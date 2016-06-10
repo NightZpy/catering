@@ -48,9 +48,9 @@ Route::get('/home', 'HomeController@index');
 /* 
  * ------------------- Route index for Provider ---------------
  */
-Route::get('providers', [
-	'as' => 'providers.index',
+Route::get('kitchen/providers', [
+	'as' => 'kitchen.providers.index',
 	'uses' => function() {
-		return view('providers.index');
+		return view('kitchen.providers.index');
 	}
 ]);

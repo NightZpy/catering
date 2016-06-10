@@ -1,12 +1,11 @@
 <?php
 
-namespace $NAMESPACE_API_REQUEST$;
+namespace App\Http\Requests\API\Kitchen;
 
-use $NAMESPACE_MODEL$\$MODEL_NAME$;
-use InfyOm\Generator\Request\MyAPIRequest;
+use App\Models\Kitchen\Provider;
 use App\Http\Requests\API\MyAPIRequest;
 
-class Create$MODEL_NAME$APIRequest extends MyAPIRequest
+class CreateProviderAPIRequest extends MyAPIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +24,6 @@ class Create$MODEL_NAME$APIRequest extends MyAPIRequest
      */
     public function rules()
     {
-        return $MODEL_NAME$::$rules;
+        return Provider::$rules;
     }
 }

@@ -1,6 +1,6 @@
 [
     {
-        "fieldInput": "id:integer,true,true",
+        "fieldInput": "id:primary",
         "htmlType": "number",
         "validations": "",
         "searchable": false,
@@ -10,9 +10,19 @@
         "inIndex": false
     },
     {
-        "fieldInput": "code:string,255",
+        "fieldInput": "code:string,128",
         "htmlType": "text",
-        "validations": "required",
+        "validations": "",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": false,
+        "inIndex": true
+    },
+    {
+        "fieldInput": "name:string,128",
+        "htmlType": "text",
+        "validations": "required|min:1|max:128|unique:providers",
         "searchable": true,
         "fillable": true,
         "primary": false,
@@ -20,39 +30,39 @@
         "inIndex": true
     },
     {
-        "fieldInput": "name:string,255",
+        "fieldInput": "specialty:string,128",
         "htmlType": "text",
-        "validations": "",
-        "searchable": false,
+        "validations": "required|min:1|max:128",
+        "searchable": true,
         "fillable": true,
         "primary": false,
         "inForm": true,
         "inIndex": true
     },
     {
-        "fieldInput": "specialty:string,255",
+        "fieldInput": "district:string,128",
         "htmlType": "text",
-        "validations": "",
-        "searchable": false,
+        "validations": "min:1|max:128",
+        "searchable": true,
         "fillable": true,
         "primary": false,
         "inForm": true,
-        "inIndex": true
-    },
-    {
-        "fieldInput": "district:string,255",
-        "htmlType": "text",
-        "validations": "",
-        "searchable": false,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true
+        "inIndex": false
     },
     {
         "fieldInput": "address:text",
         "htmlType": "textarea",
-        "validations": "",
+        "validations": "min:12|max:512",
+        "searchable": false,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": false
+    },
+    {
+        "fieldInput": "phone:string,128",
+        "htmlType": "number",
+        "validations": "required|numeric|digits_between:7,20",
         "searchable": false,
         "fillable": true,
         "primary": false,
@@ -60,50 +70,40 @@
         "inIndex": true
     },
     {
-        "fieldInput": "phone:string,255",
+        "fieldInput": "movil1:string,128",
+        "htmlType": "number",
+        "validations": "numeric|digits_between:7,20",
+        "searchable": false,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": false
+    },
+    {
+        "fieldInput": "movil2:string,128",
+        "htmlType": "number",
+        "validations": "numeric|digits_between:7,20",
+        "searchable": false,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": false
+    },
+    {
+        "fieldInput": "contact:string,128",
         "htmlType": "text",
-        "validations": "",
-        "searchable": false,
+        "validations": "min:1|max:128",
+        "searchable": true,
         "fillable": true,
         "primary": false,
         "inForm": true,
         "inIndex": true
     },
     {
-        "fieldInput": "movil1:string,255",
-        "htmlType": "text",
-        "validations": "",
-        "searchable": false,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true
-    },
-    {
-        "fieldInput": "movil2:string,255",
-        "htmlType": "text",
-        "validations": "",
-        "searchable": false,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true
-    },
-    {
-        "fieldInput": "contact:string,255",
-        "htmlType": "text",
-        "validations": "",
-        "searchable": false,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true
-    },
-    {
-        "fieldInput": "email:string,255",
+        "fieldInput": "email:string,128",
         "htmlType": "email",
-        "validations": "",
-        "searchable": false,
+        "validations": "required|email|min:3|max:128|unique:providers",
+        "searchable": true,
         "fillable": true,
         "primary": false,
         "inForm": true,
@@ -116,8 +116,8 @@
         "searchable": false,
         "fillable": false,
         "primary": false,
-        "inForm": true,
-        "inIndex": true
+        "inForm": false,
+        "inIndex": false
     },
     {
         "fieldInput": "updated_at:dateTime",
@@ -126,8 +126,8 @@
         "searchable": false,
         "fillable": false,
         "primary": false,
-        "inForm": true,
-        "inIndex": true
+        "inForm": false,
+        "inIndex": false
     },
     {
         "fieldInput": "deleted_at:dateTime",
@@ -136,7 +136,7 @@
         "searchable": false,
         "fillable": true,
         "primary": false,
-        "inForm": true,
-        "inIndex": true
+        "inForm": false,
+        "inIndex": false
     }
 ]
