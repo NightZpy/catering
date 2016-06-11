@@ -41,7 +41,7 @@
 
 <div class="table-responsive" id="providers-table">
     <vuetable v-ref:vuetable
-        api-url="{{ route('api.v1.providers.index') }}"
+        api-url="{{ route('api.v1.kitchen.providers.index') }}"
         :fields="columns"
         pagination-path=""
         :fields="fields"

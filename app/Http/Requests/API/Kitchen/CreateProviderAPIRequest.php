@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests\API;
+namespace App\Http\Requests\API\Kitchen;
 
-use App\Models\Provider;
+use App\Models\Kitchen\Provider;
+use App\Http\Requests\API\MyAPIRequest;
 
 class CreateProviderAPIRequest extends MyAPIRequest
 {

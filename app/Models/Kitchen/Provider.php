@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Kitchen;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Provider
- * @package App\Models
+ * @package App\Models\Kitchen
  */
 class Provider extends Model
 {
@@ -15,9 +15,6 @@ class Provider extends Model
 
     public $table = 'providers';
     
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
-
 
     protected $dates = ['deleted_at'];
 
@@ -32,8 +29,7 @@ class Provider extends Model
         'movil1',
         'movil2',
         'contact',
-        'email',
-        'deleted_at'
+        'email'
     ];
 
     /**
@@ -42,7 +38,6 @@ class Provider extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
         'code' => 'string',
         'name' => 'string',
         'specialty' => 'string',
@@ -62,6 +57,22 @@ class Provider extends Model
      * @var array
      */
     public static $rules = [
-        
+        'name' => 'required|min:1|max:128|unique:providers',
+        'specialty' => 'required|min:1|max:128',
+        'district' => 'min:1|max:128',
+        'address' => 'min:12|max:512',
+        'phone' => 'required|numeric|digits_between:7,20',
+        'movil1' => 'numeric|digits_between:7,20',
+        'movil2' => 'numeric|digits_between:7,20',
+        'contact' => 'min:1|max:128',
+        'email' => 'required|email|min:3|max:128|unique:providers'
     ];
+
+    /*
+     * -------------------- Getters and Setters
+     */
+    public function setCodeAttribute($value)
+    {
+        $this->attributes['code'] = intval($this->all()->last()->code) + 1;
+    }
 }

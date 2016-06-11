@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests\API;
+namespace App\Http\Requests\API\Kitchen;
 
-use App\Models\Provider;
+use App\Models\Kitchen\Provider;
+use App\Http\Requests\API\MyAPIRequest;
 
 class UpdateProviderAPIRequest extends MyAPIRequest
 {
@@ -23,6 +24,10 @@ class UpdateProviderAPIRequest extends MyAPIRequest
      */
     public function rules()
     {
-        return Provider::$rules;
+        $rules = Provider::$rules;
+        //$rules['code'] = $rules['code'] . ',code,' . $this->id;
+        $rules['name'] = $rules['name'] . ',name,' . $this->id;
+        $rules['email'] = $rules['email'] . ',email,' . $this->id;
+        return $rules;
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Kitchen;
 
-use App\Http\Requests\API\CreateProviderAPIRequest;
-use App\Http\Requests\API\UpdateProviderAPIRequest;
-use App\Models\Provider;
-use App\Repositories\ProviderRepository;
+use App\Http\Requests\API\Kitchen\CreateProviderAPIRequest;
+use App\Http\Requests\API\Kitchen\UpdateProviderAPIRequest;
+use App\Models\Kitchen\Provider;
+use App\Repositories\Kitchen\ProviderRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController as InfyOmBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -15,7 +15,7 @@ use Response;
 
 /**
  * Class ProviderController
- * @package App\Http\Controllers\API
+ * @package App\Http\Controllers\API\Kitchen
  */
 
 class ProviderAPIController extends InfyOmBaseController
@@ -47,7 +47,12 @@ class ProviderAPIController extends InfyOmBaseController
         if ($request->exists('filter')) {
             $query->where(function($q) use($request) {
                 $value = "%{$request->filter}%";
-                
+                $q->where("code", "like", $value)
+                  ->orWhere("name", "like", $value)
+                  ->orWhere("specialty", "like", $value)
+                  ->orWhere("district", "like", $value)
+                  ->orWhere("contact", "like", $value)
+                  ->orWhere("email", "like", $value);
             });
         }
 

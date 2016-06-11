@@ -39,12 +39,12 @@ var tableColumns = [
 	{
 	    name: 'district',
 	    sortField: 'district',
-	    visible: true
+	    visible: false
 	},
 	{
 	    name: 'address',
 	    sortField: 'address',
-	    visible: true
+	    visible: false
 	},
 	{
 	    name: 'phone',
@@ -54,12 +54,12 @@ var tableColumns = [
 	{
 	    name: 'movil1',
 	    sortField: 'movil1',
-	    visible: true
+	    visible: false
 	},
 	{
 	    name: 'movil2',
 	    sortField: 'movil2',
-	    visible: true
+	    visible: false
 	},
 	{
 	    name: 'contact',
@@ -74,17 +74,17 @@ var tableColumns = [
 	{
 	    name: 'created_at',
 	    sortField: 'created_at',
-	    visible: true
+	    visible: false
 	},
 	{
 	    name: 'updated_at',
 	    sortField: 'updated_at',
-	    visible: true
+	    visible: false
 	},
 	{
 	    name: 'deleted_at',
 	    sortField: 'deleted_at',
-	    visible: true
+	    visible: false
 	},       
     {
         name: '__actions',

@@ -11,14 +11,14 @@
         <div class="content" style="padding-top: 30px;">
             <div class="box box-primary">
                 <div class="box-body">
-                    @include('providers.table')
+                    @include('kitchen.providers.table')
                 </div>
             </div>
         </div>
         <!-- --------- Modals ---------- -->
-        @include('providers.form')
-        @include('providers.delete')
-        @include('providers.show')
+        @include('kitchen.providers.form')
+        @include('kitchen.providers.delete')
+        @include('kitchen.providers.show')
         @include('layouts.modal.info')        
     </div>
 @endsection
@@ -29,11 +29,11 @@
         var token = '{{ csrf_token() }}';
         var fieldInitOrder = 'id';
         var apiUrl = { 
-            show:  "{{ route('api.v1.providers.show') }}/",
-            index: "{{ route('api.v1.providers.index') }}",  
-            store: "{{ route('api.v1.providers.store') }}",  
-            update: "{{ route('api.v1.providers.update') }}/",  
-            delete: "{{ route('api.v1.providers.delete') }}/"
+            show:  "{{ route('api.v1.kitchen.providers.show') }}/",
+            index: "{{ route('api.v1.kitchen.providers.index') }}",  
+            store: "{{ route('api.v1.kitchen.providers.store') }}",  
+            update: "{{ route('api.v1.kitchen.providers.update') }}/",  
+            delete: "{{ route('api.v1.kitchen.providers.delete') }}/"
         };
     </script>
     <script src="/app/js/crud.js"></script>    

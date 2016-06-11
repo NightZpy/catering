@@ -5,5 +5,5 @@ Provider Form
 @stop
 
 @section('modal-form-content')
-	@include('providers.fields')
+	@include('kitchen.providers.fields')
 @stop

@@ -9,32 +9,28 @@
 |
 */
 
-
-
-
-
 /* 
  * ------------------- Route API CRUD for Provider ---------------
  */
-Route::group(['prefix' => 'providers'], function () {	
+Route::group(['prefix' => 'providers', 'namespace' => 'Kitchen'], function () {	
 	Route::get('/', [
-		'as' => 'api.v1.providers.index',
+		'as' => 'api.v1.kitchen.providers.index',
 		'uses' => 'ProviderAPIController@index'
 	]);
 	Route::get('show/{id?}', [
-		'as' => 'api.v1.providers.show',
+		'as' => 'api.v1.kitchen.providers.show',
 		'uses' => 'ProviderAPIController@show'
 	]);
 	Route::patch('update/{id?}', [
-		'as' => 'api.v1.providers.update',
+		'as' => 'api.v1.kitchen.providers.update',
 		'uses' => 'ProviderAPIController@update'
 	]);
 	Route::delete('delete/{id?}', [
-		'as' => 'api.v1.providers.delete',
+		'as' => 'api.v1.kitchen.providers.delete',
 		'uses' => 'ProviderAPIController@destroy'
 	]);
 	Route::post('store', [
-		'as' => 'api.v1.providers.store',
+		'as' => 'api.v1.kitchen.providers.store',
 		'uses' => 'ProviderAPIController@store'
 	]);
 });
