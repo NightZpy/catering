@@ -24,6 +24,10 @@ class UpdateProviderAPIRequest extends MyAPIRequest
      */
     public function rules()
     {
-        return Provider::$rules;
+        $rules = Provider::$rules;
+        //$rules['code'] = $rules['code'] . ',code,' . $this->id;
+        $rules['name'] = $rules['name'] . ',name,' . $this->id;
+        $rules['email'] = $rules['email'] . ',email,' . $this->id;
+        return $rules;
     }
 }

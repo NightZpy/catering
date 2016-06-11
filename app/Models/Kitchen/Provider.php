@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Provider extends Model
 {
-    //use SoftDeletes;
+    use SoftDeletes;
 
     public $table = 'providers';
     
@@ -29,8 +29,7 @@ class Provider extends Model
         'movil1',
         'movil2',
         'contact',
-        'email',
-        'deleted_at'
+        'email'
     ];
 
     /**
@@ -68,4 +67,12 @@ class Provider extends Model
         'contact' => 'min:1|max:128',
         'email' => 'required|email|min:3|max:128|unique:providers'
     ];
+
+    /*
+     * -------------------- Getters and Setters
+     */
+    public function setCodeAttribute($value)
+    {
+        $this->attributes['code'] = intval($this->all()->last()->code) + 1;
+    }
 }

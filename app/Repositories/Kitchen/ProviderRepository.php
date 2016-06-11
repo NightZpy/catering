@@ -26,4 +26,22 @@ class ProviderRepository extends BaseRepository
     {
         return Provider::class;
     }
+
+    /**
+    * Overwrite methods
+    */
+    public function create(array $attributes)
+    {        
+        $provider = parent::create($attributes);
+        //$this->createPivot($provider, 'items', $attributes);        
+        return $provider;
+    }
+
+    public function update(array $attributes, $id)
+    {
+        //$provider = $this->findWithoutFail($id);
+        $provider = parent::update($attributes, $id);
+        //$this->updatePivot($provider, 'items', $attributes);
+        return $provider;        
+    }    
 }
