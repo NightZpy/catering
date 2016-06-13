@@ -34,3 +34,29 @@ Route::group(['prefix' => 'providers', 'namespace' => 'Kitchen'], function () {
 		'uses' => 'ProviderAPIController@store'
 	]);
 });
+
+/* 
+ * ------------------- Route API CRUD for Type ---------------
+ */
+Route::group(['prefix' => 'types'], function () {	
+	Route::get('/', [
+		'as' => 'api.v1.types.index',
+		'uses' => 'TypeAPIController@index'
+	]);
+	Route::get('show/{id?}', [
+		'as' => 'api.v1.types.show',
+		'uses' => 'TypeAPIController@show'
+	]);
+	Route::patch('update/{id?}', [
+		'as' => 'api.v1.types.update',
+		'uses' => 'TypeAPIController@update'
+	]);
+	Route::delete('delete/{id?}', [
+		'as' => 'api.v1.types.delete',
+		'uses' => 'TypeAPIController@destroy'
+	]);
+	Route::post('store', [
+		'as' => 'api.v1.types.store',
+		'uses' => 'TypeAPIController@store'
+	]);
+});
