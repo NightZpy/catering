@@ -20,8 +20,7 @@ class Type extends Model
 
 
     public $fillable = [
-        'name',
-        'deleted_at'
+        'name'
     ];
 
     /**

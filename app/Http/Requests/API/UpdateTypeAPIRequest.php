@@ -24,6 +24,8 @@ class UpdateTypeAPIRequest extends MyAPIRequest
      */
     public function rules()
     {
-        return Type::$rules;
+        $rules = Provider::$rules;
+        $rules['name'] = $rules['name'] . ',name,' . $this->id;
+        return $rules;
     }
 }
