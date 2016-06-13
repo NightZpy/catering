@@ -15,17 +15,16 @@ class CreateprovidersTable extends Migration
     {
         Schema::create('providers', function (Blueprint $table) {
             $table->primary('id');
-            $table->string('code', 128);
-            $table->string('name', 128);
-            $table->string('specialty', 128);
-            $table->string('district', 128);
-            $table->text('address');
+            $table->string('code', 128)->unique();
+            $table->string('name', 128)->unique();
+            $table->string('specialty', 128)->nullable();
+            $table->string('district', 128)->nullable();
+            $table->text('address', 128)->nullable();
             $table->string('phone', 128);
-            $table->string('movil1', 128);
-            $table->string('movil2', 128);
-            $table->string('contact', 128);
+            $table->string('movil1', 128)->nullable();
+            $table->string('movil2', 128)->nullable();
+            $table->string('contact', 128)->nullable();
             $table->string('email', 128);
-            $table->dateTime('deleted_at');
             $table->timestamps();
             $table->softDeletes();
         });

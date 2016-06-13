@@ -54,3 +54,13 @@ Route::get('kitchen/providers', [
 		return view('kitchen.providers.index');
 	}
 ]);
+
+/* 
+ * ------------------- Route index for Type ---------------
+ */
+Route::get('types', [
+	'as' => 'types.index',
+	'uses' => function() {
+		return view('types.index');
+	}
+]);
