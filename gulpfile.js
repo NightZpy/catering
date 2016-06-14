@@ -21,5 +21,7 @@ elixir(function(mix) {
     // Add all model-config.js and generate 
     // then using gulp, but, generate one for each model.
 	 mix.scripts(['models/provider-config.js'], 'public/app/js/models/provider-config.js')
+	 mix.scripts(['models/type-config.js'], 'public/app/js/models/type-config.js')
+	 mix.scripts(['models/presentation-config.js'], 'public/app/js/models/presentation-config.js')
        
 });

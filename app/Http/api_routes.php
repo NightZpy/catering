@@ -60,3 +60,29 @@ Route::group(['prefix' => 'types'], function () {
 		'uses' => 'TypeAPIController@store'
 	]);
 });
+
+/* 
+ * ------------------- Route API CRUD for Presentation ---------------
+ */
+Route::group(['prefix' => 'presentations'], function () {	
+	Route::get('/', [
+		'as' => 'api.v1.presentations.index',
+		'uses' => 'PresentationAPIController@index'
+	]);
+	Route::get('show/{id?}', [
+		'as' => 'api.v1.presentations.show',
+		'uses' => 'PresentationAPIController@show'
+	]);
+	Route::patch('update/{id?}', [
+		'as' => 'api.v1.presentations.update',
+		'uses' => 'PresentationAPIController@update'
+	]);
+	Route::delete('delete/{id?}', [
+		'as' => 'api.v1.presentations.delete',
+		'uses' => 'PresentationAPIController@destroy'
+	]);
+	Route::post('store', [
+		'as' => 'api.v1.presentations.store',
+		'uses' => 'PresentationAPIController@store'
+	]);
+});

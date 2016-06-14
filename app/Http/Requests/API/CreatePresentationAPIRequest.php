@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\Type;
-use App\Http\Requests\API\MyAPIRequest;
+use App\Models\Presentation;
 
-class UpdateTypeAPIRequest extends MyAPIRequest
+class CreatePresentationAPIRequest extends MyAPIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +23,6 @@ class UpdateTypeAPIRequest extends MyAPIRequest
      */
     public function rules()
     {
-        $rules = Type::$rules;
-        $rules['name'] = $rules['name'] . ',name,' . $this->id;
-        return $rules;
+        return Presentation::$rules;
     }
 }

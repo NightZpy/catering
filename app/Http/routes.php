@@ -64,3 +64,33 @@ Route::get('types', [
 		return view('types.index');
 	}
 ]);
+
+/* 
+ * ------------------- Route index for Presentation ---------------
+ */
+Route::get('presentations', [
+	'as' => 'presentations.index',
+	'uses' => function() {
+		return view('presentations.index');
+	}
+]);
+
+/* 
+ * ------------------- Route index for Presentation ---------------
+ */
+Route::get('presentations', [
+	'as' => 'presentations.index',
+	'uses' => function() {
+		return view('presentations.index');
+	}
+]);
+
+/* 
+ * ------------------- Route index for Presentation ---------------
+ */
+Route::get('presentations', [
+	'as' => 'presentations.index',
+	'uses' => function() {
+		return view('presentations.index');
+	}
+]);
