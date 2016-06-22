@@ -3,7 +3,6 @@
 namespace App\Http\Requests\API;
 
 use App\Models\Unit;
-use App\Http\Requests\API\MyAPIRequest;
 
 class UpdateUnitAPIRequest extends MyAPIRequest
 {
@@ -24,6 +23,9 @@ class UpdateUnitAPIRequest extends MyAPIRequest
      */
     public function rules()
     {
-        return Unit::$rules;
+        $rules = Unit::$rules;
+        $rules['name'] = $rules['name'] . ',name,' . $this->id;
+        $rules['symbol'] = $rules['symbol'] . ',symbol,' . $this->id;
+        return $rules;        
     }
 }
