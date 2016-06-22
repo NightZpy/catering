@@ -1,10 +1,10 @@
 <?php
 
-namespace $NAMESPACE_API_REQUEST$;
+namespace App\Http\Requests\API;
 
-use $NAMESPACE_MODEL$\$MODEL_NAME$;
+use App\Models\Unit;
 
-class Update$MODEL_NAME$APIRequest extends MyAPIRequest
+class CreateUnitAPIRequest extends MyAPIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +23,6 @@ class Update$MODEL_NAME$APIRequest extends MyAPIRequest
      */
     public function rules()
     {
-        return $MODEL_NAME$::$rules;
+        return Unit::$rules;
     }
 }

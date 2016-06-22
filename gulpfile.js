@@ -23,5 +23,6 @@ elixir(function(mix) {
 	 mix.scripts(['models/provider-config.js'], 'public/app/js/models/provider-config.js')
 	 mix.scripts(['models/type-config.js'], 'public/app/js/models/type-config.js')
 	 mix.scripts(['models/presentation-config.js'], 'public/app/js/models/presentation-config.js')
+	 mix.scripts(['models/unit-config.js'], 'public/app/js/models/unit-config.js')
        
 });

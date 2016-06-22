@@ -86,3 +86,30 @@ Route::group(['prefix' => 'presentations'], function () {
 		'uses' => 'PresentationAPIController@store'
 	]);
 });
+
+/* 
+ * ------------------- Route API CRUD for Unit ---------------
+ */
+Route::group(['prefix' => 'units'], function () {	
+	Route::get('/', [
+		'as' => 'api.v1.units.index',
+		'uses' => 'UnitAPIController@index'
+	]);
+	Route::get('show/{id?}', [
+		'as' => 'api.v1.units.show',
+		'uses' => 'UnitAPIController@show'
+	]);
+	Route::patch('update/{id?}', [
+		'as' => 'api.v1.units.update',
+		'uses' => 'UnitAPIController@update'
+	]);
+	Route::delete('delete/{id?}', [
+		'as' => 'api.v1.units.delete',
+		'uses' => 'UnitAPIController@destroy'
+	]);
+	Route::post('store', [
+		'as' => 'api.v1.units.store',
+		'uses' => 'UnitAPIController@store'
+	]);
+});
+
