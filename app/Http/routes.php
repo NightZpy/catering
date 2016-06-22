@@ -76,21 +76,11 @@ Route::get('presentations', [
 ]);
 
 /* 
- * ------------------- Route index for Presentation ---------------
+ * ------------------- Route index for Unit ---------------
  */
-Route::get('presentations', [
-	'as' => 'presentations.index',
+Route::get('units', [
+	'as' => 'units.index',
 	'uses' => function() {
-		return view('presentations.index');
-	}
-]);
-
-/* 
- * ------------------- Route index for Presentation ---------------
- */
-Route::get('presentations', [
-	'as' => 'presentations.index',
-	'uses' => function() {
-		return view('presentations.index');
+		return view('units.index');
 	}
 ]);
