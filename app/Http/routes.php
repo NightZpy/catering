@@ -84,3 +84,14 @@ Route::get('units', [
 		return view('units.index');
 	}
 ]);
+
+
+/* 
+ * ------------------- Route index for InputMaterial ---------------
+ */
+Route::get('input-materials', [
+	'as' => 'inputMaterials.index',
+	'uses' => function() {
+		return view('inputMaterials.index');
+	}
+]);

@@ -113,3 +113,30 @@ Route::group(['prefix' => 'units'], function () {
 	]);
 });
 
+
+
+/* 
+ * ------------------- Route API CRUD for InputMaterial ---------------
+ */
+Route::group(['prefix' => 'inputMaterials'], function () {	
+	Route::get('/', [
+		'as' => 'api.v1.inputMaterials.index',
+		'uses' => 'InputMaterialAPIController@index'
+	]);
+	Route::get('show/{id?}', [
+		'as' => 'api.v1.inputMaterials.show',
+		'uses' => 'InputMaterialAPIController@show'
+	]);
+	Route::patch('update/{id?}', [
+		'as' => 'api.v1.inputMaterials.update',
+		'uses' => 'InputMaterialAPIController@update'
+	]);
+	Route::delete('delete/{id?}', [
+		'as' => 'api.v1.inputMaterials.delete',
+		'uses' => 'InputMaterialAPIController@destroy'
+	]);
+	Route::post('store', [
+		'as' => 'api.v1.inputMaterials.store',
+		'uses' => 'InputMaterialAPIController@store'
+	]);
+});
