@@ -139,4 +139,23 @@ class InputMaterialAPIController extends InfyOmBaseController
 
         return $this->sendResponse($id, 'InputMaterial deleted successfully');
     }
+
+    /**
+     * Display a listing of the InputMaterial.
+     * GET|HEAD /inputMaterials
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function basic(Request $request)
+    {
+        /** @var InputMaterial $inputMaterial */
+        $inputMaterials = $this->inputMaterialRepository->all()->pluck('name', 'id');
+
+        if (empty($inputMaterials)) {
+            return Response::json(ResponseUtil::makeError('InputMaterial not found'), 400);
+        }
+
+        return Response::json($inputMaterials);    
+    }
 }

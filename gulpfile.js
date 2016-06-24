@@ -1,5 +1,6 @@
 var elixir = require('laravel-elixir');
 elixir.config.sourcemaps = false;
+require('laravel-elixir-vueify');
 
 /*
  |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ elixir(function(mix) {
 	 mix.scripts(['models/type-config.js'], 'public/app/js/models/type-config.js')
 	 mix.scripts(['models/presentation-config.js'], 'public/app/js/models/presentation-config.js')
      mix.scripts(['models/unit-config.js'], 'public/app/js/models/unit-config.js')
-	 mix.scripts(['models/input-material-config.js'], 'public/app/js/models/input-material-config.js')
+     mix.scripts(['models/input-material-config.js'], 'public/app/js/models/input-material-config.js')
+	 mix.scripts(['models/family-config.js'], 'public/app/js/models/family-config.js')
        
 });

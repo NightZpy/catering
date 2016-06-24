@@ -7,12 +7,15 @@ var VuetablePaginationBootstrap = require('vuetable/src/components/VuetablePagin
 var VuetablePaginationSimple = require('../vendor/vue-table/components/VuetablePaginationSimple.vue')
 var VueEditable = require('../vendor/vue-editable/vue-editable.js')
 var VueStrap = require('../vendor/vue-strap/vue-strap.min.js')
+var vSelect = require('vue-select')
+var CustomVueSelectTemplate = require('./vue-components/vue-select.vue')
 var VueValidator = require('vue-validator')
 
 Vue.use(VueResource)
 Vue.use(VueEditable)
 Vue.use(VueValidator)
 
+Vue.component('v-select', vSelect)
 Vue.component('vuetable', Vuetable);
 Vue.component('vuetable-pagination', VuetablePagination)
 Vue.component('vuetable-pagination-dropdown', VuetablePaginationDropdown)
@@ -21,7 +24,8 @@ Vue.component('vuetable-pagination-simple', VuetablePaginationSimple)
 
 var E_SERVER_ERROR = 'Error communicating with the server';
 
-Vue.config.debug = true        
+Vue.config.debug = true
+Vue.config.devtools = true       
 
 Vue.component('custom-error', {
   props: ['field', 'validator', 'message'],
@@ -39,7 +43,7 @@ Vue.validator('url', function (val) {
 var vm = new Vue({
     components: {
         modal: VueStrap.modal,
-        'v-select': VueStrap.select
+        CustomVueSelectTemplate
     },
     el: "#crud-app",
     data: {
@@ -55,7 +59,7 @@ var vm = new Vue({
         url: apiUrl,           
         row: objectRow,
         searchFor: '',
-        columns: tableColumns,     
+        columns: tableColumns, 
         sortOrder: {
             field: fieldInitOrder,
             direction: 'asc'
@@ -98,8 +102,25 @@ var vm = new Vue({
             this.sendData(this.url.show + this.row.id, 'GET')
                 .then(this.success, this.failed);
         },
-        sendData: function(url, method, data = {}) {
-            return this.$http({url: url, method: method, data: data});
+        getForeignData: function (callUrl = null) {
+            var foreign = this.url.foreign.index;
+            var mapVar = mapVar;   
+            if (callUrl == null)          
+                callUrl = foreign.url;
+            var sendParams = {url: callUrl, method: foreign.method, data: {}};
+            this.$http(sendParams)
+                .then(
+                    function(response) {
+                        if (response.data.data) {
+                            var data = response.data.data;
+                            vm.$set(mapVar, data);
+                        }
+                    }, 
+                    function(response) {}
+                );
+        },
+        sendData: function(callUrl, method, data = {}) {
+            return this.$http({url: callUrl, method: method, data: data});
         },            
         cleanData: function() {
             this.row = objectRow;
@@ -148,6 +169,9 @@ var vm = new Vue({
         modal: function(type) {                    
             this.method = type;
             if (type=='PATCH' || type=='POST') {
+                if (mapVar) {
+                    this.getForeignData();
+                }
                 this.formModal = true;
             } else if (type=='SHOW') {
                 this.showModal = true;

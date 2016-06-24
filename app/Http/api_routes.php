@@ -123,6 +123,12 @@ Route::group(['prefix' => 'inputMaterials'], function () {
 		'as' => 'api.v1.inputMaterials.index',
 		'uses' => 'InputMaterialAPIController@index'
 	]);
+
+	Route::get('/basic', [
+		'as' => 'api.v1.inputMaterials.basic',
+		'uses' => 'InputMaterialAPIController@basic'
+	]);
+
 	Route::get('show/{id?}', [
 		'as' => 'api.v1.inputMaterials.show',
 		'uses' => 'InputMaterialAPIController@show'
@@ -138,5 +144,31 @@ Route::group(['prefix' => 'inputMaterials'], function () {
 	Route::post('store', [
 		'as' => 'api.v1.inputMaterials.store',
 		'uses' => 'InputMaterialAPIController@store'
+	]);
+});
+
+/* 
+ * ------------------- Route API CRUD for Family ---------------
+ */
+Route::group(['prefix' => 'families'], function () {	
+	Route::get('/', [
+		'as' => 'api.v1.families.index',
+		'uses' => 'FamilyAPIController@index'
+	]);
+	Route::get('show/{id?}', [
+		'as' => 'api.v1.families.show',
+		'uses' => 'FamilyAPIController@show'
+	]);
+	Route::patch('update/{id?}', [
+		'as' => 'api.v1.families.update',
+		'uses' => 'FamilyAPIController@update'
+	]);
+	Route::delete('delete/{id?}', [
+		'as' => 'api.v1.families.delete',
+		'uses' => 'FamilyAPIController@destroy'
+	]);
+	Route::post('store', [
+		'as' => 'api.v1.families.store',
+		'uses' => 'FamilyAPIController@store'
 	]);
 });

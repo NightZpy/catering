@@ -95,3 +95,13 @@ Route::get('input-materials', [
 		return view('inputMaterials.index');
 	}
 ]);
+
+/* 
+ * ------------------- Route index for Family ---------------
+ */
+Route::get('families', [
+	'as' => 'families.index',
+	'uses' => function() {
+		return view('families.index');
+	}
+]);

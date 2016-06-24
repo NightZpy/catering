@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class Createinput_materialsTable extends Migration
+class CreateInputMaterialsTable extends Migration
 {
 
     /**
@@ -15,9 +15,8 @@ class Createinput_materialsTable extends Migration
     {
         Schema::create('input_materials', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 128);
-            $table->string('code', 128);
-            $table->dateTime('deleted_at');
+            $table->string('name', 128)->unique();
+            $table->string('code', 128)->unique();
             $table->timestamps();
             $table->softDeletes();
         });
