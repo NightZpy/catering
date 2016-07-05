@@ -58,18 +58,23 @@
 </div>	
 
 <!-- Input Material Id Field -->
-<div class="form-group col-sm-6">
+<div @click="getForeignData('{{ route('api.v1.inputMaterials.index') }}/', 'inputMaterialsOptions')" class="form-group col-sm-6">
     <label for="input_material_id">Input Material Id:</label>
 	{{-- <v-select></v-select> --}}
-	<select @load="getForeignData('{{ route('api.v1.inputMaterials.basic') }}/')" v-model="row.input_material_id" v-validate:input_material_id="{ required: true }">	<option v-for="option in inputMaterialsOptions" {{-- --}}>
-			<option value="@{{ option.id }}">@{{ option.name }}</option>
-		</option>
+	<select v-model="row.input_material_id" v-validate:input_material_id="{ required: true }">
+		<template v-show="foreignData.inputMaterialsOptions">
+			<option v-for="option in foreignData['inputMaterialsOptions']" v-bind:value="option.id">		
+				@{{-- option.name --}}>
+			</option>
+		</template>
 	</select>
-    <div v-if="$validation.input_material_id.invalid" class="alert alert-danger" role="alert">
-		<div v-if="$validation.input_material_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-			<span class="sr-only">Error:</span>
-			El código es obligatorio
-		</div>
-	</div>    
+	<template v-show="foreignData.inputMaterialsOptions">
+	    <div v-if="$validation.input_material_id.invalid" class="alert alert-danger" role="alert">
+			<div v-if="$validation.input_material_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				El código es obligatorio
+			</div>
+		</div> 
+	</template>   
 </div>			
 </validator>	

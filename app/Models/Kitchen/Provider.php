@@ -73,6 +73,12 @@ class Provider extends Model
      */
     public function setCodeAttribute($value)
     {
-        $this->attributes['code'] = intval($this->all()->last()->code) + 1;
+        if (empty($value)) 
+            if($this->all())
+                $this->attributes['code'] = intval($this->all()->last()->code) + 1;
+            else
+                $this->attributes['code'] = 1;
+        else
+            $this->attributes['code'] = $value;
     }
 }

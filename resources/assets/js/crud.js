@@ -58,6 +58,7 @@ var vm = new Vue({
         submitMessage: "",
         url: apiUrl,           
         row: objectRow,
+        foreignData: {},
         searchFor: '',
         columns: tableColumns, 
         sortOrder: {
@@ -102,18 +103,22 @@ var vm = new Vue({
             this.sendData(this.url.show + this.row.id, 'GET')
                 .then(this.success, this.failed);
         },
-        getForeignData: function (callUrl = null) {
+        getForeignData: function (callUrl = null, mapVar = null) {
             var foreign = this.url.foreign.index;
-            var mapVar = mapVar;   
             if (callUrl == null)          
                 callUrl = foreign.url;
+            console.log(mapVar);
             var sendParams = {url: callUrl, method: foreign.method, data: {}};
             this.$http(sendParams)
                 .then(
                     function(response) {
                         if (response.data.data) {
                             var data = response.data.data;
-                            vm.$set(mapVar, data);
+                            var newObject = {};
+                            newObject = [mapVar] = data;
+                            vm.$set('foreignData', newObject);
+                            vm.$set('foreignData', {'inputMaterialsOptionsExists': true});
+                            console.log(JSON.stringify(this.foreignData));
                         }
                     }, 
                     function(response) {}
@@ -169,9 +174,6 @@ var vm = new Vue({
         modal: function(type) {                    
             this.method = type;
             if (type=='PATCH' || type=='POST') {
-                if (mapVar) {
-                    this.getForeignData();
-                }
                 this.formModal = true;
             } else if (type=='SHOW') {
                 this.showModal = true;
