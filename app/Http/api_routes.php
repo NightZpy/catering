@@ -171,4 +171,9 @@ Route::group(['prefix' => 'families'], function () {
 		'as' => 'api.v1.families.store',
 		'uses' => 'FamilyAPIController@store'
 	]);
+
+	Route::get('check-unique/{field}/{value?}', [
+		'as' => 'api.v1.families.check-unique',
+		'uses' => 'FamilyAPIController@checkUnique'
+	]);
 });

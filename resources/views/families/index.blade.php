@@ -38,6 +38,10 @@
                    method: 'GET' ,
                    url: "{{ route('api.v1.inputMaterials.basic') }}/"
                 }]
+            },
+            validation: {
+                name: "",
+                code: "",
             }
         };
     

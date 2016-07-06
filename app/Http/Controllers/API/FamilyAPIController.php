@@ -140,4 +140,9 @@ class FamilyAPIController extends InfyOmBaseController
 
         return $this->sendResponse($id, 'Family deleted successfully');
     }
+
+    public function checkUnique($field, $value = null)
+    {
+        return Response::json(['success' => true, 'unique' => false]);
+    }
 }

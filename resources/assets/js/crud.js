@@ -40,6 +40,10 @@ Vue.validator('url', function (val) {
     return /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/.test(val)
 });
 
+Vue.validator('unique', function (val, condition) {
+    return condition;
+});
+
 var vm = new Vue({
     components: {
         modal: VueStrap.modal,
@@ -107,7 +111,7 @@ var vm = new Vue({
             var foreign = this.url.foreign.index;
             if (callUrl == null)          
                 callUrl = foreign.url;
-            
+
             var sendParams = {url: callUrl, method: foreign.method, data: {}};
             this.$http(sendParams)
                 .then(
@@ -145,6 +149,17 @@ var vm = new Vue({
             if (response.data.errors) {
                 vm.updateErrors(response.data.errors);
             }
+        },
+        checkUnique: function(checkUrl) {
+            this.$http({url: checkUrl, method: 'get'})
+                .then(
+                    function(response) {
+                        return response.unique;
+                    },
+                    function(response) {
+                        return false;
+                    }
+                );
         },
         updateErrors: function(errors) {
             var errorMessages = [];
