@@ -17,6 +17,7 @@ var tableColumns = [
     },
     {
         name: 'name',
+        title: 'Nombre',
         sortField: 'name',
         visible: true
     },
@@ -27,6 +28,7 @@ var tableColumns = [
     },
     {
         name: 'input_material_id',
+        title: 'Insumo',
         sortField: 'input_material_id',
         visible: true
     },

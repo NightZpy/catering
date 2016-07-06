@@ -107,18 +107,14 @@ var vm = new Vue({
             var foreign = this.url.foreign.index;
             if (callUrl == null)          
                 callUrl = foreign.url;
-            console.log(mapVar);
+            
             var sendParams = {url: callUrl, method: foreign.method, data: {}};
             this.$http(sendParams)
                 .then(
                     function(response) {
                         if (response.data.data) {
                             var data = response.data.data;
-                            var newObject = {};
-                            newObject = [mapVar] = data;
-                            vm.$set('foreignData', newObject);
-                            vm.$set('foreignData', {'inputMaterialsOptionsExists': true});
-                            console.log(JSON.stringify(this.foreignData));
+                            vm.$set('foreignData', {[mapVar]: data});
                         }
                     }, 
                     function(response) {}

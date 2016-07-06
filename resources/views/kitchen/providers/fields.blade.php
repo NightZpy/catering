@@ -189,10 +189,10 @@
     <label for="email">Email:</label>
     <input type="email" class="form-control" v-model="row.email" v-validate:email="{ required: true, email: true, minlength: 3, maxlength: 128{{-- , unique: providers --}} }" data-type="email" />
     <div v-if="$validation.email.invalid" class="alert alert-danger" role="alert">
-			<div v-if="$validation.email.required">
+		<div v-if="$validation.email.required">
 			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 			<span class="sr-only">Error:</span>
-			Custom rule(required) Message Here
+			Custom rule(email) Message Here
 		</div>
 		<div v-if="$validation.email.email">
 			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
