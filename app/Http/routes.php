@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/test', function(){
+	return App\Models\Family::first()->input_material;
+});
+
 Route::get('/', function () {
     return view('login');
 });

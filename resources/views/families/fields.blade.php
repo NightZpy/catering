@@ -19,11 +19,11 @@
 				<span class="sr-only">Error:</span>
 				Custom rule(maxlength) Message Here
 			</div>
-			{{-- <div v-if="$validation.name.unique">
+			<div v-if="$validation.name.unique">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(unique) Message Here
-			</div> --}}
+			</div>
 		
 		</div>
 	</div>	

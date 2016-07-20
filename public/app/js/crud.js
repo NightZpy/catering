@@ -17065,6 +17065,7 @@ var vm = new Vue({
             }
         },
         checkUnique: function checkUnique(checkUrl) {
+            console.log(checkUrl);
             this.$http({ url: checkUrl, method: 'get' }).then(function (response) {
                 return response.unique;
             }, function (response) {

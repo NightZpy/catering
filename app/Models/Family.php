@@ -15,10 +15,10 @@ class Family extends Model
     use SoftDeletes;
 
     public $table = 'families';
-    
+
+    protected $appends = ['input_material_name'];
 
     protected $dates = ['deleted_at'];
-
 
     public $fillable = [
         'name',
@@ -47,4 +47,24 @@ class Family extends Model
         'code' => 'required|min:1|max:10|unique:families',
         'input_material_id' => 'required'
     ];
+
+    /**
+     *
+     *-------------------- Relations
+     *
+     */
+    public function inputMaterial()
+    {
+        return $this->belongsTo(InputMaterial::class);
+    }
+
+    /**
+     *
+     *-------------------- Accessors and Mutators
+     *
+     */
+    public function getInputMaterialNameAttribute()
+    {
+        return $this->inputMaterial->name;
+    }
 }

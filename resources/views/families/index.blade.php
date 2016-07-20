@@ -40,7 +40,7 @@
                 }]
             },
             validation: {
-                name: "",
+                unique: "",
                 code: "",
             }
         };

@@ -151,6 +151,7 @@ var vm = new Vue({
             }
         },
         checkUnique: function(checkUrl) {
+            console.log(checkUrl);
             this.$http({url: checkUrl, method: 'get'})
                 .then(
                     function(response) {

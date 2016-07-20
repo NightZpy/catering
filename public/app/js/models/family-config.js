@@ -27,9 +27,9 @@ var tableColumns = [
         visible: true
     },
     {
-        name: 'input_material_id',
+        name: 'input_material_name',
         title: 'Insumo',
-        sortField: 'input_material_id',
+        sortField: 'input_material_name',
         visible: true
     },
     {

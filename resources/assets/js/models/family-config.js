@@ -23,13 +23,14 @@ var tableColumns = [
     },
     {
         name: 'code',
+        title: "Código"
         sortField: 'code',
         visible: true
     },
     {
-        name: 'input_material_id',
+        name: 'input_material_name',
         title: 'Insumo',
-        sortField: 'input_material_id',
+        sortField: 'input_material_name',
         visible: true
     },
     {
