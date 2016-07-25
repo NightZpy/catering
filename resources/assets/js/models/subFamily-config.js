@@ -4,7 +4,6 @@ var objectRow = {
     id: "",
     name: "",
     code: "",
-    input_material_id: "",
     family_id: "",
     created_at: "",
     updated_at: ""
@@ -16,12 +15,6 @@ var tableColumns = [
         sortField: 'id',
         visible: false
     },
-    {
-        name: 'compose_code',
-        title: 'Código compuesto',
-        sortField: 'compose_code',
-        visible: true
-    }, 
     {
         name: 'family_code',
         title: 'Código familia',
@@ -36,26 +29,14 @@ var tableColumns = [
     },
     {
         name: 'code',
-        title: "Código subfamilia",
+        title: "Código sub-familia",
         sortField: 'code',
         visible: true
     },
     {
         name: 'name',
-        title: 'Subfamilia',
+        title: 'Sub-familia',
         sortField: 'name',
-        visible: true
-    },
-    {
-        name: 'input_material_code',
-        title: 'Código insumo',
-        sortField: 'input_material_code',
-        visible: true
-    },
-    {
-        name: 'input_material_name',
-        title: 'Insumo',
-        sortField: 'input_material_name',
         visible: true
     },
     {

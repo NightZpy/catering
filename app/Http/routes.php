@@ -119,3 +119,13 @@ Route::get('sub-families', [
 		return view('subFamilies.index');
 	}
 ]);
+
+/* 
+ * ------------------- Route index for Item ---------------
+ */
+Route::get('kitchen/items', [
+	'as' => 'kitchen.items.index',
+	'uses' => function() {
+		return view('kitchen.items.index');
+	}
+]);

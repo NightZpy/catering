@@ -202,4 +202,35 @@ Route::group(['prefix' => 'sub-families'], function () {
 		'as' => 'api.v1.subFamilies.store',
 		'uses' => 'SubFamilyAPIController@store'
 	]);
+
+	Route::get('by-family/{familyId?}', [
+		'as' => 'api.v1.subFamilies.byFamily',
+		'uses' => 'SubFamilyAPIController@byFamily'
+	]);	
+});
+
+/* 
+ * ------------------- Route API CRUD for Item ---------------
+ */
+Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {	
+	Route::get('/', [
+		'as' => 'api.v1.kitchen.items.index',
+		'uses' => 'ItemAPIController@index'
+	]);
+	Route::get('show/{id?}', [
+		'as' => 'api.v1.kitchen.items.show',
+		'uses' => 'ItemAPIController@show'
+	]);
+	Route::patch('update/{id?}', [
+		'as' => 'api.v1.kitchen.items.update',
+		'uses' => 'ItemAPIController@update'
+	]);
+	Route::delete('delete/{id?}', [
+		'as' => 'api.v1.kitchen.items.delete',
+		'uses' => 'ItemAPIController@destroy'
+	]);
+	Route::post('store', [
+		'as' => 'api.v1.kitchen.items.store',
+		'uses' => 'ItemAPIController@store'
+	]);
 });

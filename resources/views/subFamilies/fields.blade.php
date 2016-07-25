@@ -73,23 +73,5 @@
 				La familia es obligatoria
 			</div>
 		</div> 
-	</div>	
-
-	<!-- Input Material Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.inputMaterials.index') }}/', 'inputMaterialsOptions')" class="form-group col-sm-6">
-	    <label for="input_material_id">Insumo:</label>
-		{{-- <v-select></v-select> --}}
-		<select class="form-control" v-model="row.input_material_id" v-validate:input_material_id="{ required: true }">
-			<option value="" selected="selected">-- Seleccione un insumo --</option>
-			<option v-for="option in foreignData.inputMaterialsOptions" v-bind:value="option.id">		
-				@{{ option.name }}
-			</option>
-		</select>
-	    <div v-if="$validation.input_material_id.invalid" class="alert alert-danger" role="alert">
-			<div v-if="$validation.input_material_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				El insumo es obligatorio
-			</div>
-		</div> 
-	</div>			
+	</div>				
 </validator>	

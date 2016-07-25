@@ -119,7 +119,8 @@ var vm = new Vue({
                         if (response.data.data) {
                             var data = response.data.data;
                             var currentForeignData = vm.foreignData; 
-                            currentForeignData[mapVar] = data;
+                            currentForeignData[mapVar] = data;                            
+                            currentForeignData[mapVar + 'Count'] = data.length;                            
                             vm.foreignData.push(currentForeignData);
                         }
                     }, 

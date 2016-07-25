@@ -17033,6 +17033,7 @@ var vm = new Vue({
                     var data = response.data.data;
                     var currentForeignData = vm.foreignData;
                     currentForeignData[mapVar] = data;
+                    currentForeignData[mapVar + 'Count'] = data.length;
                     vm.foreignData.push(currentForeignData);
                 }
             }, function (response) {});

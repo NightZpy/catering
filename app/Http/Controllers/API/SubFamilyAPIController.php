@@ -6,6 +6,7 @@ use App\Http\Requests\API\CreateSubFamilyAPIRequest;
 use App\Http\Requests\API\UpdateSubFamilyAPIRequest;
 use App\Models\SubFamily;
 use App\Repositories\SubFamilyRepository;
+use App\Repositories\FamilyRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController as InfyOmBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -23,9 +24,10 @@ class SubFamilyAPIController extends InfyOmBaseController
     /** @var  SubFamilyRepository */
     private $subFamilyRepository;
 
-    public function __construct(SubFamilyRepository $subFamilyRepo)
+    public function __construct(SubFamilyRepository $subFamilyRepo, FamilyRepository $familyRepo)
     {
         $this->subFamilyRepository = $subFamilyRepo;
+        $this->familyRepository = $familyRepo;
     }
 
     /**
@@ -147,5 +149,21 @@ class SubFamilyAPIController extends InfyOmBaseController
         $subFamily->delete();
 
         return $this->sendResponse($id, 'SubFamily deleted successfully');
+    }
+
+    public function byFamily(Request $request, $familyId = null)
+    {
+        if(!$familyId) 
+            return $this->index($request);
+
+        $family = $this->familyRepository->find($familyId);
+
+        if (empty($family))
+            return Response::json(ResponseUtil::makeError('Family not found'), 400);
+
+        if (empty($family->subFamilies))
+            return Response::json(ResponseUtil::makeError('Subfamilies not found'), 400);
+
+        return $this->sendResponse($family->subFamilies->toArray(), 'Subfamilies retrieved successfully');
     }
 }

@@ -3,9 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Family;
-use InfyOm\Generator\Common\BaseRepository;
 
-class FamilyRepository extends BaseRepository
+class FamilyRepository extends MyBaseRepository
 {
     /**
      * @var array
@@ -23,4 +22,12 @@ class FamilyRepository extends BaseRepository
     {
         return Family::class;
     }
+
+    public function create(array $attributes)
+    {
+        if (!isset($attributes['code']))
+            $attributes['code'] = $this->getNewCode();
+        $item = parent::create($attributes);
+        return $item;        
+    }        
 }
