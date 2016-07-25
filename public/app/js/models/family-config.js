@@ -4,7 +4,6 @@ var objectRow = {
     id: "",
     name: "",
     code: "",
-    input_material_id: "",
     created_at: "",
     updated_at: ""
 };
@@ -23,13 +22,8 @@ var tableColumns = [
     },
     {
         name: 'code',
+        title: "Código",
         sortField: 'code',
-        visible: true
-    },
-    {
-        name: 'input_material_name',
-        title: 'Insumo',
-        sortField: 'input_material_name',
         visible: true
     },
     {

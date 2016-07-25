@@ -48,15 +48,13 @@ class InputMaterial extends Model
     /**
      * Mutators
      */
-    public function setCodeAttribute($value)
+    public function getCodeAttribute()
     {
-        $size = strlen($value);
-        if ($size == 1)
-            $code = '00' . $value;
-        elseif ($size == 2)
-            $code = '0' . $value;
-        else
-            $code = $this->code;
-        $this->attributes['code'] = $code;
-    }      
+        $code = $this->attributes['code'];
+        if ($code < 10)
+            $code = '00' . $code;
+        elseif ($code < 100) 
+            $code = '0' . $code;        
+        return $code;
+    }  
 }

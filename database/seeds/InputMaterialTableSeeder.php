@@ -13,6 +13,22 @@ class InputMaterialTableSeeder extends Seeder
     public function run()
     {
     	InputMaterial::truncate();
-	    factory(InputMaterial::class, 8)->create();   
+        $names = [
+                'Atún',
+                'Harina',
+                'Uvas',
+                'Salsa',
+                'Queso',
+                'Arroz',
+                'Canela',
+                'Aceite'
+            ];
+        foreach ($names as $key => $value) {
+            $material = [
+                'name' => $value, 
+                'code' => $key + 1,
+            ];  
+            InputMaterial::create($material);
+        }
     }
 }

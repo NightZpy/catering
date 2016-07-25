@@ -13,6 +13,12 @@ class FamilyTableSeeder extends Seeder
     public function run()
     {
     	Family::truncate();
-	    factory(Family::class, 20)->create();   
+        for ($i=1; $i <= 20; $i++) { 
+            $family = [
+                'name' => "Family-$i", 
+                'code' => $i,
+            ]; 
+            Family::create($family);
+        }
     }
 }

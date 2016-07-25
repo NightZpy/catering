@@ -21,3 +21,7 @@
     <a href="{!! route('families.index') !!}"><i class="fa fa-edit"></i><span>Families</span></a>
 </li>
 
+<li class="{{ Request::is('subFamilies*') ? 'active' : '' }}">
+    <a href="{!! route('subFamilies.index') !!}"><i class="fa fa-edit"></i><span>SubFamilies</span></a>
+</li>
+

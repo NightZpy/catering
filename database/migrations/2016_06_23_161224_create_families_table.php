@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatefamiliesTable extends Migration
+class CreateFamiliesTable extends Migration
 {
 
     /**
@@ -16,12 +16,7 @@ class CreatefamiliesTable extends Migration
         Schema::create('families', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 128)->unique();
-            $table->string('code', 128)->unique();
-            $table->integer('input_material_id')->unsigned();
-            $table->foreign('input_material_id')
-                ->references('id')->on('input_materials')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');    
+            $table->smallInteger('code', 128)->unique();
             $table->timestamps();
             $table->softDeletes();
         });

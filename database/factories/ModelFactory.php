@@ -82,22 +82,3 @@ $factory->define(App\Models\Unit::class, function (Faker\Generator $faker) {
         'symbol' => $symbols[$i]
     ];
 });
-
-$factory->define(App\Models\InputMaterial::class, function (Faker\Generator $faker) {
-
-    $names = [
-            'Atún',
-            'Harina',
-            'Uvas',
-            'Salsa',
-            'Queso',
-            'Arroz',
-            'Canela',
-            'Aceite'
-        ];
-    $code = $faker->unique()->numberBetween(0, 7);
-    return [
-        'name' => $names[$code], 
-        'code' => $code + 1,
-    ];
-});

@@ -16,14 +16,11 @@ class Family extends Model
 
     public $table = 'families';
 
-    protected $appends = ['input_material_name'];
-
     protected $dates = ['deleted_at'];
 
     public $fillable = [
         'name',
-        'code',
-        'input_material_id'
+        'code'
     ];
 
     /**
@@ -33,8 +30,7 @@ class Family extends Model
      */
     protected $casts = [
         'name' => 'string',
-        'code' => 'string',
-        'input_material_id' => 'integer'
+        'code' => 'string'
     ];
 
     /**
@@ -44,8 +40,7 @@ class Family extends Model
      */
     public static $rules = [
         'name' => 'required|min:1|max:128|unique:families',
-        'code' => 'required|min:1|max:10|unique:families',
-        'input_material_id' => 'required'
+        'code' => 'required|min:1|max:10|unique:families'
     ];
 
     /**
@@ -53,9 +48,9 @@ class Family extends Model
      *-------------------- Relations
      *
      */
-    public function inputMaterial()
+    public function subFamilies()
     {
-        return $this->belongsTo(InputMaterial::class);
+        return $this->hasMany(SubFamily::class);
     }
 
     /**
@@ -63,8 +58,12 @@ class Family extends Model
      *-------------------- Accessors and Mutators
      *
      */
-    public function getInputMaterialNameAttribute()
+
+    public function getCodeAttribute()
     {
-        return $this->inputMaterial->name;
-    }
+        $code = $this->attributes['code'];
+        if ($code < 10)
+            $code = '0' . $code;
+        return $code;
+    }      
 }

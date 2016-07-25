@@ -177,3 +177,29 @@ Route::group(['prefix' => 'families'], function () {
 		'uses' => 'FamilyAPIController@checkUnique'
 	]);
 });
+
+/* 
+ * ------------------- Route API CRUD for SubFamily ---------------
+ */
+Route::group(['prefix' => 'sub-families'], function () {	
+	Route::get('/', [
+		'as' => 'api.v1.subFamilies.index',
+		'uses' => 'SubFamilyAPIController@index'
+	]);
+	Route::get('show/{id?}', [
+		'as' => 'api.v1.subFamilies.show',
+		'uses' => 'SubFamilyAPIController@show'
+	]);
+	Route::patch('update/{id?}', [
+		'as' => 'api.v1.subFamilies.update',
+		'uses' => 'SubFamilyAPIController@update'
+	]);
+	Route::delete('delete/{id?}', [
+		'as' => 'api.v1.subFamilies.delete',
+		'uses' => 'SubFamilyAPIController@destroy'
+	]);
+	Route::post('store', [
+		'as' => 'api.v1.subFamilies.store',
+		'uses' => 'SubFamilyAPIController@store'
+	]);
+});

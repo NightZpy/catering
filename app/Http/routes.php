@@ -109,3 +109,13 @@ Route::get('families', [
 		return view('families.index');
 	}
 ]);
+
+/* 
+ * ------------------- Route index for SubFamily ---------------
+ */
+Route::get('sub-families', [
+	'as' => 'subFamilies.index',
+	'uses' => function() {
+		return view('subFamilies.index');
+	}
+]);

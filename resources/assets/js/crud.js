@@ -62,7 +62,7 @@ var vm = new Vue({
         submitMessage: "",
         url: apiUrl,           
         row: objectRow,
-        foreignData: {},
+        foreignData: new Array(),
         searchFor: '',
         columns: tableColumns, 
         sortOrder: {
@@ -118,7 +118,9 @@ var vm = new Vue({
                     function(response) {
                         if (response.data.data) {
                             var data = response.data.data;
-                            vm.$set('foreignData', {[mapVar]: data});
+                            var currentForeignData = vm.foreignData; 
+                            currentForeignData[mapVar] = data;
+                            vm.foreignData.push(currentForeignData);
                         }
                     }, 
                     function(response) {}

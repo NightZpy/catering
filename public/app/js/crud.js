@@ -16915,8 +16915,6 @@ if (module.hot) {(function () {  module.hot.accept()
 },{"vue":85,"vue-hot-reload-api":78}],92:[function(require,module,exports){
 'use strict';
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var Vue = require('vue');
 var VueResource = require('vue-resource');
 var Vuetable = require('vuetable/src/components/Vuetable.vue');
@@ -16983,7 +16981,7 @@ var vm = new Vue({
         submitMessage: "",
         url: apiUrl,
         row: objectRow,
-        foreignData: {},
+        foreignData: new Array(),
         searchFor: '',
         columns: tableColumns,
         sortOrder: {
@@ -17033,7 +17031,9 @@ var vm = new Vue({
             this.$http(sendParams).then(function (response) {
                 if (response.data.data) {
                     var data = response.data.data;
-                    vm.$set('foreignData', _defineProperty({}, mapVar, data));
+                    var currentForeignData = vm.foreignData;
+                    currentForeignData[mapVar] = data;
+                    vm.foreignData.push(currentForeignData);
                 }
             }, function (response) {});
         },
