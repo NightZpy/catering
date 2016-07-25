@@ -55,6 +55,7 @@ var vm = new Vue({
         infoModal: false,
         showModal: false,
         deleteModal: false,
+        localModals: modals,
         flashMessage: null,
         defaultErrorMessage: 'Some errors in sended data, please check!.',
         flashTypeDanger: 'danger',
@@ -184,14 +185,16 @@ var vm = new Vue({
         },
         modal: function(type) {                    
             this.method = type;
-            if (type=='PATCH' || type=='POST') {
+            if (type == 'PATCH' || type == 'POST') {
                 this.formModal = true;
-            } else if (type=='SHOW') {
+            } else if (type == 'SHOW') {
                 this.showModal = true;
-            } else if (type=='DELETE') {
+            } else if (type == 'DELETE') {
                 this.deleteModal = true;
-            } else if (type=='INFO') {
+            } else if (type == 'INFO') {
                 this.infoModal = true;
+            } else {
+                this.localModals[type] = true;
             }
         },
         /*
@@ -279,9 +282,10 @@ var vm = new Vue({
             } else if (action == 'delete-item') {
                 this.row.id = data.id;
                 this.modal('DELETE');
-            } else if (action == 'add-provider') {
+            } else {
                 this.row.id = data.id;
-                this.modal('ADD-PROVIDER-TO-ITEM');
+                console.log('Data: ' + data.name + ' | Action: ' + action);
+                this.modal(action);
             }
         },
         'vuetable:load-success': function(response) {

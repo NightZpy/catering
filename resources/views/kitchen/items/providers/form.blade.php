@@ -1,9 +1,13 @@
-@extends('layouts.modal.form')
+@extends('layouts.modal.relation-form')
 
-@section('modal-form-title')
-Item Form
+@section('modal-relation-form-title')
+Add Provider to Item Form
 @stop
 
-@section('modal-form-content')
-	@include('kitchen.items.fields')
+@section('modal-sync')
+localModals.addProviderToItem
+@stop
+
+@section('modal-relation-form-content')
+	@include('kitchen.items.providers.fields')
 @stop

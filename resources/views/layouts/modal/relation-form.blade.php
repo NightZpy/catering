@@ -1,12 +1,12 @@
 <modal 
 	title="@yield('modal-title')" 
-	:show.sync="formModal" 
+	:show.sync="@yield('modal-sync')" 
 	effect="fade" 
 	width="800"
 >
 	<div slot="modal-header" class="modal-header">
 		<h4 class="modal-title">
-		  <b>@yield('modal-form-title')</b>
+		  <b>@yield('modal-relation-form-title')</b>
 		</h4>
 	</div>	
 	<div slot="modal-body" class="modal-body">
@@ -15,7 +15,7 @@
 			<div class="box box-primary">
 				<div class="box-body">
 					<div class="row">
-						@yield('modal-form-content')
+						@yield('modal-relation-form-content')
 					</div>
 				</div>
 			</div>
