@@ -6,6 +6,7 @@ use App\Http\Requests\API\Kitchen\CreateItemAPIRequest;
 use App\Http\Requests\API\Kitchen\UpdateItemAPIRequest;
 use App\Models\Kitchen\Item;
 use App\Repositories\Kitchen\ItemRepository;
+use App\Repositories\Kitchen\ProviderRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController as InfyOmBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -21,11 +22,13 @@ use Response;
 class ItemAPIController extends InfyOmBaseController
 {
     /** @var  ItemRepository */
-    private $itemRepository;
+    private $repository;
+    private $providerRepository;
 
-    public function __construct(ItemRepository $itemRepo)
+    public function __construct(ItemRepository $itemREpository, ProviderRepository $providerRepository)
     {
-        $this->itemRepository = $itemRepo;
+        $this->repository = $itemREpository;
+        $this->providerRepository = $providerRepository;
     }
 
     /**
@@ -75,7 +78,7 @@ class ItemAPIController extends InfyOmBaseController
     {
         $input = $request->all();
 
-        $items = $this->itemRepository->create($input);
+        $items = $this->repository->create($input);
 
         return $this->sendResponse($items->toArray(), 'Item saved successfully');
     }
@@ -91,7 +94,7 @@ class ItemAPIController extends InfyOmBaseController
     public function show($id)
     {
         /** @var Item $item */
-        $item = $this->itemRepository->find($id);
+        $item = $this->repository->find($id);
 
         if (empty($item)) {
             return Response::json(ResponseUtil::makeError('Item not found'), 400);
@@ -114,13 +117,13 @@ class ItemAPIController extends InfyOmBaseController
         $input = $request->all();
 
         /** @var Item $item */
-        $item = $this->itemRepository->find($id);
+        $item = $this->repository->find($id);
 
         if (empty($item)) {
             return Response::json(ResponseUtil::makeError('Item not found'), 400);
         }
 
-        $item = $this->itemRepository->update($input, $id);
+        $item = $this->repository->update($input, $id);
 
         return $this->sendResponse($item->toArray(), 'Item updated successfully');
     }
@@ -136,7 +139,7 @@ class ItemAPIController extends InfyOmBaseController
     public function destroy($id)
     {
         /** @var Item $item */
-        $item = $this->itemRepository->find($id);
+        $item = $this->repository->find($id);
 
         if (empty($item)) {
             return Response::json(ResponseUtil::makeError('Item not found'), 400);
@@ -145,5 +148,34 @@ class ItemAPIController extends InfyOmBaseController
         $item->delete();
 
         return $this->sendResponse($id, 'Item deleted successfully');
+    }
+
+    public function storeProvider(Request $request, $id = null, $providerId = null)
+    {
+        $item = $this->repository->findWithoutFail($id);
+
+        if (empty($item)) {
+            //Flash::error('Item not found');
+            return Response::json(ResponseUtil::makeError('Item not found'), 400);
+        }
+
+        $provider = $this->providerRepository->findWithoutFail($providerId);
+
+        if (empty($provider)) {
+            //Flash::error('Provider not found');
+            return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+        }
+
+        $attributes = $request->all();
+        //$selected   = False;
+        if ($request->get('selected') && !$item->auto_provider)
+            $attributes['selected'] = True;        
+        //$attributes['selected'] => $selected;
+        //$provider->items()->updateExistingPivot($itemId, compact('price', 'selected'));    
+        //$item->providers()->updateExistingPivot($providerId, compact('price', 'selected'));    
+        $this->repository->createPivot($item, 'provider', $request->all(), 'providers'); 
+
+        //Flash::success('¡Información de ' . $item->name . ' guardada exitosamente!');
+        return $this->sendResponse($request->all(), 'Provider associated to Item successfully');
     }
 }

@@ -28,6 +28,6 @@
 		</div>
 	</div>
 	<div slot="modal-footer" class="modal-footer">
-		<button type="button" class="btn btn-default" @click='closeModal'>Go!</button>
+		<button type="button" class="btn btn-default" @click='closeModal("showModal")'>Go!</button>
 	</div>	
 </modal>

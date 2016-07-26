@@ -233,4 +233,10 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 		'as' => 'api.v1.kitchen.items.store',
 		'uses' => 'ItemAPIController@store'
 	]);
+	Route::group(['prefix' => 'providers'], function () {	
+		Route::patch('store/{id?}/{providerId?}', [
+			'as' => 'api.v1.kitchen.items.providers.store',
+			'uses' => 'ItemAPIController@storeProvider'
+		]);
+	});
 });

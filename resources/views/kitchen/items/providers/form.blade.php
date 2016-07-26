@@ -5,7 +5,19 @@ Add Provider to Item Form
 @stop
 
 @section('modal-sync')
-localModals.addProviderToItem
+addProviderToItem
+@stop
+
+@section('modal-close')
+	'addProviderToItem'
+@stop
+
+@section('model')
+Provider
+@stop
+
+@section('related')
+	'provider'
 @stop
 
 @section('modal-relation-form-content')

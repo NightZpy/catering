@@ -24,10 +24,18 @@ abstract class MyBaseRepository extends BaseRepository
         return $method;
     }    
 
-    public function createPivot($model, $key, $attributes)
+    public function createPivot($model, $key, $attributes, $method = null)
     {
-        if (( $method = $this->checkPivotAttributes($key, $attributes) ))
-            $model->$method()->attach($attributes[$key]);
+        if (!$method) 
+            $method = $this->checkPivotAttributes($key, $attributes);
+
+        if ($this->checkPivotAttributes($key, $attributes)) {
+            $attributes = $attributes[$key];
+            $key = $key . '_id';
+            $id = $attributes[$key];
+            unset($attributes[$key]);
+            $model->$method()->attach($id, $attributes);
+        }
         return $method;
     }      
 

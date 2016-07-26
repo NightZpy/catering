@@ -16,8 +16,8 @@
             </div>
         </div>
         <!-- --------- Modals ---------- -->  
-        @include('kitchen.items.providers.form')             
         @include('kitchen.items.form')
+        @include('kitchen.items.providers.form')             
         @include('kitchen.items.delete')
         @include('kitchen.items.show')
         @include('layouts.modal.info')        
@@ -36,10 +36,46 @@
             update: "{{ route('api.v1.kitchen.items.update') }}/",  
             delete: "{{ route('api.v1.kitchen.items.delete') }}/",
             foreign: {
-                index: [{
-                   method: 'GET' ,
-                   url: "{{ route('api.v1.inputMaterials.basic') }}/"
-                }]
+                unit: { 
+                    index: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.units.index') }}/"
+                    }
+                },
+                presentation: { 
+                    index: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.presentations.index') }}/"
+                    }
+                },
+                type: { 
+                    index: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.types.index') }}/"
+                    }
+                },
+                family: { 
+                    index: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.families.index') }}/"
+                    }
+                },
+                subFamily: { 
+                    index: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.subFamilies.index') }}/"
+                    }
+                },
+                provider: { 
+                    store: {
+                        method: 'PATCH' ,
+                        url: "{{ route('api.v1.kitchen.items.providers.store') }}/"
+                    }, 
+                    index: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.kitchen.providers.index') }}/"
+                    }
+                },
             },
             validation: {
                 unique: "",

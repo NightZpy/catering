@@ -116,6 +116,11 @@ class Item extends Model
         return $this->belongsTo(Type::class);
     }
 
+    public function providers()
+    {
+        return $this->belongsToMany(Provider::class)->withPivot('price', 'selected');
+    }
+
     /**
      *
      *-------------------- Accessors and Mutators

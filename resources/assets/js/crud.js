@@ -25,7 +25,8 @@ Vue.component('vuetable-pagination-simple', VuetablePaginationSimple)
 var E_SERVER_ERROR = 'Error communicating with the server';
 
 Vue.config.debug = true
-Vue.config.devtools = true       
+Vue.config.devtools = true   
+// Vue.config.warnExpressionErrors = true    
 
 Vue.component('custom-error', {
   props: ['field', 'validator', 'message'],
@@ -86,26 +87,37 @@ var vm = new Vue({
         }
     },
     methods: {
-        submit: function() {
-            var actionUrl = this.url.store;
+        submit: function(related) {
             this.row._token = token;
-            if (this.method == 'PATCH' || this.method == 'POST') {
-                if (this.method == 'PATCH') {
-                    actionUrl = this.url.update + this.row.id;                    
-                }  
-            } else if (this.method == 'DELETE') {
-                actionUrl = this.url.delete + this.row.id;                
+            console.log('Related: ' + related);
+            if (!related) {
+                var actionUrl = this.url.store;
+                if (this.method == 'PATCH' || this.method == 'POST') {
+                    if (this.method == 'PATCH') {
+                        actionUrl = this.url.update + this.row.id;                    
+                    }  
+                } else if (this.method == 'DELETE') {
+                    actionUrl = this.url.delete + this.row.id;                
+                }                            
+            } else {                
+                var index =  "'" + related + "'";
+                console.log('Index: ' + index)
+                var url = this.url.foreign[related].store.url;
+                var method = this.url.foreign[related].store.method;
+                var providerId = this.row[related][related + '_id'];
+                var actionUrl = url + this.row.id + '/' + providerId;
+                this.method = method;
             }
             //this.$http({actionUrl, this.method, data}).then(this.success, this.failed);
             this.sendData(actionUrl, this.method, this.row)
-                .then(this.success, this.failed);            
+                .then(this.success, this.failed);
         },
         getData: function () {
             this.sendData(this.url.show + this.row.id, 'GET')
                 .then(this.success, this.failed);
         },
-        getForeignData: function (callUrl = null, mapVar = null) {
-            var foreign = this.url.foreign.index;
+        getForeignData: function (callUrl = null, mapVar = null, related = null) {
+            var foreign = this.url.foreign[related].index;
             if (callUrl == null)          
                 callUrl = foreign.url;
 
@@ -172,8 +184,13 @@ var vm = new Vue({
             }
             vm.$setValidationErrors(errorMessages);     
         },
-        closeModal: function() {
-            this.formModal = this.showModal = this.deleteModal = this.infoModal = false;
+        closeModal: function(modalName) {
+            console.log('Modal: ' + modalName);
+            if (this.localModals[modalName] != undefined)
+                this.localModals[modalName]    = false;
+            else
+                this.$set(modalName, false);
+            //this.formModal = this.showModal = this.deleteModal = this.infoModal = false;
             this.cleanData();  
         },
         visible: function(field) {

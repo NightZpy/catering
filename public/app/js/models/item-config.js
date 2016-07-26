@@ -11,7 +11,12 @@ var objectRow = {
 	presentation_id: "",
 	type_id: "",
 	family_id: "",
-	sub_family_id: ""
+	sub_family_id: "",
+	provider: {
+		provider_id: "",
+		price: "",
+		selected: ""
+	}
 };
 
 var tableColumns = [

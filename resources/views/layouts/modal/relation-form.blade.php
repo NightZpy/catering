@@ -1,6 +1,6 @@
 <modal 
 	title="@yield('modal-title')" 
-	:show.sync="@yield('modal-sync')" 
+	:show.sync="localModals.@yield('modal-sync')" 
 	effect="fade" 
 	width="800"
 >
@@ -22,7 +22,12 @@
 		</div>
 	</div>
 	<div slot="modal-footer" class="modal-footer">
-		<button type="button" class="btn btn-default" @click='closeModal'>Close</button>
-		<button type="button" class="btn btn-success" @click="submit" v-if="$validation.valid">Save</button>
+		<button type="button" class="btn btn-default" 
+			@click="closeModal(@yield('modal-close'))"
+		>Close</button>
+		<button type="button" class="btn btn-success" 
+			@click="submit(@yield('related', 'null'))"
+			v-if="{{  '$validation' }}@yield('model').valid"
+		>Save</button>
 	</div>	
 </modal>
