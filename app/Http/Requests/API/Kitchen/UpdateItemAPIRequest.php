@@ -3,6 +3,7 @@
 namespace App\Http\Requests\API\Kitchen;
 
 use App\Models\Kitchen\Item;
+use App\Http\Requests\API\MyAPIRequest;
 
 class UpdateItemAPIRequest extends MyAPIRequest
 {
@@ -23,6 +24,9 @@ class UpdateItemAPIRequest extends MyAPIRequest
      */
     public function rules()
     {
-        return Item::$rules;
+        $rules = Item::$rules;
+        $rules['name'] = $rules['name'] . ',name,' . $this->id;
+        //$rules['email'] = $rules['email'] . ',email,' . $this->id;
+        return $rules;
     }
 }

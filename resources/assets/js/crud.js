@@ -87,10 +87,11 @@ var vm = new Vue({
         }
     },
     methods: {
-        submit: function(related) {
+        submit: function(related = null) {
             this.row._token = token;
             console.log('Related: ' + related);
-            if (!related) {
+            //console.log('Event: ' + e);
+            if (!related || related.target ) {
                 var actionUrl = this.url.store;
                 if (this.method == 'PATCH' || this.method == 'POST') {
                     if (this.method == 'PATCH') {
@@ -201,12 +202,14 @@ var vm = new Vue({
             return false;
         },
         modal: function(type) {                    
-            this.method = type;
             if (type == 'PATCH' || type == 'POST') {
+                this.method = type;
                 this.formModal = true;
             } else if (type == 'SHOW') {
+                this.method = type;
                 this.showModal = true;
             } else if (type == 'DELETE') {
+                this.method = type;
                 this.deleteModal = true;
             } else if (type == 'INFO') {
                 this.infoModal = true;

@@ -74,7 +74,7 @@ class Item extends Model
      */
     public static $rules = [
         //'code' => 'required|min:1|max:128',
-        'name' => 'required|unique:items|min:1|max:128',
+        'name' => 'required|min:1|max:128|unique:items',
         'auto_provider' => 'required|boolean',
         'perishable' => 'required|boolean',
         'min_stock' => 'required|digits_between:1,4',

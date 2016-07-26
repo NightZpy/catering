@@ -3,7 +3,7 @@
 @section('content')
     <div id="crud-app">
         <section class="content-header">
-            <h1 class="pull-left">Items</h1>
+            <h1 class="pull-left">Providers from @{{ row.name }}</h1>
             <h1 class="pull-right">
                <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('POST')">Add New</a>
             </h1>
@@ -11,7 +11,7 @@
         <div class="content" style="padding-top: 30px;">
             <div class="box box-primary">
                 <div class="box-body">
-                    @include('kitchen.items.table')
+                    @include('kitchen.items.providers.table')
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
 @endsection
 
 @push('vue-scripts')  
-    <script src="/app/js/models/item-config.js"></script>
+    <script src="/app/js/models/kitchen/item/provider/config.js"></script>
     <script>
         var token = '{{ csrf_token() }}';
         var fieldInitOrder = 'id';
