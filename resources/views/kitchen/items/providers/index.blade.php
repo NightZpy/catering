@@ -3,7 +3,7 @@
 @section('content')
     <div id="crud-app">
         <section class="content-header">
-            <h1 class="pull-left">Providers from @{{ row.name }}</h1>
+            <h1 class="pull-left">Providers from {{ $item->name }}</h1>
             <h1 class="pull-right">
                <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('POST')">Add New</a>
             </h1>

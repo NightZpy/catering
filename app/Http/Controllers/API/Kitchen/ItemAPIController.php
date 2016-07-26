@@ -178,4 +178,21 @@ class ItemAPIController extends InfyOmBaseController
         //Flash::success('¡Información de ' . $item->name . ' guardada exitosamente!');
         return $this->sendResponse($request->all(), 'Provider associated to Item successfully');
     }
+
+    public function providers(Request $request, $id = null)
+    {
+         $item = $this->repository->findWithoutFail($id);
+
+        if (empty($item)) {
+            //Flash::error('Item not found');
+            return Response::json(ResponseUtil::makeError('Item not found'), 400);
+        }
+
+        if (empty($item->providers)) {
+            //Flash::error('Item not found');
+            return Response::json(ResponseUtil::makeError('Not Providers for Item'), 400);
+        }
+
+        return $this->sendResponse($item->providers->toArray(), 'Providers associated to Item successfully retrieved');       
+    }
 }

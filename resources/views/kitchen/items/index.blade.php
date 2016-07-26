@@ -74,6 +74,10 @@
                     index: {
                         method: 'GET' ,
                         url: "{{ route('api.v1.kitchen.providers.index') }}/"
+                    },
+                    relate_list: {
+                        method: 'GET',
+                        url: "{{ route('api.v1.kitchen.items.providers.index') }}/"                        
                     }
                 },
             },
