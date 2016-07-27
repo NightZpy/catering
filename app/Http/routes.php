@@ -123,9 +123,22 @@ Route::get('sub-families', [
 /* 
  * ------------------- Route index for Item ---------------
  */
-Route::get('kitchen/items', [
-	'as' => 'kitchen.items.index',
-	'uses' => function() {
-		return view('kitchen.items.index');
-	}
-]);
+Route::group(['prefix' => 'kitchen'], function () {	
+	Route::group(['prefix' => 'items'], function() {
+		Route::get('', [
+			'as' => 'kitchen.items.index',
+			'uses' => function() {
+				return view('kitchen.items.index');
+			}
+		]);	
+
+		Route::group(['prefix' => 'providers'], function() {
+			Route::get('{item?}', [
+				'as' => 'kitchen.items.providers.index',
+				'uses' => function (App\Models\Kitchen\Item $item) {
+					return view('kitchen.items.providers.index', compact('item'));
+				}
+			]);
+		});
+	});
+});

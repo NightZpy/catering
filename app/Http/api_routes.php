@@ -238,7 +238,7 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 			'as' => 'api.v1.kitchen.items.providers.store',
 			'uses' => 'ItemAPIController@storeProvider'
 		]);
-		Route::get('index/{id?}', [
+		Route::get('{id?}', [
 			'as' => 'api.v1.kitchen.items.providers.index',
 			'uses' => 'ItemAPIController@providers'
 		]);

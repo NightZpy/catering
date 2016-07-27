@@ -304,7 +304,7 @@ var vm = new Vue({
                 this.modal('DELETE');
             } else if (action.split('-')[0] == 'LINK') {
                 var foreign = action.split('-')[1];
-                document.location = this.url.foreign[foreign].relate_list.url + data.id;
+                document.location = this.url.foreign[foreign].index.url + data.id;
             } else {
                 this.row.id = data.id;
                 console.log('Data: ' + data.name + ' | Action: ' + action);
