@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(InputMaterialTableSeeder::class);
         $this->call(FamilyTableSeeder::class);
         $this->call(SubFamilyTableSeeder::class);
+        $this->call(ItemTableSeeder::class);
+        $this->call(ItemProviderTableSeeder::class);
         Model::reguard();
     }
 }

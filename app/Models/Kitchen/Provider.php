@@ -68,6 +68,16 @@ class Provider extends Model
         'email' => 'required|email|min:3|max:128|unique:providers'
     ];
 
+    /**
+     *
+     *-------------------- Relations
+     *
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class);
+    }
+
     /*
      * -------------------- Getters and Setters
      */
