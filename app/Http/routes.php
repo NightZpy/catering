@@ -11,8 +11,12 @@
 |
 */
 
+Route::get('/test', function(){
+	return App\Models\Family::first()->input_material;
+});
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
 
@@ -84,3 +88,57 @@ Route::get('units', [
 		return view('units.index');
 	}
 ]);
+
+
+/* 
+ * ------------------- Route index for InputMaterial ---------------
+ */
+Route::get('input-materials', [
+	'as' => 'inputMaterials.index',
+	'uses' => function() {
+		return view('inputMaterials.index');
+	}
+]);
+
+/* 
+ * ------------------- Route index for Family ---------------
+ */
+Route::get('families', [
+	'as' => 'families.index',
+	'uses' => function() {
+		return view('families.index');
+	}
+]);
+
+/* 
+ * ------------------- Route index for SubFamily ---------------
+ */
+Route::get('sub-families', [
+	'as' => 'subFamilies.index',
+	'uses' => function() {
+		return view('subFamilies.index');
+	}
+]);
+
+/* 
+ * ------------------- Route index for Item ---------------
+ */
+Route::group(['prefix' => 'kitchen'], function () {	
+	Route::group(['prefix' => 'items'], function() {
+		Route::get('', [
+			'as' => 'kitchen.items.index',
+			'uses' => function() {
+				return view('kitchen.items.index');
+			}
+		]);	
+
+		Route::group(['prefix' => 'providers'], function() {
+			Route::get('{item?}', [
+				'as' => 'kitchen.items.providers.index',
+				'uses' => function (App\Models\Kitchen\Item $item) {
+					return view('kitchen.items.providers.index', compact('item'));
+				}
+			]);
+		});
+	});
+});

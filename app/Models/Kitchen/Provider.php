@@ -68,11 +68,27 @@ class Provider extends Model
         'email' => 'required|email|min:3|max:128|unique:providers'
     ];
 
+    /**
+     *
+     *-------------------- Relations
+     *
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class);
+    }
+
     /*
      * -------------------- Getters and Setters
      */
     public function setCodeAttribute($value)
     {
-        $this->attributes['code'] = intval($this->all()->last()->code) + 1;
+        if (empty($value)) 
+            if($this->all())
+                $this->attributes['code'] = intval($this->all()->last()->code) + 1;
+            else
+                $this->attributes['code'] = 1;
+        else
+            $this->attributes['code'] = $value;
     }
 }

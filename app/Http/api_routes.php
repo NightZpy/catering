@@ -113,3 +113,134 @@ Route::group(['prefix' => 'units'], function () {
 	]);
 });
 
+
+
+/* 
+ * ------------------- Route API CRUD for InputMaterial ---------------
+ */
+Route::group(['prefix' => 'inputMaterials'], function () {	
+	Route::get('/', [
+		'as' => 'api.v1.inputMaterials.index',
+		'uses' => 'InputMaterialAPIController@index'
+	]);
+
+	Route::get('/basic', [
+		'as' => 'api.v1.inputMaterials.basic',
+		'uses' => 'InputMaterialAPIController@basic'
+	]);
+
+	Route::get('show/{id?}', [
+		'as' => 'api.v1.inputMaterials.show',
+		'uses' => 'InputMaterialAPIController@show'
+	]);
+	Route::patch('update/{id?}', [
+		'as' => 'api.v1.inputMaterials.update',
+		'uses' => 'InputMaterialAPIController@update'
+	]);
+	Route::delete('delete/{id?}', [
+		'as' => 'api.v1.inputMaterials.delete',
+		'uses' => 'InputMaterialAPIController@destroy'
+	]);
+	Route::post('store', [
+		'as' => 'api.v1.inputMaterials.store',
+		'uses' => 'InputMaterialAPIController@store'
+	]);
+});
+
+/* 
+ * ------------------- Route API CRUD for Family ---------------
+ */
+Route::group(['prefix' => 'families'], function () {	
+	Route::get('/', [
+		'as' => 'api.v1.families.index',
+		'uses' => 'FamilyAPIController@index'
+	]);
+	Route::get('show/{id?}', [
+		'as' => 'api.v1.families.show',
+		'uses' => 'FamilyAPIController@show'
+	]);
+	Route::patch('update/{id?}', [
+		'as' => 'api.v1.families.update',
+		'uses' => 'FamilyAPIController@update'
+	]);
+	Route::delete('delete/{id?}', [
+		'as' => 'api.v1.families.delete',
+		'uses' => 'FamilyAPIController@destroy'
+	]);
+	Route::post('store', [
+		'as' => 'api.v1.families.store',
+		'uses' => 'FamilyAPIController@store'
+	]);
+
+	Route::get('check-unique/{field}/{value?}', [
+		'as' => 'api.v1.families.check-unique',
+		'uses' => 'FamilyAPIController@checkUnique'
+	]);
+});
+
+/* 
+ * ------------------- Route API CRUD for SubFamily ---------------
+ */
+Route::group(['prefix' => 'sub-families'], function () {	
+	Route::get('/', [
+		'as' => 'api.v1.subFamilies.index',
+		'uses' => 'SubFamilyAPIController@index'
+	]);
+	Route::get('show/{id?}', [
+		'as' => 'api.v1.subFamilies.show',
+		'uses' => 'SubFamilyAPIController@show'
+	]);
+	Route::patch('update/{id?}', [
+		'as' => 'api.v1.subFamilies.update',
+		'uses' => 'SubFamilyAPIController@update'
+	]);
+	Route::delete('delete/{id?}', [
+		'as' => 'api.v1.subFamilies.delete',
+		'uses' => 'SubFamilyAPIController@destroy'
+	]);
+	Route::post('store', [
+		'as' => 'api.v1.subFamilies.store',
+		'uses' => 'SubFamilyAPIController@store'
+	]);
+
+	Route::get('by-family/{familyId?}', [
+		'as' => 'api.v1.subFamilies.byFamily',
+		'uses' => 'SubFamilyAPIController@byFamily'
+	]);	
+});
+
+/* 
+ * ------------------- Route API CRUD for Item ---------------
+ */
+Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {	
+	Route::get('/', [
+		'as' => 'api.v1.kitchen.items.index',
+		'uses' => 'ItemAPIController@index'
+	]);
+	Route::get('show/{id?}', [
+		'as' => 'api.v1.kitchen.items.show',
+		'uses' => 'ItemAPIController@show'
+	]);
+	Route::patch('update/{id?}', [
+		'as' => 'api.v1.kitchen.items.update',
+		'uses' => 'ItemAPIController@update'
+	]);
+	Route::delete('delete/{id?}', [
+		'as' => 'api.v1.kitchen.items.delete',
+		'uses' => 'ItemAPIController@destroy'
+	]);
+	Route::post('store', [
+		'as' => 'api.v1.kitchen.items.store',
+		'uses' => 'ItemAPIController@store'
+	]);
+	Route::group(['prefix' => 'providers'], function () {	
+		Route::patch('store/{id?}/{providerId?}', [
+			'as' => 'api.v1.kitchen.items.providers.store',
+			'uses' => 'ItemAPIController@storeProvider'
+		]);
+		Route::get('{id?}', [
+			'as' => 'api.v1.kitchen.items.providers.index',
+			'uses' => 'ItemAPIController@providers'
+		]);
+	});
+});

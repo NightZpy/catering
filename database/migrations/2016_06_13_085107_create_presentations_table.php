@@ -14,8 +14,8 @@ class CreatepresentationsTable extends Migration
     public function up()
     {
         Schema::create('presentations', function (Blueprint $table) {
-            $table->integer('id', true ,true);
-            $table->string('name', 128);
+            $table->increments('id');
+            $table->string('name', 128)->unique();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateunitsTable extends Migration
+class CreateFamiliesTable extends Migration
 {
 
     /**
@@ -13,10 +13,10 @@ class CreateunitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('units', function (Blueprint $table) {
+        Schema::create('families', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 128);
-            $table->string('symbol', 128);
+            $table->string('name', 128)->unique();
+            $table->smallInteger('code', 128)->unique();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +29,6 @@ class CreateunitsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('units');
+        Schema::drop('families');
     }
 }

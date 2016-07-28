@@ -1,0 +1,85 @@
+[
+  {
+    "fieldInput": "id:increments",
+    "htmlType": "",
+    "validations": "",
+    "searchable": false,
+    "fillable": false,
+    "primary": true
+  },
+  {
+    "fieldInput": "code:string,128",
+    "htmlType": "text",
+    "validations": "required|min:1|max:128",
+    "fillable": true,
+    "searchable": true
+  },  
+  {
+    "fieldInput": "name:string,128",
+    "htmlType": "text",
+    "validations": "required|unique:items|min:1|max:128",
+    "fillable": true,
+    "searchable": true
+  },
+  {
+    "fieldInput": "auto_provider:boolean",
+    "htmlType": "radio:Si,No",
+    "validations": "required|boolean",
+    "fillable": true,
+    "searchable": true
+  },
+  {
+    "fieldInput": "perishable:boolean",
+    "htmlType": "radio:Si,No",
+    "validations": "required|boolean",
+    "fillable": true,
+    "searchable": true
+  },
+  {
+    "fieldInput": "min_stock:smallInteger",
+    "htmlType": "number",
+    "validations": "required|min:1|max:4",
+    "fillable": true
+  },
+  {
+    "fieldInput": "quantity:smallInteger",
+    "htmlType": "number",
+    "validations": "required|min:1|max:4",
+    "fillable": true
+  },
+  {
+    "fieldInput": "currency:string,128",
+    "htmlType": "text",
+    "validations": "required|min:1|max:128",
+    "fillable": true,
+    "searchable": true
+  },
+  {
+    "fieldInput": "unit_id:integer",
+    "htmlType": "select:a,b,c",
+    "validations": "required|exists:units,id",
+    "fillable": true,
+    "searchable": true
+  },
+  {
+    "fieldInput": "presentation_id:integer",
+    "htmlType": "select:a,b,c",
+    "validations": "required|exists:presentations,id",
+    "fillable": true,
+    "searchable": true
+  },
+  {
+    "fieldInput": "type_id:integer",
+    "htmlType": "select:a,b,c",
+    "validations": "required|exists:types,id",
+    "fillable": true,
+    "searchable": true
+  },
+  {
+    "fieldInput": "sub_family_id:integer",
+    "htmlType": "select:a,b,c",
+    "validations": "required|exists:sub_families,id",
+    "fillable": true,
+    "searchable": true
+  }  
+]

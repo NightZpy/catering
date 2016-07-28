@@ -24,7 +24,7 @@
 @endsection
 
 @push('vue-scripts')  
-    <script src="/app/js/models/provider-config.js"></script>
+    <script src="/app/js/models/kitchen/provider/config.js"></script>
     <script>
         var token = '{{ csrf_token() }}';
         var fieldInitOrder = 'id';
