@@ -242,5 +242,9 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 			'as' => 'api.v1.kitchen.items.providers.index',
 			'uses' => 'ItemAPIController@providers'
 		]);
+		Route::get('show/{id?}/{providerId?}', [
+			'as' => 'api.v1.kitchen.items.providers.show',
+			'uses' => 'ItemAPIController@provider'
+		]);
 	});
 });

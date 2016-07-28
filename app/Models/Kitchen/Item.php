@@ -31,7 +31,9 @@ class Item extends Model
         'family_name', 
         'sub_family_code', 
         'sub_family_name', 
-        'compose_code'
+        'compose_code',
+        'price_format',
+        'selected_format'
     ];    
 
     protected $dates = ['deleted_at'];
@@ -184,5 +186,15 @@ class Item extends Model
     public function getPerishableFormatAttribute()
     {
         return ($this->perishable ? 'Si' : 'No');
+    }    
+
+    public function getPriceFormatAttribute()
+    {
+        return number_format($this->pivot->price, 2, ',', '.');
+    }
+
+    public function getSelectedFormatAttribute()
+    {
+        return ($this->pivot->selected ? 'Si': 'No');
     }    
 }

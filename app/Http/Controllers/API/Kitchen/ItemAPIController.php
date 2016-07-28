@@ -181,7 +181,7 @@ class ItemAPIController extends InfyOmBaseController
 
     public function providers(Request $request, $id = null)
     {
-         $item = $this->repository->findWithoutFail($id);
+        $item = $this->repository->findWithoutFail($id);
 
         if (empty($item)) {
             //Flash::error('Item not found');
@@ -191,8 +191,35 @@ class ItemAPIController extends InfyOmBaseController
         if (empty($item->providers)) {
             //Flash::error('Item not found');
             return Response::json(ResponseUtil::makeError('Not Providers for Item'), 400);
+        }         
+
+        $query = $item->providers();
+        if (request()->has('sort')) {
+            list($sortCol, $sortDir) = explode('|', request()->sort);
+            $query = $query->orderBy($sortCol, $sortDir);
+        } else {
+            $query = $query->orderBy('created_at', 'asc');
         }
 
-        return $this->sendResponse($item->providers->toArray(), 'Providers associated to Item successfully retrieved');       
+        if ($request->exists('filter')) {
+            $query->where(function($q) use($request) {
+                $value = "%{$request->filter}%";
+                $q->where("code", "like", $value)
+                  ->orWhere("name", "like", $value)
+                  ->orWhere("specialty", "like", $value)
+                  ->orWhere("district", "like", $value)
+                  ->orWhere("contact", "like", $value)
+                  ->orWhere("email", "like", $value);
+            });
+        }
+
+        $perPage = request()->has('per_page') ? (int) request()->per_page : null;
+        return response()->json($query->paginate($perPage));
+    }
+
+    public function provider(Request $request, $id = null, $providerId = null) {
+        $provider = $this->repository->findWithoutFail($id)->providers()->whereProviderId($providerId)->first();
+
+        return $this->sendResponse($provider->toArray(), 'Provider associated to Item successfully retrieve');
     }
 }

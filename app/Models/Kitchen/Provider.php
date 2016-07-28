@@ -18,6 +18,10 @@ class Provider extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $appends = [
+        'price_format',
+        'selected_format'    
+    ];
 
     public $fillable = [
         'code',
@@ -91,4 +95,14 @@ class Provider extends Model
         else
             $this->attributes['code'] = $value;
     }
+
+    public function getPriceFormatAttribute()
+    {
+        return number_format($this->pivot->price, 2, ',', '.');
+    }
+
+    public function getSelectedFormatAttribute()
+    {
+        return ($this->pivot->selected ? 'Si': 'No');
+    }      
 }

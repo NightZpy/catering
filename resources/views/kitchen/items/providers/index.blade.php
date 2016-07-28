@@ -3,7 +3,7 @@
 @section('content')
     <div id="crud-app">
         <section class="content-header">
-            <h1 class="pull-left">Providers from {{ $item->name }}</h1>
+            <h1 class="pull-left">Providers from Item: <strong>{{ $item->name }}</strong></h1>
             <h1 class="pull-right">
                <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('POST')">Add New</a>
             </h1>
@@ -29,11 +29,11 @@
         var token = '{{ csrf_token() }}';
         var fieldInitOrder = 'id';
         var apiUrl = { 
-            show:  "{{ route('api.v1.kitchen.items.show') }}/",
-            index: "{{ route('api.v1.kitchen.items.index') }}",  
-            store: "{{ route('api.v1.kitchen.items.store') }}",  
-            update: "{{ route('api.v1.kitchen.items.update') }}/",  
-            delete: "{{ route('api.v1.kitchen.items.delete') }}/",
+            show:  "{{ route('api.v1.kitchen.items.providers.show', $item->id) }}/",
+            index: "{{ route('api.v1.kitchen.items.providers.index', $item->id) }}",  
+            store: "{{ route('api.v1.kitchen.items.providers.store', $item->id) }}",  
+            {{-- update: "{{ route('api.v1.kitchen.items.providers.update', $item->id) }}/", --}}  
+            {{-- delete: "{{ route('api.v1.kitchen.items.providers.delete', $item->id) }}/", --}}
             foreign: {
                 index: [{
                    method: 'GET' ,

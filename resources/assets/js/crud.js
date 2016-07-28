@@ -196,7 +196,9 @@ var vm = new Vue({
         },
         visible: function(field) {
             for (var column in this.columns) {
-                if (this.columns[column].name == field) 
+                if (this.columns[column].name == field || 
+                    this.columns[column].name == field + '_format' ||
+                    this.columns[column].name == field + '_name') 
                     return this.columns[column].visible;
             }
             return false;
