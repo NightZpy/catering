@@ -17034,6 +17034,13 @@ var vm = new Vue({
         getData: function getData() {
             this.sendData(this.url.show + this.row.id, 'GET').then(this.success, this.failed);
         },
+        available: function available(url) {
+            this.sendData(url, 'GET').then(function (response) {
+                return true;
+            }, function (response) {
+                return false;
+            });
+        },
         getForeignData: function getForeignData() {
             var callUrl = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
             var mapVar = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];

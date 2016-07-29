@@ -240,9 +240,13 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 			'as' => 'api.v1.kitchen.items.providers.index',
 			'uses' => 'ItemAPIController@providers'
 		]);
+		Route::get('available-list/{id?}', [
+			'as' => 'api.v1.kitchen.items.providers.available-providers',
+			'uses' => 'ItemAPIController@availableProviders'
+		]);
 		Route::get('available/{id?}', [
 			'as' => 'api.v1.kitchen.items.providers.available',
-			'uses' => 'ItemAPIController@availableProviders'
+			'uses' => 'ItemAPIController@hasAvailableProviders'
 		]);
 		Route::get('show/{id?}/{providerId?}', [
 			'as' => 'api.v1.kitchen.items.providers.show',

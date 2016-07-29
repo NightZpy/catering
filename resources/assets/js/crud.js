@@ -115,6 +115,14 @@ var vm = new Vue({
             this.sendData(this.url.show + this.row.id, 'GET')
                 .then(this.success, this.failed);
         },
+        available: function(url) {
+            this.sendData(url, 'GET')
+                .then(function (response){
+                    return true;
+                }, function (response){
+                    return false;
+                });
+        },
         getForeignData: function (callUrl = null, mapVar = null, related = null) {
             var foreign = this.url.foreign[related].index;
             if (callUrl == null)          

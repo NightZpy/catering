@@ -4,7 +4,7 @@
     <div id="crud-app">
         <section class="content-header">
             <h1 class="pull-left">Providers from Item: <strong>{{ $item->name }}</strong></h1>
-            <h1 class="pull-right">
+            <h1 v-if="available('{{ route('api.v1.kitchen.items.providers.available') }}/' + row.id)" class="pull-right">               
                <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('addProviderToItem')">Add New</a>
             </h1>
         </section>
@@ -34,7 +34,7 @@
         var fieldInitOrder = 'id';
         var apiUrl = { 
             show:  "{{ route('api.v1.kitchen.items.providers.show', $item->id) }}/",
-            index: "{{ route('api.v1.kitchen.items.providers.available', $item->id) }}",  
+            index: "{{ route('api.v1.kitchen.items.providers.available-providers', $item->id) }}",  
             //store: "{{ route('api.v1.kitchen.items.providers.store', $item->id) }}",  
             {{-- update: "{{ route('api.v1.kitchen.items.providers.update', $item->id) }}/", --}}  
             {{-- delete: "{{ route('api.v1.kitchen.items.providers.delete', $item->id) }}/", --}}
@@ -46,11 +46,11 @@
                     }, 
                     index: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.kitchen.items.providers.available') }}/"
+                        url: "{{ route('api.v1.kitchen.items.providers.available-providers') }}/"
                     },
                     relate_list: {
                         method: 'GET',
-                        url: "{{ route('api.v1.kitchen.items.providers.available') }}/"                        
+                        url: "{{ route('api.v1.kitchen.items.providers.available-providers') }}/"                        
                     },
                     already_associate: {
                         method: 'GET',

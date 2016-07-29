@@ -224,6 +224,14 @@ class ItemAPIController extends InfyOmBaseController
         return $this->sendResponse($providers, 'Provider retrieve successfully');
     }
 
+    public function hasAvailableProviders(Request $request, $id = null)
+    {
+        $providers = $this->repository->availableProviders($id)->toArray();
+        if (empty($providers))
+            return Response::json(ResponseUtil::makeError('Providers not found'), 400);        
+        return $this->sendResponse(True, 'Provider retrieve successfully');        
+    }
+
 
     public function provider(Request $request, $id = null, $providerId = null) {
         $provider = $this->repository->findWithoutFail($id)->providers()->whereProviderId($providerId)->first();
