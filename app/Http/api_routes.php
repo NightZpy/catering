@@ -256,9 +256,13 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 			'as' => 'api.v1.kitchen.items.providers.already-associate',
 			'uses' => 'ItemAPIController@alreadyAssociate'
 		]);		
-		Route::patch('store/{id?}/{providerId?}', [
+		Route::patch('{id?}/{providerId?}', [
 			'as' => 'api.v1.kitchen.items.providers.store',
 			'uses' => 'ItemAPIController@storeProvider'
+		]);	
+		Route::delete('{id?}/{providerId?}', [
+			'as' => 'api.v1.kitchen.items.providers.delete',
+			'uses' => 'ItemAPIController@deleteProvider'
 		]);		
 	});
 });

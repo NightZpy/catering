@@ -87,9 +87,9 @@ var vm = new Vue({
         }
     },
     methods: {
-        submit: function(related = null) {
+        submit: function(related = null, type = null) {
             this.row._token = token;
-            console.log('Related: ' + related);
+            //console.log('Related: ' + related);
             //console.log('Event: ' + e);
             if (!related || related.target ) {
                 var actionUrl = this.url.store;
@@ -100,11 +100,12 @@ var vm = new Vue({
                 } else if (this.method == 'DELETE') {
                     actionUrl = this.url.delete + this.row.id;                
                 }                            
-            } else {                
-                var url = this.url.foreign[related].store.url;
-                var method = this.url.foreign[related].store.method;
+            } else {                     
+                var url = this.url.foreign[related][type].url;
+                var method = this.url.foreign[related][type].method;
                 var relatedId = this.row[related][related + '_id'];
                 var actionUrl = url + this.row.id + '/' + relatedId;
+                console.log('URL: ' + actionUrl);
                 this.method = method;
             }
             //this.$http({actionUrl, this.method, data}).then(this.success, this.failed);
@@ -310,9 +311,17 @@ var vm = new Vue({
             } else if (action == 'delete-item') {
                 this.row.id = data.id;
                 this.modal('DELETE');
-            } else if (action.split('-')[0] == 'LINK') {
-                var foreign = action.split('-')[1];
-                document.location = this.url.foreign[foreign].index.url + data.id;
+            } else if (action.split(':').length) {
+                var foreign = action.split(':')[1];
+                var action = action.split(':')[0];
+                if (action == 'LINK') {
+                    document.location = this.url.foreign[foreign].index.url + data.id;                    
+                } else {                    
+                    if ( action == 'DELETE')
+                        this.row[foreign][foreign + '_id'] = data.id;
+                    this.modal(action);                    
+                }
+
             } else {
                 this.row.id = data.id;
                 //console.log('Data: ' + data.name + ' | Action: ' + action);

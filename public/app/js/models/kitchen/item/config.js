@@ -116,7 +116,7 @@ var actions = [
     { name: 'edit-item', label: '', icon: 'glyphicon glyphicon-pencil', class: 'btn btn-warning', extra: {title: 'Edit', 'data-toggle':"tooltip", 'data-placement': "top"} },
     { name: 'delete-item', label: '', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } },
     { name: 'addProviderToItem', label: '', icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {title: 'Add Provider', 'data-toggle':"tooltip", 'data-placement': "right" } },
-    { name: 'LINK-provider', label: '', icon: 'glyphicon glyphicon-th-list', class: 'btn btn-success', extra: {title: 'Providers', 'data-toggle':"tooltip", 'data-placement': "right" } }
+    { name: 'LINK:provider', label: '', icon: 'glyphicon glyphicon-th-list', class: 'btn btn-success', extra: {title: 'Providers', 'data-toggle':"tooltip", 'data-placement': "right" } }
 ];
 
 var modals = {

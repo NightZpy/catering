@@ -242,12 +242,26 @@ class ItemAPIController extends InfyOmBaseController
     public function alreadyAssociate(Request $request, $id = null, $providerId = null)
     {
         $item = $this->repository->findWithoutFail($id);
-
         if (empty($item))
             return Response::json(ResponseUtil::makeError('Item not found'), 400);
 
         if ($item->providers()->whereProviderId($providerId)->count()) 
             return $this->sendResponse([True], 'Provider already associate to item');
         return $this->sendResponse([False], 'Provider not associate yet to item');   
+    }
+
+    public function deleteProvider(Request $request, $id = null, $providerId = null)
+    {
+        $item = $this->repository->findWithoutFail($id);
+        if (empty($item))
+            return Response::json(ResponseUtil::makeError('Item not found'), 400); 
+        $provider = ['provider_id' => '', 'price' => '', 'selected' => ''];
+        if ($item->providers()->whereProviderId($providerId)->count()) {
+            $item->providers()->detach($providerId);
+            $item = $item->toArray();
+            $item['provider'] = $provider;
+            return $this->sendResponse($item, 'Provider successfully detached from item');
+        }
+        return Response::json(ResponseUtil::makeError('Provider could not be detached from item'), 400);
     }
 }

@@ -55,6 +55,10 @@
                     already_associate: {
                         method: 'GET',
                         url: "{{ route('api.v1.kitchen.items.providers.already-associate') }}/"
+                    },
+                    delete: {
+                        method: 'DELETE',
+                        url: "{{ route('api.v1.kitchen.items.providers.delete') }}/"
                     }
                 },
             },

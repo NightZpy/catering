@@ -11,6 +11,6 @@
 	</div>
 	<div slot="modal-footer" class="modal-footer">
 		<button type="button" class="btn btn-default" @click='closeModal("deleteModal")'>Cancelar</button>
-		<button type="button" class="btn btn-success" @click="submit">Aceptar</button>
+		<button type="button" class="btn btn-success" @click="submit(@yield('submit', ''))">Aceptar</button>
 	</div>
 </modal>
