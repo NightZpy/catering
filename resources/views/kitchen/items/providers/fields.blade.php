@@ -49,7 +49,7 @@
 	</div>
 
 	<!-- Provider Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.kitchen.providers.index') }}/', 'providerOptions', 'provider')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.kitchen.items.providers.available') }}/' + row.id, 'providerOptions', 'provider')" class="form-group col-sm-6">
 	    <label for="provider_id">Proveedor:</label>
 		{{-- <v-select></v-select> --}}
 		<select class="form-control" v-model="row.provider.provider_id" v-validate:provider_id="{ required: true }">

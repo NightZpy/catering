@@ -98,11 +98,15 @@ class Provider extends Model
 
     public function getPriceFormatAttribute()
     {
-        return number_format($this->pivot->price, 2, ',', '.');
+        if (isset($this->pivot))
+            return number_format($this->pivot->price, 2, ',', '.');
+        return false;
     }
 
     public function getSelectedFormatAttribute()
     {
-        return ($this->pivot->selected ? 'Si': 'No');
+        if (isset($this->pivot))
+            return ($this->pivot->selected ? 'Si': 'No');
+        return false;
     }      
 }

@@ -26,9 +26,9 @@ elixir(function(mix) {
 	 mix.scripts(['models/presentation-config.js'], 'public/app/js/models/presentation-config.js')
      mix.scripts(['models/unit-config.js'], 'public/app/js/models/unit-config.js')
      mix.scripts(['models/input-material-config.js'], 'public/app/js/models/input-material-config.js')
-     mix.scripts(['models/family-config.js'], 'public/app/js/models/family-config.js'),
-     mix.scripts(['models/subFamily-config.js'], 'public/app/js/models/subFamily-config.js'),
-     mix.scripts(['models/kitchen/item/config.js'], 'public/app/js/models/kitchen/item/config.js'),
+     mix.scripts(['models/family-config.js'], 'public/app/js/models/family-config.js')
+     mix.scripts(['models/subFamily-config.js'], 'public/app/js/models/subFamily-config.js')
+     mix.scripts(['models/kitchen/item/config.js'], 'public/app/js/models/kitchen/item/config.js')
 	 mix.scripts(['models/kitchen/item/provider/config.js'], 'public/app/js/models/kitchen/item/provider/config.js')
        
 });

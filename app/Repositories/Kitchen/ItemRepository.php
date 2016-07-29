@@ -3,6 +3,7 @@
 namespace App\Repositories\Kitchen;
 
 use App\Models\Kitchen\Item;
+use App\Models\Kitchen\Provider;
 use App\Repositories\MyBaseRepository;
 
 class ItemRepository extends MyBaseRepository
@@ -36,5 +37,11 @@ class ItemRepository extends MyBaseRepository
             $attributes['code'] = $this->getNewCode();
         $item = parent::create($attributes);
         return $item;        
+    }    
+
+    public function availableProviders($id)
+    {
+        $providersId = $this->findWithoutFail($id)->providers->pluck('id');    
+        return Provider::whereNotIn('id', $providersId)->get();
     }    
 }

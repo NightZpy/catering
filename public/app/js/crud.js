@@ -17022,12 +17022,10 @@ var vm = new Vue({
                     actionUrl = this.url.delete + this.row.id;
                 }
             } else {
-                var index = "'" + related + "'";
-                console.log('Index: ' + index);
                 var url = this.url.foreign[related].store.url;
                 var method = this.url.foreign[related].store.method;
-                var providerId = this.row[related][related + '_id'];
-                var actionUrl = url + this.row.id + '/' + providerId;
+                var relatedId = this.row[related][related + '_id'];
+                var actionUrl = url + this.row.id + '/' + relatedId;
                 this.method = method;
             }
             //this.$http({actionUrl, this.method, data}).then(this.success, this.failed);
@@ -17210,7 +17208,7 @@ var vm = new Vue({
                 document.location = this.url.foreign[foreign].index.url + data.id;
             } else {
                 this.row.id = data.id;
-                console.log('Data: ' + data.name + ' | Action: ' + action);
+                //console.log('Data: ' + data.name + ' | Action: ' + action);
                 this.modal(action);
             }
         },
