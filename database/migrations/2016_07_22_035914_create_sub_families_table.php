@@ -16,12 +16,7 @@ class CreateSubFamiliesTable extends Migration
         Schema::create('sub_families', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 128);
-            $table->smallInteger('code', 128);
-            $table->integer('input_material_id')->unsigned();
-            $table->foreign('input_material_id')
-                ->references('id')->on('input_materials')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');              
+            $table->integer('code')->unique();            
             $table->integer('family_id')->unsigned();
             $table->foreign('family_id')
                 ->references('id')->on('families')

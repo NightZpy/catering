@@ -16,7 +16,7 @@ class CreateFamiliesTable extends Migration
         Schema::create('families', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 128)->unique();
-            $table->smallInteger('code', 128)->unique();
+            $table->integer('code')->unique();
             $table->timestamps();
             $table->softDeletes();
         });
