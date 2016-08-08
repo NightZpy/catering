@@ -89,7 +89,7 @@ var vm = new Vue({
     methods: {
         submit: function(related = null, type = null) {
             this.row._token = token;
-            //console.log('Related: ' + related);
+            console.log('Related: ' + related);
             //console.log('Event: ' + e);
             if (!related || related.target ) {
                 var actionUrl = this.url.store;
@@ -99,6 +99,7 @@ var vm = new Vue({
                     }  
                 } else if (this.method == 'DELETE') {
                     actionUrl = this.url.delete + this.row.id;                
+                    console.log('ActionUrl: ' + actionUrl)
                 }                            
             } else {                     
                 var url = this.url.foreign[related][type].url;
@@ -190,7 +191,7 @@ var vm = new Vue({
                     errorMessages.push({ field: fieldAttr, message: errorMgs[msg] });                       
                 }
             }
-            vm.$setValidationErrors(errorMessages);     
+            //vm.$setValidationErrors(errorMessages);     
         },
         closeModal: function(modalName) {
             console.log('Modal: ' + modalName);
@@ -300,32 +301,42 @@ var vm = new Vue({
          },
         'vuetable:action': function(action, data) {
             this.cleanData();
-            if (action == 'view-item') {
-                this.row.id = data.id;
-                this.getData();
-                this.modal('SHOW');
-            } else if (action == 'edit-item') {
-                this.row.id = data.id;
-                this.getData();
-                this.modal('PATCH');                
-            } else if (action == 'delete-item') {
-                this.row.id = data.id;
-                this.modal('DELETE');
-            } else if (action.split(':').length) {
-                var foreign = action.split(':')[1];
-                var action = action.split(':')[0];
-                if (action == 'LINK') {
-                    document.location = this.url.foreign[foreign].index.url + data.id;                    
-                } else {                    
-                    if ( action == 'DELETE')
-                        this.row[foreign][foreign + '_id'] = data.id;
-                    this.modal(action);                    
-                }
+            console.log('Data: ' + data.name + ' | Action: ' + action);
+            console.log('Data: ' + JSON.stringify(data));
+            var size = action.split(':').length;
 
+            if (size) {
+                var actions = action.split(':');
+                action = actions[0];
+                var related = null;
+                if (actions[1] == 'related')
+                    related = actions[2];
+
+                if (action == 'LINK') {
+                    document.location = this.url.foreign[related].index.url + data.id; 
+                } else {
+                    var modal = related + action;
+                    this.row[related].id = data.id;
+                    this.modal(modal);
+                    /*if (action == 'SHOW') {
+                    
+                    } else if (action == 'EDIT') {
+
+                    } else if (action == 'DELETE') {
+
+                    }*/                    
+                }
             } else {
                 this.row.id = data.id;
-                //console.log('Data: ' + data.name + ' | Action: ' + action);
-                this.modal(action);
+                this.getData();
+                if (action == 'view-item') {
+                    this.modal('SHOW');
+                } else if (action == 'edit-item') {
+                    this.getData();
+                    this.modal('PATCH');                
+                } else if (action == 'delete-item') {
+                    this.modal('DELETE');
+                }
             }
         },
         'vuetable:load-success': function(response) {

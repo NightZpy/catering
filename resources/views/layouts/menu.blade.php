@@ -13,10 +13,6 @@
     <a href="{!! route('units.index') !!}"><i class="fa fa-edit"></i><span>Units</span></a>
 </li>
 
-<li class="{{ Request::is('inputMaterials*') ? 'active' : '' }}">
-    <a href="{!! route('inputMaterials.index') !!}"><i class="fa fa-edit"></i><span>InputMaterials</span></a>
-</li>
-
 <li class="{{ Request::is('families*') ? 'active' : '' }}">
     <a href="{!! route('families.index') !!}"><i class="fa fa-edit"></i><span>Families</span></a>
 </li>

@@ -236,7 +236,10 @@ class ItemAPIController extends InfyOmBaseController
     public function provider(Request $request, $id = null, $providerId = null) {
         $provider = $this->repository->findWithoutFail($id)->providers()->whereProviderId($providerId)->first();
 
-        return $this->sendResponse($provider->toArray(), 'Provider associated to Item successfully retrieve');
+        $provider = $provider->toArray();
+        $provider['provider'] = $provider['pivot'];
+        unset($provider['pivot']);
+        return $this->sendResponse($provider, 'Provider associated to Item successfully retrieve');
     }
 
     public function alreadyAssociate(Request $request, $id = null, $providerId = null)

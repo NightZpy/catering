@@ -1,24 +1,12 @@
-<modal
-	title="{{ $modalTitle }}" 
-	:show.sync="localModals.{{ $modalSync }}" 
-	effect="fade" 
-	width="800"
->
+<modal title="@yield('modal-delete-title')" :show.sync="deleteModal" effect="fade" small>
 	<div slot="modal-header" class="modal-header">
 		<h4 class="modal-title">
-		  <b>{{ $modalTitle }}</b>
+		  <b>@yield('modal-delete-title')</b>
 		</h4>
 	</div>	
 	<div slot="modal-body" class="modal-body">
-		<div class="content">
-			@include('layouts.flash')
-			<div class="box box-primary">
-				<div class="box-body">
-					<div class="row">
-						{!! $content !!} {{-- @yield('modal-relation-form-content') --}}
-					</div>
-				</div>
-			</div>
+		<div class="row">
+			<div class="col-sm-offset-2 col-sm-8">@include('layouts.flash')</div>			
 		</div>
 	</div>
 	<div slot="modal-footer" class="modal-footer">
@@ -29,5 +17,5 @@
 			@click="submit({{ $related or 'null' }})"
 			v-if="{{  '$validation' . $model }}.valid"
 		>Save</button>
-	</div>	
+	</div>
 </modal>

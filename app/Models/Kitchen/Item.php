@@ -167,7 +167,10 @@ class Item extends Model
     {
         $code = $this->attributes['code'];
         if ($code < 10)
-            $code = '0' . $code;
+            $code = '00' . $code;
+        elseif ($code < 100) 
+            $code = '0' . $code;            
+        
         return $code;
     } 
 

@@ -1,8 +1,8 @@
 @extends('layouts.modal.delete')
 
-@section('submit')
+{{-- @section('submit')
 	'provider', 'delete'
-@stop
+@stop --}}
 
 @section('modal-delete-title')
 Delete Provider Associate to <strong>{{ $item->name }}</strong>!

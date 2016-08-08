@@ -4,7 +4,7 @@
     <div id="crud-app">
         <section class="content-header">
             <h1 class="pull-left">Providers from Item: <strong>{{ $item->name }}</strong></h1>
-            <h1 v-if="available('{{ route('api.v1.kitchen.items.providers.available') }}/' + row.id)" class="pull-right">               
+            <h1 v-if="!available('{{ route('api.v1.kitchen.items.providers.available', $item->id) }}')" class="pull-right">               
                <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('addProviderToItem')">Add New</a>
             </h1>
         </section>
@@ -16,9 +16,15 @@
             </div>
         </div>
         <!-- --------- Modals ---------- -->
-        @include('kitchen.items.providers.form')
+        <!-- (Add) -->
+        @include('kitchen.items.providers.add')
+        <!-- (Edit) -->
+        @include('kitchen.items.providers.edit')
+        <!-- (Delete) -->
         @include('kitchen.items.providers.delete')
+        <!-- (Show) -->
         @include('kitchen.items.providers.show')
+        <!-- (Info) -->
         @include('layouts.modal.info')        
     </div>
 @endsection
@@ -35,9 +41,9 @@
         var apiUrl = { 
             show:  "{{ route('api.v1.kitchen.items.providers.show', $item->id) }}/",
             index: "{{ route('api.v1.kitchen.items.providers.available-providers', $item->id) }}",  
-            //store: "{{ route('api.v1.kitchen.items.providers.store', $item->id) }}",  
-            {{-- update: "{{ route('api.v1.kitchen.items.providers.update', $item->id) }}/", --}}  
-            {{-- delete: "{{ route('api.v1.kitchen.items.providers.delete', $item->id) }}/", --}}
+            store: "{{ route('api.v1.kitchen.items.providers.store', $item->id) }}",  
+            update: "{{ route('api.v1.kitchen.items.providers.store', $item->id) }}/",
+            delete: "{{ route('api.v1.kitchen.items.providers.delete', $item->id) }}/",
             foreign: {
                 provider: {
                     store: {
@@ -58,7 +64,7 @@
                     },
                     delete: {
                         method: 'DELETE',
-                        url: "{{ route('api.v1.kitchen.items.providers.delete') }}/"
+                        url: "{{ route('api.v1.kitchen.items.providers.delete', $item->id) }}/"
                     }
                 },
             },

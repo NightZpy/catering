@@ -3,7 +3,7 @@ var objectRow = {
 	code: "",
 	name: "",   
 	auto_provider: "",
-	provider_data: {
+	provider: {
 		id: "",
 		code: "",
 		name: "",
@@ -19,7 +19,7 @@ var objectRow = {
 		updated_at: "",
 		deleted_at: ""
 	},
-	provider: {
+	pivot: {
 		price: "",
 		selected: "",      
 		provider_id: ""			
@@ -59,14 +59,16 @@ var tableColumns = [
 ];
 
 var actions = [
-    { name: 'view-item', label: '', icon: 'glyphicon glyphicon-zoom-in', class: 'btn btn-info', extra: {'title': 'View', 'data-toggle':"tooltip", 'data-placement': "left"} },
-    { name: 'edit-item', label: '', icon: 'glyphicon glyphicon-pencil', class: 'btn btn-warning', extra: {title: 'Edit', 'data-toggle':"tooltip", 'data-placement': "top"} },
-    //{ name: 'delete-item', label: '', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } },
-    //{ name: 'addProviderToItem', label: '', icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {title: 'Add Provider', 'data-toggle':"tooltip", 'data-placement': "right" } },
-    { name: 'DELETE:provider', label: '', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } }
+    { name: 'SHOW:related:provider', label: '', icon: 'glyphicon glyphicon-zoom-in', class: 'btn btn-info', extra: {'title': 'View', 'data-toggle':"tooltip", 'data-placement': "left"} },
+    { name: 'EDIT:related:provider', label: '', icon: 'glyphicon glyphicon-pencil', class: 'btn btn-warning', extra: {title: 'Edit', 'data-toggle':"tooltip", 'data-placement': "top"} },
+    { name: 'DELETE:related:provider', label: '', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } },
+    //{ name: 'addProviderToItem', label: '', icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {title: 'Add Provider', 'data-toggle':"tooltip", 'data-placement': "right" } }
+    //{ name: 'PATCH:provider', label: '', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } }
 ];
 
 var modals = {
 	addProviderToItem: false,
-	providers: false
+	providerSHOW: false,
+	providerEDIT: false,
+	providerDELETE: false
 };
