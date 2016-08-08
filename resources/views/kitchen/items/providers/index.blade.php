@@ -54,6 +54,10 @@
                         method: 'GET' ,
                         url: "{{ route('api.v1.kitchen.items.providers.available-providers') }}/"
                     },
+                    show: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.kitchen.items.providers.show', $item->id) }}/"
+                    },
                     relate_list: {
                         method: 'GET',
                         url: "{{ route('api.v1.kitchen.items.providers.available-providers') }}/"                        

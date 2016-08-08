@@ -1,5 +1,12 @@
-@extends('layouts.modal.show')
+<?php 
+	extract([
+            'modalTitle'    => 'Details for ',
+            'modalSync'     => 'providerSHOW',
+            'modalClose'    => "'providerSHOW'",
+            'model'         => 'Provider',
+            'related'       => "'provider'",
+            //'content'       => view('kitchen.items.providers.fields')
+	]);
+?>
 
-@section('modal-show-title')
-Item
-@stop
+@include('layouts.modal.relation-show')

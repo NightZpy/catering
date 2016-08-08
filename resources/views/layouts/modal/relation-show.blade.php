@@ -1,12 +1,11 @@
 <modal 
-	v-if="showModal" 
 	title="@yield('modal-show-title')" 
 	:show.sync="localModals.{{ $modalSync }}" 
 	effect="fade" 
 	width="800">
 	<div slot="modal-header" class="modal-header">
 		<h4 class="modal-title">
-		  <b>@yield('modal-show-title')</b>
+		  <b>{{ $modalTitle }} @{{ row.provider.name }}</b>
 		</h4>
 	</div>	
 	<div slot="modal-body" class="modal-body">

@@ -17035,7 +17035,13 @@ var vm = new Vue({
             this.sendData(actionUrl, this.method, this.row).then(this.success, this.failed);
         },
         getData: function getData() {
-            this.sendData(this.url.show + this.row.id, 'GET').then(this.success, this.failed);
+            var url = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+
+            if (!url) {
+                this.sendData(this.url.show + this.row.id, 'GET').then(this.success, this.failed);
+            } else {
+                this.sendData(url, 'GET').then(this.success, this.failed);
+            }
         },
         available: function available(url) {
             this.sendData(url, 'GET').then(function (response) {
@@ -17217,25 +17223,31 @@ var vm = new Vue({
                 } else {
                     var modal = related + action;
                     this.row[related].id = data.id;
+                    console.log('--------------------- ID: ' + data.id);
                     this.modal(modal);
-                    /*if (action == 'SHOW') {
-                    
+                    var url = null;
+                    if (action == 'SHOW') {
+                        url = this.url.foreign[related].show.url + data.id;
                     } else if (action == 'EDIT') {
-                     } else if (action == 'DELETE') {
-                     }*/
+                        url = this.url.foreign[related].show.url + data.id;
+                    } else if (action == 'DELETE') {
+                        url = this.url.foreign[related].delete.url + data.id;
+                    }
+                    console.log('URL: ' + url);
+                    this.getData(url);
                 }
             } else {
-                    this.row.id = data.id;
+                this.row.id = data.id;
+                this.getData();
+                if (action == 'view-item') {
+                    this.modal('SHOW');
+                } else if (action == 'edit-item') {
                     this.getData();
-                    if (action == 'view-item') {
-                        this.modal('SHOW');
-                    } else if (action == 'edit-item') {
-                        this.getData();
-                        this.modal('PATCH');
-                    } else if (action == 'delete-item') {
-                        this.modal('DELETE');
-                    }
+                    this.modal('PATCH');
+                } else if (action == 'delete-item') {
+                    this.modal('DELETE');
                 }
+            }
         },
         'vuetable:load-success': function vuetableLoadSuccess(response) {
             var data = response.data.data;

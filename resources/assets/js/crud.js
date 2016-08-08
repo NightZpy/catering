@@ -113,9 +113,14 @@ var vm = new Vue({
             this.sendData(actionUrl, this.method, this.row)
                 .then(this.success, this.failed);
         },
-        getData: function () {
-            this.sendData(this.url.show + this.row.id, 'GET')
-                .then(this.success, this.failed);
+        getData: function (url = null) {
+            if (!url) {
+                this.sendData(this.url.show + this.row.id, 'GET')
+                .then(this.success, this.failed);                
+            } else {
+               this.sendData(url, 'GET')
+                .then(this.success, this.failed);    
+            }
         },
         available: function(url) {
             this.sendData(url, 'GET')
@@ -317,14 +322,18 @@ var vm = new Vue({
                 } else {
                     var modal = related + action;
                     this.row[related].id = data.id;
+                    console.log('--------------------- ID: ' + data.id);
                     this.modal(modal);
-                    /*if (action == 'SHOW') {
-                    
+                    var url = null;
+                    if (action == 'SHOW') {
+                        url = this.url.foreign[related].show.url + data.id;
                     } else if (action == 'EDIT') {
-
+                        url = this.url.foreign[related].show.url + data.id;
                     } else if (action == 'DELETE') {
-
-                    }*/                    
+                        url = this.url.foreign[related].delete.url + data.id;
+                    }                    
+                    console.log('URL: '+url);
+                    this.getData(url);
                 }
             } else {
                 this.row.id = data.id;
