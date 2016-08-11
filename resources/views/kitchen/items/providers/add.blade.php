@@ -2,9 +2,10 @@
 	extract([
             'modalTitle'    => 'Add Provider to ' . $item->name,
             'modalSync'     => 'addProviderToItem',
-            'modalClose'    => "'addProviderToItem'",
+            'modalClose'    => 'addProviderToItem',
             'model'         => 'Provider',
-            'related'       => "'provider'",
+            'related'       => 'provider',
+            'type'			=> 'store',
             'content'       => view('kitchen.items.providers.fields')
 	]);
 ?>

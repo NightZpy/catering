@@ -89,7 +89,7 @@ var vm = new Vue({
     methods: {
         submit: function(related = null, type = null) {
             this.row._token = token;
-            console.log('Related: ' + related);
+            //console.log('Related: ' + related + ' | Type: ' + type);
             //console.log('Event: ' + e);
             if (!related || related.target ) {
                 var actionUrl = this.url.store;
@@ -104,7 +104,7 @@ var vm = new Vue({
             } else {                     
                 var url = this.url.foreign[related][type].url;
                 var method = this.url.foreign[related][type].method;
-                var relatedId = this.row[related][related + '_id'];
+                var relatedId = this.row[related]['id'];
                 var actionUrl = url + this.row.id + '/' + relatedId;
                 console.log('URL: ' + actionUrl);
                 this.method = method;

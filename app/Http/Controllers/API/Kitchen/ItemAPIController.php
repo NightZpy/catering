@@ -166,14 +166,23 @@ class ItemAPIController extends InfyOmBaseController
         }
 
         $attributes = $request->all();
-        if (isset($attributes['provider']['selected']) && $attributes['provider']['selected'] && !$item->auto_provider)
-            $attributes['provider']['selected'] = True; 
+
+        if (isset($attributes['pivot']['selected']) && $attributes['pivot']['selected'] && !$item->auto_provider)
+            $attributes['pivot']['selected'] = True; 
 
         if ($providerId)
-            $attributes['provider']['provider_id'] = $provider->id;
+            $attributes['pivot']['provider_id'] = $provider->id;     
 
-        \Debugbar::info($attributes);
-        $this->repository->createPivot($item, 'provider', $attributes, 'providers'); 
+        $exists = $this->repository
+             ->findWithoutFail($id)
+             ->providers()
+             ->whereProviderId($providerId)->count();
+
+        if ($exists) {
+          $item->providers()->updateExistingPivot($providerId, $attributes['pivot']);
+        } else {
+          $this->repository->createPivot($item, 'pivot', $attributes, 'providers');
+        } 
 
         return $this->sendResponse($request->all(), 'Provider associated to Item successfully');
     }

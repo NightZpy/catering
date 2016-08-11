@@ -23,10 +23,10 @@
 	</div>
 	<div slot="modal-footer" class="modal-footer">
 		<button type="button" class="btn btn-default" 
-			@click="closeModal({{ $modalClose }})"
+			@click="closeModal('{{ $modalClose }}')"
 		>Close</button>
 		<button type="button" class="btn btn-success" 
-			@click="submit({{ $related or 'null' }})"
+			@click="submit('{{ $related or 'null' }}', '{{ $type or 'null' }}')"
 			v-if="{{  '$validation' . $model }}.valid"
 		>Save</button>
 	</div>	
