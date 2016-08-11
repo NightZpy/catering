@@ -176,6 +176,9 @@ var vm = new Vue({
                 vm.updateErrors(response.data.errors);
             }
         },
+        isObject: function(object) {
+            return  object instanceof Object;
+        },
         checkUnique: function(checkUrl) {
             console.log(checkUrl);
             this.$http({url: checkUrl, method: 'get'})

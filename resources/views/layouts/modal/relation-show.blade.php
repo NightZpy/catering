@@ -18,11 +18,21 @@
 							<table class="table-responsive">
 								<tbody>
 									<template v-for="(field, value) in row">		
-										<tr v-if="visible(field)">
-											<th style="width:50%">@{{ field | capitalize }}</th>
-											<td>@{{ value }}</td>
-										</tr>
+										{{-- <div v-if="visible(field)"> --}}
+											<tr v-if="isObject(value)">
+												<th style="width:50%">@{{ field | capitalize }}</th>
+												<td>@{{ value.name }}
+												</td>
+											</tr>
+											<tr v-else>
+												<th style="width:50%">@{{ field | capitalize }}</th>
+												<td>
+													@{{ value }}
+												</td>											
+											</tr>
+										{{-- </div> --}}
 									</template>
+									{{-- $content --}}
 								</tbody>
 							</table>
 						</div>

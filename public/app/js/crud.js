@@ -17096,6 +17096,9 @@ var vm = new Vue({
                 vm.updateErrors(response.data.errors);
             }
         },
+        isObject: function isObject(object) {
+            return object instanceof Object;
+        },
         checkUnique: function checkUnique(checkUrl) {
             console.log(checkUrl);
             this.$http({ url: checkUrl, method: 'get' }).then(function (response) {
