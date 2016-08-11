@@ -17,7 +17,7 @@
         </div>
         <!-- --------- Modals ---------- -->  
         @include('kitchen.items.form')
-        @include('kitchen.items.providers.form')             
+        @include('kitchen.items.providers.add')             
         @include('kitchen.items.delete')
         @include('kitchen.items.show')
         @include('layouts.modal.info')        

@@ -181,7 +181,7 @@ class ItemAPIController extends InfyOmBaseController
         if ($exists) {
           $item->providers()->updateExistingPivot($providerId, $attributes['pivot']);
         } else {
-          $this->repository->createPivot($item, 'pivot', $attributes, 'providers');
+          $this->repository->createPivot($item, 'pivot', $attributes, 'providers', 'provider');
         } 
 
         return $this->sendResponse($request->all(), 'Provider associated to Item successfully');

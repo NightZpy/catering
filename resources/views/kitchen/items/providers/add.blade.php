@@ -1,8 +1,8 @@
 <?php
 	extract([
-            'modalTitle'    => 'Add Provider to ' . $item->name,
-            'modalSync'     => 'addProviderToItem',
-            'modalClose'    => 'addProviderToItem',
+            'modalTitle'    => 'Add Provider to {{ row.name }}',
+            'modalSync'     => 'providerADD',
+            'modalClose'    => 'providerADD',
             'model'         => 'Provider',
             'related'       => 'provider',
             'type'			=> 'store',

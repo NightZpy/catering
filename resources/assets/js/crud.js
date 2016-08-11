@@ -105,8 +105,11 @@ var vm = new Vue({
                 var url = this.url.foreign[related][type].url;
                 var method = this.url.foreign[related][type].method;
                 var relatedId = this.row[related]['id'];
-                var actionUrl = url + relatedId;
-                console.log('URL: ' + actionUrl);
+                console.log('Related: ' + relatedId);
+                if (!relatedId) {
+                    relatedId = this.row.pivot[related + '_id'];
+                }
+                var actionUrl = url + this.row.id + '/' + relatedId;
                 this.method = method;
             }
             //this.$http({actionUrl, this.method, data}).then(this.success, this.failed);
@@ -219,7 +222,7 @@ var vm = new Vue({
             }
             return false;
         },
-        modal: function(type) {                    
+        modal: function(type) {  
             if (type == 'PATCH' || type == 'POST') {
                 this.method = type;
                 this.formModal = true;
@@ -312,8 +315,8 @@ var vm = new Vue({
             console.log('Data: ' + data.name + ' | Action: ' + action);
             console.log('Data: ' + JSON.stringify(data));
             var size = action.split(':').length;
-
-            if (size) {
+            // console.log('SIZE: ' + size);
+            if (size > 1) {
                 var actions = action.split(':');
                 action = actions[0];
                 var related = null;
@@ -324,19 +327,18 @@ var vm = new Vue({
                     document.location = this.url.foreign[related].index.url + data.id; 
                 } else {
                     var modal = related + action;
-                    this.row[related].id = data.id;
-                    console.log('--------------------- ID: ' + data.id);
+                    //console.log('--------------------- ID: ' + data.id);
                     this.modal(modal);
                     var url = null;
-                    if (action == 'SHOW') {
+                    if (action == 'SHOW' || action == 'EDIT' || action == 'DELETE') {
+                        this.row[related].id = data.id;
                         url = this.url.foreign[related].show.url + data.id;
-                    } else if (action == 'EDIT') {
-                        url = this.url.foreign[related].show.url + data.id;
-                    } else if (action == 'DELETE') {
-                        url = this.url.foreign[related].show.url + data.id;
-                    }                    
-                    console.log('URL: ' + url );
-                    this.getData(url);
+                        this.getData(url);
+                    } else if (action == 'ADD') {
+                        this.row.name = data.name;
+                        this.row.id = data.id;
+                    }   
+                    //console.log('URL: ' + url );
                 }
             } else {
                 this.row.id = data.id;

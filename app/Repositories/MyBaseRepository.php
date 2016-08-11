@@ -24,14 +24,14 @@ abstract class MyBaseRepository extends BaseRepository
         return $method;
     }    
 
-    public function createPivot($model, $key, $attributes, $method = null)
+    public function createPivot($model, $key, $attributes, $method = null, $related = null)
     {
         if (!$method) 
             $method = $this->checkPivotAttributes($key, $attributes);
 
         if ($this->checkPivotAttributes($key, $attributes)) {
             $attributes = $attributes[$key];
-            $key = $key . '_id';
+            $key = $related . '_id';
             $id = $attributes[$key];
             unset($attributes[$key]);
             $model->$method()->attach($id, $attributes);

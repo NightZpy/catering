@@ -5,7 +5,7 @@
         <section class="content-header">
             <h1 class="pull-left">Providers from Item: <strong>{{ $item->name }}</strong></h1>
             <h1 v-if="!available('{{ route('api.v1.kitchen.items.providers.available', $item->id) }}')" class="pull-right">               
-               <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('addProviderToItem')">Add New</a>
+               <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('providerADD')">Add New</a>
             </h1>
         </section>
         <div class="content" style="padding-top: 30px;">
@@ -48,15 +48,15 @@
                 provider: {
                     store: {
                         method: 'PATCH' ,
-                        url: "{{ route('api.v1.kitchen.items.providers.store', $item->id) }}/"
+                        url: "{{ route('api.v1.kitchen.items.providers.store') }}/"
                     }, 
                     index: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.kitchen.items.providers.available-providers', $item->id) }}/"
+                        url: "{{ route('api.v1.kitchen.items.providers.available-providers') }}/"
                     },
                     show: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.kitchen.items.providers.show', $item->id) }}/"
+                        url: "{{ route('api.v1.kitchen.items.providers.show') }}/"
                     },
                     relate_list: {
                         method: 'GET',
@@ -68,7 +68,7 @@
                     },
                     delete: {
                         method: 'DELETE',
-                        url: "{{ route('api.v1.kitchen.items.providers.delete', $item->id) }}/"
+                        url: "{{ route('api.v1.kitchen.items.providers.delete') }}/"
                     }
                 },
             },
