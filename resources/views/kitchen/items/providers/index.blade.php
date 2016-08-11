@@ -48,11 +48,11 @@
                 provider: {
                     store: {
                         method: 'PATCH' ,
-                        url: "{{ route('api.v1.kitchen.items.providers.store') }}/"
+                        url: "{{ route('api.v1.kitchen.items.providers.store', $item->id) }}/"
                     }, 
                     index: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.kitchen.items.providers.available-providers') }}/"
+                        url: "{{ route('api.v1.kitchen.items.providers.available-providers', $item->id) }}/"
                     },
                     show: {
                         method: 'GET' ,

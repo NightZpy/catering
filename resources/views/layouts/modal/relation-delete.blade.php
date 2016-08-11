@@ -1,7 +1,11 @@
-<modal title="@yield('modal-delete-title')" :show.sync="deleteModal" effect="fade" small>
+<modal 
+	title="{{ $modalTitle }}" 
+	:show.sync="localModals.{{ $modalSync }}" 
+	effect="fade" 
+	small>
 	<div slot="modal-header" class="modal-header">
 		<h4 class="modal-title">
-		  <b>@yield('modal-delete-title')</b>
+		  <b>{!! $modalTitle !!}</b>
 		</h4>
 	</div>	
 	<div slot="modal-body" class="modal-body">
@@ -11,11 +15,10 @@
 	</div>
 	<div slot="modal-footer" class="modal-footer">
 		<button type="button" class="btn btn-default" 
-			@click="closeModal({{ $modalClose }})"
+			@click="closeModal('{{ $modalClose }}')"
 		>Close</button>
 		<button type="button" class="btn btn-success" 
-			@click="submit({{ $related or 'null' }})"
-			v-if="{{  '$validation' . $model }}.valid"
-		>Save</button>
+			@click="submit('{{ $related or 'null' }}', '{{ $type or 'null' }}')"
+		>Delete</button>
 	</div>
 </modal>

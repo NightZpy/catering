@@ -1,9 +1,12 @@
-@extends('layouts.modal.delete')
+<?php
+	extract([
+            'modalTitle'    => 'Delete Provider ({{ row.provider.name }}) associate to <em>' . $item->name . '</em>!',
+            'modalSync'     => 'providerDELETE',
+            'modalClose'    => 'providerDELETE',
+            'model'         => 'Provider',
+            'related'       => 'provider',
+            'type'			=> 'delete'
+	]);
+?>
 
-{{-- @section('submit')
-	'provider', 'delete'
-@stop --}}
-
-@section('modal-delete-title')
-Delete Provider Associate to <strong>{{ $item->name }}</strong>!
-@stop
+@include('layouts.modal.relation-delete')

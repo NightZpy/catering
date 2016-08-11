@@ -17027,7 +17027,7 @@ var vm = new Vue({
                 var url = this.url.foreign[related][type].url;
                 var method = this.url.foreign[related][type].method;
                 var relatedId = this.row[related]['id'];
-                var actionUrl = url + this.row.id + '/' + relatedId;
+                var actionUrl = url + relatedId;
                 console.log('URL: ' + actionUrl);
                 this.method = method;
             }
@@ -17234,7 +17234,7 @@ var vm = new Vue({
                     } else if (action == 'EDIT') {
                         url = this.url.foreign[related].show.url + data.id;
                     } else if (action == 'DELETE') {
-                        url = this.url.foreign[related].delete.url + data.id;
+                        url = this.url.foreign[related].show.url + data.id;
                     }
                     console.log('URL: ' + url);
                     this.getData(url);
