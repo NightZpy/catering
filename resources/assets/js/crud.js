@@ -56,7 +56,7 @@ var vm = new Vue({
         infoModal: false,
         showModal: false,
         deleteModal: false,
-        localModals: modals,
+        localModals: (typeof(modals) !== 'undefined' ? modals : {}),
         flashMessage: null,
         defaultErrorMessage: 'Some errors in sended data, please check!.',
         flashTypeDanger: 'danger',
