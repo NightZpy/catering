@@ -312,13 +312,13 @@ var vm = new Vue({
          },
         'vuetable:action': function(action, data) {
             this.cleanData();
-            console.log('Data: ' + data.name + ' | Action: ' + action);
+            console.log('Data: ' + data.name              + ' | Action: ' + action);
             console.log('Data: ' + JSON.stringify(data));
             var size = action.split(':').length;
             // console.log('SIZE: ' + size);
             if (size > 1) {
                 var actions = action.split(':');
-                action = actions[0];
+                action      = actions[0];
                 var related = null;
                 if (actions[1] == 'related')
                     related = actions[2];
@@ -332,11 +332,11 @@ var vm = new Vue({
                     var url = null;
                     if (action == 'SHOW' || action == 'EDIT' || action == 'DELETE') {
                         this.row[related].id = data.id;
-                        url = this.url.foreign[related].show.url + data.id;
+                        url = this.url.foreign[related].show.url + this.row.id + '/' + data.id;
                         this.getData(url);
                     } else if (action == 'ADD') {
                         this.row.name = data.name;
-                        this.row.id = data.id;
+                        this.row.id   = data.id;
                     }   
                     //console.log('URL: ' + url );
                 }

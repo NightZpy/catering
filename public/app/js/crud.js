@@ -17233,7 +17233,7 @@ var vm = new Vue({
                     var url = null;
                     if (action == 'SHOW' || action == 'EDIT' || action == 'DELETE') {
                         this.row[related].id = data.id;
-                        url = this.url.foreign[related].show.url + data.id;
+                        url = this.url.foreign[related].show.url + this.row.id + '/' + data.id;
                         this.getData(url);
                     } else if (action == 'ADD') {
                         this.row.name = data.name;
