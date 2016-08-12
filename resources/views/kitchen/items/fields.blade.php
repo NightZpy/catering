@@ -91,22 +91,22 @@
 		</div>
 	</div>	
 
-	<!-- Quantity Field -->
+	<!-- current_stock Field -->
 	<div class="form-group col-sm-6">
-	    <label for="quantity">Cantidad:</label>
-	    <input type="number" class="form-control" v-model="row.quantity" v-validate:quantity="{ required: true, minlength: 1, maxlength: 4 }" data-type="text" />
-	    <div v-if="$validation.quantity.invalid" class="alert alert-danger" role="alert">
-				<div v-if="$validation.quantity.required">
+	    <label for="current_stock">Cantidad:</label>
+	    <input type="number" class="form-control" v-model="row.current_stock" v-validate:current_stock="{ required: true, minlength: 1, maxlength: 4 }" data-type="text" />
+	    <div v-if="$validation.current_stock.invalid" class="alert alert-danger" role="alert">
+				<div v-if="$validation.current_stock.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(required) Message Here
 			</div>
-			<div v-if="$validation.quantity.minlength">
+			<div v-if="$validation.current_stock.minlength">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(minlength) Message Here
 			</div>
-			<div v-if="$validation.quantity.maxlength">
+			<div v-if="$validation.current_stock.maxlength">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(maxlength) Message Here
@@ -114,6 +114,30 @@
 		
 		</div>
 	</div>	
+
+	<!-- to_buy Field -->
+	<div class="form-group col-sm-6">
+	    <label for="to_buy">Cantidad:</label>
+	    <input type="number" class="form-control" v-model="row.to_buy" v-validate:to_buy="{ required: true, minlength: 1, maxlength: 4 }" data-type="text" />
+	    <div v-if="$validation.to_buy.invalid" class="alert alert-danger" role="alert">
+				<div v-if="$validation.to_buy.required">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(required) Message Here
+			</div>
+			<div v-if="$validation.to_buy.minlength">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(minlength) Message Here
+			</div>
+			<div v-if="$validation.to_buy.maxlength">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(maxlength) Message Here
+			</div>
+		
+		</div>
+	</div>		
 
 	<!-- Currency Field -->
 	<div class="form-group col-sm-6">

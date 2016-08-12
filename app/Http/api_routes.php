@@ -266,3 +266,4 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 		]);		
 	});
 });
+

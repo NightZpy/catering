@@ -4,9 +4,10 @@
     <div id="crud-app">
         <section class="content-header">
             <h1 class="pull-left">Providers from Item: <strong>{{ $item->name }}</strong></h1>
-            <h1 v-if="!available('{{ route('api.v1.kitchen.items.providers.available', $item->id) }}')" class="pull-right">               
-               <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('providerADD')">Add New</a>
-            </h1>
+            <div class="btn-group pull-right">
+                <a v-if="!available('{{ route('api.v1.kitchen.items.providers.available', $item->id) }}')" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('providerADD')">Add New</a>
+                <a class="btn btn-primary pull-right bg-olive btn-flat" href="{{ route('kitchen.items.index') }}" style="margin-top: -10px;margin-bottom: 5px">Almacen</a>
+            </div>
         </section>
         <div class="content" style="padding-top: 30px;">
             <div class="box box-primary">

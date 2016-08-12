@@ -25,3 +25,7 @@
     <a href="{!! route('kitchen.items.index') !!}"><i class="fa fa-edit"></i><span>Items</span></a>
 </li>
 
+<li class="{{ Request::is('stores*') ? 'active' : '' }}">
+    <a href="{!! route('stores.index') !!}"><i class="fa fa-edit"></i><span>Stores</span></a>
+</li>
+

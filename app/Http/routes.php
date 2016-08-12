@@ -138,3 +138,4 @@ Route::group(['prefix' => 'kitchen'], function () {
 		});
 	});
 });
+

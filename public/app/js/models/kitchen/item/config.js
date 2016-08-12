@@ -4,8 +4,9 @@ var objectRow = {
 	name: "",
 	auto_provider: "",
 	perishable: "",
+	to_buy: "",
 	min_stock: "",
-	quantity: "",
+	current_stock: "",
 	currency: "",
 	unit_id: "",
 	presentation_id: "",
@@ -73,11 +74,17 @@ var tableColumns = [
 	    visible: true
 	},
 	{
-	    name: 'quantity',
-	    sortField: 'quantity',
+	    name: 'current_stock',
+	    sortField: 'current_stock',
 	    title: 'Cantidad',
 	    visible: true
 	},
+	{
+	    name: 'to_buy',
+	    sortField: 'to_buy',
+	    title: 'Comprar',
+	    visible: true
+	},	
 	{
 	    name: 'currency',
 	    sortField: 'currency',

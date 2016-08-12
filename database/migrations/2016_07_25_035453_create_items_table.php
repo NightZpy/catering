@@ -20,7 +20,8 @@ class CreateitemsTable extends Migration
             $table->boolean('auto_provider');
             $table->boolean('perishable');
             $table->smallInteger('min_stock');
-            $table->smallInteger('quantity');
+            $table->integer('current_stock')->default(1);
+            $table->smallInteger('to_buy')->default(1);            
             $table->string('currency', 128);
             $table->integer('unit_id');
             $table->integer('presentation_id');
