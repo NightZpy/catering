@@ -2,7 +2,7 @@
 	<!-- Price Field -->
 	<div class="form-group col-sm-6">
 	    <label for="price">Precio:</label>
-	    <input type="text" class="form-control" v-model="row.provider.price" v-validate:price="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
+	    <input type="text" class="form-control" v-model="row.pivot.price" v-validate:price="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
 	    <div v-if="$validationProvider.price.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validationProvider.price.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -33,10 +33,10 @@
 		<label for="selected">¿Seleccionar este proveedor?</label>
 		<div class="btn-group">
 			<label class="btn btn-default">
-				<input type="radio" id="selected" value="1" v-model="row.provider.selected" v-validate:selected="{ required: true }"> Si
+				<input type="radio" id="selected" value="1" v-model="row.pivot.selected" v-validate:selected="{ required: true }"> Si
 			</label>
 			<label class="btn btn-default">
-				<input type="radio" id="selected" value="0" v-model="row.provider.selected" v-validate:selected> No
+				<input type="radio" id="selected" value="0" v-model="row.pivot.selected" v-validate:selected> No
 			</label>
 		</div>
 		<div v-if="$validationProvider.selected.invalid" class="alert alert-danger" role="alert">
@@ -49,10 +49,10 @@
 	</div>
 
 	<!-- Provider Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.kitchen.providers.index') }}/', 'providerOptions', 'provider')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.kitchen.items.providers.available-providers') }}/' + row.id, 'providerOptions', 'provider')" class="form-group col-sm-6">
 	    <label for="provider_id">Proveedor:</label>
 		{{-- <v-select></v-select> --}}
-		<select class="form-control" v-model="row.provider.provider_id" v-validate:provider_id="{ required: true }">
+		<select class="form-control" v-model="row.pivot.provider_id" v-validate:provider_id="{ required: true }">
 			<option value="" selected="selected">-- Seleccione un proveedor --</option>
 			<option v-for="option in foreignData.providerOptions" v-bind:value="option.id">		
 				@{{ option.name }}

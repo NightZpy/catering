@@ -55,11 +55,7 @@ class SubFamilyAPIController extends InfyOmBaseController
                 
                 $q->orWhereHas('family', function($q) use ($value){
                     $q->where('families.name', "like", $value);      
-                });
-
-                $q->orWhereHas('inputMaterial', function($q) use ($value){
-                    $q->where('input_materials.name', "like", $value);      
-                });                
+                });              
             });                      
         }
 

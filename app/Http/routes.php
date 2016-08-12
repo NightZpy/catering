@@ -15,9 +15,7 @@ Route::get('/test', function(){
 	return App\Models\Family::first()->input_material;
 });
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', 'HomeController@index');
 
 
 /*
@@ -46,8 +44,6 @@ Route::get('password/reset', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
-
-Route::get('/home', 'HomeController@index');
 
 /* 
  * ------------------- Route index for Provider ---------------

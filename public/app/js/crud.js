@@ -16975,7 +16975,7 @@ var vm = new Vue({
         infoModal: false,
         showModal: false,
         deleteModal: false,
-        localModals: modals,
+        localModals: typeof modals !== 'undefined' ? modals : {},
         flashMessage: null,
         defaultErrorMessage: 'Some errors in sended data, please check!.',
         flashTypeDanger: 'danger',
@@ -17008,9 +17008,10 @@ var vm = new Vue({
     methods: {
         submit: function submit() {
             var related = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+            var type = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
             this.row._token = token;
-            console.log('Related: ' + related);
+            //console.log('Related: ' + related + ' | Type: ' + type);
             //console.log('Event: ' + e);
             if (!related || related.target) {
                 var actionUrl = this.url.store;
@@ -17020,21 +17021,37 @@ var vm = new Vue({
                     }
                 } else if (this.method == 'DELETE') {
                     actionUrl = this.url.delete + this.row.id;
+                    console.log('ActionUrl: ' + actionUrl);
                 }
             } else {
-                var index = "'" + related + "'";
-                console.log('Index: ' + index);
-                var url = this.url.foreign[related].store.url;
-                var method = this.url.foreign[related].store.method;
-                var providerId = this.row[related][related + '_id'];
-                var actionUrl = url + this.row.id + '/' + providerId;
+                var url = this.url.foreign[related][type].url;
+                var method = this.url.foreign[related][type].method;
+                var relatedId = this.row[related]['id'];
+                console.log('Related: ' + relatedId);
+                if (!relatedId) {
+                    relatedId = this.row.pivot[related + '_id'];
+                }
+                var actionUrl = url + this.row.id + '/' + relatedId;
                 this.method = method;
             }
             //this.$http({actionUrl, this.method, data}).then(this.success, this.failed);
             this.sendData(actionUrl, this.method, this.row).then(this.success, this.failed);
         },
         getData: function getData() {
-            this.sendData(this.url.show + this.row.id, 'GET').then(this.success, this.failed);
+            var url = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+
+            if (!url) {
+                this.sendData(this.url.show + this.row.id, 'GET').then(this.success, this.failed);
+            } else {
+                this.sendData(url, 'GET').then(this.success, this.failed);
+            }
+        },
+        available: function available(url) {
+            this.sendData(url, 'GET').then(function (response) {
+                return true;
+            }, function (response) {
+                return false;
+            });
         },
         getForeignData: function getForeignData() {
             var callUrl = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
@@ -17082,6 +17099,9 @@ var vm = new Vue({
                 vm.updateErrors(response.data.errors);
             }
         },
+        isObject: function isObject(object) {
+            return object instanceof Object;
+        },
         checkUnique: function checkUnique(checkUrl) {
             console.log(checkUrl);
             this.$http({ url: checkUrl, method: 'get' }).then(function (response) {
@@ -17098,7 +17118,7 @@ var vm = new Vue({
                     errorMessages.push({ field: fieldAttr, message: errorMgs[msg] });
                 }
             }
-            vm.$setValidationErrors(errorMessages);
+            //vm.$setValidationErrors(errorMessages);   
         },
         closeModal: function closeModal(modalName) {
             console.log('Modal: ' + modalName);
@@ -17194,25 +17214,45 @@ var vm = new Vue({
         },
         'vuetable:action': function vuetableAction(action, data) {
             this.cleanData();
-            if (action == 'view-item') {
-                this.row.id = data.id;
-                this.getData();
-                this.modal('SHOW');
-            } else if (action == 'edit-item') {
-                this.row.id = data.id;
-                this.getData();
-                this.modal('PATCH');
-            } else if (action == 'delete-item') {
-                this.row.id = data.id;
-                this.modal('DELETE');
-            } else if (action.split('-')[0] == 'LINK') {
-                var foreign = action.split('-')[1];
-                document.location = this.url.foreign[foreign].index.url + data.id;
+            console.log('Data: ' + data.name + ' | Action: ' + action);
+            console.log('Data: ' + JSON.stringify(data));
+            var size = action.split(':').length;
+            // console.log('SIZE: ' + size);
+            if (size > 1) {
+                var actions = action.split(':');
+                action = actions[0];
+                var related = null;
+                if (actions[1] == 'related') related = actions[2];
+
+                if (action == 'LINK') {
+                    document.location = this.url.foreign[related].index.url + data.id;
+                } else {
+                    var modal = related + action;
+                    //console.log('--------------------- ID: ' + data.id);
+                    this.modal(modal);
+                    var url = null;
+                    if (action == 'SHOW' || action == 'EDIT' || action == 'DELETE') {
+                        this.row[related].id = data.id;
+                        url = this.url.foreign[related].show.url + this.row.id + '/' + data.id;
+                        this.getData(url);
+                    } else if (action == 'ADD') {
+                        this.row.name = data.name;
+                        this.row.id = data.id;
+                    }
+                    //console.log('URL: ' + url );
+                }
             } else {
-                this.row.id = data.id;
-                console.log('Data: ' + data.name + ' | Action: ' + action);
-                this.modal(action);
-            }
+                    this.row.id = data.id;
+                    this.getData();
+                    if (action == 'view-item') {
+                        this.modal('SHOW');
+                    } else if (action == 'edit-item') {
+                        this.getData();
+                        this.modal('PATCH');
+                    } else if (action == 'delete-item') {
+                        this.modal('DELETE');
+                    }
+                }
         },
         'vuetable:load-success': function vuetableLoadSuccess(response) {
             var data = response.data.data;

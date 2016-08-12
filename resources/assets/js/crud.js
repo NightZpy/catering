@@ -56,7 +56,7 @@ var vm = new Vue({
         infoModal: false,
         showModal: false,
         deleteModal: false,
-        localModals: modals,
+        localModals: (typeof(modals) !== 'undefined' ? modals : {}),
         flashMessage: null,
         defaultErrorMessage: 'Some errors in sended data, please check!.',
         flashTypeDanger: 'danger',
@@ -87,9 +87,9 @@ var vm = new Vue({
         }
     },
     methods: {
-        submit: function(related = null) {
+        submit: function(related = null, type = null) {
             this.row._token = token;
-            console.log('Related: ' + related);
+            //console.log('Related: ' + related + ' | Type: ' + type);
             //console.log('Event: ' + e);
             if (!related || related.target ) {
                 var actionUrl = this.url.store;
@@ -99,23 +99,39 @@ var vm = new Vue({
                     }  
                 } else if (this.method == 'DELETE') {
                     actionUrl = this.url.delete + this.row.id;                
+                    console.log('ActionUrl: ' + actionUrl)
                 }                            
-            } else {                
-                var index =  "'" + related + "'";
-                console.log('Index: ' + index)
-                var url = this.url.foreign[related].store.url;
-                var method = this.url.foreign[related].store.method;
-                var providerId = this.row[related][related + '_id'];
-                var actionUrl = url + this.row.id + '/' + providerId;
+            } else {                     
+                var url = this.url.foreign[related][type].url;
+                var method = this.url.foreign[related][type].method;
+                var relatedId = this.row[related]['id'];
+                console.log('Related: ' + relatedId);
+                if (!relatedId) {
+                    relatedId = this.row.pivot[related + '_id'];
+                }
+                var actionUrl = url + this.row.id + '/' + relatedId;
                 this.method = method;
             }
             //this.$http({actionUrl, this.method, data}).then(this.success, this.failed);
             this.sendData(actionUrl, this.method, this.row)
                 .then(this.success, this.failed);
         },
-        getData: function () {
-            this.sendData(this.url.show + this.row.id, 'GET')
-                .then(this.success, this.failed);
+        getData: function (url = null) {
+            if (!url) {
+                this.sendData(this.url.show + this.row.id, 'GET')
+                .then(this.success, this.failed);                
+            } else {
+               this.sendData(url, 'GET')
+                .then(this.success, this.failed);    
+            }
+        },
+        available: function(url) {
+            this.sendData(url, 'GET')
+                .then(function (response){
+                    return true;
+                }, function (response){
+                    return false;
+                });
         },
         getForeignData: function (callUrl = null, mapVar = null, related = null) {
             var foreign = this.url.foreign[related].index;
@@ -163,6 +179,9 @@ var vm = new Vue({
                 vm.updateErrors(response.data.errors);
             }
         },
+        isObject: function(object) {
+            return  object instanceof Object;
+        },
         checkUnique: function(checkUrl) {
             console.log(checkUrl);
             this.$http({url: checkUrl, method: 'get'})
@@ -183,7 +202,7 @@ var vm = new Vue({
                     errorMessages.push({ field: fieldAttr, message: errorMgs[msg] });                       
                 }
             }
-            vm.$setValidationErrors(errorMessages);     
+            //vm.$setValidationErrors(errorMessages);     
         },
         closeModal: function(modalName) {
             console.log('Modal: ' + modalName);
@@ -203,7 +222,7 @@ var vm = new Vue({
             }
             return false;
         },
-        modal: function(type) {                    
+        modal: function(type) {  
             if (type == 'PATCH' || type == 'POST') {
                 this.method = type;
                 this.formModal = true;
@@ -216,7 +235,7 @@ var vm = new Vue({
             } else if (type == 'INFO') {
                 this.infoModal = true;
             } else {
-                this.localModals[type] = true;
+                this.localModals[type] = true;                
             }
         },
         /*
@@ -293,24 +312,45 @@ var vm = new Vue({
          },
         'vuetable:action': function(action, data) {
             this.cleanData();
-            if (action == 'view-item') {
-                this.row.id = data.id;
-                this.getData();
-                this.modal('SHOW');
-            } else if (action == 'edit-item') {
-                this.row.id = data.id;
-                this.getData();
-                this.modal('PATCH');                
-            } else if (action == 'delete-item') {
-                this.row.id = data.id;
-                this.modal('DELETE');
-            } else if (action.split('-')[0] == 'LINK') {
-                var foreign = action.split('-')[1];
-                document.location = this.url.foreign[foreign].index.url + data.id;
+            console.log('Data: ' + data.name              + ' | Action: ' + action);
+            console.log('Data: ' + JSON.stringify(data));
+            var size = action.split(':').length;
+            // console.log('SIZE: ' + size);
+            if (size > 1) {
+                var actions = action.split(':');
+                action      = actions[0];
+                var related = null;
+                if (actions[1] == 'related')
+                    related = actions[2];
+
+                if (action == 'LINK') {
+                    document.location = this.url.foreign[related].index.url + data.id; 
+                } else {
+                    var modal = related + action;
+                    //console.log('--------------------- ID: ' + data.id);
+                    this.modal(modal);
+                    var url = null;
+                    if (action == 'SHOW' || action == 'EDIT' || action == 'DELETE') {
+                        this.row[related].id = data.id;
+                        url = this.url.foreign[related].show.url + this.row.id + '/' + data.id;
+                        this.getData(url);
+                    } else if (action == 'ADD') {
+                        this.row.name = data.name;
+                        this.row.id   = data.id;
+                    }   
+                    //console.log('URL: ' + url );
+                }
             } else {
                 this.row.id = data.id;
-                console.log('Data: ' + data.name + ' | Action: ' + action);
-                this.modal(action);
+                this.getData();
+                if (action == 'view-item') {
+                    this.modal('SHOW');
+                } else if (action == 'edit-item') {
+                    this.getData();
+                    this.modal('PATCH');                
+                } else if (action == 'delete-item') {
+                    this.modal('DELETE');
+                }
             }
         },
         'vuetable:load-success': function(response) {

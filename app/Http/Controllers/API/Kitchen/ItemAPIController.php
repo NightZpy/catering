@@ -25,9 +25,9 @@ class ItemAPIController extends InfyOmBaseController
     private $repository;
     private $providerRepository;
 
-    public function __construct(ItemRepository $itemREpository, ProviderRepository $providerRepository)
+    public function __construct(ItemRepository $itemRepository, ProviderRepository $providerRepository)
     {
-        $this->repository = $itemREpository;
+        $this->repository = $itemRepository;
         $this->providerRepository = $providerRepository;
     }
 
@@ -155,27 +155,35 @@ class ItemAPIController extends InfyOmBaseController
         $item = $this->repository->findWithoutFail($id);
 
         if (empty($item)) {
-            //Flash::error('Item not found');
             return Response::json(ResponseUtil::makeError('Item not found'), 400);
         }
 
-        $provider = $this->providerRepository->findWithoutFail($providerId);
-
-        if (empty($provider)) {
-            //Flash::error('Provider not found');
-            return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+        if ($providerId) {
+            $provider = $this->providerRepository->findWithoutFail($providerId);
+            if (empty($provider)) {
+                return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+            }            
         }
 
         $attributes = $request->all();
-        //$selected   = False;
-        if ($request->get('selected') && !$item->auto_provider)
-            $attributes['selected'] = True;        
-        //$attributes['selected'] => $selected;
-        //$provider->items()->updateExistingPivot($itemId, compact('price', 'selected'));    
-        //$item->providers()->updateExistingPivot($providerId, compact('price', 'selected'));    
-        $this->repository->createPivot($item, 'provider', $request->all(), 'providers'); 
 
-        //Flash::success('¡Información de ' . $item->name . ' guardada exitosamente!');
+        if (isset($attributes['pivot']['selected']) && $attributes['pivot']['selected'] && !$item->auto_provider)
+            $attributes['pivot']['selected'] = True; 
+
+        if ($providerId)
+            $attributes['pivot']['provider_id'] = $provider->id;     
+
+        $exists = $this->repository
+             ->findWithoutFail($id)
+             ->providers()
+             ->whereProviderId($providerId)->count();
+
+        if ($exists) {
+          $item->providers()->updateExistingPivot($providerId, $attributes['pivot']);
+        } else {
+          $this->repository->createPivot($item, 'pivot', $attributes, 'providers', 'provider');
+        } 
+
         return $this->sendResponse($request->all(), 'Provider associated to Item successfully');
     }
 
@@ -217,9 +225,58 @@ class ItemAPIController extends InfyOmBaseController
         return response()->json($query->paginate($perPage));
     }
 
+    public function availableProviders(Request $request, $id = null)
+    {
+        $providers = $this->repository->availableProviders($id)->toArray();
+        if (empty($providers))
+            return Response::json(ResponseUtil::makeError('Providers not found'), 400);        
+        return $this->sendResponse($providers, 'Provider retrieve successfully');
+    }
+
+    public function hasAvailableProviders(Request $request, $id = null)
+    {
+        $providers = $this->repository->availableProviders($id)->toArray();
+        if (empty($providers))
+            return Response::json(ResponseUtil::makeError('Providers not found'), 400);        
+        return $this->sendResponse(True, 'Provider retrieve successfully');        
+    }
+
+
     public function provider(Request $request, $id = null, $providerId = null) {
         $provider = $this->repository->findWithoutFail($id)->providers()->whereProviderId($providerId)->first();
 
-        return $this->sendResponse($provider->toArray(), 'Provider associated to Item successfully retrieve');
+        $item = $this->repository->findWithoutFail($id)->toArray();
+        $data = $item;
+        $provider = $provider->toArray();
+        $data['pivot'] = $provider['pivot'];
+        unset($provider['pivot']);
+        $data['provider'] = $provider;
+        return $this->sendResponse($data, 'Provider associated to Item successfully retrieve');
+    }
+
+    public function alreadyAssociate(Request $request, $id = null, $providerId = null)
+    {
+        $item = $this->repository->findWithoutFail($id);
+        if (empty($item))
+            return Response::json(ResponseUtil::makeError('Item not found'), 400);
+
+        if ($item->providers()->whereProviderId($providerId)->count()) 
+            return $this->sendResponse([True], 'Provider already associate to item');
+        return $this->sendResponse([False], 'Provider not associate yet to item');   
+    }
+
+    public function deleteProvider(Request $request, $id = null, $providerId = null)
+    {
+        $item = $this->repository->findWithoutFail($id);
+        if (empty($item))
+            return Response::json(ResponseUtil::makeError('Item not found'), 400); 
+        $provider = ['provider_id' => '', 'price' => '', 'selected' => ''];
+        if ($item->providers()->whereProviderId($providerId)->count()) {
+            $item->providers()->detach($providerId);
+            $item = $item->toArray();
+            $item['provider'] = $provider;
+            return $this->sendResponse($request->all(), 'Provider successfully detached from item');
+        }
+        return Response::json(ResponseUtil::makeError('Provider could not be detached from item'), 400);
     }
 }
