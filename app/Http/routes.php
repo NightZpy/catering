@@ -137,5 +137,16 @@ Route::group(['prefix' => 'kitchen'], function () {
 			]);
 		});
 	});
-});
 
+	Route::group(['prefix' => 'utensils'], function() {
+		/* 
+		 * ------------------- Route index for UtensilCategory ---------------
+		 */
+		Route::get('categories', [
+			'as' => 'kitchen.utensils.categories.index',
+			'uses' => function() {
+				return view('kitchen.utensils.categories.index');
+			}
+		]);	
+	});
+});

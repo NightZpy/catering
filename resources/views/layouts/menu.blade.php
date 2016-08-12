@@ -25,3 +25,7 @@
     <a href="{!! route('kitchen.items.index') !!}"><i class="fa fa-edit"></i><span>Almacen</span></a>
 </li>
 
+<li class="{{ Request::is('utensils.categories*') ? 'active' : '' }}">
+    <a href="{!! route('kitchen.utensils.categories.index') !!}"><i class="fa fa-edit"></i><span>UtensilCategories</span></a>
+</li>
+
