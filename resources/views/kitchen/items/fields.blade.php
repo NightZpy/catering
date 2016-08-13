@@ -182,7 +182,7 @@
 	</div>
 
 	<!-- Presentation Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.presentations.index') }}/', 'presentationOptions', 'presentation')" class="form-group col-sm-6">
+	<div @click="getForeignData('{{ route('api.v1.presentations.index') }}/', 'presentationOptions', 'presentation')" class="form-group col-sm-6">
 	    <label for="presentation_id">Presentación:</label>
 		{{-- <v-select></v-select> --}}
 		<select class="form-control" v-model="row.presentation_id" v-validate:presentation_id="{ required: true }">

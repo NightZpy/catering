@@ -292,5 +292,29 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 				'uses' => 'UtensilCategoryAPIController@store'
 			]);
 		});	
+
+		/* 
+		 * ------------------- Route API CRUD for Utensil ---------------
+		 */
+		Route::get('/', [
+			'as' => 'api.v1.kitchen.utensils.index',
+			'uses' => 'UtensilAPIController@index'
+		]);
+		Route::get('show/{id?}', [
+			'as' => 'api.v1.kitchen.utensils.show',
+			'uses' => 'UtensilAPIController@show'
+		]);
+		Route::patch('update/{id?}', [
+			'as' => 'api.v1.kitchen.utensils.update',
+			'uses' => 'UtensilAPIController@update'
+		]);
+		Route::delete('delete/{id?}', [
+			'as' => 'api.v1.kitchen.utensils.delete',
+			'uses' => 'UtensilAPIController@destroy'
+		]);
+		Route::post('store', [
+			'as' => 'api.v1.kitchen.utensils.store',
+			'uses' => 'UtensilAPIController@store'
+		]);	
 	});
 });
