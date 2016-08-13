@@ -47,7 +47,7 @@ class Utensil extends Model
     public static $rules = [
         'name' => 'required|min:1|max:128|unique:utensils',
         'stock' => 'required|numeric|min:0',
-        'category_id' => 'required'
+        'category_id' => 'required|exists:utensil_categories,id'
     ];
 
     /**

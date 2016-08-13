@@ -3,6 +3,7 @@
 namespace App\Http\Requests\API\Kitchen;
 
 use App\Models\Kitchen\Utensil;
+use App\Http\Requests\API\MyAPIRequest;
 
 class UpdateUtensilAPIRequest extends MyAPIRequest
 {
@@ -23,6 +24,8 @@ class UpdateUtensilAPIRequest extends MyAPIRequest
      */
     public function rules()
     {
-        return Utensil::$rules;
+        $rules = Utensil::$rules;
+        $rules['name'] = $rules['name'] . ',name,' . $this->id;
+        return $rules;
     }
 }

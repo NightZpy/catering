@@ -3,6 +3,7 @@
 namespace App\Http\Requests\API\Kitchen;
 
 use App\Models\Kitchen\Utensil;
+use App\Http\Requests\API\MyAPIRequest;
 
 class CreateUtensilAPIRequest extends MyAPIRequest
 {
