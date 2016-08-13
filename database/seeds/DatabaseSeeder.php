@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SubFamilyTableSeeder::class);
         $this->call(ItemTableSeeder::class);
         $this->call(ItemProviderTableSeeder::class);
+        $this->call(UtensilCategoryTableSeeder::class);
+        $this->call(UtensilTableSeeder::class);
         Model::reguard();
     }
 }

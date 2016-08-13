@@ -24,7 +24,7 @@ var tableColumns = [
 	},
 	{
 	    name: 'category_name',
-	    sortField: 'category_name',
+	    sortField: 'category_id',
 	    visible: true,
 	    title: 'Categoría'
 	},       
