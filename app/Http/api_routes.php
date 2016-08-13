@@ -265,5 +265,56 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 			'uses' => 'ItemAPIController@deleteProvider'
 		]);		
 	});
-});
 
+	/* 
+	 * ------------------- Route API CRUD for UtensilCategory ---------------
+	 */
+	Route::group(['prefix' => 'utensils'], function () {	
+		Route::group(['prefix' => 'categories'], function () {	
+			Route::get('/', [
+				'as' => 'api.v1.kitchen.utensils.categories.index',
+				'uses' => 'UtensilCategoryAPIController@index'
+			]);
+			Route::get('show/{id?}', [
+				'as' => 'api.v1.kitchen.utensils.categories.show',
+				'uses' => 'UtensilCategoryAPIController@show'
+			]);
+			Route::patch('update/{id?}', [
+				'as' => 'api.v1.kitchen.utensils.categories.update',
+				'uses' => 'UtensilCategoryAPIController@update'
+			]);
+			Route::delete('delete/{id?}', [
+				'as' => 'api.v1.kitchen.utensils.categories.delete',
+				'uses' => 'UtensilCategoryAPIController@destroy'
+			]);
+			Route::post('store', [
+				'as' => 'api.v1.kitchen.utensils.categories.store',
+				'uses' => 'UtensilCategoryAPIController@store'
+			]);
+		});	
+
+		/* 
+		 * ------------------- Route API CRUD for Utensil ---------------
+		 */
+		Route::get('/', [
+			'as' => 'api.v1.kitchen.utensils.index',
+			'uses' => 'UtensilAPIController@index'
+		]);
+		Route::get('show/{id?}', [
+			'as' => 'api.v1.kitchen.utensils.show',
+			'uses' => 'UtensilAPIController@show'
+		]);
+		Route::patch('update/{id?}', [
+			'as' => 'api.v1.kitchen.utensils.update',
+			'uses' => 'UtensilAPIController@update'
+		]);
+		Route::delete('delete/{id?}', [
+			'as' => 'api.v1.kitchen.utensils.delete',
+			'uses' => 'UtensilAPIController@destroy'
+		]);
+		Route::post('store', [
+			'as' => 'api.v1.kitchen.utensils.store',
+			'uses' => 'UtensilAPIController@store'
+		]);	
+	});
+});

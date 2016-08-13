@@ -74,7 +74,7 @@ var vm = new Vue({
         perPage: 10,
         paginationComponent: 'vuetable-pagination-bootstrap',
         paginationInfoTemplate: 'แสดง {from} ถึง {to} จากทั้งหมด {total} รายการ',
-        itemActions: actions,
+        itemActions: (typeof(actions) !== 'undefined' ? actions : {}),
         moreParams: []                                 
     },
     watch: {
