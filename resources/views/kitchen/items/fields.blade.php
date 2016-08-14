@@ -164,13 +164,13 @@
 	</div>	
 
 	<!-- Unit Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.units.index') }}/', 'unitOptions', 'unit')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.units.select-list') }}/', 'unitOptions', 'unit')" class="form-group col-sm-6">
 	    <label for="unit_id">Unidad:</label>
 		{{-- <v-select></v-select> --}}
 		<select class="form-control" v-model="row.unit_id" v-validate:unit_id="{ required: true }">
 			<option value="" selected="selected">-- Seleccione un tipo --</option>
-			<option v-for="option in foreignData.unitOptions" v-bind:value="option.id">		
-				@{{ option.name }}
+			<option v-for="(id, name) in foreignData.unitOptions" v-bind:value="id">	
+				@{{ name }}
 			</option>
 		</select>
 	    <div v-if="$validation.unit_id.invalid" class="alert alert-danger" role="alert">
@@ -182,13 +182,13 @@
 	</div>
 
 	<!-- Presentation Id Field -->
-	<div @click="getForeignData('{{ route('api.v1.presentations.index') }}/', 'presentationOptions', 'presentation')" class="form-group col-sm-6">
+	<div @click="getForeignData('{{ route('api.v1.presentations.select-list') }}/', 'presentationOptions', 'presentation')" class="form-group col-sm-6">
 	    <label for="presentation_id">Presentación:</label>
 		{{-- <v-select></v-select> --}}
 		<select class="form-control" v-model="row.presentation_id" v-validate:presentation_id="{ required: true }">
 			<option value="" selected="selected">-- Seleccione un tipo --</option>
-			<option v-for="option in foreignData.presentationOptions" v-bind:value="option.id">		
-				@{{ option.name }}
+			<option v-for="(id, name) in foreignData.presentationOptions" v-bind:value="id">
+				@{{ name }}
 			</option>
 		</select>
 	    <div v-if="$validation.presentation_id.invalid" class="alert alert-danger" role="alert">
@@ -200,13 +200,13 @@
 	</div>
 
 	<!-- Type Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.types.index') }}/', 'typeOptions', 'type')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.types.select-list') }}/', 'typeOptions', 'type')" class="form-group col-sm-6">
 	    <label for="type_id">Tipo:</label>
 		{{-- <v-select></v-select> --}}
 		<select class="form-control" v-model="row.type_id" v-validate:type_id="{ required: true }">
 			<option value="" selected="selected">-- Seleccione un tipo --</option>
-			<option v-for="option in foreignData.typeOptions" v-bind:value="option.id">		
-				@{{ option.name }}
+			<option v-for="(id, name) in foreignData.typeOptions" v-bind:value="id">	
+				@{{ name }}
 			</option>
 		</select>
 	    <div v-if="$validation.type_id.invalid" class="alert alert-danger" role="alert">
@@ -218,13 +218,13 @@
 	</div>
 
 	<!-- Family Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.families.index') }}/', 'familyOptions', 'family')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.families.select-list') }}/', 'familyOptions', 'family')" class="form-group col-sm-6">
 	    <label for="family_id">Familia:</label>
 		{{-- <v-select></v-select> --}}
 		<select class="form-control" v-model="row.family_id" v-validate:family_id="{ required: true }">
 			<option value="" selected="selected">-- Seleccione una familia --</option>
-			<option v-for="option in foreignData.familyOptions" v-bind:value="option.id">		
-				@{{ option.name }}
+			<option v-for="(id, name) in foreignData.familyOptions" v-bind:value="id">	
+				@{{ name }}
 			</option>
 		</select>
 	    <div v-if="$validation.family_id.invalid" class="alert alert-danger" role="alert">

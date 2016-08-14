@@ -46,4 +46,9 @@ abstract class MyBaseRepository extends BaseRepository
             return intval($data->last()->code) + 1;
         return 1;
     }    
+
+    public function selectList()
+    {
+        return $this->all()->pluck('name', 'id');
+    }
 }

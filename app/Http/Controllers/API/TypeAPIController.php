@@ -12,6 +12,7 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Http\Controllers\API\DataFormat;
 
 /**
  * Class TypeController
@@ -20,12 +21,14 @@ use Response;
 
 class TypeAPIController extends InfyOmBaseController
 {
+    use DataFormat;
+
     /** @var  TypeRepository */
-    private $typeRepository;
+    private $repository;
 
     public function __construct(TypeRepository $typeRepo)
     {
-        $this->typeRepository = $typeRepo;
+        $this->repository = $typeRepo;
     }
 
     /**
@@ -67,7 +70,7 @@ class TypeAPIController extends InfyOmBaseController
     {
         $input = $request->all();
 
-        $types = $this->typeRepository->create($input);
+        $types = $this->repository->create($input);
 
         return $this->sendResponse($types->toArray(), 'Type saved successfully');
     }
@@ -83,7 +86,7 @@ class TypeAPIController extends InfyOmBaseController
     public function show($id)
     {
         /** @var Type $type */
-        $type = $this->typeRepository->find($id);
+        $type = $this->repository->find($id);
 
         if (empty($type)) {
             return Response::json(ResponseUtil::makeError('Type not found'), 400);
@@ -106,13 +109,13 @@ class TypeAPIController extends InfyOmBaseController
         $input = $request->all();
 
         /** @var Type $type */
-        $type = $this->typeRepository->find($id);
+        $type = $this->repository->find($id);
 
         if (empty($type)) {
             return Response::json(ResponseUtil::makeError('Type not found'), 400);
         }
 
-        $type = $this->typeRepository->update($input, $id);
+        $type = $this->repository->update($input, $id);
 
         return $this->sendResponse($type->toArray(), 'Type updated successfully');
     }
@@ -128,7 +131,7 @@ class TypeAPIController extends InfyOmBaseController
     public function destroy($id)
     {
         /** @var Type $type */
-        $type = $this->typeRepository->find($id);
+        $type = $this->repository->find($id);
 
         if (empty($type)) {
             return Response::json(ResponseUtil::makeError('Type not found'), 400);

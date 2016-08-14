@@ -3,9 +3,9 @@
 namespace App\Repositories\Kitchen;
 
 use App\Models\Kitchen\UtensilCategory;
-use InfyOm\Generator\Common\BaseRepository;
+use App\Repositories\MyBaseRepository;
 
-class UtensilCategoryRepository extends BaseRepository
+class UtensilCategoryRepository extends MyBaseRepository
 {
     /**
      * @var array

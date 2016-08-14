@@ -59,6 +59,10 @@ Route::group(['prefix' => 'types'], function () {
 		'as' => 'api.v1.types.store',
 		'uses' => 'TypeAPIController@store'
 	]);
+	Route::get('select-list', [
+		'as' => 'api.v1.types.select-list',
+		'uses' => 'TypeAPIController@selectList'
+	]);	
 });
 
 /* 
@@ -85,6 +89,10 @@ Route::group(['prefix' => 'presentations'], function () {
 		'as' => 'api.v1.presentations.store',
 		'uses' => 'PresentationAPIController@store'
 	]);
+	Route::get('select-list', [
+		'as' => 'api.v1.presentations.select-list',
+		'uses' => 'PresentationAPIController@selectList'
+	]);	
 });
 
 /* 
@@ -111,6 +119,11 @@ Route::group(['prefix' => 'units'], function () {
 		'as' => 'api.v1.units.store',
 		'uses' => 'UnitAPIController@store'
 	]);
+
+	Route::get('select-list', [
+		'as' => 'api.v1.units.select-list',
+		'uses' => 'UnitAPIController@selectList'
+	]);	
 });
 
 
@@ -176,6 +189,11 @@ Route::group(['prefix' => 'families'], function () {
 		'as' => 'api.v1.families.check-unique',
 		'uses' => 'FamilyAPIController@checkUnique'
 	]);
+
+	Route::get('select-list', [
+		'as' => 'api.v1.families.select-list',
+		'uses' => 'FamilyAPIController@selectList'
+	]);	
 });
 
 /* 
@@ -290,6 +308,10 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 			Route::post('store', [
 				'as' => 'api.v1.kitchen.utensils.categories.store',
 				'uses' => 'UtensilCategoryAPIController@store'
+			]);
+			Route::get('select-list', [
+				'as' => 'api.v1.kitchen.utensils.categories.select-list',
+				'uses' => 'UtensilCategoryAPIController@selectList'
 			]);
 		});	
 

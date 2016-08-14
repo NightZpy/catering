@@ -13,6 +13,7 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Http\Controllers\API\DataFormat;
 
 /**
  * Class ItemController
@@ -21,6 +22,8 @@ use Response;
 
 class ItemAPIController extends InfyOmBaseController
 {
+    use DataFormat;
+
     /** @var  ItemRepository */
     private $repository;
     private $providerRepository;

@@ -24,7 +24,7 @@
 @endsection
 
 @push('vue-scripts')  
-    <script src="/app/js/models/subFamily-config.js"></script>
+    <script src="/app/js/models/family/sub/config.js"></script>
     <script>
         var token = '{{ csrf_token() }}';
         var fieldInitOrder = 'id';
@@ -35,10 +35,12 @@
             update: "{{ route('api.v1.subFamilies.update') }}/",  
             delete: "{{ route('api.v1.subFamilies.delete') }}/",
             foreign: {
-                index: [{
-                   method: 'GET' ,
-                   url: "{{ route('api.v1.inputMaterials.basic') }}/"
-                }]
+                family: {
+                    index: [{
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.families.select-list') }}/"
+                    }]
+                }
             },
             validation: {
                 unique: "",

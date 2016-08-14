@@ -12,6 +12,7 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Http\Controllers\API\DataFormat;
 
 /**
  * Class UtensilCategoryController
@@ -19,13 +20,15 @@ use Response;
  */
 
 class UtensilCategoryAPIController extends InfyOmBaseController
-{
+{    
+    use DataFormat;
+
     /** @var  UtensilCategoryRepository */
-    private $utensilCategoryRepository;
+    private $repository;
 
     public function __construct(UtensilCategoryRepository $utensilCategoryRepo)
     {
-        $this->utensilCategoryRepository = $utensilCategoryRepo;
+        $this->repository = $utensilCategoryRepo;
     }
 
     /**
@@ -67,7 +70,7 @@ class UtensilCategoryAPIController extends InfyOmBaseController
     {
         $input = $request->all();
 
-        $utensilCategories = $this->utensilCategoryRepository->create($input);
+        $utensilCategories = $this->repository->create($input);
 
         return $this->sendResponse($utensilCategories->toArray(), 'UtensilCategory saved successfully');
     }
@@ -83,7 +86,7 @@ class UtensilCategoryAPIController extends InfyOmBaseController
     public function show($id)
     {
         /** @var UtensilCategory $utensilCategory */
-        $utensilCategory = $this->utensilCategoryRepository->find($id);
+        $utensilCategory = $this->repository->find($id);
 
         if (empty($utensilCategory)) {
             return Response::json(ResponseUtil::makeError('UtensilCategory not found'), 400);
@@ -106,13 +109,13 @@ class UtensilCategoryAPIController extends InfyOmBaseController
         $input = $request->all();
 
         /** @var UtensilCategory $utensilCategory */
-        $utensilCategory = $this->utensilCategoryRepository->find($id);
+        $utensilCategory = $this->repository->find($id);
 
         if (empty($utensilCategory)) {
             return Response::json(ResponseUtil::makeError('UtensilCategory not found'), 400);
         }
 
-        $utensilCategory = $this->utensilCategoryRepository->update($input, $id);
+        $utensilCategory = $this->repository->update($input, $id);
 
         return $this->sendResponse($utensilCategory->toArray(), 'UtensilCategory updated successfully');
     }
@@ -128,7 +131,7 @@ class UtensilCategoryAPIController extends InfyOmBaseController
     public function destroy($id)
     {
         /** @var UtensilCategory $utensilCategory */
-        $utensilCategory = $this->utensilCategoryRepository->find($id);
+        $utensilCategory = $this->repository->find($id);
 
         if (empty($utensilCategory)) {
             return Response::json(ResponseUtil::makeError('UtensilCategory not found'), 400);

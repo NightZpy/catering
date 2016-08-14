@@ -55,16 +55,15 @@
 			</div> --}}
 	
 		</div>
-	</div>	
+	</div>			
 
 	<!-- Family Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.families.index') }}/', 'familyOptions')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.families.select-list') }}/', 'familyOptions', 'family')" class="form-group col-sm-6">
 	    <label for="family_id">Familia:</label>
-		{{-- <v-select></v-select> --}}
 		<select class="form-control" v-model="row.family_id" v-validate:family_id="{ required: true }">
 			<option value="" selected="selected">-- Seleccione una familia --</option>
-			<option v-for="option in foreignData.familyOptions" v-bind:value="option.id">		
-				@{{ option.name }}
+			<option v-for="(id, name) in foreignData.familyOptions" v-bind:value="id">		
+				@{{ name }}
 			</option>
 		</select>
 	    <div v-if="$validation.family_id.invalid" class="alert alert-danger" role="alert">
@@ -73,5 +72,5 @@
 				La familia es obligatoria
 			</div>
 		</div> 
-	</div>				
+	</div>
 </validator>	

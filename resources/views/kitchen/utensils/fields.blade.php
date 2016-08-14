@@ -53,11 +53,12 @@
 </div>	
 
 <!-- Category Id Field -->
-<div @click="getForeignData('{{ route('api.v1.kitchen.utensils.categories.index') }}/', 'utensilCategoriesOptions', 'utensil_category')" class="form-group col-sm-6">
+<div @click="getForeignData('{{ route('api.v1.kitchen.utensils.categories.select-list') }}/', 'utensilCategoriesOptions', 'utensil_category')" class="form-group col-sm-6">
     <label for="category_id">Categoria:</label>
 	<select class="form-control" v-model="row.category_id" v-validate:category_id="{ required: true }">
 		<option value="" selected="selected">-- Seleccione un tipo --</option>
-		<option v-for="option in foreignData.utensilCategoriesOptions" v-bind:value="option.id">		@{{ option.name }}
+		<option v-for="(id, name) in foreignData.utensilCategoriesOptions" v-bind:value="id">		
+			@{{ name }}
 		</option>
 	</select>
     <div v-if="$validation.category_id.invalid" class="alert alert-danger" role="alert">
