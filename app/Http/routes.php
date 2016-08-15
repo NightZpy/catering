@@ -159,4 +159,16 @@ Route::group(['prefix' => 'kitchen'], function () {
 			}
 		]);		
 	});
+
+	Route::group(['prefix' => 'recipes'], function() {
+		/* 
+		 * ------------------- Route index for RecipeType ---------------
+		 */
+		Route::get('types', [
+			'as' => 'kitchen.recipes.types.index',
+			'uses' => function() {
+				return view('kitchen.recipes.types.index');
+			}
+		]);	
+	});
 });

@@ -33,3 +33,7 @@
     <a href="{!! route('kitchen.utensils.index') !!}"><i class="fa fa-edit"></i><span>Utensils</span></a>
 </li>
 
+<li class="{{ Request::is('recipe.types*') ? 'active' : '' }}">
+    <a href="{!! route('kitchen.recipes.types.index') !!}"><i class="fa fa-edit"></i><span>RecipeTypes</span></a>
+</li>
+

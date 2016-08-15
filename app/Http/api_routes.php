@@ -339,4 +339,32 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 			'uses' => 'UtensilAPIController@store'
 		]);	
 	});
+
+	Route::group(['prefix' => 'recipes', 'namespace' => 'Recipe'], function () {
+		/* 
+		 * ------------------- Route API CRUD for RecipeType ---------------
+		 */
+		Route::group(['prefix' => 'types'], function () {	
+			Route::get('/', [
+				'as' => 'api.v1.kitchen.recipes.types.index',
+				'uses' => 'RecipeTypeAPIController@index'
+			]);
+			Route::get('show/{id?}', [
+				'as' => 'api.v1.kitchen.recipes.types.show',
+				'uses' => 'RecipeTypeAPIController@show'
+			]);
+			Route::patch('update/{id?}', [
+				'as' => 'api.v1.kitchen.recipes.types.update',
+				'uses' => 'RecipeTypeAPIController@update'
+			]);
+			Route::delete('delete/{id?}', [
+				'as' => 'api.v1.kitchen.recipes.types.delete',
+				'uses' => 'RecipeTypeAPIController@destroy'
+			]);
+			Route::post('store', [
+				'as' => 'api.v1.kitchen.recipes.types.store',
+				'uses' => 'RecipeTypeAPIController@store'
+			]);
+		});
+	});
 });
