@@ -21,7 +21,10 @@
         "sven/env-providers": "^3.0",
         "nickcousins/schemaview-laravel": "^0.2.3",
         "doctrine/dbal": "~2.3",
-        "infyomlabs/adminlte-templates": "dev-master"
+        "infyomlabs/adminlte-templates": "dev-master",
+        "barryvdh/laravel-ide-helper": "^2.2",
+        "mpociot/laravel-apidoc-generator": "^1.5",
+        "arcanedev/log-viewer": "~3.0"
     },
     "autoload": {
         "classmap": [

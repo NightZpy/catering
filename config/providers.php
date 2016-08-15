@@ -46,6 +46,7 @@ return [
             Collective\Html\HtmlServiceProvider::class,
             Laracasts\Flash\FlashServiceProvider::class,
             Prettus\Repository\Providers\RepositoryServiceProvider::class,
+            Arcanedev\LogViewer\LogViewerServiceProvider::class,
         ],
         'aliases' => [
             'Form'      => Collective\Html\FormFacade::class,
@@ -58,7 +59,10 @@ return [
         'providers' => [
             \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
             nickcousins\schemaview\SchemaViewServiceProvider::class,
-            InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class
+            InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
+            Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+            Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
+
         ],
         'aliases' => [
 

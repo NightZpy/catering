@@ -17067,7 +17067,9 @@ var vm = new Vue({
                     var data = response.data.data;
                     var currentForeignData = vm.foreignData;
                     currentForeignData[mapVar] = data;
-                    currentForeignData[mapVar + 'Count'] = data.length;
+                    var count = data.length;
+                    if (count === undefined) count = Object.keys(data).length;
+                    currentForeignData[mapVar + 'Count'] = count;
                     vm.foreignData.push(currentForeignData);
                 }
             }, function (response) {});
