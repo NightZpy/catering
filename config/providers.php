@@ -47,6 +47,7 @@ return [
             Laracasts\Flash\FlashServiceProvider::class,
             Prettus\Repository\Providers\RepositoryServiceProvider::class,
             Arcanedev\LogViewer\LogViewerServiceProvider::class,
+            'MathiasGrimm\LaravelDotEnvGen\DotEnvGenServiceProvider',
         ],
         'aliases' => [
             'Form'      => Collective\Html\FormFacade::class,
