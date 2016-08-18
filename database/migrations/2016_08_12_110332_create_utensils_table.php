@@ -17,7 +17,7 @@ class CreateutensilsTable extends Migration
             $table->increments('id');
             $table->string('name', 128)->unique();
             $table->integer('stock');
-            $table->integer('category_id');
+            $table->integer('category_id')->unsigned();
             $table->foreign('category_id')
                 ->references('id')->on('utensil_categories')
                 ->onDelete('cascade')
