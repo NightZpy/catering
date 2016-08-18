@@ -11,7 +11,10 @@ class ProviderTableSeeder extends Seeder
      */
     public function run()
     {
-    	Provider::truncate();
-	    factory(Provider::class, 20)->create();      
+        \Eloquent::unguard();
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Provider::truncate();
+        factory(Provider::class, 20)->create();      
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
