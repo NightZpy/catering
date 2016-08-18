@@ -15,7 +15,9 @@ class ItemTableSeeder extends Seeder
      */
     public function run()
     {
-    	Item::truncate();
+        \Eloquent::unguard();
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Item::truncate();
         $units = Unit::all();
         $types = Type::all();
         $presentations = Presentation::all();
@@ -43,5 +45,6 @@ class ItemTableSeeder extends Seeder
             ];  
             Item::create($item);
         }
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

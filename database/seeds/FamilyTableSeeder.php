@@ -12,7 +12,9 @@ class FamilyTableSeeder extends Seeder
      */
     public function run()
     {
-    	Family::truncate();
+        \Eloquent::unguard();
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Family::truncate();
         for ($i=1; $i <= 20; $i++) { 
             $family = [
                 'name' => "Family-$i", 
@@ -20,5 +22,6 @@ class FamilyTableSeeder extends Seeder
             ]; 
             Family::create($family);
         }
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
