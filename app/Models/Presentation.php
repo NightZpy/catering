@@ -39,6 +39,6 @@ class Presentation extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|min:1|max:128|unique:types'
+        'name' => 'required|min:1|max:128|unique:presentations'
     ];
 }
