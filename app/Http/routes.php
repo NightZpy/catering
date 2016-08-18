@@ -169,6 +169,16 @@ Route::group(['prefix' => 'kitchen'], function () {
 			'uses' => function() {
 				return view('kitchen.recipes.types.index');
 			}
-		]);	
+		]);
+
+		/* 
+		 * ------------------- Route index for BaseRecipe ---------------
+		 */
+		Route::get('bases', [
+			'as' => 'kitchen.recipes.bases.index',
+			'uses' => function() {
+				return view('kitchen.recipes.bases.index');
+			}
+		]);			
 	});
 });

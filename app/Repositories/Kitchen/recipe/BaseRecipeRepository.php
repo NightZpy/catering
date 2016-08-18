@@ -2,16 +2,18 @@
 
 namespace App\Repositories\Kitchen\Recipe;
 
-use App\Models\Kitchen\Recipe\RecipeType;
+use App\Models\Kitchen\Recipe\BaseRecipe;
 use App\Repositories\MyBaseRepository;
 
-class RecipeTypeRepository extends MyBaseRepository
+class BaseRecipeRepository extends MyBaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        'name'
+        'name',
+        'quantity',
+        'recipe_type_id'
     ];
 
     /**
@@ -19,6 +21,6 @@ class RecipeTypeRepository extends MyBaseRepository
      **/
     public function model()
     {
-        return RecipeType::class;
+        return BaseRecipe::class;
     }
 }

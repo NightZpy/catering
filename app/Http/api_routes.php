@@ -365,6 +365,36 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 				'as' => 'api.v1.kitchen.recipes.types.store',
 				'uses' => 'RecipeTypeAPIController@store'
 			]);
+			Route::get('select-list', [
+				'as' => 'api.v1.kitchen.recipes.types.select-list',
+				'uses' => 'RecipeTypeAPIController@selectList'
+			]);
+		});
+
+		/* 
+		 * ------------------- Route API CRUD for BaseRecipe ---------------
+		 */
+		Route::group(['prefix' => 'bases'], function () {	
+			Route::get('/', [
+				'as' => 'api.v1.kitchen.recipes.bases.index',
+				'uses' => 'BaseRecipeAPIController@index'
+			]);
+			Route::get('show/{id?}', [
+				'as' => 'api.v1.kitchen.recipes.bases.show',
+				'uses' => 'BaseRecipeAPIController@show'
+			]);
+			Route::patch('update/{id?}', [
+				'as' => 'api.v1.kitchen.recipes.bases.update',
+				'uses' => 'BaseRecipeAPIController@update'
+			]);
+			Route::delete('delete/{id?}', [
+				'as' => 'api.v1.kitchen.recipes.bases.delete',
+				'uses' => 'BaseRecipeAPIController@destroy'
+			]);
+			Route::post('store', [
+				'as' => 'api.v1.kitchen.recipes.bases.store',
+				'uses' => 'BaseRecipeAPIController@store'
+			]);
 		});
 	});
 });
