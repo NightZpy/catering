@@ -13,7 +13,10 @@ class ItemProviderTableSeeder extends Seeder
      */
     public function run()
     {
-    	\DB::table('item_provider')->delete();
+        \Eloquent::unguard();
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        //disable foreign key check for this connection before running seeders
+        \DB::table('item_provider')->delete();
         $itemList = array_chunk(Item::all()->toArray(), Provider::count());
         $providers = Provider::all();
 
@@ -29,5 +32,6 @@ class ItemProviderTableSeeder extends Seeder
                 }
             }
         }
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
