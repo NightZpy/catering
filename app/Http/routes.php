@@ -174,11 +174,20 @@ Route::group(['prefix' => 'kitchen'], function () {
 		/* 
 		 * ------------------- Route index for BaseRecipe ---------------
 		 */
-		Route::get('bases', [
-			'as' => 'kitchen.recipes.bases.index',
-			'uses' => function() {
-				return view('kitchen.recipes.bases.index');
-			}
-		]);			
+		Route::group(['prefix' => 'bases'], function() {
+			Route::get('', [
+				'as' => 'kitchen.recipes.bases.index',
+				'uses' => function() {
+					return view('kitchen.recipes.bases.index');
+				}
+			]);		
+
+			Route::get('items/{baseRecipe?}', [
+				'as' => 'kitchen.recipes.bases.items.index',
+				'uses' => function (App\Models\Kitchen\BaseRecipe $baseRecipe) {
+					return view('kitchen.recipes.bases.items.index', compact('baseRecipe'));
+				}
+			]);
+		});
 	});
 });

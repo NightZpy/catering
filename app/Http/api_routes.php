@@ -395,6 +395,37 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 				'as' => 'api.v1.kitchen.recipes.bases.store',
 				'uses' => 'BaseRecipeAPIController@store'
 			]);
+
+			Route::group(['prefix' => 'items'], function () {	
+				Route::get('{id?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.items.index',
+					'uses' => 'BaseRecipeAPIController@items'
+				]);
+				Route::get('available-list/{id?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.items.available-items',
+					'uses' => 'BaseRecipeAPIController@availableItems'
+				]);
+				Route::get('available/{id?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.items.available',
+					'uses' => 'BaseRecipeAPIController@hasAvailableItems'
+				]);
+				Route::get('show/{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.items.show',
+					'uses' => 'BaseRecipeAPIController@item'
+				]);
+				Route::get('exists/{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.items.already-associate',
+					'uses' => 'BaseRecipeAPIController@alreadyAssociateItem'
+				]);		
+				Route::patch('{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.items.store',
+					'uses' => 'BaseRecipeAPIController@storeItem'
+				]);	
+				Route::delete('{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.items.delete',
+					'uses' => 'BaseRecipeAPIController@deleteItem'
+				]);		
+			});
 		});
 	});
 });
