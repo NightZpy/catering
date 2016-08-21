@@ -56,11 +56,13 @@ var vm = new Vue({
         infoModal: false,
         showModal: false,
         deleteModal: false,
+        lastOpenModal: "",
         localModals: (typeof(modals) !== 'undefined' ? modals : {}),
         flashMessage: null,
         defaultErrorMessage: 'Some errors in sended data, please check!.',
         flashTypeDanger: 'danger',
         flashType: null,
+        successSubmit: false,
         submitMessage: "",
         url: apiUrl,           
         row: objectRow,
@@ -119,10 +121,10 @@ var vm = new Vue({
         getData: function (url = null) {
             if (!url) {
                 this.sendData(this.url.show + this.row.id, 'GET')
-                .then(this.success, this.failed);                
+                .then(this.success2, this.failed);                
             } else {
                this.sendData(url, 'GET')
-                .then(this.success, this.failed);    
+                .then(this.success2, this.failed);    
             }
         },
         available: function(url) {
@@ -164,7 +166,7 @@ var vm = new Vue({
             this.flashMessage = '';
             this.flashType = '';
         },            
-        success: function(response) {
+        success: function(response) {                
             if (response.data.data) {
                 var data = response.data.data;
                 vm.$set('row', data);
@@ -174,6 +176,18 @@ var vm = new Vue({
             var message = response.data.message;
             vm.flashMessage = message;
             vm.flashType = 'success';
+            this.closeModal(this.lastOpenModal);  
+        },
+        success2: function(response) {
+            if (response.data.data) {
+                var data = response.data.data;
+                vm.$set('row', data);
+            }
+            if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE')
+                this.$broadcast('vuetable:reload');
+            var message = response.data.message;
+            vm.flashMessage = message;
+            vm.flashType = 'success'; 
         },
         failed: function(response) {
             vm.flashMessage = vm.defaultErrorMessage;
@@ -208,7 +222,7 @@ var vm = new Vue({
             //vm.$setValidationErrors(errorMessages);     
         },
         closeModal: function(modalName) {
-            console.log('Modal: ' + modalName);
+            // console.log('Modal: ' + modalName);
             if (this.localModals[modalName] != undefined)
                 this.localModals[modalName]    = false;
             else
@@ -227,17 +241,22 @@ var vm = new Vue({
         },
         modal: function(type) {  
             if (type == 'PATCH' || type == 'POST') {
+                this.lastOpenModal = 'formModal';
                 this.method = type;
                 this.formModal = true;
             } else if (type == 'SHOW') {
+                this.lastOpenModal = 'showModal';
                 this.method = type;
                 this.showModal = true;
             } else if (type == 'DELETE') {
+                this.lastOpenModal = 'deleteModal';
                 this.method = type;
                 this.deleteModal = true;
             } else if (type == 'INFO') {
+                this.infoModal = 'deleteModal';
                 this.infoModal = true;
             } else {
+                this.infoModal = type;
                 this.localModals[type] = true;                
             }
         },
