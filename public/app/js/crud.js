@@ -17161,10 +17161,10 @@ var vm = new Vue({
                 this.method = type;
                 this.deleteModal = true;
             } else if (type == 'INFO') {
-                this.infoModal = 'deleteModal';
+                this.lastOpenModal = 'infoModal';
                 this.infoModal = true;
             } else {
-                this.infoModal = type;
+                this.lastOpenModal = type;
                 this.localModals[type] = true;
             }
         },

@@ -1,4 +1,4 @@
-var objectRow = {            
+var objectRow = {
 	id: "",
 	name: "",
 	servings_quantity: "",
@@ -6,7 +6,30 @@ var objectRow = {
 	description: "",
 	photo: "",
 	type_id: "",
-	type_name: ""
+	type_name: "", 
+	item: {
+		id: "",
+		code: "",
+		name: "",
+		specialty: "",
+		district: "",
+		address: "",
+		phone: "",
+		movil1: "",
+		movil2: "",
+		contact: "",
+		email: "",
+		created_at: "",
+		updated_at: "",
+		deleted_at: ""
+	},
+	pivot: {
+		purchase_quantity: "",
+		cost_per_quantity: "",     
+		decrease: "" ,
+		servings_quantity: "",
+		item_id: ""			
+	}
 };
 
 var tableColumns = [

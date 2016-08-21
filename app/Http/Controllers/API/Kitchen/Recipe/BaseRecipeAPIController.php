@@ -6,6 +6,7 @@ use App\Http\Requests\API\Kitchen\Recipe\CreateBaseRecipeAPIRequest;
 use App\Http\Requests\API\Kitchen\Recipe\UpdateBaseRecipeAPIRequest;
 use App\Models\Kitchen\recipe\BaseRecipe;
 use App\Repositories\Kitchen\Recipe\BaseRecipeRepository;
+use App\Repositories\Kitchen\ItemRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController as InfyOmBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -23,9 +24,12 @@ class BaseRecipeAPIController extends InfyOmBaseController
     /** @var  BaseRecipeRepository */
     private $repository;
 
-    public function __construct(BaseRecipeRepository $baseRecipeRepo)
+    private $itemRepository;
+
+    public function __construct(BaseRecipeRepository $baseRecipeRepo, ItemRepository $itemRepository)
     {
         $this->repository = $baseRecipeRepo;
+        $this->itemRepository = $itemRepository;
     }
 
     /**
@@ -139,6 +143,73 @@ class BaseRecipeAPIController extends InfyOmBaseController
 
         return $this->sendResponse($id, 'BaseRecipe deleted successfully');
     }
+
+    public function storeItem(Request $request, $id = null, $itemId = null)
+    {
+        $baseRecipe = $this->repository->findWithoutFail($id);
+
+        if (empty($baseRecipe)) {
+            return Response::json(ResponseUtil::makeError('Base Recipe not found'), 400);
+        }
+
+        if ($itemId) {
+            $item = $this->itemRepository->findWithoutFail($itemId);
+            if (empty($item)) {
+                return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+            }            
+        }
+
+        $attributes = $request->all();
+        if ($itemId)
+            $attributes['pivot']['item_id'] = $item->id;     
+
+        $exists = $this->repository
+             ->findWithoutFail($id)
+             ->items()
+             ->whereItemId($itemId)->count();
+
+        if ($exists) {
+          $baseRecipe->items()->updateExistingPivot($itemId, $attributes['pivot']);
+        } else {
+          $this->repository->createPivot($baseRecipe, 'pivot', $attributes, 'items', 'item');
+        } 
+
+        return $this->sendResponse($request->all(), 'Item associated to Base Recipe successfully');
+    }    
+
+    public function items(Request $request, $id = null)
+    {
+        $baseRecipe = $this->repository->findWithoutFail($id);
+
+        if (empty($baseRecipe)) {
+            //Flash::error('Base Recipe not found');
+            return Response::json(ResponseUtil::makeError('Base Recipe not found'), 400);
+        }
+
+        if (empty($baseRecipe->items)) {
+            //Flash::error('Base Recipe not found');
+            return Response::json(ResponseUtil::makeError('Not Providers for Base Recipe'), 400);
+        }         
+
+        $query = $baseRecipe->items();
+        if (request()->has('sort')) {
+            list($sortCol, $sortDir) = explode('|', request()->sort);
+            $query = $query->orderBy($sortCol, $sortDir);
+        } else {
+            $query = $query->orderBy('created_at', 'asc');
+        }
+
+        if ($request->exists('filter')) {
+            $query->where(function($q) use($request) {
+                $value = "%{$request->filter}%";
+                $q->where("code", "like", $value)
+                  ->orWhere("name", "like", $value);
+            });
+        }
+
+        $perPage = request()->has('per_page') ? (int) request()->per_page : null;
+        return response()->json($query->paginate($perPage));
+    }    
 
     public function availableItems(Request $request, $id = null)
     {
