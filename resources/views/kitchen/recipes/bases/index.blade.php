@@ -17,6 +17,7 @@
         </div>
         <!-- --------- Modals ---------- -->
         @include('kitchen.recipes.bases.form')
+        @include('kitchen.recipes.bases.items.add')
         @include('kitchen.recipes.bases.delete')
         @include('kitchen.recipes.bases.show')
         @include('layouts.modal.info')        
@@ -39,6 +40,20 @@
                     index: {
                         method: 'GET' ,
                         url: "{{ route('api.v1.kitchen.recipes.types.select-list') }}/"
+                    }
+                },
+                item: { 
+                    store: {
+                        method: 'PATCH' ,
+                        url: "{{ route('api.v1.kitchen.recipes.bases.items.store') }}/"
+                    }, 
+                    index: {
+                        method: 'GET' ,
+                        url: "{{ route('kitchen.recipes.bases.items.index') }}/"
+                    },
+                    relate_list: {
+                        method: 'GET',
+                        url: "{{ route('kitchen.recipes.bases.items.index') }}/"                        
                     }
                 },
             }
