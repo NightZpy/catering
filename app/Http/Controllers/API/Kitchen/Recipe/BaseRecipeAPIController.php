@@ -139,4 +139,20 @@ class BaseRecipeAPIController extends InfyOmBaseController
 
         return $this->sendResponse($id, 'BaseRecipe deleted successfully');
     }
+
+    public function availableItems(Request $request, $id = null)
+    {
+        $items = $this->repository->availableItems($id)->toArray();
+        if (empty($items))
+            return Response::json(ResponseUtil::makeError('Items not found'), 400);        
+        return $this->sendResponse($items, 'Item retrieve successfully');
+    }
+
+    public function hasAvailableItems(Request $request, $id = null)
+    {
+        $items = $this->repository->availableItems($id)->toArray();
+        if (empty($items))
+            return Response::json(ResponseUtil::makeError('Items not found'), 400);        
+        return $this->sendResponse(True, 'Item retrieve successfully');        
+    }    
 }

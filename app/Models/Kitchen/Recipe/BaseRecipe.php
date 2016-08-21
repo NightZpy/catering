@@ -4,6 +4,7 @@ namespace App\Models\Kitchen\Recipe;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Kitchen\Item;
 
 /**
  * Class BaseRecipe
@@ -67,6 +68,17 @@ class BaseRecipe extends Model
     {
         return $this->belongsTo(RecipeType::class);
     }  
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'base_recipe_item', 'item_id', 'base_id')
+                    ->withPivot(
+                        'purchase_quantity', 
+                        'cost_per_quantity',
+                        'decrease',
+                        'servings_quantity'
+                        );
+    }
 
     /**
      *

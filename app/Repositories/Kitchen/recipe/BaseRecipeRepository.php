@@ -3,6 +3,7 @@
 namespace App\Repositories\Kitchen\Recipe;
 
 use App\Models\Kitchen\Recipe\BaseRecipe;
+use App\Models\Kitchen\Item;
 use App\Repositories\MyBaseRepository;
 
 class BaseRecipeRepository extends MyBaseRepository
@@ -23,4 +24,10 @@ class BaseRecipeRepository extends MyBaseRepository
     {
         return BaseRecipe::class;
     }
+
+    public function availableItems($id)
+    {
+        $itemsId = $this->findWithoutFail($id)->items->pluck('id');    
+        return Item::whereNotIn('id', $itemsId)->get();
+    }    
 }
