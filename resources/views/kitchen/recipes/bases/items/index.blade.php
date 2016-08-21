@@ -41,19 +41,19 @@
         var fieldInitOrder = 'id';
         var apiUrl = { 
             show:  "{{ route('api.v1.kitchen.recipes.bases.items.show', $baseRecipe->id) }}/",
-            index: "{{ route('api.v1.kitchen.recipes.bases.items.available-bases', $baseRecipe->id) }}",  
+            index: "{{ route('api.v1.kitchen.recipes.bases.items.available-items', $baseRecipe->id) }}",  
             store: "{{ route('api.v1.kitchen.recipes.bases.items.store', $baseRecipe->id) }}",  
             update: "{{ route('api.v1.kitchen.recipes.bases.items.store', $baseRecipe->id) }}/",
             delete: "{{ route('api.v1.kitchen.recipes.bases.items.delete', $baseRecipe->id) }}/",
             foreign: {
-                provider: {
+                item: {
                     store: {
                         method: 'PATCH' ,
                         url: "{{ route('api.v1.kitchen.recipes.bases.items.store') }}/"
                     }, 
                     index: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.kitchen.recipes.bases.items.available-bases') }}/"
+                        url: "{{ route('api.v1.kitchen.recipes.bases.items.available-items') }}/"
                     },
                     show: {
                         method: 'GET' ,
@@ -61,7 +61,7 @@
                     },
                     relate_list: {
                         method: 'GET',
-                        url: "{{ route('api.v1.kitchen.recipes.bases.items.available-bases') }}/"                        
+                        url: "{{ route('api.v1.kitchen.recipes.bases.items.available-items') }}/"                        
                     },
                     already_associate: {
                         method: 'GET',

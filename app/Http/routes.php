@@ -184,7 +184,7 @@ Route::group(['prefix' => 'kitchen'], function () {
 
 			Route::get('items/{baseRecipe?}', [
 				'as' => 'kitchen.recipes.bases.items.index',
-				'uses' => function (App\Models\Kitchen\BaseRecipe $baseRecipe) {
+				'uses' => function (App\Models\Kitchen\Recipe\BaseRecipe $baseRecipe) {
 					return view('kitchen.recipes.bases.items.index', compact('baseRecipe'));
 				}
 			]);

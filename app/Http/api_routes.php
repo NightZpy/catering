@@ -425,7 +425,8 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 					'as' => 'api.v1.kitchen.recipes.bases.items.delete',
 					'uses' => 'BaseRecipeAPIController@deleteItem'
 				]);		
-			});
+			});			
+
 		});
 	});
 });

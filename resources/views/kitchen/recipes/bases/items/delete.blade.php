@@ -1,10 +1,10 @@
 <?php
 	extract([
-            'modalTitle'    => 'Delete Provider ({{ row.provider.name }}) associate to <em>' . $item->name . '</em>!',
-            'modalSync'     => 'providerDELETE',
-            'modalClose'    => 'providerDELETE',
-            'model'         => 'Provider',
-            'related'       => 'provider',
+            'modalTitle'    => 'Delete Item ({{ row.item.name }}) associate to <em>' . $baseRecipe->name . '</em>!',
+            'modalSync'     => 'itemDELETE',
+            'modalClose'    => 'itemDELETE',
+            'model'         => 'Item',
+            'related'       => 'item',
             'type'			=> 'delete'
 	]);
 ?>
