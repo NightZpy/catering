@@ -49,11 +49,12 @@ class BaseRecipeAPIController extends InfyOmBaseController
         }
 
         if ($request->exists('filter')) {
+            $value = "%{$request->filter}%";
             $query->where(function($q) use($request) {
-                $value = "%{$request->filter}%";
                 $q->where("name", "like", $value)
                   ->orWhere("quantity", "like", $value);
             });
+            //$query->search($request->filter);
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
@@ -162,7 +163,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
         $attributes = $request->all();
         if ($itemId)
             $attributes['pivot']['item_id'] = $item->id;     
-
+        \Debugbar::info($attributes);
         $exists = $this->repository
              ->findWithoutFail($id)
              ->items()
@@ -179,19 +180,28 @@ class BaseRecipeAPIController extends InfyOmBaseController
 
     public function items(Request $request, $id = null)
     {
-        $baseRecipe = $this->repository->findWithoutFail($id);
+        $baseRecipe = $this->repository->findWithoutFail($id);        
 
         if (empty($baseRecipe)) {
             //Flash::error('Base Recipe not found');
             return Response::json(ResponseUtil::makeError('Base Recipe not found'), 400);
         }
-
+        \Debugbar::info($baseRecipe->items->first()->pivot->toArray());
         if (empty($baseRecipe->items)) {
             //Flash::error('Base Recipe not found');
             return Response::json(ResponseUtil::makeError('Not Providers for Base Recipe'), 400);
         }         
 
         $query = $baseRecipe->items();
+        if ($request->exists('filter')) {
+            $value = "%{$request->filter}%";
+            $query->where(function($q) use($value) {
+                $q->where("code", "like", $value)
+                  ->orWhere("name", "like", $value);
+            });
+            //$query = $baseRecipe->items()->search($value);
+        }
+
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
             $query = $query->orderBy($sortCol, $sortDir);
@@ -199,17 +209,21 @@ class BaseRecipeAPIController extends InfyOmBaseController
             $query = $query->orderBy('created_at', 'asc');
         }
 
-        if ($request->exists('filter')) {
-            $query->where(function($q) use($request) {
-                $value = "%{$request->filter}%";
-                $q->where("code", "like", $value)
-                  ->orWhere("name", "like", $value);
-            });
-        }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
         return response()->json($query->paginate($perPage));
     }    
+
+    public function item(Request $request, $id = null, $itemId = null) {
+        $item = $this->repository->findWithoutFail($id)->items()->whereItemId($itemId)->first();
+        $baseRecipe = $this->repository->findWithoutFail($id)->toArray();        
+        $data = $baseRecipe;
+        $item = $item->toArray();        
+        $data['pivot'] = $item['pivot'];
+        unset($item['pivot']);        
+        $data['item'] = $item;
+        return $this->sendResponse($data, 'Item associated to Item successfully retrieve');
+    }
 
     public function availableItems(Request $request, $id = null)
     {

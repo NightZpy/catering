@@ -5,6 +5,7 @@ namespace App\Models\Kitchen\Recipe;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Kitchen\Item;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 /**
  * Class BaseRecipe
@@ -13,8 +14,28 @@ use App\Models\Kitchen\Item;
 class BaseRecipe extends Model
 {
     use SoftDeletes;
+    use SearchableTrait;
 
     public $table = 'base_recipes';
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        'columns' => [
+            'base_recipes.name' => 10,
+            'base_recipes.description' => 2,
+            'recipe_types.name' => 3,
+            //'items.name' => 2,
+        ],
+        'joins' => [
+            //'base_recipe_item' => ['base_recipes.id', 'base_recipe_item.base_id'],
+            //'items' => ['base_recipe_item.item_id','items.id'],
+            'recipe_types' => ['base_recipes.type_id','recipe_types.id']
+        ],
+    ];    
     
     protected $appends = [
         'code',
@@ -71,7 +92,7 @@ class BaseRecipe extends Model
 
     public function items()
     {
-        return $this->belongsToMany(Item::class, 'base_recipe_item', 'item_id', 'base_id')
+        return $this->belongsToMany(Item::class, 'base_recipe_item', 'base_id', 'item_id')
                     ->withPivot(
                         'purchase_quantity', 
                         'cost_per_quantity',
@@ -93,5 +114,5 @@ class BaseRecipe extends Model
     public function getTypeNameAttribute()
     {
         return $this->type->name;
-    }      
+    }        
 }

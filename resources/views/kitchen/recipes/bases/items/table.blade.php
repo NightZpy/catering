@@ -44,7 +44,6 @@
         api-url="{{ route('api.v1.kitchen.recipes.bases.items.index', $baseRecipe->id) }}"
         :fields="columns"
         pagination-path=""
-        :fields="fields"
         :sort-order="sortOrder"
         table-class="table table-bordered table-striped table-hover"
         ascending-icon="glyphicon glyphicon-chevron-up"

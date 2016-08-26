@@ -106,7 +106,7 @@ var vm = new Vue({
             } else {                     
                 var url = this.url.foreign[related][type].url;
                 var method = this.url.foreign[related][type].method;
-                var relatedId = this.row[related]['id'];
+                var relatedId = this.row['pivot']['id'];
                 console.log('Related: ' + relatedId);
                 if (!relatedId) {
                     relatedId = this.row.pivot[related + '_id'];
