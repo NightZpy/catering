@@ -1,21 +1,21 @@
 @extends('layouts.modal.relation-table')
 
 @section('modal-relation-table-title')
-Add Provider to Item Form
+Add item to BaseRecipe Form
 @stop
 
 @section('modal-sync')
-providers
+items
 @stop
 
 @section('modal-close')
-	'providers'
+	'items'
 @stop
 
 @section('model')
-Provider
+item
 @stop
 
 @section('modal-relation-table-content')
-	@include('kitchen.items.providers.table')
+	@include('kitchen.items.items.table')
 @stop

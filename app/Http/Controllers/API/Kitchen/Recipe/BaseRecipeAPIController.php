@@ -227,7 +227,8 @@ class BaseRecipeAPIController extends InfyOmBaseController
 
     public function availableItems(Request $request, $id = null)
     {
-        $items = $this->repository->availableItems($id)->toArray();
+        $items = $this->repository->availableItems($id)->pluck('name', 'id')->toArray();
+        $items = $this->repository->all()->pluck('name', 'id')->toArray();
         if (empty($items))
             return Response::json(ResponseUtil::makeError('Items not found'), 400);        
         return $this->sendResponse($items, 'Item retrieve successfully');
@@ -239,5 +240,21 @@ class BaseRecipeAPIController extends InfyOmBaseController
         if (empty($items))
             return Response::json(ResponseUtil::makeError('Items not found'), 400);        
         return $this->sendResponse(True, 'Item retrieve successfully');        
+    }    
+
+    public function deleteItem(Request $request, $id = null, $itemId = null)
+    {
+        $baseRecipe = $this->repository->findWithoutFail($id);
+        if (empty($baseRecipe))
+            return Response::json(ResponseUtil::makeError('BaseRecipe not found'), 400); 
+        
+        $item = $baseRecipe->items()->whereItemId($itemId)->count();
+        if ($item) {
+            $baseRecipe->items()->detach($itemId);
+            //$baseRecipe = $baseRecipe->toArray();
+            //$baseRecipe['item'] = $item;
+            return $this->sendResponse($request->all(), 'Item successfully detached from BaseRecipe');
+        }
+        return Response::json(ResponseUtil::makeError('Item could not be detached from baseRecipe'), 400);
     }    
 }

@@ -36,7 +36,7 @@
         objectRow.id = "{{ $baseRecipe->id }}";
         objectRow.name = "{{ $baseRecipe->name }}";
         objectRow.code = "{{ $baseRecipe->code }}";
-        objectRow.auto_provider = "{{ $baseRecipe->auto_provider }}";
+        objectRow.auto_item = "{{ $baseRecipe->auto_item }}";
         var token = '{{ csrf_token() }}';
         var fieldInitOrder = 'id';
         var apiUrl = { 

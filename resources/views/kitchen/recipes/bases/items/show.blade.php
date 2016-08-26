@@ -1,11 +1,11 @@
 <?php 
 	extract([
             'modalTitle'    => 'Details for ',
-            'modalSync'     => 'providerSHOW',
-            'modalClose'    => "'providerSHOW'",
-            'model'         => 'Provider',
-            'related'       => "'provider'",
-            //'content'       => view('kitchen.items.providers.fields')
+            'modalSync'     => 'itemSHOW',
+            'modalClose'    => "'itemSHOW'",
+            'model'         => 'item',
+            'related'       => "'item'",
+            //'content'       => view('kitchen.items.items.fields')
 	]);
 ?>
 

@@ -115,19 +115,21 @@
 		</div>
 	</div>	
 
-	<!-- Provider Id Field -->
+	<!-- item Id Field -->
 	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.kitchen.recipes.bases.items.available-items') }}/' + row.id, 'itemOptions', 'item')" class="form-group col-sm-6">
 	    <label for="item_id">Item:</label>
 		<select class="form-control" v-model="row.pivot.item_id" v-validate:item_id="{ required: true }">
-			<option value="" selected="selected">-- Seleccione un proveedor --</option>
-			<option v-for="option in foreignData.itemOptions" v-bind:value="option.id">		
-				@{{ option.name }}
+			<option selected="selected">-- Seleccione un proveedor --</option>
+			<option v-for="(id, name) in foreignData.itemOptions" 
+				v-bind:selected="id == row.item.id"
+				v-bind:value="id">		
+				@{{ name }}
 			</option>
 		</select>
 	    <div v-if="$validationItem.item_id.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validationItem.item_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
-				La familia es obligatoria
+				El item es obligatorio
 			</div>
 		</div> 
 	</div>			

@@ -273,11 +273,12 @@ class ItemAPIController extends InfyOmBaseController
         $item = $this->repository->findWithoutFail($id);
         if (empty($item))
             return Response::json(ResponseUtil::makeError('Item not found'), 400); 
-        $provider = ['provider_id' => '', 'price' => '', 'selected' => ''];
-        if ($item->providers()->whereProviderId($providerId)->count()) {
+
+        $provider = $item->providers()->whereProviderId($providerId)->count();
+        if ($provider) {
             $item->providers()->detach($providerId);
-            $item = $item->toArray();
-            $item['provider'] = $provider;
+            //$item = $item->toArray();
+            //$item['provider'] = $provider;
             return $this->sendResponse($request->all(), 'Provider successfully detached from item');
         }
         return Response::json(ResponseUtil::makeError('Provider could not be detached from item'), 400);
