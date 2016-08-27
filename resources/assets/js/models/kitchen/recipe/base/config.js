@@ -23,12 +23,25 @@ var objectRow = {
 		updated_at: "",
 		deleted_at: ""
 	},
-	pivot: {
+	utensil: {
+		id: "",
+		name: "",
+		stock: "",
+		category_id: "",
+		created_at: "",
+		updated_at: "",
+		deleted_at: ""
+	},
+	pivot_item: {
 		purchase_quantity: "",
 		cost_per_quantity: "",     
 		decrease: "" ,
 		servings_quantity: "",
 		item_id: ""			
+	},
+	pivot_utensil: {
+		quantity: "",
+		utensil_id: ""			
 	}
 };
 

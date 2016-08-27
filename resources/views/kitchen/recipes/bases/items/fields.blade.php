@@ -2,7 +2,7 @@
 	<!-- Cost per quantity Field -->
 	<div class="form-group col-sm-6">
 	    <label for="cost_per_quantity">Costo por cantidad:</label>
-	    <input type="text" class="form-control" v-model="row.pivot.cost_per_quantity" v-validate:cost_per_quantity="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
+	    <input type="text" class="form-control" v-model="row.pivot_item.cost_per_quantity" v-validate:cost_per_quantity="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
 	    <div v-if="$validationItem.cost_per_quantity.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validationItem.cost_per_quantity.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -31,7 +31,7 @@
 	<!-- Purchase quantity Field -->
 	<div class="form-group col-sm-6">
 	    <label for="purchase_quantity">Cantidad de compra:</label>
-	    <input type="text" class="form-control" v-model="row.pivot.purchase_quantity" v-validate:purchase_quantity="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
+	    <input type="text" class="form-control" v-model="row.pivot_item.purchase_quantity" v-validate:purchase_quantity="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
 	    <div v-if="$validationItem.purchase_quantity.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validationItem.purchase_quantity.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -60,7 +60,7 @@
 	<!-- Decrease Field -->
 	<div class="form-group col-sm-6">
 	    <label for="decrease">Merma:</label>
-	    <input type="text" class="form-control" v-model="row.pivot.decrease" v-validate:decrease="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
+	    <input type="text" class="form-control" v-model="row.pivot_item.decrease" v-validate:decrease="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
 	    <div v-if="$validationItem.decrease.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validationItem.decrease.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -89,7 +89,7 @@
 	<!-- Decrease Field -->
 	<div class="form-group col-sm-6">
 	    <label for="servings_quantity">Ración:</label>
-	    <input type="text" class="form-control" v-model="row.pivot.servings_quantity" v-validate:servings_quantity="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
+	    <input type="text" class="form-control" v-model="row.pivot_item.servings_quantity" v-validate:servings_quantity="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
 	    <div v-if="$validationItem.servings_quantity.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validationItem.servings_quantity.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -118,8 +118,8 @@
 	<!-- item Id Field -->
 	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.kitchen.recipes.bases.items.available') }}/' + row.id, 'itemOptions', 'item')" class="form-group col-sm-6">
 	    <label for="item_id">Item:</label>
-		<select class="form-control" v-model="row.pivot.item_id" v-validate:item_id="{ required: true }">
-			<option selected="selected">-- Seleccione un proveedor --</option>
+		<select class="form-control" v-model="row.pivot_item.item_id" v-validate:item_id="{ required: true }">
+			<option selected="selected">-- Seleccione un item --</option>
 			<option v-for="(id, name) in foreignData.itemOptions" 
 				v-bind:selected="id == row.item.id"
 				v-bind:value="id">		

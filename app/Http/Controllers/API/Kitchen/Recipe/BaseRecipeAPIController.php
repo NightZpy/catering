@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\API\Kitchen\Recipe;
 
+use App\Http\Controllers\AppBaseController as InfyOmBaseController;
 use App\Http\Requests\API\Kitchen\Recipe\CreateBaseRecipeAPIRequest;
 use App\Http\Requests\API\Kitchen\Recipe\UpdateBaseRecipeAPIRequest;
 use App\Models\Kitchen\recipe\BaseRecipe;
-use App\Repositories\Kitchen\Recipe\BaseRecipeRepository;
 use App\Repositories\Kitchen\ItemRepository;
+use App\Repositories\Kitchen\UtensilRepository;
+use App\Repositories\Kitchen\Recipe\BaseRecipeRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController as InfyOmBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -25,11 +26,15 @@ class BaseRecipeAPIController extends InfyOmBaseController
     private $repository;
 
     private $itemRepository;
+    private $utensilRepository;
 
-    public function __construct(BaseRecipeRepository $baseRecipeRepo, ItemRepository $itemRepository)
+    public function __construct(BaseRecipeRepository $baseRecipeRepo, 
+                                ItemRepository $itemRepository,
+                                UtensilRepository $utensilRepository)
     {
         $this->repository = $baseRecipeRepo;
         $this->itemRepository = $itemRepository;
+        $this->utensilRepository = $utensilRepository;
     }
 
     /**
@@ -161,6 +166,8 @@ class BaseRecipeAPIController extends InfyOmBaseController
         }
 
         $attributes = $request->all();
+        $attributes['pivot'] = $attributes['pivot_item'];
+        unset($attributes['pivot_item']);
         if ($itemId)
             $attributes['pivot']['item_id'] = $item->id;     
         \Debugbar::info($attributes);
@@ -228,7 +235,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
     public function availableItems(Request $request, $id = null)
     {
         $items = $this->repository->availableItems($id)->pluck('name', 'id')->toArray();
-        $items = $this->repository->all()->pluck('name', 'id')->toArray();
+        //$items = $this->repository->all()->pluck('name', 'id')->toArray();
         if (empty($items))
             return Response::json(ResponseUtil::makeError('Items not found'), 400);        
         return $this->sendResponse($items, 'Item retrieve successfully');
@@ -257,4 +264,119 @@ class BaseRecipeAPIController extends InfyOmBaseController
         }
         return Response::json(ResponseUtil::makeError('Item could not be detached from baseRecipe'), 400);
     }    
+
+    public function storeUtensil(Request $request, $id = null, $utensilId = null)
+    {
+        $baseRecipe = $this->repository->findWithoutFail($id);
+
+        if (empty($baseRecipe)) {
+            return Response::json(ResponseUtil::makeError('Base Recipe not found'), 400);
+        }
+
+        if ($utensilId) {
+            $utensil = $this->utensilRepository->findWithoutFail($utensilId);
+            if (empty($utensil)) {
+                return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+            }            
+        }
+
+        $attributes = $request->all();
+        $attributes['pivot'] = $attributes['pivot_utensil'];
+        unset($attributes['pivot_utensil']);
+        if ($utensilId)
+            $attributes['pivot']['utensil_id'] = $utensil->id;     
+        \Debugbar::info($attributes);
+        $exists = $this->repository
+             ->findWithoutFail($id)
+             ->utensils()
+             ->whereUtensilId($utensilId)->count();
+
+        if ($exists) {
+          $baseRecipe->utensils()->updateExistingPivot($utensilId, $attributes['pivot']);
+        } else {
+          $this->repository->createPivot($baseRecipe, 'pivot', $attributes, 'utensils', 'utensil');
+        } 
+
+        return $this->sendResponse($request->all(), 'Utensil associated to Base Recipe successfully');
+    }    
+
+    public function utensils(Request $request, $id = null)
+    {
+        $baseRecipe = $this->repository->findWithoutFail($id);        
+
+        if (empty($baseRecipe)) {
+            //Flash::error('Base Recipe not found');
+            return Response::json(ResponseUtil::makeError('Base Recipe not found'), 400);
+        }
+        \Debugbar::info($baseRecipe->utensils->first()->pivot->toArray());
+        if (empty($baseRecipe->utensils)) {
+            //Flash::error('Base Recipe not found');
+            return Response::json(ResponseUtil::makeError('Not Providers for Base Recipe'), 400);
+        }         
+
+        $query = $baseRecipe->utensils();
+        if ($request->exists('filter')) {
+            $value = "%{$request->filter}%";
+            $query->where(function($q) use($value) {
+                $q->where("code", "like", $value)
+                  ->orWhere("name", "like", $value);
+            });
+            //$query = $baseRecipe->utensils()->search($value);
+        }
+
+        if (request()->has('sort')) {
+            list($sortCol, $sortDir) = explode('|', request()->sort);
+            $query = $query->orderBy($sortCol, $sortDir);
+        } else {
+            $query = $query->orderBy('created_at', 'asc');
+        }
+
+
+        $perPage = request()->has('per_page') ? (int) request()->per_page : null;
+        return response()->json($query->paginate($perPage));
+    }    
+
+    public function utensil(Request $request, $id = null, $utensilId = null) {
+        $utensil = $this->repository->findWithoutFail($id)->utensils()->whereUtensilId($utensilId)->first();
+        $baseRecipe = $this->repository->findWithoutFail($id)->toArray();        
+        $data = $baseRecipe;
+        $utensil = $utensil->toArray();        
+        $data['pivot'] = $utensil['pivot'];
+        unset($utensil['pivot']);        
+        $data['utensil'] = $utensil;
+        return $this->sendResponse($data, 'Utensil associated to BaseRecipe successfully retrieve');
+    }
+
+    public function availableUtensils(Request $request, $id = null)
+    {
+        $utensils = $this->repository->availableUtensils($id)->pluck('name', 'id')->toArray();
+        //$utensils = $this->repository->all()->pluck('name', 'id')->toArray();
+        if (empty($utensils))
+            return Response::json(ResponseUtil::makeError('Utensils not found'), 400);        
+        return $this->sendResponse($utensils, 'Utensil retrieve successfully');
+    }
+
+    public function hasAvailableUtensils(Request $request, $id = null)
+    {
+        $utensils = $this->repository->availableUtensils($id)->toArray();
+        if (empty($utensils))
+            return Response::json(ResponseUtil::makeError('Utensils not found'), 400);        
+        return $this->sendResponse(True, 'Utensil retrieve successfully');        
+    }    
+
+    public function deleteUtensil(Request $request, $id = null, $utensilId = null)
+    {
+        $baseRecipe = $this->repository->findWithoutFail($id);
+        if (empty($baseRecipe))
+            return Response::json(ResponseUtil::makeError('BaseRecipe not found'), 400); 
+        
+        $utensil = $baseRecipe->utensils()->whereUtensilId($utensilId)->count();
+        if ($utensil) {
+            $baseRecipe->utensils()->detach($utensilId);
+            //$baseRecipe = $baseRecipe->toArray();
+            //$baseRecipe['utensil'] = $utensil;
+            return $this->sendResponse($request->all(), 'Utensil successfully detached from BaseRecipe');
+        }
+        return Response::json(ResponseUtil::makeError('Utensil could not be detached from baseRecipe'), 400);
+    }      
 }

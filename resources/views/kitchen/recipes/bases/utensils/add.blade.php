@@ -3,7 +3,7 @@
             'modalTitle'    => 'Add Utensil to {{ row.name }}',
             'modalSync'     => 'utensilADD',
             'modalClose'    => 'utensilADD',
-            'model'         => 'Provider',
+            'model'         => 'Utensil',
             'related'       => 'utensil',
             'type'			=> 'store',
             'content'       => view('kitchen.recipes.bases.utensils.fields')

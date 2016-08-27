@@ -2,9 +2,10 @@
 
 namespace App\Models\Kitchen\Recipe;
 
+use App\Models\Kitchen\Item;
+use App\Models\Kitchen\Utensil;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Kitchen\Item;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
 /**
@@ -100,6 +101,12 @@ class BaseRecipe extends Model
                         'servings_quantity'
                         );
     }
+
+    public function utensils()
+    {
+        return $this->belongsToMany(Utensil::class, 'base_recipe_utensil', 'base_id', 'utensil_id')
+                    ->withPivot('quantity');
+    }    
 
     /**
      *

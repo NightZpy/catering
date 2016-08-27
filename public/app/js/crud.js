@@ -16520,10 +16520,11 @@ var vm = new Vue({
             } else {
                 var url = this.url.foreign[related][type].url;
                 var method = this.url.foreign[related][type].method;
-                var relatedId = this.row['pivot']['id'];
+                var relatedKey = 'pivot_' + related;
+                var relatedId = this.row[relatedKey]['id'];
                 console.log('Related: ' + relatedId);
                 if (!relatedId) {
-                    relatedId = this.row.pivot[related + '_id'];
+                    relatedId = this.row[relatedKey][related + '_id'];
                 }
                 var actionUrl = url + this.row.id + '/' + relatedId;
                 this.method = method;

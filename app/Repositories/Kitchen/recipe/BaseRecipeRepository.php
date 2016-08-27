@@ -2,8 +2,9 @@
 
 namespace App\Repositories\Kitchen\Recipe;
 
-use App\Models\Kitchen\Recipe\BaseRecipe;
 use App\Models\Kitchen\Item;
+use App\Models\Kitchen\Recipe\BaseRecipe;
+use App\Models\Kitchen\Utensil;
 use App\Repositories\MyBaseRepository;
 
 class BaseRecipeRepository extends MyBaseRepository
@@ -29,5 +30,11 @@ class BaseRecipeRepository extends MyBaseRepository
     {
         $itemsId = $this->findWithoutFail($id)->items->pluck('id');    
         return Item::whereNotIn('id', $itemsId)->get();
+    }    
+
+    public function availableUtensils($id)
+    {
+        $utensilsId = $this->findWithoutFail($id)->utensils->pluck('id');    
+        return Utensil::whereNotIn('id', $utensilsId)->get();
     }    
 }

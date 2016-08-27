@@ -15,15 +15,15 @@ class CreateBaseRecipeUtensilPivotTable extends Migration
     {
         Schema::create('base_recipe_utensil', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('base_recipe_id')->unsigned();
-            $table->foreign('base_recipe_id')->references('id')->on('base_recipes')->onDelete('cascade');
+            $table->integer('base_id')->unsigned();
+            $table->foreign('base_id')->references('id')->on('base_recipes')->onDelete('cascade');
             
             $table->integer('utensil_id')->unsigned();            
             $table->foreign('utensil_id')->references('id')->on('utensils')->onDelete('cascade');
 			
 			$table->integer('quantity')->default(0);
             //$table->primary(['utensil_id', 'base_recipe_id']);
-            $table->unique(['utensil_id', 'base_recipe_id'], 'base_recipe_utensil_unique_key');
+            $table->unique(['utensil_id', 'base_id'], 'base_recipe_utensil_unique_key');
 			$table->timestamps();
 			$table->softDeletes();
         });
