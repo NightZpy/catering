@@ -1,0 +1,54 @@
+var objectRow = {
+	id: "",
+	code: "",
+	name: "",   
+	utensil: {
+		id: "",
+		name: "",
+		stock: "",
+		category_id: ""
+	},
+	pivot: {
+		quantity: "",
+		utensil_id: ""			
+	}
+};
+
+var tableColumns = [
+	{
+	    name: 'code',
+	    sortField: 'code',
+	    title: 'Código',
+	    visible: true
+	},
+	{
+	    name: 'name',
+	    sortField: 'name',
+	    title: 'Utensil',
+	    visible: true
+	},      
+	{
+	    name: 'pivot.quantity',
+	    sortField: 'pivot.quantity',
+	    title: 'Cantidad',
+	    visible: true
+	},      	
+    {
+        name: '__actions',
+        dataClass: 'center aligned',
+        callback: null
+    }        
+];
+
+var actions = [
+    { name: 'SHOW:related:utensil', label: '', icon: 'glyphicon glyphicon-zoom-in', class: 'btn btn-info', extra: {'title': 'View', 'data-toggle':"tooltip", 'data-placement': "left"} },
+    { name: 'EDIT:related:utensil', label: '', icon: 'glyphicon glyphicon-pencil', class: 'btn btn-warning', extra: {title: 'Edit', 'data-toggle':"tooltip", 'data-placement': "top"} },
+    { name: 'DELETE:related:utensil', label: '', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } },
+];
+
+var modals = {
+	utensilADD: false,
+	utensilSHOW: false,
+	utensilEDIT: false,
+	utensilDELETE: false
+};

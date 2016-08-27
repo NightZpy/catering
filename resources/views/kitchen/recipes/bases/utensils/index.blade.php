@@ -3,73 +3,73 @@
 @section('content')
     <div id="crud-app">
         <section class="content-header">
-            <h1 class="pull-left">Items para la receta base: <strong>{{ $baseRecipe->name }}</strong></h1>
+            <h1 class="pull-left">Utensils para la receta base: <strong>{{ $baseRecipe->name }}</strong></h1>
             <div class="btn-group pull-right">
-                <a v-if="!available('{{ route('api.v1.kitchen.recipes.bases.items.available', $baseRecipe->id) }}')" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('itemADD')">Add New</a>
+                <a v-if="!available('{{ route('api.v1.kitchen.recipes.bases.utensils.available', $baseRecipe->id) }}')" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('utensilADD')">Add New</a>
                 <a class="btn btn-primary pull-right bg-olive btn-flat" href="{{ route('kitchen.recipes.bases.index') }}" style="margin-top: -10px;margin-bottom: 5px">Recetas base</a>
             </div>
         </section>
         <div class="content" style="padding-top: 30px;">
             <div class="box box-primary">
                 <div class="box-body">
-                    @include('kitchen.recipes.bases.items.table')
+                    @include('kitchen.recipes.bases.utensils.table')
                 </div>
             </div>
         </div>
         <!-- --------- Modals ---------- -->
         <!-- (Add) -->
-        @include('kitchen.recipes.bases.items.add')
+        @include('kitchen.recipes.bases.utensils.add')
         <!-- (Edit) -->
-        @include('kitchen.recipes.bases.items.edit')
+        @include('kitchen.recipes.bases.utensils.edit')
         <!-- (Delete) -->
-        @include('kitchen.recipes.bases.items.delete')
+        @include('kitchen.recipes.bases.utensils.delete')
         <!-- (Show) -->
-        @include('kitchen.recipes.bases.items.show')
+        @include('kitchen.recipes.bases.utensils.show')
         <!-- (Info) -->
         @include('layouts.modal.info')        
     </div>
 @endsection
 
 @push('vue-scripts')  
-    <script src="/app/js/models/kitchen/recipe/base/item/config.js"></script>
+    <script src="/app/js/models/kitchen/recipe/base/utensil/config.js"></script>
     <script>
         objectRow.id = "{{ $baseRecipe->id }}";
         objectRow.name = "{{ $baseRecipe->name }}";
         objectRow.code = "{{ $baseRecipe->code }}";
-        objectRow.auto_item = "{{ $baseRecipe->auto_item }}";
+        objectRow.auto_utensil = "{{ $baseRecipe->auto_utensil }}";
         var token = '{{ csrf_token() }}';
         var fieldInitOrder = 'id';
         var apiUrl = { 
-            show:  "{{ route('api.v1.kitchen.recipes.bases.items.show', $baseRecipe->id) }}/",
-            index: "{{ route('api.v1.kitchen.recipes.bases.items.available', $baseRecipe->id) }}",  
-            store: "{{ route('api.v1.kitchen.recipes.bases.items.store', $baseRecipe->id) }}",  
-            update: "{{ route('api.v1.kitchen.recipes.bases.items.store', $baseRecipe->id) }}/",
-            delete: "{{ route('api.v1.kitchen.recipes.bases.items.delete', $baseRecipe->id) }}/",
+            show:  "{{ route('api.v1.kitchen.recipes.bases.utensils.show', $baseRecipe->id) }}/",
+            index: "{{ route('api.v1.kitchen.recipes.bases.utensils.available', $baseRecipe->id) }}",  
+            store: "{{ route('api.v1.kitchen.recipes.bases.utensils.store', $baseRecipe->id) }}",  
+            update: "{{ route('api.v1.kitchen.recipes.bases.utensils.store', $baseRecipe->id) }}/",
+            delete: "{{ route('api.v1.kitchen.recipes.bases.utensils.delete', $baseRecipe->id) }}/",
             foreign: {
-                item: {
+                utensil: {
                     store: {
                         method: 'PATCH' ,
-                        url: "{{ route('api.v1.kitchen.recipes.bases.items.store') }}/"
+                        url: "{{ route('api.v1.kitchen.recipes.bases.utensils.store') }}/"
                     }, 
                     index: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.kitchen.recipes.bases.items.available-items') }}/"
+                        url: "{{ route('api.v1.kitchen.recipes.bases.utensils.available-utensils') }}/"
                     },
                     show: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.kitchen.recipes.bases.items.show') }}/"
+                        url: "{{ route('api.v1.kitchen.recipes.bases.utensils.show') }}/"
                     },
                     relate_list: {
                         method: 'GET',
-                        url: "{{ route('api.v1.kitchen.recipes.bases.items.available-items') }}/"                        
+                        url: "{{ route('api.v1.kitchen.recipes.bases.utensils.available-utensils') }}/"                        
                     },
                     already_associate: {
                         method: 'GET',
-                        url: "{{ route('api.v1.kitchen.recipes.bases.items.already-associate') }}/"
+                        url: "{{ route('api.v1.kitchen.recipes.bases.utensils.already-associate') }}/"
                     },
                     delete: {
                         method: 'DELETE',
-                        url: "{{ route('api.v1.kitchen.recipes.bases.items.delete') }}/"
+                        url: "{{ route('api.v1.kitchen.recipes.bases.utensils.delete') }}/"
                     }
                 },
             },

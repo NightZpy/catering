@@ -1,9 +1,9 @@
 <?php
 	extract([
-            'modalTitle'    => 'Add item to {{ row.name }}',
+            'modalTitle'    => 'Add Item to {{ row.name }}',
             'modalSync'     => 'itemADD',
             'modalClose'    => 'itemADD',
-            'model'         => 'Item',
+            'model'         => 'Provider',
             'related'       => 'item',
             'type'			=> 'store',
             'content'       => view('kitchen.recipes.bases.items.fields')
