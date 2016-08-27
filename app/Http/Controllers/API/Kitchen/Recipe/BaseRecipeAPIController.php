@@ -168,9 +168,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
         $attributes = $request->all();
         $attributes['pivot'] = $attributes['pivot_item'];
         unset($attributes['pivot_item']);
-        if ($itemId)
-            $attributes['pivot']['item_id'] = $item->id;     
-        \Debugbar::info($attributes);
+        
         $exists = $this->repository
              ->findWithoutFail($id)
              ->items()
@@ -283,8 +281,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
         $attributes = $request->all();
         $attributes['pivot'] = $attributes['pivot_utensil'];
         unset($attributes['pivot_utensil']);
-        //if ($utensilId)
-        //    $attributes['pivot']['utensil_id'] = $utensil->id;     
+
         $exists = $this->repository
              ->findWithoutFail($id)
              ->utensils()

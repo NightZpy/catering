@@ -5,7 +5,7 @@
 	width="800">
 	<div slot="modal-header" class="modal-header">
 		<h4 class="modal-title">
-		  <b>{{ $modalTitle }} @{{ row.provider.name }}</b>
+		  <b>{{ $modalTitle }}</b>
 		</h4>
 	</div>	
 	<div slot="modal-body" class="modal-body">

@@ -169,12 +169,11 @@ class ItemAPIController extends InfyOmBaseController
         }
 
         $attributes = $request->all();
+        $attributes['pivot'] = $attributes['pivot_provider'];
+        unset($attributes['pivot_provider']);
 
         if (isset($attributes['pivot']['selected']) && $attributes['pivot']['selected'] && !$item->auto_provider)
-            $attributes['pivot']['selected'] = True; 
-
-        if ($providerId)
-            $attributes['pivot']['provider_id'] = $provider->id;     
+            $attributes['pivot']['selected'] = True;   
 
         $exists = $this->repository
              ->findWithoutFail($id)

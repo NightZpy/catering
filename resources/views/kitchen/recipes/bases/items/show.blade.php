@@ -1,6 +1,6 @@
 <?php 
 	extract([
-            'modalTitle'    => 'Details for ',
+            'modalTitle'    => 'Details for {{ row.item.name }}',
             'modalSync'     => 'itemSHOW',
             'modalClose'    => "'itemSHOW'",
             'model'         => 'item',

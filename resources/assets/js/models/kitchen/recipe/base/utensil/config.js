@@ -16,8 +16,8 @@ var objectRow = {
 
 var tableColumns = [
 	{
-	    name: 'code',
-	    sortField: 'code',
+	    name: 'id',
+	    sortField: 'id',
 	    title: 'Código',
 	    visible: true
 	},
