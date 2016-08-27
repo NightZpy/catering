@@ -226,7 +226,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
         $baseRecipe = $this->repository->findWithoutFail($id)->toArray();        
         $data = $baseRecipe;
         $item = $item->toArray();        
-        $data['pivot'] = $item['pivot'];
+        $data['pivot_item'] = $item['pivot'];
         unset($item['pivot']);        
         $data['item'] = $item;
         return $this->sendResponse($data, 'Item associated to Item successfully retrieve');
@@ -283,9 +283,8 @@ class BaseRecipeAPIController extends InfyOmBaseController
         $attributes = $request->all();
         $attributes['pivot'] = $attributes['pivot_utensil'];
         unset($attributes['pivot_utensil']);
-        if ($utensilId)
-            $attributes['pivot']['utensil_id'] = $utensil->id;     
-        \Debugbar::info($attributes);
+        //if ($utensilId)
+        //    $attributes['pivot']['utensil_id'] = $utensil->id;     
         $exists = $this->repository
              ->findWithoutFail($id)
              ->utensils()
@@ -341,7 +340,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
         $baseRecipe = $this->repository->findWithoutFail($id)->toArray();        
         $data = $baseRecipe;
         $utensil = $utensil->toArray();        
-        $data['pivot'] = $utensil['pivot'];
+        $data['pivot_utensil'] = $utensil['pivot'];
         unset($utensil['pivot']);        
         $data['utensil'] = $utensil;
         return $this->sendResponse($data, 'Utensil associated to BaseRecipe successfully retrieve');

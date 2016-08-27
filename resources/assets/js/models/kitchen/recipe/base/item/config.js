@@ -18,7 +18,7 @@ var objectRow = {
 		updated_at: "",
 		deleted_at: ""
 	},
-	pivot: {
+	pivot_item: {
 		purchase_quantity: "",
 		cost_per_quantity: "",     
 		decrease: "" ,

@@ -39,7 +39,7 @@
     </div>
 </div>
 
-<div class="table-responsive" id="items-items-table">
+<div class="table-responsive" id="items-table">
     <vuetable v-ref:vuetable
         api-url="{{ route('api.v1.kitchen.recipes.bases.items.index', $baseRecipe->id) }}"
         :fields="columns"

@@ -39,7 +39,7 @@
     </div>
 </div>
 
-<div class="table-responsive" id="utensils-utensils-table">
+<div class="table-responsive" id="utensils-table">
     <vuetable v-ref:vuetable
         api-url="{{ route('api.v1.kitchen.recipes.bases.utensils.index', $baseRecipe->id) }}"
         :fields="columns"
@@ -52,7 +52,7 @@
         pagination-info-class=""
         pagination-component-class=""
         :pagination-component="paginationComponent"
-        :utensil-actions="utensilActions"
+        :item-actions="itemActions"
         :per-page="perPage"
         :append-params="moreParams"
         wrapper-class="vuetable-wrapper "

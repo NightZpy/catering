@@ -16521,11 +16521,11 @@ var vm = new Vue({
                 var url = this.url.foreign[related][type].url;
                 var method = this.url.foreign[related][type].method;
                 var relatedKey = 'pivot_' + related;
-                var relatedId = this.row[relatedKey]['id'];
-                console.log('Related: ' + relatedId);
-                if (!relatedId) {
+                var relatedId = this.row[related]['id'];
+                //console.log('Related: ' + relatedId);
+                /*if (!relatedId) {
                     relatedId = this.row[relatedKey][related + '_id'];
-                }
+                }*/
                 var actionUrl = url + this.row.id + '/' + relatedId;
                 this.method = method;
             }
@@ -16727,8 +16727,8 @@ var vm = new Vue({
         },
         'vuetable:action': function vuetableAction(action, data) {
             this.cleanData();
-            console.log('Data: ' + data.name + ' | Action: ' + action);
-            console.log('Data: ' + JSON.stringify(data));
+            //console.log('Data: ' + data.name              + ' | Action: ' + action);
+            //console.log('Data: ' + JSON.stringify(data));
             var size = action.split(':').length;
             // console.log('SIZE: ' + size);
             if (size > 1) {
