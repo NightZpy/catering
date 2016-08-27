@@ -402,11 +402,11 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 					'uses' => 'BaseRecipeAPIController@items'
 				]);
 				Route::get('available-list/{id?}', [
-					'as' => 'api.v1.kitchen.recipes.bases.items.available-items',
+					'as' => 'api.v1.kitchen.recipes.bases.items.available',
 					'uses' => 'BaseRecipeAPIController@availableItems'
 				]);
 				Route::get('available/{id?}', [
-					'as' => 'api.v1.kitchen.recipes.bases.items.available',
+					'as' => 'api.v1.kitchen.recipes.bases.items.has-available',
 					'uses' => 'BaseRecipeAPIController@hasAvailableItems'
 				]);
 				Route::get('show/{id?}/{itemId?}', [
@@ -426,6 +426,37 @@ Route::group(['prefix' => 'items', 'namespace' => 'Kitchen'], function () {
 					'uses' => 'BaseRecipeAPIController@deleteItem'
 				]);		
 			});			
+
+			Route::group(['prefix' => 'utensils'], function () {	
+				Route::get('{id?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.utensils.index',
+					'uses' => 'BaseRecipeAPIController@utensils'
+				]);
+				Route::get('available-list/{id?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.utensils.available',
+					'uses' => 'BaseRecipeAPIController@availableUtensils'
+				]);
+				Route::get('available/{id?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.utensils.has-available',
+					'uses' => 'BaseRecipeAPIController@hasAvailableUtensils'
+				]);
+				Route::get('show/{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.utensils.show',
+					'uses' => 'BaseRecipeAPIController@utensil'
+				]);
+				Route::get('exists/{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.utensils.already-associate',
+					'uses' => 'BaseRecipeAPIController@alreadyAssociateUtensil'
+				]);		
+				Route::patch('{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.utensils.store',
+					'uses' => 'BaseRecipeAPIController@storeUtensil'
+				]);	
+				Route::delete('{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.utensils.delete',
+					'uses' => 'BaseRecipeAPIController@deleteUtensil'
+				]);		
+			});	
 
 		});
 	});

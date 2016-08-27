@@ -29,7 +29,7 @@
 	</div>
 
 	<!-- utensil Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.kitchen.recipes.bases.utensils.available-utensils') }}/' + row.id, 'utensilOptions', 'utensil')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.kitchen.recipes.bases.utensils.available') }}/' + row.id, 'utensilOptions', 'utensil')" class="form-group col-sm-6">
 	    <label for="utensil_id">Utensil:</label>
 		<select class="form-control" v-model="row.pivot.utensil_id" v-validate:utensil_id="{ required: true }">
 			<option selected="selected">-- Seleccione un proveedor --</option>

@@ -88,13 +88,16 @@ var tableColumns = [
 ];
 
 var actions = [
-    { name: 'view-item', label: '', icon: 'glyphicon glyphicon-zoom-in', class: 'btn btn-info', extra: {'title': 'View', 'data-toggle':"tooltip", 'data-placement': "left"} },
-    { name: 'edit-item', label: '', icon: 'glyphicon glyphicon-pencil', class: 'btn btn-warning', extra: {title: 'Edit', 'data-toggle':"tooltip", 'data-placement': "top"} },
-    { name: 'delete-item', label: '', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } },
-    { name: 'ADD:related:item', label: '', icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Item', 'data-toggle':"tooltip", 'data-placement': "left"} },
-    { name: 'LINK:related:item', label: '', icon: 'glyphicon glyphicon-th-list', class: 'btn btn-success', extra: {title: 'Items', 'data-toggle':"tooltip", 'data-placement': "right" } }
+    { name: 'view-item', label: 'Ver', icon: 'glyphicon glyphicon-zoom-in', class: 'btn btn-info', extra: {'title': 'View', 'data-toggle':"tooltip", 'data-placement': "left"} },
+    { name: 'edit-item', label: 'Editar', icon: 'glyphicon glyphicon-pencil', class: 'btn btn-warning', extra: {title: 'Edit', 'data-toggle':"tooltip", 'data-placement': "top"} },
+    { name: 'delete-item', label: 'Eliminar', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } },
+    { name: 'ADD:related:item', relate: 'Items', label: 'Asociar item', icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Item', 'data-toggle':"tooltip", 'data-placement': "left"} },
+    { name: 'LINK:related:item', relate: 'Items', label: 'Ver items', icon: 'glyphicon glyphicon-th-list', class: 'btn btn-success', extra: {title: 'Items', 'data-toggle':"tooltip", 'data-placement': "right" } },
+    { name: 'ADD:related:utensil', relate: 'Utensilios', label: 'Asociar utensilio', icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Utensil', 'data-toggle':"tooltip", 'data-placement': "left"} },
+    { name: 'LINK:related:utensil', relate: 'Utensilios', label: 'Ver utensilios', icon: 'glyphicon glyphicon-th-list', class: 'btn btn-success', extra: {title: 'Utensils', 'data-toggle':"tooltip", 'data-placement': "right" } }
 ];
 
 var modals = {
-	itemADD: false
+	itemADD: false,
+	utensilADD: false
 };

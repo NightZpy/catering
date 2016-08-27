@@ -188,6 +188,13 @@ Route::group(['prefix' => 'kitchen'], function () {
 					return view('kitchen.recipes.bases.items.index', compact('baseRecipe'));
 				}
 			]);
+
+			Route::get('utensils/{baseRecipe?}', [
+				'as' => 'kitchen.recipes.bases.utensils.index',
+				'uses' => function (App\Models\Kitchen\Recipe\BaseRecipe $baseRecipe) {
+					return view('kitchen.recipes.bases.utensils.index', compact('baseRecipe'));
+				}
+			]);			
 		});
 	});
 });

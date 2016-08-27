@@ -5,7 +5,7 @@
         <section class="content-header">
             <h1 class="pull-left">Utensils para la receta base: <strong>{{ $baseRecipe->name }}</strong></h1>
             <div class="btn-group pull-right">
-                <a v-if="!available('{{ route('api.v1.kitchen.recipes.bases.utensils.available', $baseRecipe->id) }}')" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('utensilADD')">Add New</a>
+                <a v-if="!available('{{ route('api.v1.kitchen.recipes.bases.utensils.has-available', $baseRecipe->id) }}')" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('utensilADD')">Add New</a>
                 <a class="btn btn-primary pull-right bg-olive btn-flat" href="{{ route('kitchen.recipes.bases.index') }}" style="margin-top: -10px;margin-bottom: 5px">Recetas base</a>
             </div>
         </section>
@@ -53,7 +53,7 @@
                     }, 
                     index: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.kitchen.recipes.bases.utensils.available-utensils') }}/"
+                        url: "{{ route('api.v1.kitchen.recipes.bases.utensils.available') }}/"
                     },
                     show: {
                         method: 'GET' ,
@@ -61,7 +61,7 @@
                     },
                     relate_list: {
                         method: 'GET',
-                        url: "{{ route('api.v1.kitchen.recipes.bases.utensils.available-utensils') }}/"                        
+                        url: "{{ route('api.v1.kitchen.recipes.bases.utensils.available') }}/"                        
                     },
                     already_associate: {
                         method: 'GET',

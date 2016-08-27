@@ -116,7 +116,7 @@
 	</div>	
 
 	<!-- item Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.kitchen.recipes.bases.items.available-items') }}/' + row.id, 'itemOptions', 'item')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.kitchen.recipes.bases.items.available') }}/' + row.id, 'itemOptions', 'item')" class="form-group col-sm-6">
 	    <label for="item_id">Item:</label>
 		<select class="form-control" v-model="row.pivot.item_id" v-validate:item_id="{ required: true }">
 			<option selected="selected">-- Seleccione un proveedor --</option>
