@@ -1,12 +1,12 @@
 <?php 
 	extract([
-            'modalTitle'    => 'Edit {{ row.utensil.name }} for {{ row.name }}',
-            'modalSync'     => 'utensilEDIT',
-            'modalClose'    => 'utensilEDIT',
-            'model'         => 'Utensil',
-            'related'       => 'utensil',
+            'modalTitle'    => 'Edit {{ row.base.name }} for {{ row.name }}',
+            'modalSync'     => 'baseEDIT',
+            'modalClose'    => 'baseEDIT',
+            'model'         => 'Base',
+            'related'       => 'base',
             'type'			=> 'store',
-            'content'       => view('kitchen.recipes.utensils.fields')
+            'content'       => view('kitchen.recipes.base-recipes.fields')
 	]);
 ?>
 @include('layouts.modal.relation-form')

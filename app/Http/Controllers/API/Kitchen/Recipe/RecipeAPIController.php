@@ -7,6 +7,7 @@ use App\Http\Requests\API\Kitchen\Recipe\CreateRecipeAPIRequest;
 use App\Http\Requests\API\Kitchen\Recipe\UpdateRecipeAPIRequest;
 use App\Models\Kitchen\Recipe\Recipe;
 use App\Repositories\Kitchen\Recipe\RecipeRepository;
+use App\Repositories\Kitchen\Recipe\BaseRecipeRepository;
 use App\Repositories\Kitchen\UtensilRepository;
 use Illuminate\Http\Request;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -24,10 +25,13 @@ class RecipeAPIController extends InfyOmBaseController
     /** @var  RecipeRepository */
     private $repository;
 
-    public function __construct(RecipeRepository $recipeRepo, UtensilRepository $utensilRepository)
+    public function __construct(RecipeRepository $recipeRepo, 
+                                UtensilRepository $utensilRepository,
+                                BaseRecipeRepository $baseRecipeRepository)
     {
         $this->repository = $recipeRepo;
         $this->utensilRepository = $utensilRepository;
+        $this->baseRecipeRepository = $baseRecipeRepository;
     }
 
     /**
@@ -257,7 +261,7 @@ class RecipeAPIController extends InfyOmBaseController
         return Response::json(ResponseUtil::makeError('Utensil could not be detached from recipe'), 400);
     }
 
-    public function storeBase(Request $request, $id = null, $baseRecipeId = null)
+    public function storeBase(Request $request, $id = null, $baseId = null)
     {
         $recipe = $this->repository->findWithoutFail($id);
 
@@ -265,8 +269,8 @@ class RecipeAPIController extends InfyOmBaseController
             return Response::json(ResponseUtil::makeError('Recipe not found'), 400);
         }
 
-        if ($baseRecipeId) {
-            $baseRecipe = $this->baseRecipeRepository->findWithoutFail($baseRecipeId);
+        if ($baseId) {
+            $baseRecipe = $this->baseRecipeRepository->findWithoutFail($baseId);
             if (empty($baseRecipe)) {
                 return Response::json(ResponseUtil::makeError('Base Recipe not found'), 400);
             }            
@@ -279,10 +283,10 @@ class RecipeAPIController extends InfyOmBaseController
         $exists = $this->repository
              ->findWithoutFail($id)
              ->bases()
-             ->whereBaseId($baseRecipeId)->count();
+             ->whereBaseId($baseId)->count();
 
         if ($exists) {
-          $recipe->bases()->updateExistingPivot($baseRecipeId, $attributes['pivot']);
+          $recipe->bases()->updateExistingPivot($baseId, $attributes['pivot']);
         } else {
           $this->repository->createPivot($recipe, 'pivot', $attributes, 'bases', 'base');
         } 
@@ -290,28 +294,26 @@ class RecipeAPIController extends InfyOmBaseController
         return $this->sendResponse($request->all(), 'Base Recipe associated to Recipe successfully');
     }    
 
-    public function baseRecipes(Request $request, $id = null)
+    public function bases(Request $request, $id = null)
     {
-        $baseRecipe = $this->repository->findWithoutFail($id);        
+        $recipe = $this->repository->findWithoutFail($id);        
 
-        if (empty($baseRecipe)) {
+        if (empty($recipe)) {
             //Flash::error('Recipe not found');
             return Response::json(ResponseUtil::makeError('Recipe not found'), 400);
         }
         //\Debugbar::info($baseRecipe->baseRecipes->first()->pivot->toArray());
-        if (empty($baseRecipe->baseRecipes)) {
+        if (empty($recipe->bases)) {
             //Flash::error('Recipe not found');
-            return Response::json(ResponseUtil::makeError('Not Providers for Recipe'), 400);
+            return Response::json(ResponseUtil::makeError('Not Base Recipes for Recipe'), 400);
         }         
 
-        $query = $baseRecipe->baseRecipes();
-        if ($request->exists('filter')) {
+        $query = $recipe->bases();
+        if ($request->exists('filter') && !empty($request->filter)) {
             $value = "%{$request->filter}%";
             $query->where(function($q) use($value) {
-                $q->where("code", "like", $value)
-                  ->orWhere("name", "like", $value);
+                $q->orWhere("name", "like", $value);
             });
-            //$query = $baseRecipe->baseRecipes()->search($value);
         }
 
         if (request()->has('sort')) {
@@ -326,16 +328,16 @@ class RecipeAPIController extends InfyOmBaseController
         return response()->json($query->paginate($perPage));
     }    
 
-    public function baseRecipe(Request $request, $id = null, $baseRecipeId = null) {
-        $baseRecipe = $this->repository->findWithoutFail($id)->baseRecipes()->whereBaseRecipeId($baseRecipeId)->first();
-        $baseRecipe = $this->repository->findWithoutFail($id)->toArray();        
-        $data = $baseRecipe;
-        $baseRecipe = $baseRecipe->toArray();        
-        $data['pivot_baseRecipe'] = $baseRecipe['pivot'];
-        unset($baseRecipe['pivot']);        
-        $data['baseRecipe'] = $baseRecipe;
-        return $this->sendResponse($data, 'BaseRecipe associated to BaseRecipe successfully retrieve');
-    }
+    public function base(Request $request, $id = null, $baseId = null) {
+        $base = $this->repository->findWithoutFail($id)->bases()->whereBaseId($baseId)->first();
+        $recipe = $this->repository->findWithoutFail($id)->toArray();        
+        $data = $recipe;
+        $base = $base->toArray();        
+        $data['pivot_base'] = $base['pivot'];
+        unset($base['pivot']);        
+        $data['base'] = $base;
+        return $this->sendResponse($data, 'Base Recipe associated to Recipe successfully retrieve');
+    }    
 
     public function availableBases(Request $request, $id = null)
     {
@@ -354,19 +356,17 @@ class RecipeAPIController extends InfyOmBaseController
         return $this->sendResponse(True, 'BaseRecipe retrieve successfully');        
     }    
 
-    public function deleteBase(Request $request, $id = null, $baseRecipeId = null)
+    public function deleteBase(Request $request, $id = null, $baseId = null)
     {
-        $baseRecipe = $this->repository->findWithoutFail($id);
-        if (empty($baseRecipe))
+        $recipe = $this->repository->findWithoutFail($id);
+        if (empty($recipe))
             return Response::json(ResponseUtil::makeError('BaseRecipe not found'), 400); 
         
-        $baseRecipe = $baseRecipe->baseRecipes()->whereBaseRecipeId($baseRecipeId)->count();
-        if ($baseRecipe) {
-            $baseRecipe->baseRecipes()->detach($baseRecipeId);
-            //$baseRecipe = $baseRecipe->toArray();
-            //$baseRecipe['baseRecipe'] = $baseRecipe;
-            return $this->sendResponse($request->all(), 'BaseRecipe successfully detached from BaseRecipe');
+        $base = $recipe->bases()->whereBaseId($baseId)->count();
+        if ($base) {
+            $recipe->bases()->detach($baseId);
+            return $this->sendResponse($request->all(), 'BaseRecipe successfully detached from Recipe');
         }
-        return Response::json(ResponseUtil::makeError('BaseRecipe could not be detached from baseRecipe'), 400);
+        return Response::json(ResponseUtil::makeError('BaseRecipe could not be detached from Recipe'), 400);
     }     
 }

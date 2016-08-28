@@ -15,7 +15,7 @@
                 <option value="vuetable-pagination-bootstrap">Detail</option>
                 <option value="vuetable-pagination-dropdown">Dropdown</option>
             </select>
-            <label>Utensils per page:</label>
+            <label>Recetas base per page:</label>
             <select class="form-control" v-model="perPage">
                 <option value=10>10</option>
                 <option value=15>15</option>
@@ -39,9 +39,9 @@
     </div>
 </div>
 
-<div class="table-responsive" id="utensils-table">
+<div class="table-responsive" id="base-recipes-table">
     <vuetable v-ref:vuetable
-        api-url="{{ route('api.v1.kitchen.recipes.utensils.index', $recipe->id) }}"
+        api-url="{{ route('api.v1.kitchen.recipes.base-recipes.index', $recipe->id) }}"
         :fields="columns"
         pagination-path=""
         :sort-order="sortOrder"
