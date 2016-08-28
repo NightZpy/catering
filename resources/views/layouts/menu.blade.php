@@ -42,6 +42,6 @@
 </li>
 
 <li class="{{ Request::is('recipes*') ? 'active' : '' }}">
-    <a href="{!! route('KitchenRecipe.recipes.index') !!}"><i class="fa fa-edit"></i><span>Recipes</span></a>
+    <a href="{!! route('kitchen.recipes.index') !!}"><i class="fa fa-edit"></i><span>Recipes</span></a>
 </li>
 

@@ -41,7 +41,7 @@
 
 <div class="table-responsive" id="recipes-table">
     <vuetable v-ref:vuetable
-        api-url="{{ route('api.v1.KitchenRecipe.recipes.index') }}"
+        api-url="{{ route('api.v1.kitchen.recipes.index') }}"
         :fields="columns"
         pagination-path=""
         :fields="fields"

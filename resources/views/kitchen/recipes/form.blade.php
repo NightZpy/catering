@@ -5,5 +5,5 @@ Recipe Form
 @stop
 
 @section('modal-form-content')
-	@include('KitchenRecipe.recipes.fields')
+	@include('kitchen.recipes.fields')
 @stop

@@ -35,5 +35,6 @@ elixir(function(mix) {
      mix.scripts(['models/kitchen/recipe/type/config.js'], 'public/app/js/models/kitchen/recipe/type/config.js')
      mix.scripts(['models/kitchen/recipe/base/config.js'], 'public/app/js/models/kitchen/recipe/base/config.js')
      mix.scripts(['models/kitchen/recipe/base/item/config.js'], 'public/app/js/models/kitchen/recipe/base/item/config.js')
-	 mix.scripts(['models/kitchen/recipe/base/utensil/config.js'], 'public/app/js/models/kitchen/recipe/base/utensil/config.js')
+     mix.scripts(['models/kitchen/recipe/base/utensil/config.js'], 'public/app/js/models/kitchen/recipe/base/utensil/config.js')
+	 mix.scripts(['models/kitchen/recipe/config.js'], 'public/app/js/models/kitchen/recipe/config.js')
 });
