@@ -15,6 +15,7 @@ class BaseRecipeTableSeeder extends Seeder
      */
     public function run()
     {
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     	BaseRecipe::truncate();
         $length = 100;
         for ($i=0; $i < $length; $i++) { 
@@ -29,5 +30,6 @@ class BaseRecipeTableSeeder extends Seeder
             ];  
             BaseRecipe::create($baseRecipe);
         }
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
