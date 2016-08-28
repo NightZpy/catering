@@ -1,0 +1,62 @@
+[
+  {
+    "fieldInput": "id:increments",
+    "htmlType": "",
+    "validations": "",
+    "searchable": false,
+    "fillable": false,
+    "primary": true,
+    "inForm": false,
+    "inIndex": true
+  },
+  {
+    "fieldInput": "name:string,128",
+    "htmlType": "text",
+    "validations": "required|min:1|max:128|unique:recipes",
+    "fillable": true,
+    "searchable": true,
+    "primary": false,
+    "inForm": true,
+    "inIndex": true
+  },
+  {
+    "fieldInput": "servings_quantity:smallInteger",
+    "htmlType": "number",
+    "validations": "numeric|min:1|max:4",
+    "fillable": true,
+    "searchable": true,
+    "primary": false,
+    "inForm": true,
+    "inIndex": true
+  },
+  {
+    "fieldInput": "description:text",
+    "htmlType": "textarea",
+    "validations": "min:1|max:1024",
+    "fillable": true,
+    "searchable": false,
+    "primary": false,
+    "inForm": true,
+    "inIndex": true    
+  },
+  {
+    "fieldInput": "photo:string,256",
+    "htmlType": "input",
+    "validations": "min:1|max:256|image|max:2048",
+    "fillable": true,
+    "searchable": false,
+    "primary": false,
+    "inForm": false,
+    "inIndex": false
+  },
+  {
+    "fieldInput": "type_id:integer",
+    "htmlType": "select:a,b",
+    "validations": "required|exists:recipe_types,id",
+    "fillable": true,
+    "searchable": true,
+    "primary": false,
+    "inForm": true,
+    "inIndex": true
+  }
+]    

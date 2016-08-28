@@ -41,3 +41,7 @@
     <a href="{!! route('kitchen.recipes.bases.index') !!}"><i class="fa fa-edit"></i><span>BaseRecipes</span></a>
 </li>
 
+<li class="{{ Request::is('recipes*') ? 'active' : '' }}">
+    <a href="{!! route('KitchenRecipe.recipes.index') !!}"><i class="fa fa-edit"></i><span>Recipes</span></a>
+</li>
+

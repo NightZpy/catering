@@ -77,7 +77,7 @@ class BaseRecipe extends Model
         'servings_quantity' => 'numeric|digits_between:1,4',
         'quantity' => 'required|digits_between:1,4',
         'description' => 'min:1|max:1024',
-        'photo' => 'min:1|max:256|image|max:2048',
+        'photo' => 'image|max:2048',
         'type_id' => 'required|exists:recipe_types,id'
     ];
 

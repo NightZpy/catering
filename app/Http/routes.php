@@ -162,6 +162,17 @@ Route::group(['prefix' => 'kitchen'], function () {
 
 	Route::group(['prefix' => 'recipes'], function() {
 		/* 
+		 * ------------------- Route index for Recipe ---------------
+		 */
+		Route::get('', [
+			'as' => 'kitchen.recipes.index',
+			'uses' => function() {
+				return view('kitchen.recipes.index');
+			}
+		]);	
+
+
+		/* 
 		 * ------------------- Route index for RecipeType ---------------
 		 */
 		Route::get('types', [
@@ -194,7 +205,7 @@ Route::group(['prefix' => 'kitchen'], function () {
 				'uses' => function (App\Models\Kitchen\Recipe\BaseRecipe $baseRecipe) {
 					return view('kitchen.recipes.bases.utensils.index', compact('baseRecipe'));
 				}
-			]);			
+			]);					
 		});
 	});
 });
