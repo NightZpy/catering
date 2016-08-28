@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\API\Kitchen\Recipe;
 
+use App\Http\Controllers\AppBaseController as InfyOmBaseController;
 use App\Http\Requests\API\Kitchen\Recipe\CreateRecipeAPIRequest;
 use App\Http\Requests\API\Kitchen\Recipe\UpdateRecipeAPIRequest;
 use App\Models\Kitchen\Recipe\Recipe;
 use App\Repositories\Kitchen\Recipe\RecipeRepository;
+use App\Repositories\Kitchen\UtensilRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController as InfyOmBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -23,9 +24,10 @@ class RecipeAPIController extends InfyOmBaseController
     /** @var  RecipeRepository */
     private $repository;
 
-    public function __construct(RecipeRepository $recipeRepo)
+    public function __construct(RecipeRepository $recipeRepo, UtensilRepository $utensilRepository)
     {
         $this->repository = $recipeRepo;
+        $this->utensilRepository = $utensilRepository;
     }
 
     /**
@@ -189,11 +191,11 @@ class RecipeAPIController extends InfyOmBaseController
         }         
 
         $query = $recipe->utensils();
-        if ($request->exists('filter')) {
+        if ($request->exists('filter') && !empty($request->filter)) {
             $value = "%{$request->filter}%";
             $query->where(function($q) use($value) {
-                $q->where("code", "like", $value)
-                  ->orWhere("name", "like", $value);
+                //$q->where("code", "like", $value)
+                $q->where("name", "like", $value);
             });
             //$query = $recipe->utensils()->search($value);
         }
@@ -237,5 +239,21 @@ class RecipeAPIController extends InfyOmBaseController
         if (empty($utensils))
             return Response::json(ResponseUtil::makeError('Utensils not found'), 400);        
         return $this->sendResponse(True, 'Utensil retrieve successfully');        
-    }     
+    }    
+
+    public function deleteUtensil(Request $request, $id = null, $utensilId = null)
+    {
+        $recipe = $this->repository->findWithoutFail($id);
+        if (empty($recipe))
+            return Response::json(ResponseUtil::makeError('Recipe not found'), 400); 
+        
+        $utensil = $recipe->utensils()->whereUtensilId($utensilId)->count();
+        if ($utensil) {
+            $recipe->utensils()->detach($utensilId);
+            //$recipe = $recipe->toArray();
+            //$recipe['utensil'] = $utensil;
+            return $this->sendResponse($request->all(), 'Utensil successfully detached from Recipe');
+        }
+        return Response::json(ResponseUtil::makeError('Utensil could not be detached from recipe'), 400);
+    }    
 }

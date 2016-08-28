@@ -19,7 +19,8 @@ return [
             Collective\Html\HtmlServiceProvider::class,
             Laracasts\Flash\FlashServiceProvider::class,
             Prettus\Repository\Providers\RepositoryServiceProvider::class,
-            Barryvdh\Debugbar\ServiceProvider::class,        
+            Barryvdh\Debugbar\ServiceProvider::class, 
+            Sofa\Eloquence\ServiceProvider::class       
         ],
 
         'aliases' => [

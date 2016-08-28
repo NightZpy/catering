@@ -1,6 +1,5 @@
 var objectRow = {
 	id: "",
-	code: "",
 	name: "",   
 	utensil: {
 		id: "",

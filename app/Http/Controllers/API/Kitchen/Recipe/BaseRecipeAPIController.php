@@ -311,11 +311,11 @@ class BaseRecipeAPIController extends InfyOmBaseController
         }         
 
         $query = $baseRecipe->utensils();
-        if ($request->exists('filter')) {
+        if ($request->exists('filter') && !empty($request->filter)) {
             $value = "%{$request->filter}%";
             $query->where(function($q) use($value) {
-                $q->where("code", "like", $value)
-                  ->orWhere("name", "like", $value);
+                //$q->where("code", "like", $value)
+                $q->where("name", "like", $value);
             });
             //$query = $baseRecipe->utensils()->search($value);
         }

@@ -67,21 +67,21 @@ Route::group(['prefix' => 'kitchen'], function () {
 			'uses' => function() {
 				return view('kitchen.recipes.index');
 			}
-		]);	
-
-		Route::get('base-recipes', [
-			'as' => 'kitchen.recipes.base-recipes.index',
-			'uses' => function() {
-				return view('kitchen.recipes.base-recipes.index');
-			}
 		]);		
 
-		Route::get('utensils', [
-			'as' => 'kitchen.recipes.utensils.index',
-			'uses' => function() {
-				return view('kitchen.recipes.utensils.index');
+		Route::get('base-recipes/{recipe?}', [
+			'as' => 'kitchen.recipes.base-recipes.index',
+			'uses' => function (App\Models\Kitchen\Recipe\Recipe $recipe) {
+				return view('kitchen.recipes.base-recipes.index', compact('recipe'));
 			}
-		]);	
+		]);
+
+		Route::get('utensils/{recipe?}', [
+			'as' => 'kitchen.recipes.utensils.index',
+			'uses' => function (App\Models\Kitchen\Recipe\Recipe $recipe) {
+				return view('kitchen.recipes.utensils.index', compact('recipe'));
+			}
+		]);		
 
 
 		/* 

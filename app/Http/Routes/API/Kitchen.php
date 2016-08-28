@@ -281,33 +281,33 @@ Route::group(['prefix' => 'kitchen', 'namespace' => 'Kitchen'], function () {
 				'uses' => 'BaseRecipeAPIController@store'
 			]);
 
-			Route::group(['prefix' => 'bases'], function () {	
+			Route::group(['prefix' => 'items'], function () {	
 				Route::get('{id?}', [
-					'as' => 'api.v1.kitchen.recipes.bases.bases.index',
-					'uses' => 'BaseRecipeAPIController@bases'
+					'as' => 'api.v1.kitchen.recipes.bases.items.index',
+					'uses' => 'BaseRecipeAPIController@items'
 				]);
 				Route::get('available-list/{id?}', [
-					'as' => 'api.v1.kitchen.recipes.bases.bases.available',
+					'as' => 'api.v1.kitchen.recipes.bases.items.available',
 					'uses' => 'BaseRecipeAPIController@availableItems'
 				]);
 				Route::get('available/{id?}', [
-					'as' => 'api.v1.kitchen.recipes.bases.bases.has-available',
+					'as' => 'api.v1.kitchen.recipes.bases.items.has-available',
 					'uses' => 'BaseRecipeAPIController@hasAvailableItems'
 				]);
-				Route::get('show/{id?}/{baseId?}', [
-					'as' => 'api.v1.kitchen.recipes.bases.bases.show',
-					'uses' => 'BaseRecipeAPIController@base'
+				Route::get('show/{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.items.show',
+					'uses' => 'BaseRecipeAPIController@item'
 				]);
-				Route::get('exists/{id?}/{baseId?}', [
-					'as' => 'api.v1.kitchen.recipes.bases.bases.already-associate',
+				Route::get('exists/{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.items.already-associate',
 					'uses' => 'BaseRecipeAPIController@alreadyAssociateItem'
 				]);		
-				Route::patch('{id?}/{baseId?}', [
-					'as' => 'api.v1.kitchen.recipes.bases.bases.store',
+				Route::patch('{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.items.store',
 					'uses' => 'BaseRecipeAPIController@storeItem'
 				]);	
-				Route::delete('{id?}/{baseId?}', [
-					'as' => 'api.v1.kitchen.recipes.bases.bases.delete',
+				Route::delete('{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.items.delete',
 					'uses' => 'BaseRecipeAPIController@deleteItem'
 				]);		
 			});			

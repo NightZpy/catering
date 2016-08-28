@@ -7,6 +7,7 @@ use App\Models\Kitchen\Recipe\RecipeType;
 use App\Models\Kitchen\Utensil;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Sofa\Eloquence\Eloquence;
 
 /**
  * Class Recipe
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Recipe extends Model
 {
+    use Eloquence;
     use SoftDeletes;
 
     public $table = 'recipes';
@@ -29,6 +31,20 @@ class Recipe extends Model
         'photo',
         'type_id'
     ];
+
+    protected $searchableColumns = [
+        'columns' => [
+            'recipes.name' => 10,
+            'recipes.description' => 2,
+            'recipe_types.name' => 3,
+            //'items.name' => 2,
+        ],
+        'joins' => [
+            //'base_recipe_item' => ['base_recipes.id', 'base_recipe_item.base_id'],
+            //'items' => ['base_recipe_item.item_id','items.id'],
+            'recipe_types' => ['recipes.type_id','recipe_types.id']
+        ],
+    ]; 
 
     protected $appends = [
         'code',
@@ -83,7 +99,7 @@ class Recipe extends Model
 
     public function utensils()
     {
-        return $this->belongsToMany(Utensil::class, 'base_recipe_utensil', 'base_id', 'utensil_id')
+        return $this->belongsToMany(Utensil::class, 'recipe_utensil', 'recipe_id', 'utensil_id')
                     ->withPivot('quantity');
     }   
 

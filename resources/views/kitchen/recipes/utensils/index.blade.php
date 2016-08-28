@@ -6,7 +6,7 @@
             <h1 class="pull-left">Utensils para la receta base: <strong>{{ $recipe->name }}</strong></h1>
             <div class="btn-group pull-right">
                 <a v-if="!available('{{ route('api.v1.kitchen.recipes.utensils.has-available', $recipe->id) }}')" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('utensilADD')">Add New</a>
-                <a class="btn btn-primary pull-right bg-olive btn-flat" href="{{ route('kitchen.recipes.index') }}" style="margin-top: -10px;margin-bottom: 5px">Recetas base</a>
+                <a class="btn btn-primary pull-right bg-olive btn-flat" href="{{ route('kitchen.recipes.index') }}" style="margin-top: -10px;margin-bottom: 5px">Recetas</a>
             </div>
         </section>
         <div class="content" style="padding-top: 30px;">
