@@ -13,7 +13,8 @@
         "znck/belongs-to-through": "^2.2",
         "mathiasgrimm/laravel-dot-env-gen": "dev-master",
         "nicolaslopezj/searchable": "1.*",
-        "sofa/eloquence": "~5.2"        
+        "sofa/eloquence": "~5.2",
+        "davejamesmiller/laravel-breadcrumbs": "^3.0"        
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

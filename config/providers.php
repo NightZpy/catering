@@ -20,7 +20,8 @@ return [
             Laracasts\Flash\FlashServiceProvider::class,
             Prettus\Repository\Providers\RepositoryServiceProvider::class,
             Barryvdh\Debugbar\ServiceProvider::class, 
-            Sofa\Eloquence\ServiceProvider::class       
+            Sofa\Eloquence\ServiceProvider::class,      
+            DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         ],
 
         'aliases' => [
@@ -28,6 +29,7 @@ return [
             'Html'      => Collective\Html\HtmlFacade::class,
             'Flash'     => Laracasts\Flash\Flash::class,
             'Debugbar' => Barryvdh\Debugbar\Facade::class,  
+            'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         ],
     ],
 
