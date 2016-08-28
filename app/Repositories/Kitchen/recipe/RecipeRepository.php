@@ -3,9 +3,10 @@
 namespace App\Repositories\Kitchen\Recipe;
 
 use App\Models\Kitchen\Recipe\Recipe;
-use InfyOm\Generator\Common\BaseRepository;
+use App\Models\Kitchen\Utensil;
+use App\Repositories\MyBaseRepository;
 
-class RecipeRepository extends BaseRepository
+class RecipeRepository extends MyBaseRepository
 {
     /**
      * @var array
@@ -23,4 +24,10 @@ class RecipeRepository extends BaseRepository
     {
         return Recipe::class;
     }
+
+    public function availableUtensils($id)
+    {
+        $utensilsId = $this->findWithoutFail($id)->utensils->pluck('id');    
+        return Utensil::whereNotIn('id', $utensilsId)->get();
+    }     
 }

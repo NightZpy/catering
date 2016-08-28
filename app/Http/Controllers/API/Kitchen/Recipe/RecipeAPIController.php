@@ -21,11 +21,11 @@ use Response;
 class RecipeAPIController extends InfyOmBaseController
 {
     /** @var  RecipeRepository */
-    private $recipeRepository;
+    private $repository;
 
     public function __construct(RecipeRepository $recipeRepo)
     {
-        $this->recipeRepository = $recipeRepo;
+        $this->repository = $recipeRepo;
     }
 
     /**
@@ -69,7 +69,7 @@ class RecipeAPIController extends InfyOmBaseController
     {
         $input = $request->all();
 
-        $recipes = $this->recipeRepository->create($input);
+        $recipes = $this->repository->create($input);
 
         return $this->sendResponse($recipes->toArray(), 'Recipe saved successfully');
     }
@@ -85,7 +85,7 @@ class RecipeAPIController extends InfyOmBaseController
     public function show($id)
     {
         /** @var Recipe $recipe */
-        $recipe = $this->recipeRepository->find($id);
+        $recipe = $this->repository->find($id);
 
         if (empty($recipe)) {
             return Response::json(ResponseUtil::makeError('Recipe not found'), 400);
@@ -108,13 +108,13 @@ class RecipeAPIController extends InfyOmBaseController
         $input = $request->all();
 
         /** @var Recipe $recipe */
-        $recipe = $this->recipeRepository->find($id);
+        $recipe = $this->repository->find($id);
 
         if (empty($recipe)) {
             return Response::json(ResponseUtil::makeError('Recipe not found'), 400);
         }
 
-        $recipe = $this->recipeRepository->update($input, $id);
+        $recipe = $this->repository->update($input, $id);
 
         return $this->sendResponse($recipe->toArray(), 'Recipe updated successfully');
     }
@@ -130,7 +130,7 @@ class RecipeAPIController extends InfyOmBaseController
     public function destroy($id)
     {
         /** @var Recipe $recipe */
-        $recipe = $this->recipeRepository->find($id);
+        $recipe = $this->repository->find($id);
 
         if (empty($recipe)) {
             return Response::json(ResponseUtil::makeError('Recipe not found'), 400);
@@ -140,4 +140,102 @@ class RecipeAPIController extends InfyOmBaseController
 
         return $this->sendResponse($id, 'Recipe deleted successfully');
     }
+
+    public function storeUtensil(Request $request, $id = null, $utensilId = null)
+    {
+        $recipe = $this->repository->findWithoutFail($id);
+
+        if (empty($recipe)) {
+            return Response::json(ResponseUtil::makeError('Recipe not found'), 400);
+        }
+
+        if ($utensilId) {
+            $utensil = $this->utensilRepository->findWithoutFail($utensilId);
+            if (empty($utensil)) {
+                return Response::json(ResponseUtil::makeError('Utensil not found'), 400);
+            }            
+        }
+
+        $attributes = $request->all();
+        $attributes['pivot'] = $attributes['pivot_utensil'];
+        unset($attributes['pivot_utensil']);
+
+        $exists = $this->repository
+             ->findWithoutFail($id)
+             ->utensils()
+             ->whereUtensilId($utensilId)->count();
+
+        if ($exists) {
+          $recipe->utensils()->updateExistingPivot($utensilId, $attributes['pivot']);
+        } else {
+          $this->repository->createPivot($recipe, 'pivot', $attributes, 'utensils', 'utensil');
+        } 
+
+        return $this->sendResponse($request->all(), 'Utensil associated to Recipe successfully');
+    }    
+
+    public function utensils(Request $request, $id = null)
+    {
+        $recipe = $this->repository->findWithoutFail($id);        
+
+        if (empty($recipe)) {
+            //Flash::error('Recipe not found');
+            return Response::json(ResponseUtil::makeError('Recipe not found'), 400);
+        }
+        \Debugbar::info($recipe->utensils->first()->pivot->toArray());
+        if (empty($recipe->utensils)) {
+            //Flash::error('Recipe not found');
+            return Response::json(ResponseUtil::makeError('Not Providers for Recipe'), 400);
+        }         
+
+        $query = $recipe->utensils();
+        if ($request->exists('filter')) {
+            $value = "%{$request->filter}%";
+            $query->where(function($q) use($value) {
+                $q->where("code", "like", $value)
+                  ->orWhere("name", "like", $value);
+            });
+            //$query = $recipe->utensils()->search($value);
+        }
+
+        if (request()->has('sort')) {
+            list($sortCol, $sortDir) = explode('|', request()->sort);
+            $query = $query->orderBy($sortCol, $sortDir);
+        } else {
+            $query = $query->orderBy('created_at', 'asc');
+        }
+
+
+        $perPage = request()->has('per_page') ? (int) request()->per_page : null;
+        return response()->json($query->paginate($perPage));
+    }    
+
+    public function utensil(Request $request, $id = null, $utensilId = null) {
+        $utensil = $this->repository->findWithoutFail($id)->utensils()->whereUtensilId($utensilId)->first();
+        $recipe = $this->repository->findWithoutFail($id)->toArray();        
+        $data = $recipe;
+        $utensil = $utensil->toArray();        
+        $data['pivot_utensil'] = $utensil['pivot'];
+        unset($utensil['pivot']);        
+        $data['utensil'] = $utensil;
+        return $this->sendResponse($data, 'Utensil associated to BaseRecipe successfully retrieve');
+    }
+
+
+    public function availableUtensils(Request $request, $id = null)
+    {
+        $utensils = $this->repository->availableUtensils($id)->pluck('name', 'id')->toArray();
+        //$utensils = $this->repository->all()->pluck('name', 'id')->toArray();
+        if (empty($utensils))
+            return Response::json(ResponseUtil::makeError('Utensils not found'), 400);        
+        return $this->sendResponse($utensils, 'Utensil retrieve successfully');
+    }
+
+    public function hasAvailableUtensils(Request $request, $id = null)
+    {
+        $utensils = $this->repository->availableUtensils($id)->toArray();
+        if (empty($utensils))
+            return Response::json(ResponseUtil::makeError('Utensils not found'), 400);        
+        return $this->sendResponse(True, 'Utensil retrieve successfully');        
+    }     
 }

@@ -81,11 +81,11 @@ class Recipe extends Model
                         );
     }*/
 
-    /*public function utensils()
+    public function utensils()
     {
         return $this->belongsToMany(Utensil::class, 'base_recipe_utensil', 'base_id', 'utensil_id')
                     ->withPivot('quantity');
-    } */    
+    }   
 
     /**
      *

@@ -274,7 +274,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
         if ($utensilId) {
             $utensil = $this->utensilRepository->findWithoutFail($utensilId);
             if (empty($utensil)) {
-                return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+                return Response::json(ResponseUtil::makeError('Utensil not found'), 400);
             }            
         }
 
@@ -307,7 +307,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
         \Debugbar::info($baseRecipe->utensils->first()->pivot->toArray());
         if (empty($baseRecipe->utensils)) {
             //Flash::error('Base Recipe not found');
-            return Response::json(ResponseUtil::makeError('Not Providers for Base Recipe'), 400);
+            return Response::json(ResponseUtil::makeError('Not Utensils for Base Recipe'), 400);
         }         
 
         $query = $baseRecipe->utensils();

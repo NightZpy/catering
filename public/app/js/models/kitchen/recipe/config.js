@@ -4,7 +4,42 @@ var objectRow = {
 	servings_quantity: "",
 	description: "",
 	photo: "",
-	recipe_type_id: ""
+	type_id: "",
+	type_name: "", 
+	base: {
+		id: "",
+		code: "",
+		name: "",
+		servings_quantity: "",
+		quantity: "",
+		description: "",
+		photo: "",
+		type_id: "",
+		type_name: "", 		
+		created_at: "",
+		updated_at: "",
+		deleted_at: ""
+	},
+	utensil: {
+		id: "",
+		name: "",
+		stock: "",
+		category_id: "",
+		created_at: "",
+		updated_at: "",
+		deleted_at: ""
+	},
+	pivot_base: {
+		purchase_quantity: "",
+		cost_per_quantity: "",     
+		decrease: "" ,
+		servings_quantity: "",
+		base_id: ""			
+	},
+	pivot_utensil: {
+		quantity: "",
+		utensil_id: ""			
+	}
 };
 
 var tableColumns = [
