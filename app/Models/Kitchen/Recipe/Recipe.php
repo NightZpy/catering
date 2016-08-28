@@ -86,16 +86,11 @@ class Recipe extends Model
         return $this->belongsTo(RecipeType::class);
     }  
 
-    /*public function bases()
+    public function bases()
     {
-        return $this->belongsToMany(BaseRecipe::class, 'base_recipe_recipe', 'base_id', 'base_id')
-                    ->withPivot(
-                        'purchase_quantity', 
-                        'cost_per_quantity',
-                        'decrease',
-                        'servings_quantity'
-                        );
-    }*/
+        return $this->belongsToMany(BaseRecipe::class, 'base_recipe_recipe', 'recipe_id', 'base_id')
+                    ->withPivot('required_quantity');
+    }
 
     public function utensils()
     {

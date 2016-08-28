@@ -18,6 +18,7 @@
         <!-- --------- Modals ---------- -->
         @include('kitchen.recipes.form')
         @include('kitchen.recipes.utensils.add')
+        @include('kitchen.recipes.base-recipes.add')
         @include('kitchen.recipes.delete')
         @include('kitchen.recipes.show')
         @include('layouts.modal.info')        
