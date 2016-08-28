@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\API\Kitchen\Recipe;
 
+use App\Http\Requests\API\MyAPIRequest;
 use App\Models\Kitchen\Recipe\Recipe;
 
 class UpdateRecipeAPIRequest extends MyAPIRequest
@@ -23,6 +24,8 @@ class UpdateRecipeAPIRequest extends MyAPIRequest
      */
     public function rules()
     {
-        return Recipe::$rules;
+        $rules = Recipe::$rules;
+        $rules['name'] = $rules['name'] . ',name,' . $this->id;
+        return $rules;
     }
 }

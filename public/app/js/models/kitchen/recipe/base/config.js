@@ -88,8 +88,8 @@ var tableColumns = [
 	    title: 'Foto'
 	},
 	{
-	    name: 'type_name',
-	    sortField: 'type_id',
+	    name: 'type.name',
+	    sortField: 'type.name',
 	    visible: true,
 	    title: 'Tipo'
 	},       

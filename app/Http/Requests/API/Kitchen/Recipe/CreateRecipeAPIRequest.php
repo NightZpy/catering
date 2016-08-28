@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\API\Kitchen\Recipe;
 
+use App\Http\Requests\API\MyAPIRequest;
 use App\Models\Kitchen\Recipe\Recipe;
 
 class CreateRecipeAPIRequest extends MyAPIRequest
