@@ -184,7 +184,7 @@ class RecipeAPIController extends InfyOmBaseController
             //Flash::error('Recipe not found');
             return Response::json(ResponseUtil::makeError('Recipe not found'), 400);
         }
-        \Debugbar::info($recipe->utensils->first()->pivot->toArray());
+        
         if (empty($recipe->utensils)) {
             //Flash::error('Recipe not found');
             return Response::json(ResponseUtil::makeError('Not Providers for Recipe'), 400);

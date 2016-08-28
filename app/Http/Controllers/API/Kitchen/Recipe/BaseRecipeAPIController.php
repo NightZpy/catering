@@ -191,7 +191,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
             //Flash::error('Base Recipe not found');
             return Response::json(ResponseUtil::makeError('Base Recipe not found'), 400);
         }
-        \Debugbar::info($baseRecipe->items->first()->pivot->toArray());
+        //\Debugbar::info($baseRecipe->items->first()->pivot->toArray());
         if (empty($baseRecipe->items)) {
             //Flash::error('Base Recipe not found');
             return Response::json(ResponseUtil::makeError('Not Providers for Base Recipe'), 400);
@@ -304,7 +304,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
             //Flash::error('Base Recipe not found');
             return Response::json(ResponseUtil::makeError('Base Recipe not found'), 400);
         }
-        \Debugbar::info($baseRecipe->utensils->first()->pivot->toArray());
+        //\Debugbar::info($baseRecipe->utensils->first()->pivot->toArray());
         if (empty($baseRecipe->utensils)) {
             //Flash::error('Base Recipe not found');
             return Response::json(ResponseUtil::makeError('Not Utensils for Base Recipe'), 400);
