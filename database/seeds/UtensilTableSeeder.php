@@ -12,6 +12,7 @@ class UtensilTableSeeder extends Seeder
      */
     public function run()
     {
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     	Utensil::truncate();
         for ($i=1; $i <= 60; $i++) { 
             $categoryId =  rand(1, 20);
@@ -22,5 +23,6 @@ class UtensilTableSeeder extends Seeder
             ];
             Utensil::create($utensil);
         }
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     }
 }
