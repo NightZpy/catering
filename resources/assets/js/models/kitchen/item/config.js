@@ -10,7 +10,7 @@ var objectRow = {
 	currency: "",
 	unit_id: "",
 	presentation_id: "",
-	type_id: "",
+	type: "",
 	family_id: "",
 	sub_family_id: "",
 	provider: {
@@ -104,8 +104,8 @@ var tableColumns = [
 	    visible: true
 	},
 	{
-	    name: 'type_name',
-	    sortField: 'type_name',
+	    name: 'type',
+	    sortField: 'type',
 	    title: 'Tipo',
 	    visible: true
 	},

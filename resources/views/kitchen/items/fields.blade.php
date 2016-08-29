@@ -200,22 +200,33 @@
 	</div>
 
 	<!-- Type Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.types.select-list') }}/', 'typeOptions', 'type')" class="form-group col-sm-6">
-	    <label for="type_id">Tipo:</label>
-		{{-- <v-select></v-select> --}}
-		<select class="form-control" v-model="row.type_id" v-validate:type_id="{ required: true }">
-			<option value="" selected="selected">-- Seleccione un tipo --</option>
-			<option v-for="(id, name) in foreignData.typeOptions" v-bind:value="id">	
-				@{{ name }}
-			</option>
-		</select>
-	    <div v-if="$validation.type_id.invalid" class="alert alert-danger" role="alert">
-			<div v-if="$validation.type_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	<div class="form-group col-sm-6">
+	    <label for="type">Tipo:</label>
+	    <input type="text" class="form-control" v-model="row.type" v-validate:type="{ required: true, minlength: 1, maxlength: 128 }" data-type="text" />
+	    <div v-if="$validation.type.invalid" class="alert alert-danger" role="alert">
+				<div v-if="$validation.type.required">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
-				El tipo es obligatorio
+				Custom rule(required) Message Here
 			</div>
-		</div> 
-	</div>
+			{{-- <div v-if="$validation.type.unique">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(unique) Message Here
+			</div> --}}
+			<div v-if="$validation.type.minlength">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(minlength) Message Here
+			</div>
+			<div v-if="$validation.type.maxlength">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(maxlength) Message Here
+			</div>
+		
+		</div>
+	</div>	
 
 	<!-- Family Id Field -->
 	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.families.select-list') }}/', 'familyOptions', 'family')" class="form-group col-sm-6">

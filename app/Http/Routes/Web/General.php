@@ -1,15 +1,5 @@
 <?php 
-Route::group(['prefix' => 'general'], function () {	
-	/* 
-	 * ------------------- Route index for Type ---------------
-	 */
-	Route::get('types', [
-		'as' => 'types.index',
-		'uses' => function() {
-			return view('types.index');
-		}
-	]);
-
+Route::group(['prefix' => 'general'], function () {
 	/* 
 	 * ------------------- Route index for Presentation ---------------
 	 */

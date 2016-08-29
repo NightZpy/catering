@@ -26,7 +26,6 @@ class Item extends Model
         'perishable_format',
         'unit_name', 
         'presentation_name', 
-        'type_name', 
         'family_code', 
         'family_name', 
         'sub_family_code', 
@@ -47,9 +46,9 @@ class Item extends Model
         'current_stock',
         'to_buy',
         'currency',
+        'type',
         'unit_id',
         'presentation_id',
-        'type_id',
         'sub_family_id'
     ];
 
@@ -66,7 +65,7 @@ class Item extends Model
         'currency' => 'string',
         'unit_id' => 'integer',
         'presentation_id' => 'integer',
-        'type_id' => 'integer',
+        'type' => 'string',
         'sub_family_id' => 'integer'
     ];
 
@@ -86,7 +85,7 @@ class Item extends Model
         'currency' => 'required|min:1|max:128',
         'unit_id' => 'required|exists:units,id',
         'presentation_id' => 'required|exists:presentations,id',
-        'type_id' => 'required|exists:types,id',
+        'type' => 'required|min:1|max:128',
         'sub_family_id' => 'required|exists:sub_families,id'
     ];
 
@@ -113,11 +112,6 @@ class Item extends Model
     public function presentation()
     {
         return $this->belongsTo(Presentation::class);
-    }
-
-    public function type()
-    {
-        return $this->belongsTo(Type::class);
     }
 
     public function providers()
@@ -153,12 +147,7 @@ class Item extends Model
     public function getUnitNameAttribute()
     {
         return $this->unit->name;
-    }
-
-    public function getTypeNameAttribute()
-    {
-        return $this->type->name;
-    }   
+    }  
 
     public function getPresentationNameAttribute()
     {

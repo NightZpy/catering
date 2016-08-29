@@ -22,6 +22,7 @@ return [
             Barryvdh\Debugbar\ServiceProvider::class, 
             Sofa\Eloquence\ServiceProvider::class,      
             DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+            Laracasts\Generators\GeneratorsServiceProvider::class
         ],
 
         'aliases' => [

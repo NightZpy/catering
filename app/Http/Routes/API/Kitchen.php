@@ -29,55 +29,55 @@ Route::group(['prefix' => 'kitchen', 'namespace' => 'Kitchen'], function () {
 		]);
 	});	
 
-	Route::group(['prefix' => 'bases'], function () {
+	Route::group(['prefix' => 'items'], function () {
 		Route::get('/', [
-			'as' => 'api.v1.kitchen.bases.index',
+			'as' => 'api.v1.kitchen.items.index',
 			'uses' => 'ItemAPIController@index'
 		]);
 		Route::get('show/{id?}', [
-			'as' => 'api.v1.kitchen.bases.show',
+			'as' => 'api.v1.kitchen.items.show',
 			'uses' => 'ItemAPIController@show'
 		]);
 		Route::patch('update/{id?}', [
-			'as' => 'api.v1.kitchen.bases.update',
+			'as' => 'api.v1.kitchen.items.update',
 			'uses' => 'ItemAPIController@update'
 		]);
 		Route::delete('delete/{id?}', [
-			'as' => 'api.v1.kitchen.bases.delete',
+			'as' => 'api.v1.kitchen.items.delete',
 			'uses' => 'ItemAPIController@destroy'
 		]);
 		Route::post('store', [
-			'as' => 'api.v1.kitchen.bases.store',
+			'as' => 'api.v1.kitchen.items.store',
 			'uses' => 'ItemAPIController@store'
 		]);	
 
 		Route::group(['prefix' => 'providers'], function () {	
 			Route::get('{id?}', [
-				'as' => 'api.v1.kitchen.bases.providers.index',
+				'as' => 'api.v1.kitchen.items.providers.index',
 				'uses' => 'ItemAPIController@providers'
 			]);
 			Route::get('available-list/{id?}', [
-				'as' => 'api.v1.kitchen.bases.providers.available-providers',
+				'as' => 'api.v1.kitchen.items.providers.available-providers',
 				'uses' => 'ItemAPIController@availableProviders'
 			]);
 			Route::get('available/{id?}', [
-				'as' => 'api.v1.kitchen.bases.providers.available',
+				'as' => 'api.v1.kitchen.items.providers.available',
 				'uses' => 'ItemAPIController@hasAvailableProviders'
 			]);
 			Route::get('show/{id?}/{providerId?}', [
-				'as' => 'api.v1.kitchen.bases.providers.show',
+				'as' => 'api.v1.kitchen.items.providers.show',
 				'uses' => 'ItemAPIController@provider'
 			]);
 			Route::get('exists/{id?}/{providerId?}', [
-				'as' => 'api.v1.kitchen.bases.providers.already-associate',
+				'as' => 'api.v1.kitchen.items.providers.already-associate',
 				'uses' => 'ItemAPIController@alreadyAssociate'
 			]);		
 			Route::patch('{id?}/{providerId?}', [
-				'as' => 'api.v1.kitchen.bases.providers.store',
+				'as' => 'api.v1.kitchen.items.providers.store',
 				'uses' => 'ItemAPIController@storeProvider'
 			]);	
 			Route::delete('{id?}/{providerId?}', [
-				'as' => 'api.v1.kitchen.bases.providers.delete',
+				'as' => 'api.v1.kitchen.items.providers.delete',
 				'uses' => 'ItemAPIController@deleteProvider'
 			]);		
 		});

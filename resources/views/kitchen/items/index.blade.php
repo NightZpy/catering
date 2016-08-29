@@ -48,12 +48,6 @@
                         url: "{{ route('api.v1.presentations.index') }}/"
                     }
                 },
-                type: { 
-                    index: {
-                        method: 'GET' ,
-                        url: "{{ route('api.v1.types.index') }}/"
-                    }
-                },
                 family: { 
                     index: {
                         method: 'GET' ,
