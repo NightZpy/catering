@@ -24,7 +24,7 @@
 @endsection
 
 @push('vue-scripts')  
-    <script src="/app/js/models/unit-config.js"></script>
+    <script src="/app/js/models/unit/config.js"></script>
     <script>
         var token = '{{ csrf_token() }}';
         var fieldInitOrder = 'id';
