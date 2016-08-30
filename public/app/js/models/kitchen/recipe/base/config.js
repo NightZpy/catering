@@ -2,7 +2,6 @@ var objectRow = {
 	id: "",
 	name: "",
 	servings_quantity: "",
-	quantity: "",
 	description: "",
 	photo: "",
 	type_id: "",
@@ -67,13 +66,7 @@ var tableColumns = [
 	    name: 'servings_quantity',
 	    sortField: 'servings_quantity',
 	    visible: true,
-	    title: "Cantidad por ración"
-	},
-	{
-	    name: 'quantity',
-	    sortField: 'quantity',
-	    visible: true,
-	    title: 'Cantidad'
+	    title: "Raciones"
 	},
 	{
 	    name: 'description',

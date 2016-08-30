@@ -49,7 +49,6 @@ class BaseRecipe extends Model
     public $fillable = [
         'name',
         'servings_quantity',
-        'quantity',
         'description',
         'photo',
         'type_id'
@@ -63,6 +62,7 @@ class BaseRecipe extends Model
     protected $casts = [
         'name' => 'string',
         'description' => 'string',
+        'servings_quantity' => 'integer',
         'photo' => 'string',
         'type_id' => 'integer'
     ];
@@ -74,8 +74,7 @@ class BaseRecipe extends Model
      */
     public static $rules = [
         'name' => 'required|min:1|max:128|unique:base_recipes',
-        'servings_quantity' => 'numeric|digits_between:1,4',
-        'quantity' => 'required|digits_between:1,4',
+        'servings_quantity' => 'required|digits_between:1,4',
         'description' => 'min:1|max:1024',
         'photo' => 'image|max:2048',
         'type_id' => 'required|exists:recipe_types,id'

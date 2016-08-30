@@ -164,7 +164,7 @@
 	</div>	
 
 	<!-- Unit Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.units.select-list') }}/', 'unitOptions', 'unit')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.units.select-list') }}/', 'unitOptions', 'unit')">
 	    <label for="unit_id">Unidad:</label>
 		{{-- <v-select></v-select> --}}
 		<select class="form-control" v-model="row.unit_id" v-validate:unit_id="{ required: true }">

@@ -55,9 +55,8 @@ class BaseRecipeAPIController extends InfyOmBaseController
 
         if ($request->exists('filter')) {
             $value = "%{$request->filter}%";
-            $query->where(function($q) use($request) {
-                $q->where("name", "like", $value)
-                  ->orWhere("quantity", "like", $value);
+            $query->where(function($q) use($value) {
+                $q->where("name", "like", $value);
             });
             //$query->search($request->filter);
         }

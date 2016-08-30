@@ -61,7 +61,7 @@ var tableColumns = [
 	    name: 'servings_quantity',
 	    sortField: 'servings_quantity',
 	    visible: true,
-	    title: "Cantidad por ración"
+	    title: "Raciones"
 	},
 	{
 	    name: 'description',
