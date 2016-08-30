@@ -12,6 +12,7 @@
 */
 
 Route::get('/test', function(){
+	return App\Models\Kitchen\Item::all()->toArray();
 	return App\Models\Family::first()->input_material;
 });
 

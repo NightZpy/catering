@@ -50,8 +50,7 @@ class SubFamilyAPIController extends InfyOmBaseController
             $value = "%{$request->filter}%";
 
             $query->where(function($q) use($value) {
-                $q->where("name", "like", $value)
-                  ->orWhere("code", "like", $value);
+                $q->where("name", "like", $value);
                 
                 $q->orWhereHas('family', function($q) use ($value){
                     $q->where('families.name', "like", $value);      
@@ -76,6 +75,8 @@ class SubFamilyAPIController extends InfyOmBaseController
         $input = $request->all();
 
         $subFamilies = $this->subFamilyRepository->create($input);
+
+        \Debugbar::info($subFamilies);
 
         return $this->sendResponse($subFamilies->toArray(), 'SubFamily saved successfully');
     }

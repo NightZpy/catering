@@ -17,6 +17,7 @@ class SubFamily extends Model
     public $table = 'sub_families';
 
     protected $appends = [
+        'code',
         'family_code', 
         'family_name', 
     ];
@@ -25,9 +26,7 @@ class SubFamily extends Model
 
     public $fillable = [
         'name',
-        'code',
-        'input_material_id',
-        'families'
+        'family_id'
     ];
 
     /**
@@ -48,7 +47,6 @@ class SubFamily extends Model
      */
     public static $rules = [
         'name' => 'required|min:1|max:128|unique:sub_families',
-        'code' => 'required|min:1|max:10|unique:sub_families',
         'family_id' => 'required|exists:families,id',
     ];
 
@@ -72,6 +70,15 @@ class SubFamily extends Model
      *-------------------- Accessors and Mutators
      *
      */
+    public function getCodeAttribute()
+    {
+        $code = $this->id;
+        if ($code < 10)
+            $code = '00' . $code;       
+        
+        return $code;
+    }  
+
     public function getFamilyCodeAttribute()
     {
         return $this->family->code;
@@ -82,11 +89,4 @@ class SubFamily extends Model
         return $this->family->name;
     }
 
-    public function getCodeAttribute()
-    {
-        $code = $this->attributes['code'];
-        if ($code < 10)
-            $code = '0' . $code;
-        return $code;
-    }    
 }

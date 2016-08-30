@@ -22,6 +22,7 @@ class Item extends Model
     public $table = 'items';
     
     protected $appends = [
+        'code',
         'auto_provider_format',
         'perishable_format',
         'unit_name', 
@@ -38,7 +39,6 @@ class Item extends Model
     protected $dates = ['deleted_at'];
 
     public $fillable = [
-        'code',
         'name',
         'auto_provider',
         'perishable',
@@ -156,7 +156,7 @@ class Item extends Model
 
     public function getCodeAttribute()
     {
-        $code = $this->attributes['code'];
+        $code = $this->id;
         if ($code < 10)
             $code = '00' . $code;
         elseif ($code < 100) 

@@ -18,7 +18,6 @@ class FamilyTableSeeder extends Seeder
         for ($i=1; $i <= 20; $i++) { 
             $family = [
                 'name' => "Family-$i", 
-                'code' => $i,
             ]; 
             Family::create($family);
         }

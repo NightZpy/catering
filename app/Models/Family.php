@@ -18,9 +18,12 @@ class Family extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $appends = [
+        'code'
+    ];   
+
     public $fillable = [
         'name',
-        'code'
     ];
 
     /**
@@ -40,7 +43,6 @@ class Family extends Model
      */
     public static $rules = [
         'name' => 'required|min:1|max:128|unique:families',
-        'code' => 'required|min:1|max:10|unique:families'
     ];
 
     /**
@@ -61,9 +63,10 @@ class Family extends Model
 
     public function getCodeAttribute()
     {
-        $code = $this->attributes['code'];
+        $code = $this->id;
         if ($code < 10)
-            $code = '0' . $code;
+            $code = '0' . $code;        
+        
         return $code;
     }      
 }

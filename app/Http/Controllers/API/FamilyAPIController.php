@@ -50,9 +50,7 @@ class FamilyAPIController extends InfyOmBaseController
         if ($request->exists('filter')) {
             $query->where(function($q) use($request) {
                 $value = "%{$request->filter}%";
-                $q->where("name", "like", $value)
-                  ->orWhere("code", "like", $value)
-                  ->orWhere("input_material_id", "like", $value);
+                $q->where("name", "like", $value);
             });
         }
 

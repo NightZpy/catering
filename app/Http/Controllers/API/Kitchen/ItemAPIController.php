@@ -53,16 +53,24 @@ class ItemAPIController extends InfyOmBaseController
         if ($request->exists('filter')) {
             $query->where(function($q) use($request) {
                 $value = "%{$request->filter}%";
-                $q->where("code", "like", $value)
-                  ->orWhere("name", "like", $value)
+                $q->orWhere("name", "like", $value)
                   ->orWhere("auto_provider", "like", $value)
+                  ->orWhere("type", "like", $value)
                   ->orWhere("perishable", "like", $value)
-                  ->orWhere("currency", "like", $value)
-                  ->orWhere("unit_id", "like", $value)
-                  ->orWhere("presentation_id", "like", $value)
-                  ->orWhere("type_id", "like", $value)
-                  ->orWhere("sub_family_id", "like", $value);
-            });
+                  ->orWhere("currency", "like", $value);
+                  
+                  $q->orWhereHas('subFamily', function($q) use ($value){
+                    $q->orWhere("sub_families.name", "like", $value);
+                  });
+
+                  $q->orWhereHas('presentation', function($q) use ($value){
+                    $q->orWhere("presentations.name", "like", $value);
+                  });
+
+                  $q->orWhereHas('family', function($q) use ($value){
+                    $q->orWhere("families.name", "like", $value);
+                  });
+            });                      
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
