@@ -9,6 +9,7 @@ use App\Models\SubFamily;
 use App\Models\Unit;
 use App\Models\Presentation;
 use App\Models\Type;
+use App\Models\Kitchen\Recipe\BaseRecipe;
 
 /**
  * Class Item
@@ -91,6 +92,20 @@ class Item extends Model
 
     /**
      *
+     *-------------------- Overwrite pivot
+     *
+     */    
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof BaseRecipe) {
+            return new BaseRecipeItemPivot($parent, $attributes, $table, $exists);
+        }
+        return parent::newPivot($parent, $attributes, $table, $exists);
+    }
+    
+
+    /**
+     *
      *-------------------- Relations
      *
      */
@@ -117,6 +132,17 @@ class Item extends Model
     public function providers()
     {
         return $this->belongsToMany(Provider::class)->withPivot('price', 'selected');
+    }
+
+    public function bases()
+    {
+        return $this->belongsToMany(BaseRecipe::class, 'base_recipe_item', 'base_id', 'item_id')
+                    ->withPivot(
+                        'purchase_quantity', 
+                        'cost_per_quantity',
+                        'decrease',
+                        'servings_quantity'
+                    );
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Models\Kitchen\Utensil;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use App\Models\Kitchen\BaseRecipeItemPivot;
 
 /**
  * Class BaseRecipe
@@ -82,6 +83,19 @@ class BaseRecipe extends Model
 
     /**
      *
+     *-------------------- Overwrite pivot
+     *
+     */    
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof Item) {
+            return new BaseRecipeItemPivot($parent, $attributes, $table, $exists);
+        }
+        return parent::newPivot($parent, $attributes, $table, $exists);
+    }
+
+    /**
+     *
      *-------------------- Relations
      *
      */
@@ -120,5 +134,5 @@ class BaseRecipe extends Model
     public function getTypeNameAttribute()
     {
         return $this->type->name;
-    }        
+    }            
 }

@@ -12,7 +12,7 @@
 */
 
 Route::get('/test', function(){
-	return App\Models\Kitchen\Item::all()->toArray();
+	return App\Models\Kitchen\Item::first()->bases->first()->pivot;
 	return App\Models\Family::first()->input_material;
 });
 
