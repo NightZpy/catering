@@ -2,6 +2,8 @@
 
 namespace App\Models\Kitchen;
 
+use App\Models\Kitchen\Item;
+use App\Models\Kitchen\Recipe\BaseRecipe;
 use Illuminate\Database\Eloquent\Relations\Pivot;
  
 class BaseRecipeItemPivot extends Pivot {
@@ -13,6 +15,16 @@ class BaseRecipeItemPivot extends Pivot {
         'cost',
         'cost_format'
 	];
+
+    public function base()
+    {
+        return $this->hasOne(BaseRecipe::class, 'id', 'base_id')->whereId($this->base_id);
+    }
+
+    public function item()
+    {
+        return $this->hasOne(Item::class);
+    }    
 
     public function getTotalQuantityAttribute()
     {
@@ -33,7 +45,7 @@ class BaseRecipeItemPivot extends Pivot {
 
     public function getCostFormatAttribute()
     {
-        return $this->currency . ' ' . number_format($this->cost, 2, ',', '.');
+        return $this->base->currency . ' ' . number_format($this->cost, 2, ',', '.');
     }   
 
 }

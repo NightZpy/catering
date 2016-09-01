@@ -23,7 +23,11 @@ var objectRow = {
 		cost_per_quantity: "",     
 		decrease: "" ,
 		servings_quantity: "",
-		item_id: ""			
+		item_id: "",
+        total_quantity: "",
+        total_quantity_format: "",
+        cost: "",
+        cost_format: ""					
 	}
 };
 
@@ -63,7 +67,19 @@ var tableColumns = [
 	    sortField: 'pivot.servings_quantity',
 	    title: 'Ración',
 	    visible: true
-	},		
+	},	
+	{
+	    name: 'pivot.cost_format',
+	    sortField: 'pivot.cost_format',
+	    title: 'Costo',
+	    visible: true
+	}, 	
+	{
+	    name: 'pivot.total_quantity_format',
+	    sortField: 'pivot.total_quantity_format',
+	    title: 'Cantidad total',
+	    visible: true
+	},			
     {
         name: '__actions',
         dataClass: 'center aligned',

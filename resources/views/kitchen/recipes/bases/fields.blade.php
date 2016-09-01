@@ -47,7 +47,7 @@
 
 	<!-- Servings Quantity Field -->
 	<div class="form-group col-sm-6">
-	    <label for="servings_quantity">Servings Quantity:</label>
+	    <label for="servings_quantity">Raciones:</label>
 	    <input type="number" class="form-control" v-model="row.servings_quantity" v-validate:servings_quantity="{ {{-- numeric, --}} minlength: 1, maxlength: 4 }" data-type="text" />
 	    <div v-if="$validation.servings_quantity.invalid" class="alert alert-danger" role="alert">
 			{{-- <div v-if="$validation.servings_quantity.numeric">
