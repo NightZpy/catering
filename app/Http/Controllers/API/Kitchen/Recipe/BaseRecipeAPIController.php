@@ -169,6 +169,8 @@ class BaseRecipeAPIController extends InfyOmBaseController
         unset($attributes['pivot_item']['total_quantity_format']);
         unset($attributes['pivot_item']['cost']);
         unset($attributes['pivot_item']['cost_format']);
+        if (isset($attributes['pivot_item']['base']))
+            unset($attributes['pivot_item']['base']);
         $attributes['pivot'] = $attributes['pivot_item'];
         unset($attributes['pivot_item']);
         
