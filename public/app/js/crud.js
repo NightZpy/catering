@@ -16404,9 +16404,10 @@ if (module.hot) {(function () {  module.hot.accept()
   }
 })()}
 },{"vue":85,"vue-hot-reload-api":78}],91:[function(require,module,exports){
+(function (global){
 'use strict';
 
-var Vue = require('vue');
+global.Vue = require('vue');
 var VueResource = require('vue-resource');
 //var Vuetable = require('vuetable/src/components/Vuetable.vue')
 var Vuetable = require('../vendor/vue-table/components/Vuetable.vue');
@@ -16456,7 +16457,7 @@ Vue.validator('unique', function (val, condition) {
     return condition;
 });
 
-var vm = new Vue({
+window.vm = new Vue({
     components: {
         modal: VueStrap.modal,
         CustomVueSelectTemplate: CustomVueSelectTemplate
@@ -16540,6 +16541,19 @@ var vm = new Vue({
             } else {
                 this.sendData(url, 'GET').then(this.success2, this.failed);
             }
+        },
+        getOneData: function getOneData(url, field, assign) {
+            var sendParams = {
+                url: url,
+                method: 'GET',
+                data: {}
+            };
+            this.$http(sendParams).then(function (response) {
+                if (response.data.data) {
+                    var data = response.data.data;
+                    this.$set(assign, data[field]);
+                }
+            }, function (response) {});
         },
         available: function available(url) {
             this.sendData(url, 'GET').then(function (response) {
@@ -16760,7 +16774,6 @@ var vm = new Vue({
                     if (action == 'view-item') {
                         this.modal('SHOW');
                     } else if (action == 'edit-item') {
-                        this.getData();
                         this.modal('PATCH');
                     } else if (action == 'delete-item') {
                         this.modal('DELETE');
@@ -16781,6 +16794,7 @@ var vm = new Vue({
     }
 });
 
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"../vendor/vue-editable/vue-editable.js":93,"../vendor/vue-strap/vue-strap.min.js":94,"../vendor/vue-table/components/Vuetable.vue":95,"../vendor/vue-table/components/VuetablePaginationSimple.vue":97,"./vue-components/vue-select.vue":92,"vue":85,"vue-resource":79,"vue-select":80,"vue-validator":84,"vuetable/src/components/VuetablePagination.vue":87,"vuetable/src/components/VuetablePaginationBootstrap.vue":88,"vuetable/src/components/VuetablePaginationDropdown.vue":89}],92:[function(require,module,exports){
 'use strict';
 

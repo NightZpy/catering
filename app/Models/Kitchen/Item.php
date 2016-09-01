@@ -141,9 +141,9 @@ class Item extends Model
         return $this->belongsToMany(BaseRecipe::class, 'base_recipe_item', 'base_id', 'item_id')
                     ->withPivot(
                         'purchase_quantity', 
-                        'cost_per_quantity',
                         'decrease',
-                        'servings_quantity'
+                        'servings_quantity',
+                        'cost_per_quantity'
                     );
     }
 

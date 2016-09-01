@@ -3,7 +3,7 @@
             'modalTitle'    => 'Add Item to {{ row.name }}',
             'modalSync'     => 'itemADD',
             'modalClose'    => 'itemADD',
-            'model'         => 'Utensil',
+            'model'         => 'Item',
             'related'       => 'item',
             'type'			=> 'store',
             'content'       => view('kitchen.recipes.bases.items.fields')

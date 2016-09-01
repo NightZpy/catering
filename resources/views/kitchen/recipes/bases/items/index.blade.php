@@ -59,6 +59,10 @@
                         method: 'GET' ,
                         url: "{{ route('api.v1.kitchen.recipes.bases.items.show') }}/"
                     },
+                    showOne: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.kitchen.items.show') }}/"
+                    },
                     relate_list: {
                         method: 'GET',
                         url: "{{ route('api.v1.kitchen.recipes.bases.items.available') }}/"                        
@@ -79,7 +83,14 @@
             }
         };
     </script>
-    <script src="/app/js/crud.js"></script>    
+    <script src="/app/js/crud.js"></script>   
+    <script>
+        var vm = window.vm; 
+        vm.$watch('row.pivot_item.item_id', function (value) {
+            var url = apiUrl.foreign.item.showOne.url + value;
+            this.getOneData(url, 'decrease', 'row.pivot_item.decrease');            
+        });
+    </script>     
 @endpush
 
 @push('vue-styles')

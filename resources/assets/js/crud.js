@@ -1,4 +1,4 @@
-var Vue = require('vue')
+global.Vue = require('vue')
 var VueResource = require('vue-resource')
 //var Vuetable = require('vuetable/src/components/Vuetable.vue')
 var Vuetable = require('../vendor/vue-table/components/Vuetable.vue')
@@ -46,7 +46,7 @@ Vue.validator('unique', function (val, condition) {
     return condition;
 });
 
-var vm = new Vue({
+window.vm = new Vue({
     components: {
         modal: VueStrap.modal,
         CustomVueSelectTemplate
@@ -128,6 +128,23 @@ var vm = new Vue({
                this.sendData(url, 'GET')
                 .then(this.success2, this.failed);    
             }
+        },
+        getOneData: function(url, field, assign) {
+            var sendParams = {
+                url: url, 
+                method: 'GET', 
+                data: {}
+            };
+            this.$http(sendParams)
+                .then(
+                    function(response) {
+                        if (response.data.data) {
+                            var data = response.data.data;
+                            this.$set(assign, data[field]);
+                        }
+                    }, 
+                    function(response) {}
+                );             
         },
         available: function(url) {
             this.sendData(url, 'GET')
@@ -370,7 +387,6 @@ var vm = new Vue({
                 if (action == 'view-item') {
                     this.modal('SHOW');
                 } else if (action == 'edit-item') {
-                    this.getData();
                     this.modal('PATCH');                
                 } else if (action == 'delete-item') {
                     this.modal('DELETE');

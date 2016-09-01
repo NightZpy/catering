@@ -31,7 +31,7 @@ var objectRow = {
         total_quantity: "",
         total_quantity_format: "",
         cost: "",
-        cost_format: ""					
+        cost_format: ""
 	}
 };
 

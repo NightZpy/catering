@@ -165,6 +165,10 @@ class BaseRecipeAPIController extends InfyOmBaseController
         }
 
         $attributes = $request->all();
+        unset($attributes['pivot_item']['total_quantity']);
+        unset($attributes['pivot_item']['total_quantity_format']);
+        unset($attributes['pivot_item']['cost']);
+        unset($attributes['pivot_item']['cost_format']);
         $attributes['pivot'] = $attributes['pivot_item'];
         unset($attributes['pivot_item']);
         
@@ -211,7 +215,6 @@ class BaseRecipeAPIController extends InfyOmBaseController
         } else {
             $query = $query->orderBy('created_at', 'asc');
         }
-
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
         return response()->json($query->paginate($perPage));

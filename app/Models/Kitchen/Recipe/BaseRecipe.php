@@ -108,10 +108,10 @@ class BaseRecipe extends Model
     {
         return $this->belongsToMany(Item::class, 'base_recipe_item', 'base_id', 'item_id')
                     ->withPivot(
-                        'purchase_quantity', 
-                        'cost_per_quantity',
-                        'decrease',
-                        'servings_quantity'
+                            'purchase_quantity', 
+                            'decrease',
+                            'servings_quantity',
+                            'cost_per_quantity'
                         );
     }
 
