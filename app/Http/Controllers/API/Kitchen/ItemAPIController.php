@@ -257,8 +257,8 @@ class ItemAPIController extends InfyOmBaseController
 
         $item = $this->repository->findWithoutFail($id)->toArray();
         $data = $item;
-        $provider = $provider->toArray();
-        $data['pivot'] = $provider['pivot'];
+        $provider = $provider->toArray();    
+        $data['pivot_provider'] = $provider['pivot'];
         unset($provider['pivot']);
         $data['provider'] = $provider;
         return $this->sendResponse($data, 'Provider associated to Item successfully retrieve');

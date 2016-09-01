@@ -4,6 +4,7 @@ var objectRow = {
 	name: "",
 	auto_provider: "",
 	perishable: "",
+	decrease: "",
 	to_buy: "",
 	min_stock: "",
 	current_stock: "",
@@ -29,7 +30,7 @@ var objectRow = {
 		updated_at: "",
 		deleted_at: ""
 	},
-	pivot: {
+	pivot_provider: {
 		price: "",
 		selected: "",      
 		provider_id: ""			
@@ -67,6 +68,12 @@ var tableColumns = [
 	    title: 'Perecible',
 	    visible: true
 	},
+	{
+	    name: 'decrease',
+	    sortField: 'decrease',
+	    title: 'Merma',
+	    visible: true
+	},	
 	{
 	    name: 'min_stock',
 	    sortField: 'min_stock',

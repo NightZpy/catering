@@ -6,14 +6,18 @@ var objectRow = {
 		id: "",
 		code: "",
 		name: "",
-		specialty: "",
-		district: "",
-		address: "",
-		phone: "",
-		movil1: "",
-		movil2: "",
-		contact: "",
-		email: "",
+		auto_provider: "",
+		perishable: "",
+		decrease: "",
+		to_buy: "",
+		min_stock: "",
+		current_stock: "",
+		currency: "",
+		unit_id: "",
+		presentation_id: "",
+		type: "",
+		family_id: "",
+		sub_family_id: "",
 		created_at: "",
 		updated_at: "",
 		deleted_at: ""
@@ -88,9 +92,9 @@ var tableColumns = [
 ];
 
 var actions = [
-    { name: 'SHOW:related:item', label: '', icon: 'glyphicon glyphicon-zoom-in', class: 'btn btn-info', extra: {'title': 'View', 'data-toggle':"tooltip", 'data-placement': "left"} },
-    { name: 'EDIT:related:item', label: '', icon: 'glyphicon glyphicon-pencil', class: 'btn btn-warning', extra: {title: 'Edit', 'data-toggle':"tooltip", 'data-placement': "top"} },
-    { name: 'DELETE:related:item', label: '', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } },
+    { name: 'SHOW:related:item', label: 'Ver', icon: 'glyphicon glyphicon-zoom-in', class: 'btn btn-info', extra: {'title': 'View', 'data-toggle':"tooltip", 'data-placement': "left"} },
+    { name: 'EDIT:related:item', label: 'Editar', icon: 'glyphicon glyphicon-pencil', class: 'btn btn-warning', extra: {title: 'Edit', 'data-toggle':"tooltip", 'data-placement': "top"} },
+    { name: 'DELETE:related:item', label: 'Eliminar', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } },
 ];
 
 var modals = {

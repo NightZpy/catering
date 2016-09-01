@@ -24,7 +24,7 @@ class BaseRecipeItemPivot extends Pivot {
     public function item()
     {
         return $this->hasOne(Item::class);
-    }    
+    }
 
     public function getTotalQuantityAttribute()
     {

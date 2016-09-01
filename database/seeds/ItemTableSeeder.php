@@ -30,6 +30,7 @@ class ItemTableSeeder extends Seeder
                 'name' => $name,
                 'auto_provider' => rand(0, 1),
                 'perishable' => rand(0, 1),
+                'decrease' => rand(0, 100),
                 'min_stock' => rand(10, 100),
                 'current_stock' => rand(1, 9999),
                 'to_buy' => rand(1, 9999),

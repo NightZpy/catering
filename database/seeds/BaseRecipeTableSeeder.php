@@ -24,7 +24,6 @@ class BaseRecipeTableSeeder extends Seeder
             $baseRecipe = [
                 'name' => $name,
                 'servings_quantity' => rand(1, 9999),
-                'quantity' => rand(1, 9999),
                 'description' => $description,
                 'type_id' => rand(1, 20),
             ];  

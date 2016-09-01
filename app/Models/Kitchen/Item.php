@@ -59,15 +59,16 @@ class Item extends Model
      * @var array
      */
     protected $casts = [
-        'code' => 'string',
-        'name' => 'string',
-        'auto_provider' => 'boolean',
-        'perishable' => 'boolean',
-        'currency' => 'string',
-        'unit_id' => 'integer',
+        'code'            => 'string',
+        'name'            => 'string',
+        'auto_provider'   => 'boolean',
+        'perishable'      => 'boolean',
+        'currency'        => 'string',
+        'unit_id'         => 'integer',
         'presentation_id' => 'integer',
-        'type' => 'string',
-        'sub_family_id' => 'integer'
+        'type'            => 'string',
+        'sub_family_id'   => 'integer',
+        'decrease'        => 'float'
     ];
 
     /**
@@ -76,18 +77,19 @@ class Item extends Model
      * @var array
      */
     public static $rules = [
-        //'code' => 'required|min:1|max:128',
-        'name' => 'required|min:1|max:128|unique:items',
-        'auto_provider' => 'required|boolean',
-        'perishable' => 'required|boolean',
-        'min_stock' => 'required|digits_between:1,4',
-        'current_stock' => 'required|digits_between:1,4',
-        'current_stock' => 'required|digits_between:1,4',
-        'currency' => 'required|min:1|max:128',
-        'unit_id' => 'required|exists:units,id',
+        //'code'          => 'required|min:1|max:128',
+        'name'            => 'required|min:1|max:128|unique:items',
+        'auto_provider'   => 'required|boolean',
+        'perishable'      => 'required|boolean',
+        'decrease'        => 'required|numeric|digits_between:1,3',
+        'min_stock'       => 'required|digits_between:1,4',
+        'current_stock'   => 'required|digits_between:1,4',
+        'current_stock'   => 'required|digits_between:1,4',
+        'currency'        => 'required|min:1|max:128',
+        'unit_id'         => 'required|exists:units,id',
         'presentation_id' => 'required|exists:presentations,id',
-        'type' => 'required|min:1|max:128',
-        'sub_family_id' => 'required|exists:sub_families,id'
+        'type'            => 'required|min:1|max:128',
+        'sub_family_id'   => 'required|exists:sub_families,id'
     ];
 
     /**

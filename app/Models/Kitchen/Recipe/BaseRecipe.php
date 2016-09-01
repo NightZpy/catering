@@ -61,11 +61,11 @@ class BaseRecipe extends Model
      * @var array
      */
     protected $casts = [
-        'name' => 'string',
-        'description' => 'string',
+        'name'              => 'string',
+        'description'       => 'string',
         'servings_quantity' => 'integer',
-        'photo' => 'string',
-        'type_id' => 'integer'
+        'photo'             => 'string',
+        'type_id'           => 'integer'
     ];
 
     /**
@@ -74,11 +74,11 @@ class BaseRecipe extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|min:1|max:128|unique:base_recipes',
+        'name'              => 'required|min:1|max:128|unique:base_recipes',
         'servings_quantity' => 'required|digits_between:1,4',
-        'description' => 'min:1|max:1024',
-        'photo' => 'image|max:2048',
-        'type_id' => 'required|exists:recipe_types,id'
+        'description'       => 'min:1|max:1024',
+        'photo'             => 'image|max:2048',
+        'type_id'           => 'required|exists:recipe_types,id'
     ];
 
     /**
