@@ -35,7 +35,6 @@ var objectRow = {
 	},
 	pivot_item: {
 		purchase_quantity: "",
-		cost_per_quantity: "",     
 		decrease: "" ,
 		servings_quantity: "",
 		item_id: ""			
