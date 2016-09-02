@@ -28,7 +28,8 @@ class BaseRecipeItemPivot extends Pivot {
 
     public function getTotalQuantityAttribute()
     {
-        return ($this->servings_quantity / (1 - ($this->decrease / 100)));
+        $divisor = (1 - ($this->decrease / 100));
+        return ($divisor == 0) ? 0 : $this->servings_quantity / $divisor;
     }
 
     public function getTotalQuantityFormatAttribute()
@@ -45,7 +46,7 @@ class BaseRecipeItemPivot extends Pivot {
 
     public function getCostFormatAttribute()
     {
-        return $this->base->currency . ' ' . number_format($this->cost, 2, ',', '.');
+        return number_format($this->cost, 2, ',', '.');
     }   
 
 }

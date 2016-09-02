@@ -6,6 +6,8 @@ var objectRow = {
 	photo: "",
 	type_id: "",
 	type_name: "", 
+	cost_mp_x_recipe: "",
+	cost_mp_x_ration: "",
 	item: {
 		id: "",
 		code: "",
@@ -67,6 +69,18 @@ var tableColumns = [
 	    sortField: 'servings_quantity',
 	    visible: true,
 	    title: "Raciones"
+	},
+	{
+	    name: 'cost_mp_x_recipe_format',
+	    sortField: 'cost_mp_x_recipe_format',
+	    visible: true,
+	    title: "Costo MP X Receta"
+	},
+	{
+	    name: 'cost_mp_x_ration_format',
+	    sortField: 'cost_mp_x_ration_format',
+	    visible: true,
+	    title: "Costo MP X Ración"
 	},
 	{
 	    name: 'description',

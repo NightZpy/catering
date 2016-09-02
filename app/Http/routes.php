@@ -12,8 +12,8 @@
 */
 
 Route::get('/test', function(){
-	dd(App\Models\Kitchen\Item::first()->bases->first()->toArray());
-	return App\Models\Family::first()->input_material;
+	//dd(App\Models\Kitchen\Item::first()->bases->first()->toArray());
+	dd(App\Models\Kitchen\Recipe\BaseRecipe::first()->items->first());
 });
 
 Route::get('/', 'HomeController@index');

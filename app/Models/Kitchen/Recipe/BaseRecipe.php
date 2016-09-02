@@ -41,7 +41,11 @@ class BaseRecipe extends Model
     
     protected $appends = [
         'code',
-        'type_name'
+        'type_name',
+        'cost_mp_x_recipe',
+        'cost_mp_x_recipe_format',
+        'cost_mp_x_ration',
+        'cost_mp_x_ration_format'
     ];
 
     protected $dates = ['deleted_at'];
@@ -134,5 +138,34 @@ class BaseRecipe extends Model
     public function getTypeNameAttribute()
     {
         return $this->type->name;
-    }            
-}
+    }      
+
+    public function getCostMPXRecipeAttribute()
+    {
+        if (!$this->items()->count())
+            return 0;
+        $total = 0;
+
+        $items = $this->items()->get();
+        foreach ($items as $item)
+            $total += $item->pivot->cost;
+        return $total;
+    }
+
+    public function getCostMPXRecipeFormatAttribute()
+    {
+        return number_format($this->cost_mp_x_recipe, 2, ',', '.');
+    }
+
+    public function getCostMPXRationAttribute()
+    {
+        if ($this->servings_quantity != 0)
+            return $this->cost_mp_x_recipe / $this->servings_quantity;
+        return 0;
+    } 
+
+    public function getCostMPXRationFormatAttribute()
+    {
+        return number_format($this->cost_mp_x_ration, 2, ',', '.');
+    }     
+}   
