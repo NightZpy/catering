@@ -48,35 +48,6 @@
 			</div>
 		
 		</div>
-	</div>		
-
-	<!-- Cost per quantity Field -->
-	<div class="form-group col-sm-6">
-	    <label for="cost_per_quantity">Costo por cantidad:</label>
-	    <input type="text" class="form-control" v-model="row.pivot_item.cost_per_quantity" v-validate:cost_per_quantity="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
-	    <div v-if="$validationItem.cost_per_quantity.invalid" class="alert alert-danger" role="alert">
-			<div v-if="$validationItem.cost_per_quantity.required">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				Custom rule(required) Message Here
-			</div>
-			{{-- <div v-if="$validationItem.cost_per_quantity.unique">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				Custom rule(unique) Message Here
-			</div> --}}
-			<div v-if="$validationItem.cost_per_quantity.minlength">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				Custom rule(minlength) Message Here
-			</div>
-			<div v-if="$validationItem.cost_per_quantity.maxlength">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				Custom rule(maxlength) Message Here
-			</div>
-		
-		</div>
 	</div>
 
 	<!-- Purchase quantity Field -->

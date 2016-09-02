@@ -55,8 +55,8 @@ var tableColumns = [
 	    visible: true
 	},      
 	{
-	    name: 'pivot.cost_per_quantity',
-	    sortField: 'pivot.cost_per_quantity',
+	    name: 'cost',
+	    sortField: 'cost',
 	    title: 'Costo por cantidad',
 	    visible: true
 	},      

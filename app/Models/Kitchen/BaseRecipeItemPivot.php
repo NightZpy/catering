@@ -23,7 +23,7 @@ class BaseRecipeItemPivot extends Pivot {
 
     public function item()
     {
-        return $this->hasOne(Item::class);
+        return $this->hasOne(Item::class, 'id', 'item_id');
     }
 
     public function getTotalQuantityAttribute()
@@ -41,7 +41,7 @@ class BaseRecipeItemPivot extends Pivot {
     {
         if ($this->purchase_quantity == 0)
             return 0;
-        return $this->totalQuantity * $this->cost_per_quantity / $this->purchase_quantity;
+        return $this->totalQuantity * $this->item->cost / $this->purchase_quantity;
     }   
 
     public function getCostFormatAttribute()

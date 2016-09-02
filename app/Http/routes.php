@@ -12,8 +12,9 @@
 */
 
 Route::get('/test', function(){
-	//dd(App\Models\Kitchen\Item::first()->bases->first()->toArray());
-	dd(App\Models\Kitchen\Recipe\BaseRecipe::first()->items->first());
+	//dd(App\Models\Kitchen\Item::findOrFail(3)->bases);
+	//dd(App\Models\Kitchen\Item::findOrFail(3)->bases->first()->pivot->base);
+	App\Models\Kitchen\Recipe\BaseRecipe::first()->items->first()->pivot->getCostAttribute();
 });
 
 Route::get('/', 'HomeController@index');

@@ -34,7 +34,9 @@ class Item extends Model
         'sub_family_name', 
         'compose_code',
         'price_format',
-        'selected_format'
+        'selected_format',
+        'cost',
+        'low_provider'
     ];    
 
     protected $dates = ['deleted_at'];
@@ -223,4 +225,20 @@ class Item extends Model
             return ($this->pivot->selected ? 'Si': 'No');
         return false;
     } 
+
+    public function getCostAttribute()
+    {
+        foreach ($this->providers as $provider) 
+            if ($provider->pivot->selected == 1)
+                return $provider->pivot->price; 
+        return $this->low_provider->pivot->price;
+    }
+
+    public function getLowProviderAttribute()
+    {
+        $sorted = $this->providers->sortBy(function ($provider, $key) {
+            return $provider->pivot->price;
+        });
+        return $sorted->first();
+    }
 }

@@ -114,8 +114,7 @@ class BaseRecipe extends Model
                     ->withPivot(
                             'purchase_quantity', 
                             'decrease',
-                            'servings_quantity',
-                            'cost_per_quantity'
+                            'servings_quantity'
                         );
     }
 

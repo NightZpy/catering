@@ -41,13 +41,13 @@ var tableColumns = [
 	},      
 	{
 	    name: 'price_format',
-	    sortField: 'price_format',
+	    sortField: 'pivot_price',
 	    title: 'Precio',
 	    visible: true
 	},      
 	{
 	    name: 'selected_format',
-	    sortField: 'selected_format',
+	    sortField: 'pivot_selected',
 	    title: 'Seleccionado',
 	    visible: true
 	}, 	

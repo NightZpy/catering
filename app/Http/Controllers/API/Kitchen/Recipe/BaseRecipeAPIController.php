@@ -212,12 +212,17 @@ class BaseRecipeAPIController extends InfyOmBaseController
         }
 
         if (request()->has('sort')) {
-            list($sortCol, $sortDir) = explode('|', request()->sort);
+            list($sortCol, $sortDir) = explode('|', request()->sort);           
+
+            if ($sortCol == 'cost') {
+                $query->join('item_provider', 'items.id', '=', 'item_provider.item_id');
+                $sortCol = 'item_provider.price';
+                $query->groupBy('item_provider.item_id');
+            }
             $query = $query->orderBy($sortCol, $sortDir);
         } else {
             $query = $query->orderBy('created_at', 'asc');
-        }
-
+        }        
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
         return response()->json($query->paginate($perPage));
     }    
