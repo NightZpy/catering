@@ -235,8 +235,17 @@ class BaseRecipeAPIController extends InfyOmBaseController
 
     public function availableItems(Request $request, $id = null)
     {
-        $items = $this->repository->availableItems($id)->pluck('name', 'id')->toArray();
-        //$items = $this->repository->all()->pluck('name', 'id')->toArray();
+        //$items = $this->repository->availableItems($id)->pluck('name', 'id')->toArray();
+        //$items = $this->repository->all()->toArray();
+        $items = $this->itemRepository->all()->toArray();
+        $items = array_map(function ($item) {
+            return [
+                'id' => $item['id'], 
+                'name' => $item['name'], 
+                'presentation' => $item['presentation_name']
+                ];
+        }, $items);
+
         if (empty($items))
             return Response::json(ResponseUtil::makeError('Items not found'), 400);        
         return $this->sendResponse($items, 'Item retrieve successfully');

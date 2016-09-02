@@ -4,10 +4,10 @@
 	    <label for="item_id">Item:</label>
 		<select class="form-control" v-model="row.pivot_item.item_id" v-validate:item_id="{ required: true }">
 			<option selected="selected">-- Seleccione un item --</option>
-			<option v-for="(id, name) in foreignData.itemOptions" 
-				v-bind:selected="id == row.item.id"
-				v-bind:value="id">		
-				@{{ name }}
+			<option v-for="item in foreignData.itemOptions" 
+				v-bind:selected="item.id == row.item.id"
+				v-bind:value="item.id">		
+				@{{ item.name + ' - ' + item.presentation }}
 			</option>
 		</select>
 	    <div v-if="$validationItem.item_id.invalid" class="alert alert-danger" role="alert">
