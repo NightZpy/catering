@@ -154,18 +154,18 @@ class BaseRecipe extends Model
 
     public function getCostMPXRecipeFormatAttribute()
     {
-        return number_format($this->cost_mp_x_recipe, 2, ',', '.');
+        return number_format($this->cost_mp_x_recipe, 1, ',', '.');
     }
 
     public function getCostMPXRationAttribute()
     {
-        if ($this->servings_quantity != 0)
+        if ($this->servings_quantity != 0) 
             return $this->cost_mp_x_recipe / $this->servings_quantity;
         return 0;
     } 
 
     public function getCostMPXRationFormatAttribute()
     {
-        return number_format($this->cost_mp_x_ration, 2, ',', '.');
+        return number_format($this->cost_mp_x_ration, 1, ',', '.');
     }     
 }   
