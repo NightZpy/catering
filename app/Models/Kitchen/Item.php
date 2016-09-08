@@ -231,14 +231,20 @@ class Item extends Model
         foreach ($this->providers as $provider) 
             if ($provider->pivot->selected == 1)
                 return $provider->pivot->price; 
-        return $this->low_provider->pivot->price;
+        $provider = $this->low_provider;
+        if ($provider)
+            return $provider->pivot->price;
+        return false;
     }
 
     public function getLowProviderAttribute()
     {
-        $sorted = $this->providers->sortBy(function ($provider, $key) {
-            return $provider->pivot->price;
-        });
-        return $sorted->first();
+        if ($this->providers) {
+            $sorted = $this->providers->sortBy(function ($provider, $key) {
+                return $provider->pivot->price;
+            });
+            return $sorted->first();
+        }
+        return false;
     }
 }
