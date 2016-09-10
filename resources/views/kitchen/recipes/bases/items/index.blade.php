@@ -90,6 +90,20 @@
             var url = apiUrl.foreign.item.showOne.url + value;
             this.getOneData(url, 'decrease', 'row.pivot_item.decrease');            
         });
+
+        var loadRelateItems = function () {
+            vm.getForeignData(apiUrl.foreign.item.relate_list.url + row.id, 'itemOptions', 'item');
+        }
+
+        vm.$watch('localModals.itemADD', function (value) {
+            if (value) 
+                loadRelateItems();
+        });
+
+        vm.$watch('localModals.itemEDIT', function (value) {
+            if (value) 
+                loadRelateItems();
+        });
     </script>     
 @endpush
 
