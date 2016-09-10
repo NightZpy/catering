@@ -53,7 +53,7 @@
 </div>	
 
 <!-- Category Id Field -->
-<div @click="getForeignData('{{ route('api.v1.kitchen.utensils.categories.select-list') }}/', 'utensilCategoriesOptions', 'utensil_category')" class="form-group col-sm-6">
+<div class="form-group col-sm-6">
     <label for="category_id">Categoria:</label>
 	<select class="form-control" v-model="row.category_id" v-validate:category_id="{ required: true }">
 		<option value="" selected="selected">-- Seleccione un tipo --</option>

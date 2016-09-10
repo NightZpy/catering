@@ -79,7 +79,14 @@
             }
         };
     </script>
-    <script src="/app/js/crud.js"></script>    
+    <script src="/app/js/crud.js"></script>  
+    <script>
+        var vm = window.vm;
+        vm.$watch('localModals.providerADD', function (value) {
+            if (value) 
+                this.getForeignData(this.url.foreign.provider.relate_list.url + this.row.id, 'providerOptions', 'provider', 'relate_list');
+        });        
+    </script>       
 @endpush
 
 @push('vue-styles')
