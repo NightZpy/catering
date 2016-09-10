@@ -54,7 +54,7 @@
                     },
                     relate_list: {
                         method: 'GET',
-                            url: "{{ route('kitchen.recipes.base-recipes.index') }}/"                        
+                            url: "{{ route('api.v1.kitchen.recipes.base-recipes.available') }}/"                        
                     }
                 },
                 utensil: { 
@@ -68,7 +68,7 @@
                     },
                     relate_list: {
                         method: 'GET',
-                        url: "{{ route('kitchen.recipes.utensils.index') }}/"                        
+                        url: "{{ route('api.v1.kitchen.recipes.utensils.available') }}/"                        
                     }
                 },
 
@@ -82,7 +82,17 @@
             if (value) {
                 this.getForeignData(this.url.foreign.unit.select.url, 'typeOptions', 'type', 'select');
             }
-        });       
+        }); 
+
+        vm.$watch('localModals.baseADD', function (value) {
+            if (value) 
+                this.getForeignData(this.url.foreign.base.relate_list.url + this.row.id, 'baseOptions', 'base', 'relate_list');
+        });  
+
+        vm.$watch('localModals.utensilADD', function (value) {
+            if (value) 
+                this.getForeignData(this.url.foreign.utensil.relate_list.url + this.row.id, 'utensilOptions', 'utensil', 'relate_list');
+        });             
     </script>     
 @endpush
 
