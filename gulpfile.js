@@ -18,6 +18,26 @@ elixir(function(mix) {
         'vue-styles.css'
     ], 'public/app/css/vue-styles.css');
 
+    mix.styles([
+        'bootstrap/3.3.6/css/bootstrap.css',
+        'font-awesome/4.5.0/css/font-awesome.css',
+        'select2/4.0.2/css/select2.css',
+        'admin-lte/2.3.3/css/AdminLTE.css',
+        'admin-lte/2.3.3/css/skins/_all-skins.css',
+        'ionicons/2.0.1/css/ionicons.css'        
+    ], 'public/app/css/app.css');
+
+    mix.scripts([
+        'jquery/1.12.0/jquery.min.js',
+        'bootstrap/3.3.6/js/bootstrap.min.js',
+        'select2/4.0.2/js/select2.min.js',
+        'iCheck/1.0.2/icheck.min.js',
+        'admin-lte/2.3.3/js/app.min.js',
+        'jquery.dataTables.min.js',
+        'dataTables.bootstrap.min.js'        
+    ], 'public/app/js/app.js');
+
+
     mix.browserify('crud.js', 'public/app/js/crud.js');
     // Add all model-config.js and generate 
     // then using gulp, but, generate one for each model.
