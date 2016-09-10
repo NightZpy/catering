@@ -79,6 +79,23 @@
         };
     </script>
     <script src="/app/js/crud.js"></script>    
+    <script>
+        var vm = window.vm;
+
+        var loadRelateUtensils = function () {
+            vm.getForeignData(apiUrl.foreign.utensil.relate_list.url + vm.row.id, 'utensilOptions', 'utensil');
+        }
+
+        vm.$watch('localModals.utensilADD', function (value) {
+            if (value) 
+                loadRelateUtensils();
+        });
+
+        vm.$watch('localModals.utensilEDIT', function (value) {
+            if (value) 
+                loadRelateUtensils();
+        });
+    </script>      
 @endpush
 
 @push('vue-styles')

@@ -1,6 +1,6 @@
 <validator name="validation">	
 	<!-- Recipe Type Id Field -->
-	<div class="form-group col-sm-6"  @click="getForeignData('{{ route('api.v1.kitchen.recipes.types.select-list') }}/', 'typeOptions', 'type')">
+	<div class="form-group col-sm-6">
 	    <label for="type_id">Tipo de receta:</label>
 		<select class="form-control" v-model="row.type_id" v-validate:type_id="{ required: true }">
 			<option value="" selected="selected">-- Seleccione un tipo --</option>

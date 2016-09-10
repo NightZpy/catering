@@ -38,7 +38,7 @@
             delete: "{{ route('api.v1.kitchen.recipes.bases.delete') }}/",
             foreign: {
                 type: { 
-                    index: {
+                    select: {
                         method: 'GET' ,
                         url: "{{ route('api.v1.kitchen.recipes.types.select-list') }}/"
                     }
@@ -58,7 +58,7 @@
                     },
                     relate_list: {
                         method: 'GET',
-                        url: "{{ route('api.v1.kitchen.recipes.bases.items.index') }}/"
+                        url: "{{ route('api.v1.kitchen.recipes.bases.items.available') }}/"
                     }
                 },
                 utensil: { 
@@ -72,7 +72,7 @@
                     },
                     relate_list: {
                         method: 'GET',
-                        url: "{{ route('kitchen.recipes.bases.utensils.index') }}/"                        
+                        url: "{{ route('api.v1.kitchen.recipes.bases.utensils.available') }}/"                        
                     }
                 },
 
@@ -82,6 +82,23 @@
     <script src="/app/js/crud.js"></script>    
     <script>
         var vm = window.vm; 
+        
+        vm.$watch('formModal', function (value) {
+            if (value) {
+                this.getForeignData(this.url.foreign.type.select.url, 'typeOptions', 'type', 'select');
+            }
+        });
+
+        vm.$watch('localModals.itemADD', function (value) {
+            if (value) 
+                this.getForeignData(this.url.foreign.item.relate_list.url + this.row.id, 'itemOptions', 'item', 'relate_list');
+        });
+
+        vm.$watch('localModals.utensilADD', function (value) {
+            if (value) 
+                this.getForeignData(this.url.foreign.utensil.relate_list.url + this.row.id, 'utensilOptions', 'utensil', 'relate_list');
+        });
+
         vm.$watch('row.pivot_item.item_id', function (value) {
             var url = apiUrl.foreign.item.show.url + value;
             this.getOneData(url, 'decrease', 'row.pivot_item.decrease');            
