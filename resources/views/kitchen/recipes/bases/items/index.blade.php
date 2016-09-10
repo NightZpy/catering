@@ -92,7 +92,7 @@
         });
 
         var loadRelateItems = function () {
-            vm.getForeignData(apiUrl.foreign.item.relate_list.url + row.id, 'itemOptions', 'item');
+            vm.getForeignData(apiUrl.foreign.item.relate_list.url + vm.row.id, 'itemOptions', 'item');
         }
 
         vm.$watch('localModals.itemADD', function (value) {
