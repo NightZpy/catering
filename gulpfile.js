@@ -19,23 +19,23 @@ elixir(function(mix) {
     ], 'public/app/css/vue-styles.css');
 
     mix.styles([
-        'bootstrap/3.3.6/css/bootstrap.css',
-        'font-awesome/4.5.0/css/font-awesome.css',
-        'select2/4.0.2/css/select2.css',
-        'admin-lte/2.3.3/css/AdminLTE.css',
-        'admin-lte/2.3.3/css/skins/_all-skins.css',
-        'ionicons/2.0.1/css/ionicons.css'        
-    ], 'public/app/css/app.css');
+        'bootstrap/3.3.6/bootstrap.min.css',
+        'font-awesome/4.5.0/font-awesome.min.css',
+        'select2/4.0.2/select2.min.css',
+        'admin-lte/2.3.3/AdminLTE.min.css',
+        'admin-lte/2.3.3/skins/_all-skins.min.css',
+        'ionicons/2.0.1/ionicons.min.css'        
+    ], 'public/app/css/app.min.css');
 
     mix.scripts([
         'jquery/1.12.0/jquery.min.js',
-        'bootstrap/3.3.6/js/bootstrap.min.js',
-        'select2/4.0.2/js/select2.min.js',
+        'bootstrap/3.3.6/bootstrap.min.js',
+        'select2/4.0.2/select2.min.js',
         'iCheck/1.0.2/icheck.min.js',
-        'admin-lte/2.3.3/js/app.min.js',
-        'jquery.dataTables.min.js',
-        'dataTables.bootstrap.min.js'        
-    ], 'public/app/js/app.js');
+        'admin-lte/2.3.3/app.min.js',
+        'dataTables/1.10.11/jquery.dataTables.min.js',
+        'dataTables/1.10.11/dataTables.bootstrap.min.js'        
+    ], 'public/app/js/app.min.js');
 
 
     mix.browserify('crud.js', 'public/app/js/crud.js');

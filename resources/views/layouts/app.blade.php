@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> 
     --}}
 
-    <link rel="stylesheet" href="/app/css/app.css">
+    <link rel="stylesheet" href="/app/css/app.min.css">
     @stack('vue-styles')
 </head>
 <body class="skin-blue sidebar-mini">
@@ -216,7 +216,7 @@
 
     --}}
 
-    <script src="/app/js/app.js"></script>
+    <script src="/app/js/app.min.js"></script>
 
     @yield('scripts')
     @stack('vue-scripts')
