@@ -80,7 +80,7 @@
         var vm = window.vm;
         vm.$watch('formModal', function (value) {
             if (value) {
-                this.getForeignData(this.url.foreign.unit.select.url, 'typeOptions', 'type', 'select');
+                this.getForeignData(this.url.foreign.type.select.url, 'typeOptions', 'type', 'select');
             }
         }); 
 
