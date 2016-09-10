@@ -36,19 +36,22 @@
             delete: "{{ route('api.v1.subFamilies.delete') }}/",
             foreign: {
                 family: {
-                    index: [{
+                    index: {
                         method: 'GET' ,
                         url: "{{ route('api.v1.families.select-list') }}/"
-                    }]
+                    }
                 }
-            },
-            validation: {
-                unique: "",
-                code: "",
             }
         };
     </script>
     <script src="/app/js/crud.js"></script>    
+    <script>
+        var vm = window.vm;
+        vm.$watch('formModal', function (value) {
+            if (value) 
+                this.getForeignData(this.url.foreign.family.index.url, 'familyOptions', 'family');
+        });
+    </script>    
 @endpush
 
 @push('vue-styles')

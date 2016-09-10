@@ -29,7 +29,7 @@
 	</div>	
 
 	<!-- Family Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.families.select-list') }}/', 'familyOptions', 'family')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6" {{-- @click="getForeignData('{{ route('api.v1.families.select-list') }}/', 'familyOptions', 'family')" --}} class="form-group col-sm-6">
 	    <label for="family_id">Familia:</label>
 		<select class="form-control" v-model="row.family_id" v-validate:family_id="{ required: true }">
 			<option value="" selected="selected">-- Seleccione una familia --</option>
