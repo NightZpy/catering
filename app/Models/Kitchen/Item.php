@@ -36,7 +36,8 @@ class Item extends Model
         'price_format',
         'selected_format',
         'cost',
-        'low_provider'
+        'low_provider',
+        'family_id'
     ];    
 
     protected $dates = ['deleted_at'];
@@ -49,6 +50,7 @@ class Item extends Model
         'current_stock',
         'to_buy',
         'currency',
+        'decrease',
         'type',
         'unit_id',
         'presentation_id',
@@ -154,6 +156,12 @@ class Item extends Model
      *-------------------- Accessors and Mutators
      *
      */
+    
+    public function getFamilyIdAttribute()
+    {
+        return $this->family->id;
+    }
+
     public function getFamilyCodeAttribute()
     {
         return $this->family->code;
