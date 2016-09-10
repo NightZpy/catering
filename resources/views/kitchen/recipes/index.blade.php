@@ -38,7 +38,7 @@
             delete: "{{ route('api.v1.kitchen.recipes.delete') }}/",
             foreign: {
                 type: { 
-                    index: {
+                    select: {
                         method: 'GET' ,
                         url: "{{ route('api.v1.kitchen.recipes.types.select-list') }}/"
                     }
@@ -76,6 +76,14 @@
         };
     </script>
     <script src="/app/js/crud.js"></script>    
+    <script>
+        var vm = window.vm;
+        vm.$watch('formModal', function (value) {
+            if (value) {
+                this.getForeignData(this.url.foreign.unit.select.url, 'typeOptions', 'type', 'select');
+            }
+        });       
+    </script>     
 @endpush
 
 @push('vue-styles')
