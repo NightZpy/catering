@@ -36,7 +36,7 @@
             delete: "{{ route('api.v1.subFamilies.delete') }}/",
             foreign: {
                 family: {
-                    index: {
+                    select: {
                         method: 'GET' ,
                         url: "{{ route('api.v1.families.select-list') }}/"
                     }
@@ -49,7 +49,7 @@
         var vm = window.vm;
         vm.$watch('formModal', function (value) {
             if (value) 
-                this.getForeignData(this.url.foreign.family.index.url, 'familyOptions', 'family');
+                this.getForeignData(this.url.foreign.family.select.url, 'familyOptions', 'family');
         });
     </script>    
 @endpush

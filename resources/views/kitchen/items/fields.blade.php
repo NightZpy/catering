@@ -164,7 +164,7 @@
 	</div>	
 
 	<!-- Unit Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.units.select-list') }}/', 'unitOptions', 'unit')">
+	<div class="form-group col-sm-6">
 	    <label for="unit_id">Unidad:</label>
 		{{-- <v-select></v-select> --}}
 		<select class="form-control" v-model="row.unit_id" v-validate:unit_id="{ required: true }">
@@ -182,7 +182,7 @@
 	</div>
 
 	<!-- Presentation Id Field -->
-	<div @click="getForeignData('{{ route('api.v1.presentations.select-list') }}/', 'presentationOptions', 'presentation')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6">
 	    <label for="presentation_id">Presentación:</label>
 		{{-- <v-select></v-select> --}}
 		<select class="form-control" v-model="row.presentation_id" v-validate:presentation_id="{ required: true }">
@@ -229,7 +229,7 @@
 	</div>	
 
 	<!-- Family Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.families.select-list') }}/', 'familyOptions', 'family')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6" class="form-group col-sm-6">
 	    <label for="family_id">Familia:</label>
 		{{-- <v-select></v-select> --}}
 		<select class="form-control" v-model="row.family_id" v-validate:family_id="{ required: true }">
@@ -247,7 +247,7 @@
 	</div>
 
 	<!-- SubFamily Id Field -->
-	<div v-if="foreignData.familyOptionsCount > 0" class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.subFamilies.byFamily') }}/' + row.family_id , 'subFamilyOptions', 'subFamily')" class="form-group col-sm-6">
+	<div v-if="foreignData.familyOptionsCount > 0" class="form-group col-sm-6" class="form-group col-sm-6">
 	    <label for="sub_family_id">Sub-Familia:</label>
 		{{-- <v-select></v-select> --}}
 		<select class="form-control" v-model="row.sub_family_id" v-validate:sub_family_id="{ required: true }">

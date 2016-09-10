@@ -154,8 +154,8 @@ window.vm = new Vue({
                     return false;
                 });
         },
-        getForeignData: function (callUrl = null, mapVar = null, related = null) {
-            var foreign = this.url.foreign[related].index;
+        getForeignData: function (callUrl = null, mapVar = null, related = null, action = 'index') {
+            var foreign = this.url.foreign[related][action];
             if (callUrl == null)          
                 callUrl = foreign.url;
 

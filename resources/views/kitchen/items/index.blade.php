@@ -37,27 +37,31 @@
             delete: "{{ route('api.v1.kitchen.items.delete') }}/",
             foreign: {
                 unit: { 
-                    index: {
+                    select: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.units.index') }}/"
+                        url: "{{ route('api.v1.units.select-list') }}/"
                     }
                 },
                 presentation: { 
-                    index: {
+                    select: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.presentations.index') }}/"
+                        url: "{{ route('api.v1.presentations.select-list') }}/"
                     }
                 },
                 family: { 
-                    index: {
+                    select: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.families.index') }}/"
+                        url: "{{ route('api.v1.families.select-list') }}/"
                     }
                 },
                 subFamily: { 
                     index: {
                         method: 'GET' ,
                         url: "{{ route('api.v1.subFamilies.index') }}/"
+                    },
+                    byFamily: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.subFamilies.byFamily') }}/"
                     }
                 },
                 provider: { 
@@ -71,7 +75,7 @@
                     },
                     relate_list: {
                         method: 'GET',
-                        url: "{{ route('kitchen.items.providers.index') }}/"                        
+                        url: "{{ route('api.v1.kitchen.items.providers.available-providers') }}/"                        
                     }
                 },
             },
@@ -80,8 +84,27 @@
                 code: "",
             }
         };
-    </script>
+    </script>    
     <script src="/app/js/crud.js"></script>    
+    <script>
+        var vm = window.vm;
+        vm.$watch('formModal', function (value) {
+            if (value) {
+                this.getForeignData(this.url.foreign.unit.select.url, 'unitOptions', 'unit', 'select');
+                this.getForeignData(this.url.foreign.presentation.select.url, 'presentationOptions', 'presentation', 'select');
+                this.getForeignData(this.url.foreign.family.select.url, 'familyOptions', 'family', 'select');
+            }
+        });
+
+        vm.$watch('row.family_id', function (value) {
+            this.getForeignData(this.url.foreign.subFamily.byFamily.url + this.row.family_id , 'subFamilyOptions', 'subFamily');
+        });
+
+        vm.$watch('localModals.providerADD', function (value) {
+            if (value) 
+                this.getForeignData(this.url.foreign.provider.relate_list.url + this.row.id, 'providerOptions', 'provider', 'relate_list');
+        });        
+    </script>  
 @endpush
 
 @push('vue-styles')
