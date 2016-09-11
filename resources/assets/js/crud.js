@@ -11,6 +11,7 @@ var VueStrap = require('../vendor/vue-strap/vue-strap.min.js')
 var vSelect = require('vue-select')
 var CustomVueSelectTemplate = require('./vue-components/vue-select.vue')
 var VueValidator = require('vue-validator')
+const decamelize = require('decamelize');
 
 Vue.use(VueResource)
 Vue.use(VueEditable)
@@ -197,7 +198,8 @@ window.vm = new Vue({
                 var map = 'row';
                 if ( actions.length && actions[2] == 'inform' ) {
                     map += '.' + actions[0];
-                    this.row[actions[0] + '_id'] = data.id; 
+                    var field = decamelize(actions[0]);
+                    this.row[ field + '_id' ] = data.id; 
                 }
                 vm.$set(map, data);
             }
@@ -216,7 +218,8 @@ window.vm = new Vue({
                 var map = 'row';
                 if ( actions.length && actions[2] == 'inform' ) {
                     map += '.' + actions[0];
-                    this.row[actions[0] + '_id'] = data.id; 
+                    var field = decamelize(actions[0]);
+                    this.row[ field + '_id' ] = data.id; 
                 }
                 vm.$set(map, data);
             }

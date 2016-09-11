@@ -47,6 +47,11 @@ var objectRow = {
 	family: {
 		id: "",
 		name: ""
+	},
+	subFamily: {
+		id: "",
+		name: "",
+		family_id: ""
 	}
 };
 
@@ -167,5 +172,6 @@ var modals = {
 	providerADD: false,
 	unit_ADD_inform: false,
 	presentation_ADD_inform: false,
-	family_ADD_inform: false
+	family_ADD_inform: false,
+	subFamily_ADD_inform: false
 };

@@ -21,6 +21,7 @@
         @include('kitchen.items.units.add')             
         @include('kitchen.items.presentations.add')             
         @include('kitchen.items.families.add')             
+        @include('kitchen.items.families.sub.add')             
         @include('kitchen.items.delete')
         @include('kitchen.items.show')
         @include('layouts.modal.info')        
@@ -77,6 +78,10 @@
                     byFamily: {
                         method: 'GET' ,
                         url: "{{ route('api.v1.subFamilies.byFamily') }}/"
+                    },
+                    store: {
+                        method: 'POST' ,
+                        url: "{{ route('api.v1.subFamilies.store') }}"
                     }
                 },
                 provider: { 
@@ -116,6 +121,10 @@
             vm.getForeignData(vm.url.foreign.family.select.url, 'familyOptions', 'family', 'select');
         };
 
+        var loadSubFamilies = function () {
+            vm.getForeignData(vm.url.foreign.subFamily.byFamily.url + vm.row.family_id , 'subFamilyOptions', 'subFamily');
+        };
+
         vm.$watch('formModal', function (value) {
             if (value) {
                 loadUnits();
@@ -125,7 +134,7 @@
         });
 
         vm.$watch('row.family_id', function (value) {
-            this.getForeignData(this.url.foreign.subFamily.byFamily.url + this.row.family_id , 'subFamilyOptions', 'subFamily');
+            loadSubFamilies();
         });
 
         vm.$watch('localModals.providerADD', function (value) {
@@ -155,8 +164,15 @@
         vm.$watch('localModals.family_ADD_inform', function (value) {
             if ( !value )
                 loadFamilies();
-        });           
+        });
 
+        /**
+         * Load subfamilies list after add new subfamily from add new item form
+         */
+        vm.$watch('localModals.subFamily_ADD_inform', function (value) {
+            if ( !value )
+                loadSubFamilies();
+        });
 
     </script>  
 @endpush
