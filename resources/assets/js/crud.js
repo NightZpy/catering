@@ -57,7 +57,7 @@ window.vm = new Vue({
         infoModal: false,
         showModal: false,
         deleteModal: false,
-        lastOpenModal: "",
+        lastOpenModal: [],
         localModals: (typeof(modals) !== 'undefined' ? modals : {}),
         flashMessage: null,
         defaultErrorMessage: 'Some errors in sended data, please check!.',
@@ -189,10 +189,11 @@ window.vm = new Vue({
             this.flashMessage = '';
             this.flashType = '';
         },            
-        success: function(response) {                
+        success: function(response) { 
+            var lastOpenModal = this.lastOpenModal.pop();              
             if ( response.data.data ) {
                 var data = response.data.data;
-                var actions = this.lastOpenModal.split('_');
+                var actions = lastOpenModal.split('_');
                 var map = 'row';
                 if ( actions.length && actions[2] == 'inform' ) {
                     map += '.' + actions[0];
@@ -205,12 +206,13 @@ window.vm = new Vue({
             var message = response.data.message;
             vm.flashMessage = message;
             vm.flashType = 'success';
-            this.closeModal(this.lastOpenModal);  
+            this.closeModal(lastOpenModal);  
         },
         success2: function(response) {
+            var lastOpenModal = this.lastOpenModal[0]; 
             if (response.data.data) { 
                 var data = response.data.data;
-                var actions = this.lastOpenModal.split('_');
+                var actions = lastOpenModal.split('_');
                 var map = 'row';
                 if ( actions.length && actions[2] == 'inform' ) {
                     map += '.' + actions[0];
@@ -276,22 +278,22 @@ window.vm = new Vue({
         },
         modal: function(type) {  
             if (type == 'PATCH' || type == 'POST') {
-                this.lastOpenModal = 'formModal';
+                this.lastOpenModal.push('formModal');
                 this.method = type;
                 this.formModal = true;
             } else if (type == 'SHOW') {
-                this.lastOpenModal = 'showModal';
+                this.lastOpenModal.push('showModal');
                 this.method = type;
                 this.showModal = true;
             } else if (type == 'DELETE') {
-                this.lastOpenModal = 'deleteModal';
+                this.lastOpenModal.push('deleteModal');
                 this.method = type;
                 this.deleteModal = true;
             } else if (type == 'INFO') {
-                this.lastOpenModal = 'infoModal';
+                this.lastOpenModal.push('infoModal');
                 this.infoModal = true;
             } else {
-                this.lastOpenModal = type;
+                this.lastOpenModal.push(type);
                 this.localModals[type] = true;                
             }
         },
