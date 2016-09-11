@@ -4,7 +4,7 @@
             'modalSync'     => 'baseADD',
             'modalClose'    => 'baseADD',
             'model'         => 'Base',
-            'related'       => 'base',
+            'related'       => true,
             'type'			=> 'store',
             'content'       => view('kitchen.recipes.base-recipes.fields')
 	]);

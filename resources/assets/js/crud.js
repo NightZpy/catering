@@ -190,9 +190,15 @@ window.vm = new Vue({
             this.flashType = '';
         },            
         success: function(response) {                
-            if (response.data.data) {
+            if ( response.data.data ) {
                 var data = response.data.data;
-                vm.$set('row', data);
+                var actions = this.lastOpenModal.split('_');
+                var map = 'row';
+                if ( actions.length && actions[2] == 'inform' ) {
+                    map += '.' + actions[0];
+                    this.row[actions[0] + '_id'] = data.id; 
+                }
+                vm.$set(map, data);
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE')
                 this.$broadcast('vuetable:reload');
@@ -202,9 +208,15 @@ window.vm = new Vue({
             this.closeModal(this.lastOpenModal);  
         },
         success2: function(response) {
-            if (response.data.data) {
+            if (response.data.data) { 
                 var data = response.data.data;
-                vm.$set('row', data);
+                var actions = this.lastOpenModal.split('_');
+                var map = 'row';
+                if ( actions.length && actions[2] == 'inform' ) {
+                    map += '.' + actions[0];
+                    this.row[actions[0] + '_id'] = data.id; 
+                }
+                vm.$set(map, data);
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE')
                 this.$broadcast('vuetable:reload');

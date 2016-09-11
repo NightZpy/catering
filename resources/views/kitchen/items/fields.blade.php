@@ -112,7 +112,7 @@
 							</option>
 						</select>
 						<span class="input-group-btn">
-	    					<button class="btn btn-primary" @click="modal('unitADD')">
+	    					<button class="btn btn-primary" @click="modal('unit_ADD_inform')">
 	    						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     						</button>
 	  					</span>
@@ -136,7 +136,7 @@
 							</option>
 						</select>
 						<span class="input-group-btn">
-	    					<button class="btn btn-primary" @click="modal('presentationADD')">
+	    					<button class="btn btn-primary" @click="modal('presentation_ADD_inform')">
 	    						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     						</button>
 	  					</span>

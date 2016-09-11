@@ -4,7 +4,7 @@
             'modalSync'     => 'utensilEDIT',
             'modalClose'    => 'utensilEDIT',
             'model'         => 'Utensil',
-            'related'       => 'utensil',
+            'related'       => true,
             'type'			=> 'store',
             'content'       => view('kitchen.recipes.utensils.fields')
 	]);

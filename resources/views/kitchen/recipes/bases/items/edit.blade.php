@@ -4,7 +4,7 @@
             'modalSync'     => 'itemEDIT',
             'modalClose'    => 'itemEDIT',
             'model'         => 'Item',
-            'related'       => 'item',
+            'related'       => true,
             'type'			=> 'store',
             'content'       => view('kitchen.recipes.bases.items.fields')
 	]);

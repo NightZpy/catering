@@ -16602,7 +16602,13 @@ window.vm = new Vue({
         success: function success(response) {
             if (response.data.data) {
                 var data = response.data.data;
-                vm.$set('row', data);
+                var actions = this.lastOpenModal.split('_');
+                var map = 'row';
+                if (actions.length && actions[2] == 'inform') {
+                    map += '.' + actions[0];
+                    this.row[actions[0] + '_id'] = data.id;
+                }
+                vm.$set(map, data);
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE') this.$broadcast('vuetable:reload');
             var message = response.data.message;
@@ -16613,7 +16619,13 @@ window.vm = new Vue({
         success2: function success2(response) {
             if (response.data.data) {
                 var data = response.data.data;
-                vm.$set('row', data);
+                var actions = this.lastOpenModal.split('_');
+                var map = 'row';
+                if (actions.length && actions[2] == 'inform') {
+                    map += '.' + actions[0];
+                    this.row[actions[0] + '_id'] = data.id;
+                }
+                vm.$set(map, data);
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE') this.$broadcast('vuetable:reload');
             var message = response.data.message;

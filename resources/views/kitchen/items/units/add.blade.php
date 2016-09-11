@@ -1,8 +1,8 @@
 <?php
 	extract([
             'modalTitle'    => 'Nueva presentación',
-            'modalSync'     => 'presentationADD',
-            'modalClose'    => 'presentationADD',
+            'modalSync'     => 'presentation_ADD_inform',
+            'modalClose'    => 'presentation_ADD_inform',
             'model'         => 'Presentation',
             'type'			=> 'store',
             'content'       => view('kitchen.items.presentations.fields')

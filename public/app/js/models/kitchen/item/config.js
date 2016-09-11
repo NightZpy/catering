@@ -161,6 +161,6 @@ var actions = [
 
 var modals = {
 	providerADD: false,
-	unitADD: false,
-	presentationADD: false
+	unit_ADD_inform: false,
+	presentation_ADD_inform: false
 };

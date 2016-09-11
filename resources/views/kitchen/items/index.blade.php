@@ -131,7 +131,7 @@
         /**
          * Load unit list after add new unit from add new item form
          */
-        vm.$watch('localModals.unitADD', function (value) {
+        vm.$watch('localModals.unit_ADD_inform', function (value) {
             if ( !value )
                 loadUnits();
         });
@@ -139,7 +139,7 @@
         /**
          * Load presentation list after add new presentation from add new item form
          */
-        vm.$watch('localModals.presentationADD', function (value) {
+        vm.$watch('localModals.presentation_ADD_inform', function (value) {
             if ( !value )
                 loadUPresentations();
         });        
