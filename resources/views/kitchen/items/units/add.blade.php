@@ -1,11 +1,11 @@
 <?php
 	extract([
-            'modalTitle'    => 'Nueva presentación',
-            'modalSync'     => 'presentation_ADD_inform',
-            'modalClose'    => 'presentation_ADD_inform',
-            'model'         => 'Presentation',
+            'modalTitle'    => 'Nueva unidad',
+            'modalSync'     => 'unit_ADD_inform',
+            'modalClose'    => 'unit_ADD_inform',
+            'model'         => 'Unit',
             'type'			=> 'store',
-            'content'       => view('kitchen.items.presentations.fields')
+            'content'       => view('kitchen.items.units.fields')
 	]);
 ?>
 

@@ -9,13 +9,19 @@
 				<!-- Family Id Field -->
 				<div class="form-group col-sm-6" class="form-group col-sm-6">
 				    <label for="family_id">Familia:</label>
-					{{-- <v-select></v-select> --}}
-					<select class="form-control" v-model="row.family_id" v-validate:family_id="{ required: true }">
-						<option value="" selected="selected">-- Seleccione familia --</option>
-						<option v-for="(id, name) in foreignData.familyOptions" v-bind:value="id">		
-							@{{ name }}
-						</option>
-					</select>
+				    <div class="input-group">
+						<select class="form-control" v-model="row.family_id" v-validate:family_id="{ required: true }">
+							<option value="" selected="selected">-- Seleccione familia --</option>
+							<option v-for="(id, name) in foreignData.familyOptions" v-bind:value="id">		
+								@{{ name }}
+							</option>
+						</select>
+						<span class="input-group-btn">
+	    					<button class="btn btn-primary" @click="modal('family_ADD_inform')">
+	    						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    						</button>
+	  					</span>
+  					</div>
 				    <div v-if="$validation.family_id.invalid" class="alert alert-danger" role="alert">
 						<div v-if="$validation.family_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Error:</span>
@@ -27,7 +33,6 @@
 				<!-- SubFamily Id Field -->
 				<div class="form-group col-sm-6" class="form-group col-sm-6">
 				    <label for="sub_family_id">Sub-Familia:</label>
-					{{-- <v-select></v-select> --}}
 					<select :disabled="" class="form-control" v-model="row.sub_family_id" v-validate:sub_family_id="{ required: true }">
 						<option value="foreignData.familyOptionsCount > 0" selected="selected">-- Seleccione una sub-familia --</option>
 						<option v-for="option in foreignData.subFamilyOptions" v-bind:value="option.id">	
@@ -103,7 +108,6 @@
 				<!-- Unit Id Field -->
 				<div class="form-group col-sm-6">
 				    <label for="unit_id">Unidad:</label>
-					{{-- <v-select></v-select> --}}
 					<div class="input-group">
 						<select class="form-control" v-model="row.unit_id" v-validate:unit_id="{ required: true }">
 							<option value="" selected="selected">-- Seleccione unidad --</option>

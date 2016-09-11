@@ -43,6 +43,10 @@ var objectRow = {
 	presentation: {
 		id: "",
 		name: ""
+	},
+	family: {
+		id: "",
+		name: ""
 	}
 };
 
@@ -162,5 +166,6 @@ var actions = [
 var modals = {
 	providerADD: false,
 	unit_ADD_inform: false,
-	presentation_ADD_inform: false
+	presentation_ADD_inform: false,
+	family_ADD_inform: false
 };
