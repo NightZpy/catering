@@ -19,6 +19,7 @@ class UtensilTableSeeder extends Seeder
             $utensil = [
                 'name'                => "Utensil-$i",
                 'stock'               => rand(10, 9999),
+                'cost'               => rand(1, 9999),
                 'category_id' => $categoryId
             ];
             Utensil::create($utensil);

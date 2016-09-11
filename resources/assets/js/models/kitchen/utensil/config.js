@@ -2,6 +2,7 @@ var objectRow = {
 	id: "",
 	name: "",
 	stock: "",
+	cost: "",
 	category_id: ""
 };
 
@@ -20,6 +21,17 @@ var tableColumns = [
 	{
 	    name: 'stock',
 	    sortField: 'stock',
+	    visible: true
+	},
+	{
+	    name: 'cost',
+	    sortField: 'cost',
+	    visible: true
+	},
+	{
+		name: 'total_cost_format',
+	    sortField: 'total_cost',
+	    title: 'Costo total',
 	    visible: true
 	},
 	{
