@@ -18,6 +18,8 @@
         <!-- --------- Modals ---------- -->  
         @include('kitchen.items.form')
         @include('kitchen.items.providers.add')             
+        @include('kitchen.items.units.add')             
+        @include('kitchen.items.presentations.add')             
         @include('kitchen.items.delete')
         @include('kitchen.items.show')
         @include('layouts.modal.info')        
@@ -40,12 +42,20 @@
                     select: {
                         method: 'GET' ,
                         url: "{{ route('api.v1.units.select-list') }}/"
+                    }, 
+                    store: {
+                        method: 'POST' ,
+                        url: "{{ route('api.v1.units.store') }}"
                     }
                 },
                 presentation: { 
                     select: {
                         method: 'GET' ,
                         url: "{{ route('api.v1.presentations.select-list') }}/"
+                    }, 
+                    store: {
+                        method: 'POST' ,
+                        url: "{{ route('api.v1.presentations.store') }}"
                     }
                 },
                 family: { 
@@ -88,11 +98,24 @@
     <script src="/app/js/crud.js"></script>    
     <script>
         var vm = window.vm;
+
+        var loadUnits = function () {
+            vm.getForeignData(vm.url.foreign.unit.select.url, 'unitOptions', 'unit', 'select');
+        };
+
+        var loadUPresentations = function () {
+            vm.getForeignData(vm.url.foreign.presentation.select.url, 'presentationOptions', 'presentation', 'select');
+        };
+
+        var loadFamilies = function () {
+            vm.getForeignData(vm.url.foreign.family.select.url, 'familyOptions', 'family', 'select');
+        };
+
         vm.$watch('formModal', function (value) {
             if (value) {
-                this.getForeignData(this.url.foreign.unit.select.url, 'unitOptions', 'unit', 'select');
-                this.getForeignData(this.url.foreign.presentation.select.url, 'presentationOptions', 'presentation', 'select');
-                this.getForeignData(this.url.foreign.family.select.url, 'familyOptions', 'family', 'select');
+                loadUnits();
+                loadUPresentations();
+                loadFamilies();
             }
         });
 
@@ -101,9 +124,27 @@
         });
 
         vm.$watch('localModals.providerADD', function (value) {
-            if (value) 
+            if ( value ) 
                 this.getForeignData(this.url.foreign.provider.relate_list.url + this.row.id, 'providerOptions', 'provider', 'relate_list');
+        });
+
+        /**
+         * Load unit list after add new unit from add new item form
+         */
+        vm.$watch('localModals.unitADD', function (value) {
+            if ( !value )
+                loadUnits();
+        });
+
+        /**
+         * Load presentation list after add new presentation from add new item form
+         */
+        vm.$watch('localModals.presentationADD', function (value) {
+            if ( !value )
+                loadUPresentations();
         });        
+
+
     </script>  
 @endpush
 

@@ -16502,13 +16502,15 @@ window.vm = new Vue({
     },
     methods: {
         submit: function submit() {
-            var related = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+            var model = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
             var type = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+            var related = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
+            var actionUrl = null;
             this.row._token = token;
-            //console.log('Related: ' + related + ' | Type: ' + type);
-            //console.log('Event: ' + e);
-            if (!related || related.target) {
+            var data = this.row;
+
+            if (!model || model.target) {
                 var actionUrl = this.url.store;
                 if (this.method == 'PATCH' || this.method == 'POST') {
                     if (this.method == 'PATCH') {
@@ -16516,22 +16518,25 @@ window.vm = new Vue({
                     }
                 } else if (this.method == 'DELETE') {
                     actionUrl = this.url.delete + this.row.id;
-                    console.log('ActionUrl: ' + actionUrl);
                 }
-            } else {
-                var url = this.url.foreign[related][type].url;
-                var method = this.url.foreign[related][type].method;
-                var relatedKey = 'pivot_' + related;
-                var relatedId = this.row[related]['id'];
-                //console.log('Related: ' + relatedId);
-                /*if (!relatedId) {
-                    relatedId = this.row[relatedKey][related + '_id'];
+            } else if (related) {
+                var url = this.url.foreign[model][type].url;
+                var method = this.url.foreign[model][type].method;
+                var modelId = this.row[model]['id'];
+                //var modelKey = 'pivot_' + model;
+                //console.log('Related: ' + modelId);
+                /*if (!modelId) {
+                    modelId = this.row[modelKey][model + '_id'];
                 }*/
-                var actionUrl = url + this.row.id + '/' + relatedId;
+                actionUrl = url + this.row.id + '/' + modelId;
                 this.method = method;
+            } else {
+                actionUrl = this.url.foreign[model][type].url;
+                this.method = this.url.foreign[model][type].method;
+                data = this.row[model];
+                data._token = token;
             }
-            //this.$http({actionUrl, this.method, data}).then(this.success, this.failed);
-            this.sendData(actionUrl, this.method, this.row).then(this.success, this.failed);
+            this.sendData(actionUrl, this.method, data).then(this.success, this.failed);
         },
         getData: function getData() {
             var url = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];

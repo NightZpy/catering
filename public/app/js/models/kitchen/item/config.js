@@ -34,6 +34,15 @@ var objectRow = {
 		price: "",
 		selected: "",      
 		provider_id: ""			
+	},
+	unit: {
+		id: "",
+		name: "",
+		symbol: ""
+	},
+	presentation: {
+		id: "",
+		name: ""
 	}
 };
 
@@ -57,14 +66,14 @@ var tableColumns = [
 	},
 	{
 	    name: 'auto_provider_format',
-	    sortField: 'auto_provider_format',
+	    sortField: 'auto_provider',
 	    match: 'auto_provider',
 	    title: 'Auto-proveedor',
 	    visible: true
 	},
 	{
 	    name: 'perishable_format',
-	    sortField: 'perishable_format',
+	    sortField: 'perishable',
 	    title: 'Perecible',
 	    visible: true
 	},
@@ -151,5 +160,7 @@ var actions = [
 ];
 
 var modals = {
-	providerADD: false
+	providerADD: false,
+	unitADD: false,
+	presentationADD: false
 };

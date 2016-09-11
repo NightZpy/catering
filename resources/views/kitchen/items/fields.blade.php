@@ -25,11 +25,11 @@
 				</div>
 
 				<!-- SubFamily Id Field -->
-				<div v-if="foreignData.familyOptionsCount > 0" class="form-group col-sm-6" class="form-group col-sm-6">
+				<div class="form-group col-sm-6" class="form-group col-sm-6">
 				    <label for="sub_family_id">Sub-Familia:</label>
 					{{-- <v-select></v-select> --}}
-					<select class="form-control" v-model="row.sub_family_id" v-validate:sub_family_id="{ required: true }">
-						<option value="" selected="selected">-- Seleccione una sub-familia --</option>
+					<select :disabled="" class="form-control" v-model="row.sub_family_id" v-validate:sub_family_id="{ required: true }">
+						<option value="foreignData.familyOptionsCount > 0" selected="selected">-- Seleccione una sub-familia --</option>
 						<option v-for="option in foreignData.subFamilyOptions" v-bind:value="option.id">	
 							@{{ option.name }}
 						</option>
@@ -104,12 +104,19 @@
 				<div class="form-group col-sm-6">
 				    <label for="unit_id">Unidad:</label>
 					{{-- <v-select></v-select> --}}
-					<select class="form-control" v-model="row.unit_id" v-validate:unit_id="{ required: true }">
-						<option value="" selected="selected">-- Seleccione unidad --</option>
-						<option v-for="(id, name) in foreignData.unitOptions" v-bind:value="id">	
-							@{{ name }}
-						</option>
-					</select>
+					<div class="input-group">
+						<select class="form-control" v-model="row.unit_id" v-validate:unit_id="{ required: true }">
+							<option value="" selected="selected">-- Seleccione unidad --</option>
+							<option v-for="(id, name) in foreignData.unitOptions" v-bind:value="id">	
+								@{{ name }}
+							</option>
+						</select>
+						<span class="input-group-btn">
+	    					<button class="btn btn-primary" @click="modal('unitADD')">
+	    						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    						</button>
+	  					</span>
+  					</div>
 				    <div v-if="$validation.unit_id.invalid" class="alert alert-danger" role="alert">
 						<div v-if="$validation.unit_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Error:</span>
@@ -121,13 +128,19 @@
 				<!-- Presentation Id Field -->
 				<div class="form-group col-sm-6">
 				    <label for="presentation_id">Presentación:</label>
-					{{-- <v-select></v-select> --}}
-					<select class="form-control" v-model="row.presentation_id" v-validate:presentation_id="{ required: true }">
-						<option value="" selected="selected">-- Seleccione presentacion --</option>
-						<option v-for="(id, name) in foreignData.presentationOptions" v-bind:value="id">
-							@{{ name }}
-						</option>
-					</select>
+				    <div class="input-group">
+						<select class="form-control" v-model="row.presentation_id" v-validate:presentation_id="{ required: true }">
+							<option value="" selected="selected">-- Seleccione presentacion --</option>
+							<option v-for="(id, name) in foreignData.presentationOptions" v-bind:value="id">
+								@{{ name }}
+							</option>
+						</select>
+						<span class="input-group-btn">
+	    					<button class="btn btn-primary" @click="modal('presentationADD')">
+	    						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    						</button>
+	  					</span>
+  					</div>
 				    <div v-if="$validation.presentation_id.invalid" class="alert alert-danger" role="alert">
 						<div v-if="$validation.presentation_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Error:</span>
