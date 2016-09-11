@@ -8,7 +8,7 @@ var VuetablePaginationBootstrap = require('vuetable/src/components/VuetablePagin
 var VuetablePaginationSimple = require('../vendor/vue-table/components/VuetablePaginationSimple.vue')
 var VueEditable = require('../vendor/vue-editable/vue-editable.js')
 var VueStrap = require('../vendor/vue-strap/vue-strap.min.js')
-var vSelect = require('vue-select')
+var VueSelect = require('vue-select')
 var CustomVueSelectTemplate = require('./vue-components/vue-select.vue')
 var VueValidator = require('vue-validator')
 const decamelize = require('decamelize');
@@ -17,7 +17,8 @@ Vue.use(VueResource)
 Vue.use(VueEditable)
 Vue.use(VueValidator)
 
-Vue.component('v-select', vSelect)
+//Vue.component('v-select', vSelect)
+Vue.component('v-select', VueSelect.VueSelect);
 Vue.component('vuetable', Vuetable);
 Vue.component('vuetable-pagination', VuetablePagination)
 Vue.component('vuetable-pagination-dropdown', VuetablePaginationDropdown)
@@ -299,6 +300,18 @@ window.vm = new Vue({
                 this.lastOpenModal.push(type);
                 this.localModals[type] = true;                
             }
+        },
+        objectToArrayObject: function(object) {
+            var array = []
+            for (var key in object) {
+                if (object.hasOwnProperty(key)) {
+                    var data = {}
+                    data.label = object[key];
+                    data.value = key;
+                    array.push(data);
+                }
+            }
+            return array;
         },
         /*
          * Table methods
