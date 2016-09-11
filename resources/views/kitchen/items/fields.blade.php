@@ -164,7 +164,9 @@
 				<!-- Currency Field -->
 				<div class="form-group col-sm-6">
 				    <label for="currency">Moneda:</label>
-				    <input type="text" class="form-control" v-model="row.currency" v-validate:currency="{ required: true, minlength: 1, maxlength: 128 }" data-type="text" />
+				    <input type="text" class="form-control" v-model="row.currency" v-validate:currency="{ required: true, minlength: 1, maxlength: 128 }" 
+				    data-type="text" 
+				    placeholder="Soles" />
 				    <div v-if="$validation.currency.invalid" class="alert alert-danger" role="alert">
 							<div v-if="$validation.currency.required">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

@@ -135,6 +135,7 @@
 
         vm.$watch('row.family_id', function (value) {
             loadSubFamilies();
+            this.row.subFamily.family_id = value;
         });
 
         vm.$watch('localModals.providerADD', function (value) {
