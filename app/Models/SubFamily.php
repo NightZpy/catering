@@ -81,12 +81,16 @@ class SubFamily extends Model
 
     public function getFamilyCodeAttribute()
     {
-        return $this->family->code;
+        if ($this->family)   
+            return $this->family->code;
+        return false;
     }
 
     public function getFamilyNameAttribute()
     {
-        return $this->family->name;
+        if ($this->family)   
+            return $this->family->name;
+        return false;
     }
 
 }
