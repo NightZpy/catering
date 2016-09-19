@@ -159,7 +159,9 @@ class Item extends Model
     
     public function getFamilyIdAttribute()
     {
-        return $this->family->id;
+    	if ($this->family)   
+        	return $this->family->id;
+        return false;
     }
 
     public function getFamilyCodeAttribute()
@@ -171,7 +173,9 @@ class Item extends Model
 
     public function getFamilyNameAttribute()
     {
-        return $this->family->name;
+    	if ($this->family) 
+        	return $this->family->name;
+        return false;
     }    
 
     public function getSubFamilyCodeAttribute()
