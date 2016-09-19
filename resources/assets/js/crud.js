@@ -9,6 +9,7 @@ var VuetablePaginationSimple = require('../vendor/vue-table/components/VuetableP
 var VueEditable = require('../vendor/vue-editable/vue-editable.js')
 var VueStrap = require('../vendor/vue-strap/vue-strap.min.js')
 var VueSelect = require('vue-select')
+var select2 = require('select2-browserify');
 var CustomVueSelectTemplate = require('./vue-components/vue-select.vue')
 var VueValidator = require('vue-validator')
 const decamelize = require('decamelize');

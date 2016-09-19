@@ -97,10 +97,11 @@
 		</div>    
 	</div>	
 
-	{{-- <!-- Category Id Field -->
+	<!-- Category Id Field -->
 	<div class="form-group col-sm-6">
 	    <label for="category_id">Categoria:</label>
 		<v-select
+			v-validate:category_id="{ required: true }"
 			multiple 
 			:value.sync="row.category_id" 
 			:options="objectToArrayObject(foreignData.utensilCategoriesOptions)">				
@@ -112,5 +113,5 @@
 				La categoría es obligatoria
 			</div>
 		</div>    
-	</div> --}}				
+	</div>				
 </validator>	
