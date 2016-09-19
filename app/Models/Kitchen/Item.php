@@ -164,7 +164,9 @@ class Item extends Model
 
     public function getFamilyCodeAttribute()
     {
-        return $this->family->code;
+    	if ($this->family)    	
+        	return $this->family->code;
+        return false;
     }
 
     public function getFamilyNameAttribute()
