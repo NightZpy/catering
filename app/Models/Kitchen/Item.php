@@ -211,9 +211,12 @@ class Item extends Model
 
     public function getComposeCodeAttribute()
     {
-        $familyCode = $this->family->code;
-        $subFamilyCode = $this->subFamily->code;
-        return $familyCode . $subFamilyCode . $this->code;
+    	if ($this->family) {  
+	        $familyCode = $this->family->code;
+	        $subFamilyCode = $this->subFamily->code;
+	        return $familyCode . $subFamilyCode . $this->code;
+	    }
+	    return false;
     }  
 
     public function getAutoProviderFormatAttribute()
