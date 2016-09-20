@@ -37,8 +37,14 @@ elixir(function(mix) {
         'dataTables/1.10.11/dataTables.bootstrap.min.js'        
     ], 'public/app/js/app.min.js');
 
+    /*mix.scripts(['../vendor/vue-strap/vue-strap.min.js'], 
+        'public/app/js/vue-strap/vue-strap.min.js')
 
-    mix.browserify('crud.js', 'public/app/js/crud.js');
+    mix.scripts(['../vendor/vue-strap/vue-strap-lang.js'], 
+        'public/app/js/vue-strap/lang.js')*/
+
+
+    mix.browserify('crud.js', 'public/app/js/crud.js');    
     // Add all model-config.js and generate 
     // then using gulp, but, generate one for each model.
 	 mix.scripts(['models/kitchen/provider/config.js'], 'public/app/js/models/kitchen/provider/config.js')

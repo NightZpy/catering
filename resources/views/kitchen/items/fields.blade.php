@@ -16,6 +16,16 @@
 								@{{ name }}
 							</option>
 						</select>
+						{{-- <v-select
+							v-validate:family_id="{ required: true }"
+							:options="objectToArrayObject(foreignData.familyOptions)"
+							placeholder="Seleccione una familia"
+							:value.sync="row.family_id"
+							search justified required  clear-button  close-on-select>
+							<v-option v-for="(id, name) in foreignData.familyOptions" :value="id">		
+								@{{ name }}
+							</v-option>
+						</v-select> --}}
 						<span class="input-group-btn">
 	    					<button class="btn btn-primary" @click="modal('family_ADD_inform')">
 	    						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

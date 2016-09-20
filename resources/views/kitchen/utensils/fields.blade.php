@@ -83,28 +83,12 @@
 	<!-- Category Id Field -->
 	<div class="form-group col-sm-6">
 	    <label for="category_id">Categoria:</label>
-		<select class="form-control" v-model="row.category_id" v-validate:category_id="{ required: true }">
-			<option value="" selected="selected">-- Seleccione un tipo --</option>
-			<option v-for="(id, name) in foreignData.utensilCategoriesOptions" v-bind:value="id">		
-				@{{ name }}
-			</option>
-		</select>
-	    <div v-if="$validation.category_id.invalid" class="alert alert-danger" role="alert">
-			<div v-if="$validation.category_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				La categoría es obligatoria
-			</div>
-		</div>    
-	</div>	
-
-	<!-- Category Id Field -->
-	<div class="form-group col-sm-6">
-	    <label for="category_id">Categoria:</label>
 		<v-select
 			v-validate:category_id="{ required: true }"
-			multiple 
-			:value.sync="row.category_id" 
-			:options="objectToArrayObject(foreignData.utensilCategoriesOptions)">				
+			:options="objectToArrayObject(foreignData.utensilCategoriesOptions)"
+			placeholder="Seleccione una categoría"
+			:value.sync="row.category_id"
+			search justified required  clear-button  close-on-select>
 		</v-select>
 	    <div v-if="$validation.category_id.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validation.category_id.required">
@@ -113,5 +97,5 @@
 				La categoría es obligatoria
 			</div>
 		</div>    
-	</div>				
-</validator>	
+	</div>			
+</validator>

@@ -44,7 +44,7 @@
                 },
             }
         };
-    </script>
+    </script>  
     <script src="/app/js/crud.js"></script>   
     <script>
         var vm = window.vm;
@@ -52,7 +52,15 @@
             if (value) {
                 this.getForeignData(this.url.foreign.category.select.url, 'utensilCategoriesOptions', 'category', 'select')
             }
-        });       
+        }); 
+
+        vm.$watch('row.category_id', function (value) {
+            if ( value.length > 0 )
+                vm.$validation.category_id.invalid = false;
+            else
+                vm.$validation.category_id.invalid = true;
+            vm.$validation.category_id.valid = ! vm.$validation.category_id.invalid;
+        });        
     </script>       
 @endpush
 
