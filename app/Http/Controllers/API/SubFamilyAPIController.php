@@ -47,15 +47,7 @@ class SubFamilyAPIController extends InfyOmBaseController
         }
 
         if ($request->exists('filter')) {
-            $value = "%{$request->filter}%";
-
-            $query->where(function($q) use($value) {
-                $q->where("name", "like", $value);
-                
-                $q->orWhereHas('family', function($q) use ($value){
-                    $q->where('families.name', "like", $value);      
-                });              
-            });                      
+            $query->search("{$request->filter}");                      
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;

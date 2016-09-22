@@ -4,6 +4,7 @@ namespace App\Models\Kitchen\Recipe;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\SearchTrait;
 
 /**
  * Class RecipeType
@@ -11,10 +12,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class RecipeType extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchTrait;
 
     public $table = 'recipe_types';
-    
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */  
+    protected $searchableColumns = [
+        'name'
+    ];      
 
     protected $dates = ['deleted_at'];
 

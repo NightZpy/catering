@@ -1,0 +1,37 @@
+<?php
+namespace App\Models;
+
+trait SearchTrait {
+    public function scopeSearch($query, $string)
+    {
+        if ( empty ( $string ) || !strlen ( $string ) )
+            return $query;
+        
+        $i = 0;
+        $searchString = "%$string%";
+        foreach ($this->searchableColumns as $key => $field) {
+            if ( is_array ( $field ) ) {                
+                $fields = $field;
+                $relation = $table = $key;
+                if (key_exists( 'table', $fields )) {
+                    $table = $fields['table'];
+                    unset ( $fields['table'] );
+                }
+                $where = 'orWhereHas';
+                if ( $i == 0)
+                    $where = 'whereHas';
+                $query->$where($relation, function($q) use ($searchString, $relation, $fields, $table) {
+                    foreach ($fields as $relationField)   
+                            $q->orWhere($table . '.' . $relationField, "LIKE", $searchString);
+                });                   
+            } else {
+                $where = 'orWhere';
+                if ( $i == 0)
+                    $where = 'where';                    
+                $query->$where( $field, 'LIKE', $searchString );
+            }
+            $i = 1;
+        }
+        return $query;
+    }
+}

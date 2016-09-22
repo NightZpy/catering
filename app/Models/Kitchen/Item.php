@@ -1,15 +1,15 @@
 <?php
-
 namespace App\Models\Kitchen;
 
+use App\Models\Family;
+use App\Models\Kitchen\Recipe\BaseRecipe;
+use App\Models\Presentation;
+use App\Models\SubFamily;
+use App\Models\Type;
+use App\Models\Unit;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Family;
-use App\Models\SubFamily;
-use App\Models\Unit;
-use App\Models\Presentation;
-use App\Models\Type;
-use App\Models\Kitchen\Recipe\BaseRecipe;
+use App\Models\SearchTrait;
 
 /**
  * Class Item
@@ -17,10 +17,38 @@ use App\Models\Kitchen\Recipe\BaseRecipe;
  */
 class Item extends Model
 {
-    use SoftDeletes, \Znck\Eloquent\Traits\BelongsToThrough;
-
+    use SoftDeletes, \Znck\Eloquent\Traits\BelongsToThrough, SearchTrait;
 
     public $table = 'items';
+    protected $searchableColumns = [
+        'name', 
+        'type',
+        'providers' => [
+            'name', 
+            'specialty'
+        ],
+        'bases' => [
+            'table' => 'base_recipes',
+            'name'
+        ], 
+        'family' => [
+            'table' => 'families',
+            'name'
+        ],
+        'subFamily' => [
+            'table' => 'sub_families',
+            'name'
+        ],
+        'unit' => [
+            'table' => 'units',
+            'name'
+        ],
+        'presentation' => [
+            'table' => 'presentations',
+            'name'
+        ]               
+    ];
+
     
     protected $appends = [
         'code',
@@ -38,7 +66,9 @@ class Item extends Model
         'cost',
         'low_provider',
         'family_id'
-    ];    
+    ]; 
+
+
 
     protected $dates = ['deleted_at'];
 

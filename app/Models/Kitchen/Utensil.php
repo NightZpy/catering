@@ -4,6 +4,7 @@ namespace App\Models\Kitchen;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\SearchTrait;
 
 /**
  * Class Utensil
@@ -11,10 +12,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Utensil extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchTrait;
 
     public $table = 'utensils';
     
+    protected $searchableColumns = [
+        'name',
+        'category' => [
+            'table' => 'categories',
+            'name'
+        ]
+    ];     
+
     protected $appends = [
         'category_name',
         'total_cost',

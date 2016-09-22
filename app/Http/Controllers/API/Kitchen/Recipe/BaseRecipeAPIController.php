@@ -54,11 +54,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
         }
 
         if ($request->exists('filter')) {
-            $value = "%{$request->filter}%";
-            $query->where(function($q) use($value) {
-                $q->where("name", "like", $value);
-            });
-            //$query->search($request->filter);
+            $query->search("{$request->filter}");
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\SearchTrait;
 
 /**
  * Class Presentation
@@ -15,6 +16,9 @@ class Presentation extends Model
 
     public $table = 'presentations';
     
+    protected $searchableColumns = [
+        'name'
+    ];  
 
     protected $dates = ['deleted_at'];
 

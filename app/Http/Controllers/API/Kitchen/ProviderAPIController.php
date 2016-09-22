@@ -45,15 +45,7 @@ class ProviderAPIController extends InfyOmBaseController
         }
 
         if ($request->exists('filter')) {
-            $query->where(function($q) use($request) {
-                $value = "%{$request->filter}%";
-                $q->where("code", "like", $value)
-                  ->orWhere("name", "like", $value)
-                  ->orWhere("specialty", "like", $value)
-                  ->orWhere("district", "like", $value)
-                  ->orWhere("contact", "like", $value)
-                  ->orWhere("email", "like", $value);
-            });
+            $query->search("{$request->filter}");
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;

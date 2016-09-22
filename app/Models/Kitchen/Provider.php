@@ -4,6 +4,7 @@ namespace App\Models\Kitchen;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\SearchTrait;
 
 /**
  * Class Provider
@@ -11,10 +12,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Provider extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchTrait;
 
     public $table = 'providers';
     
+    protected $searchableColumns = [
+        'name', 
+        'specialty',
+        'items' => [
+            'name', 
+            'type'
+        ]               
+    ];
 
     protected $dates = ['deleted_at'];
 

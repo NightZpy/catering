@@ -45,12 +45,7 @@ class UtensilAPIController extends InfyOmBaseController
         }
 
         if ($request->exists('filter')) {
-            $query->where(function($q) use($request) {
-                $value = "%{$request->filter}%";
-                $q->where("name", "like", $value)
-                  ->orWhere("stock", "like", $value)
-                  ->orWhere("category_id", "like", $value);
-            });
+            $query->search("{$request->filter}");
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;

@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Kitchen\Item;
+use App\Models\SearchTrait;
 
 /**
  * Class SubFamily
@@ -12,9 +13,20 @@ use App\Models\Kitchen\Item;
  */
 class SubFamily extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchTrait;
 
     public $table = 'sub_families';
+
+    protected $searchableColumns = [
+        'name',
+        'family' => [
+            'table' => 'families',
+            'name'
+        ],
+        'items' => [
+            'name'
+        ]
+    ];      
 
     protected $appends = [
         'code',

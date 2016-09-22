@@ -7,7 +7,7 @@ use App\Models\Kitchen\Recipe\RecipeType;
 use App\Models\Kitchen\Utensil;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Sofa\Eloquence\Eloquence;
+use App\Models\SearchTrait;
 
 /**
  * Class Recipe
@@ -15,11 +15,24 @@ use Sofa\Eloquence\Eloquence;
  */
 class Recipe extends Model
 {
-    use Eloquence;
+    use SearchTrait;
     use SoftDeletes;
 
     public $table = 'recipes';
     
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */  
+    protected $searchableColumns = [
+        'name',
+        'servings_quantity'
+        'type' => [
+            'table' => 'types',
+            'name'
+        ]
+    ];  
 
     protected $dates = ['deleted_at'];
 
@@ -31,20 +44,6 @@ class Recipe extends Model
         'photo',
         'type_id'
     ];
-
-    protected $searchableColumns = [
-        'columns' => [
-            'recipes.name' => 10,
-            'recipes.description' => 2,
-            'recipe_types.name' => 3,
-            //'items.name' => 2,
-        ],
-        'joins' => [
-            //'base_recipe_item' => ['base_recipes.id', 'base_recipe_item.base_id'],
-            //'items' => ['base_recipe_item.item_id','items.id'],
-            'recipe_types' => ['recipes.type_id','recipe_types.id']
-        ],
-    ]; 
 
     protected $appends = [
         'code',

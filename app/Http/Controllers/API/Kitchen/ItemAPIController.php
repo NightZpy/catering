@@ -22,7 +22,7 @@ use App\Http\Controllers\API\DataFormat;
 
 class ItemAPIController extends InfyOmBaseController
 {
-    use DataFormat;
+    use DataFormat;    
 
     /** @var  ItemRepository */
     private $repository;
@@ -43,6 +43,8 @@ class ItemAPIController extends InfyOmBaseController
      */
     public function index(Request $request)
     {
+        //return Item::search($request->filter)->get();
+
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
             $query = Item::orderBy($sortCol, $sortDir);
@@ -51,8 +53,11 @@ class ItemAPIController extends InfyOmBaseController
         }
 
         if ($request->exists('filter')) {
-            $query->where(function($q) use($request) {
+          $query->search("{$request->filter}");
+            /*$query->where(function($q) use($request) {
                 $value = "%{$request->filter}%";
+                \Debugbar::info($value);
+                $q->search($value);
                 $q->orWhere("name", "like", $value)
                   ->orWhere("auto_provider", "like", $value)
                   ->orWhere("type", "like", $value)
@@ -70,7 +75,7 @@ class ItemAPIController extends InfyOmBaseController
                   $q->orWhereHas('family', function($q) use ($value){
                     $q->orWhere("families.name", "like", $value);
                   });
-            });                      
+            });*/                      
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;

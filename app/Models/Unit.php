@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\SearchTrait;
 
 /**
  * Class Unit
@@ -11,10 +12,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Unit extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchTrait;
 
     public $table = 'units';
-    
+ 
+    protected $searchableColumns = [
+        'name'
+    ];         
 
     protected $dates = ['deleted_at'];
 

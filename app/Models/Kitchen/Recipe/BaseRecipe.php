@@ -6,8 +6,8 @@ use App\Models\Kitchen\Item;
 use App\Models\Kitchen\Utensil;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Nicolaslopezj\Searchable\SearchableTrait;
 use App\Models\Kitchen\BaseRecipeItemPivot;
+use App\Models\SearchTrait;
 
 /**
  * Class BaseRecipe
@@ -16,7 +16,7 @@ use App\Models\Kitchen\BaseRecipeItemPivot;
 class BaseRecipe extends Model
 {
     use SoftDeletes;
-    use SearchableTrait;
+    use SearchTrait;
 
     public $table = 'base_recipes';
 
@@ -24,20 +24,15 @@ class BaseRecipe extends Model
      * Searchable rules.
      *
      * @var array
-     */
-    protected $searchable = [
-        'columns' => [
-            'base_recipes.name' => 10,
-            'base_recipes.description' => 2,
-            'recipe_types.name' => 3,
-            //'items.name' => 2,
-        ],
-        'joins' => [
-            //'base_recipe_item' => ['base_recipes.id', 'base_recipe_item.base_id'],
-            //'items' => ['base_recipe_item.item_id','items.id'],
-            'recipe_types' => ['base_recipes.type_id','recipe_types.id']
-        ],
-    ];    
+     */  
+    protected $searchableColumns = [
+        'name',
+        'servings_quantity'
+        'type' => [
+            'table' => 'types',
+            'name'
+        ]
+    ];       
     
     protected $appends = [
         'code',
