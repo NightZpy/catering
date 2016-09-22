@@ -187,7 +187,7 @@ class ItemAPIController extends InfyOmBaseController
              ->findWithoutFail($id)
              ->providers()
              ->whereProviderId($providerId)->count();
-
+        
         if ($exists) {
           $item->providers()->updateExistingPivot($providerId, $attributes['pivot']);
         } else {

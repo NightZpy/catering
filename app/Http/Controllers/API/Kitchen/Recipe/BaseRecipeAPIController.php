@@ -179,6 +179,9 @@ class BaseRecipeAPIController extends InfyOmBaseController
              ->items()
              ->whereItemId($itemId)->count();
 
+        if ( isset( $attributes['pivot']['item'] ) )
+            unset( $attributes['pivot']['item'] );
+        
         if ($exists) {
           $baseRecipe->items()->updateExistingPivot($itemId, $attributes['pivot']);
         } else {

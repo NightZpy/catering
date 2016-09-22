@@ -101,7 +101,6 @@ window.vm = new Vue({
             var actionUrl = null;
             this.row._token = token;
             var data = this.row; 
-
             if (!model || model.target ) {
                 var actionUrl = this.url.store;
                 if (this.method == 'PATCH' || this.method == 'POST') {
@@ -110,7 +109,7 @@ window.vm = new Vue({
                     }  
                 } else if (this.method == 'DELETE') {
                     actionUrl = this.url.delete + this.row.id;                
-                }   
+                }  
             } else if( related ) {                     
                 var url = this.url.foreign[model][type].url;
                 var method = this.url.foreign[model][type].method;
@@ -121,12 +120,13 @@ window.vm = new Vue({
                     modelId = this.row[modelKey][model + '_id'];
                 }*/
                 actionUrl = url + this.row.id + '/' + modelId;
-                this.method = method;                
+                this.method = method;  
+                console.log(actionUrl);
             } else {
                 actionUrl = this.url.foreign[model][type].url;
                 this.method = this.url.foreign[model][type].method;  
                 data = this.row[model];
-                data._token = token;              
+                data._token = token;   
             }
             this.sendData(actionUrl, this.method, data)
                 .then(this.success, this.failed);

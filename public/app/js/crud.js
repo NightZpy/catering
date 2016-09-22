@@ -16967,7 +16967,6 @@ window.vm = new Vue({
             var actionUrl = null;
             this.row._token = token;
             var data = this.row;
-
             if (!model || model.target) {
                 var actionUrl = this.url.store;
                 if (this.method == 'PATCH' || this.method == 'POST') {
@@ -16988,6 +16987,7 @@ window.vm = new Vue({
                 }*/
                 actionUrl = url + this.row.id + '/' + modelId;
                 this.method = method;
+                console.log(actionUrl);
             } else {
                 actionUrl = this.url.foreign[model][type].url;
                 this.method = this.url.foreign[model][type].method;

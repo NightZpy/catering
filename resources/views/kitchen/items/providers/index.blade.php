@@ -82,10 +82,20 @@
     <script src="/app/js/crud.js"></script>  
     <script>
         var vm = window.vm;
+
+        var loadAvailableProviders = function () {
+            vm.getForeignData(vm.url.foreign.provider.relate_list.url + vm.row.id, 'providerOptions', 'provider', 'relate_list');
+        }
+
         vm.$watch('localModals.providerADD', function (value) {
-            if (value) 
-                this.getForeignData(this.url.foreign.provider.relate_list.url + this.row.id, 'providerOptions', 'provider', 'relate_list');
-        });        
+            if (value)
+                loadAvailableProviders();
+        });  
+
+        vm.$watch('localModals.providerEDIT', function (value) {
+            if (value)
+                 loadAvailableProviders();
+        });      
     </script>       
 @endpush
 
