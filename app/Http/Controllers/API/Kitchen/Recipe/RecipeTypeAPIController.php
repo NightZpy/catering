@@ -41,7 +41,7 @@ class RecipeTypeAPIController extends InfyOmBaseController
     public function index(Request $request)
     {
         if (request()->has('sort')) {
-            list($sortCol, $sortDir) = explode('|', request()->sort);
+            list($sortCol, $sortDir) = explode('|', request()->sort);            
             $query = RecipeType::orderBy($sortCol, $sortDir);
         } else {
             $query = RecipeType::orderBy('created_at', 'asc');

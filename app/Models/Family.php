@@ -12,7 +12,7 @@ use App\Models\SearchTrait;
  */
 class Family extends Model
 {
-    use SoftDeletes SearchTrait;
+    use SoftDeletes, SearchTrait;
 
     public $table = 'families';
 

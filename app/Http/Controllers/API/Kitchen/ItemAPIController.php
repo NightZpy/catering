@@ -47,39 +47,30 @@ class ItemAPIController extends InfyOmBaseController
 
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = Item::orderBy($sortCol, $sortDir);
+            if (\Schema::hasColumn('items', $sortCol) ) 
+              $query = Item::orderBy($sortCol, $sortDir);
+            else
+              $query = Item::orderBy('created_at', 'asc');
         } else {
             $query = Item::orderBy('created_at', 'asc');
         }
 
         if ($request->exists('filter')) {
-          $query->search("{$request->filter}");
-            /*$query->where(function($q) use($request) {
-                $value = "%{$request->filter}%";
-                \Debugbar::info($value);
-                $q->search($value);
-                $q->orWhere("name", "like", $value)
-                  ->orWhere("auto_provider", "like", $value)
-                  ->orWhere("type", "like", $value)
-                  ->orWhere("perishable", "like", $value)
-                  ->orWhere("currency", "like", $value);
-                  
-                  $q->orWhereHas('subFamily', function($q) use ($value){
-                    $q->orWhere("sub_families.name", "like", $value);
-                  });
-
-                  $q->orWhereHas('presentation', function($q) use ($value){
-                    $q->orWhere("presentations.name", "like", $value);
-                  });
-
-                  $q->orWhereHas('family', function($q) use ($value){
-                    $q->orWhere("families.name", "like", $value);
-                  });
-            });*/                      
+          $query->search("{$request->filter}");                     
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
-        return response()->json($query->paginate($perPage));    
+        if ( $sortCol && !\Schema::hasColumn('items', $sortCol) ) {
+          /*\Debugbar::info($sortCol);
+          if ($sortDir == 'desc')
+            $result = $query->paginate($perPage)->sortByDesc($sortCol);
+          else
+            $result = $query->paginate($perPage)->sortBy($sortCol);*/
+        } else {
+          $result = $query->paginate($perPage);
+        }
+
+        return response()->json($result);
     }
 
     /**
