@@ -6,6 +6,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Kitchen\Item;
 use App\Models\SearchTrait;
+use App\Models\SortTrait;
 
 /**
  * Class SubFamily
@@ -13,7 +14,7 @@ use App\Models\SearchTrait;
  */
 class SubFamily extends Model
 {
-    use SoftDeletes, SearchTrait;
+    use SoftDeletes, SearchTrait, SortTrait;
 
     public $table = 'sub_families';
 

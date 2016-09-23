@@ -42,7 +42,10 @@ class PresentationAPIController extends InfyOmBaseController
     {
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = Presentation::orderBy($sortCol, $sortDir);
+            if ( \Schema::hasColumn('presentations', $sortCol) ) 
+              $query = Presentation::orderBy($sortCol, $sortDir);
+            else
+              $query = Presentation::sortBy($sortCol, $sortDir);
         } else {
             $query = Presentation::orderBy('created_at', 'asc');
         }

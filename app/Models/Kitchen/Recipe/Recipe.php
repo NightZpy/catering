@@ -8,6 +8,7 @@ use App\Models\Kitchen\Utensil;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\SearchTrait;
+use App\Models\SortTrait;
 
 /**
  * Class Recipe
@@ -17,6 +18,7 @@ class Recipe extends Model
 {
     use SearchTrait;
     use SoftDeletes;
+    use SortTrait;
 
     public $table = 'recipes';
     

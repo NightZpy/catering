@@ -24,7 +24,7 @@ var tableColumns = [
     {
         name: 'family_name',
         title: 'Familia',
-        sortField: 'family_name',
+        sortField: 'family.name',
         visible: true
     },
     {

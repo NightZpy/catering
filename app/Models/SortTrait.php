@@ -12,7 +12,21 @@ trait SortTrait {
 
             if ( $argLength == 2 ) {
                 list($relation, $field) = explode('.', $field);
-                $table = str_plural($relation);
+
+                /*$relationName = explode(':', $relation);
+
+                if ( count( $relationName ) > 1 ) {
+                    $relation = $relationName[1];
+                    if ($relationName[0] == 'table') {
+                        $class = get_class($faq->products()->getRelated());
+                        $table = $class::table;
+                    }
+                } else {
+                    $table = str_plural($relation);                    
+                }*/
+                $table = str_plural($relation);                    
+                
+                
                 $query->join(
                         $table, 
                         $this->table . '.' . $relation . '_id', 

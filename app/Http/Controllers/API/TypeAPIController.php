@@ -42,7 +42,10 @@ class TypeAPIController extends InfyOmBaseController
     {
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = Type::orderBy($sortCol, $sortDir);
+            if ( \Schema::hasColumn('types', $sortCol) ) 
+              $query = Type::orderBy($sortCol, $sortDir);
+            else
+              $query = Type::sortBy($sortCol, $sortDir);
         } else {
             $query = Type::orderBy('created_at', 'asc');
         }

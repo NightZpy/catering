@@ -8,6 +8,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Kitchen\BaseRecipeItemPivot;
 use App\Models\SearchTrait;
+use App\Models\SortTrait;
 
 /**
  * Class BaseRecipe
@@ -17,6 +18,7 @@ class BaseRecipe extends Model
 {
     use SoftDeletes;
     use SearchTrait;
+    use SortTrait;
 
     public $table = 'base_recipes';
 

@@ -36,7 +36,7 @@ var tableColumns = [
 	},
 	{
 	    name: 'category_name',
-	    sortField: 'category_id',
+	    sortField: 'table.name',
 	    visible: true,
 	    title: 'Categoría'
 	},       

@@ -42,7 +42,10 @@ class UnitAPIController extends InfyOmBaseController
     {
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = Unit::orderBy($sortCol, $sortDir);
+            if ( \Schema::hasColumn('units', $sortCol) ) 
+              $query = Unit::orderBy($sortCol, $sortDir);
+            else
+              $query = Unit::sortBy($sortCol, $sortDir);
         } else {
             $query = Unit::orderBy('created_at', 'asc');
         }

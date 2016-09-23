@@ -39,7 +39,10 @@ class UtensilAPIController extends InfyOmBaseController
     {
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = Utensil::orderBy($sortCol, $sortDir);
+            if ( \Schema::hasColumn('utensils', $sortCol) ) 
+              $query = Utensil::orderBy($sortCol, $sortDir);
+            else
+              $query = Utensil::sortBy($sortCol, $sortDir);
         } else {
             $query = Utensil::orderBy('created_at', 'asc');
         }

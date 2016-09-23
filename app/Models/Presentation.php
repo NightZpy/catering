@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\SearchTrait;
+use App\Models\SortTrait;
 
 /**
  * Class Presentation
@@ -12,7 +13,7 @@ use App\Models\SearchTrait;
  */
 class Presentation extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SortTrait, SearchTrait;
 
     public $table = 'presentations';
     

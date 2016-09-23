@@ -39,7 +39,10 @@ class ProviderAPIController extends InfyOmBaseController
     {
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = Provider::orderBy($sortCol, $sortDir);
+            if ( \Schema::hasColumn('providers', $sortCol) ) 
+              $query = Provider::orderBy($sortCol, $sortDir);
+            else
+              $query = Provider::sortBy($sortCol, $sortDir);
         } else {
             $query = Provider::orderBy('created_at', 'asc');
         }

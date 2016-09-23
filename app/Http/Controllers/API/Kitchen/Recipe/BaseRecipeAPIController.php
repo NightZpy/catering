@@ -48,11 +48,14 @@ class BaseRecipeAPIController extends InfyOmBaseController
     {
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = BaseRecipe::orderBy($sortCol, $sortDir);
+            if ( \Schema::hasColumn('base_recipes', $sortCol) ) 
+              $query = BaseRecipe::orderBy($sortCol, $sortDir);
+            else
+              $query = BaseRecipe::sortBy($sortCol, $sortDir);
         } else {
             $query = BaseRecipe::orderBy('created_at', 'asc');
         }
-
+        
         if ($request->exists('filter')) {
             $query->search("{$request->filter}");
         }

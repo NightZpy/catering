@@ -42,7 +42,10 @@ class FamilyAPIController extends InfyOmBaseController
     {
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = Family::orderBy($sortCol, $sortDir);
+            if ( \Schema::hasColumn('families', $sortCol) ) 
+              $query = Family::orderBy($sortCol, $sortDir);
+            else
+              $query = Family::sortBy($sortCol, $sortDir);
         } else {
             $query = Family::orderBy('created_at', 'asc');
         }

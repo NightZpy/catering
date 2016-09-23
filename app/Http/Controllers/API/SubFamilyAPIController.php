@@ -41,11 +41,13 @@ class SubFamilyAPIController extends InfyOmBaseController
     {
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = SubFamily::orderBy($sortCol, $sortDir);
+            if ( \Schema::hasColumn('sub_families', $sortCol) ) 
+              $query = SubFamily::orderBy($sortCol, $sortDir);
+            else
+              $query = SubFamily::sortBy($sortCol, $sortDir);
         } else {
             $query = SubFamily::orderBy('created_at', 'asc');
         }
-
         if ($request->exists('filter')) {
             $query->search("{$request->filter}");                      
         }

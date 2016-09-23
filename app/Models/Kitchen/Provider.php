@@ -5,6 +5,7 @@ namespace App\Models\Kitchen;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\SearchTrait;
+use App\Models\SortTrait;
 
 /**
  * Class Provider
@@ -12,7 +13,7 @@ use App\Models\SearchTrait;
  */
 class Provider extends Model
 {
-    use SoftDeletes, SearchTrait;
+    use SoftDeletes, SearchTrait, SortTrait;
 
     public $table = 'providers';
     
