@@ -20,10 +20,8 @@ return [
             Laracasts\Flash\FlashServiceProvider::class,
             Prettus\Repository\Providers\RepositoryServiceProvider::class,
             Barryvdh\Debugbar\ServiceProvider::class, 
-            Sofa\Eloquence\ServiceProvider::class,      
             DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
-            Laracasts\Generators\GeneratorsServiceProvider::class,
-            Sofa\Eloquence\ServiceProvider::class
+            Laracasts\Generators\GeneratorsServiceProvider::class
         ],
 
         'aliases' => [

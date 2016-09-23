@@ -38,7 +38,8 @@ trait SortTrait {
                     $table2. '.id'
                 )
                 ->orderBy($table2 . '.' . $field, $sortDir);
-            }          
+            }  
+            $query->select($this->table . '.*');        
         } else {
             $query->orderBy($field, $sortDir);
         }        

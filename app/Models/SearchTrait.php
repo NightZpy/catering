@@ -23,12 +23,13 @@ trait SearchTrait {
                 $query->$where($relation, function($q) use ($searchString, $relation, $fields, $table) {
                     foreach ($fields as $relationField)   
                             $q->orWhere($table . '.' . $relationField, "LIKE", $searchString);
-                });                   
+                });    
+                $query->select($this->table . '.*');
             } else {
                 $where = 'orWhere';
                 if ( $i == 0)
                     $where = 'where';                    
-                $query->$where( $field, 'LIKE', $searchString );
+                $query->$where( $this->table . '.' . $field, 'LIKE', $searchString );
             }
             $i = 1;
         }
