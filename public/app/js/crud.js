@@ -16987,7 +16987,6 @@ window.vm = new Vue({
                 }*/
                 actionUrl = url + this.row.id + '/' + modelId;
                 this.method = method;
-                console.log(actionUrl);
             } else {
                 actionUrl = this.url.foreign[model][type].url;
                 this.method = this.url.foreign[model][type].method;

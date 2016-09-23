@@ -10,6 +10,7 @@ use App\Models\Unit;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\SearchTrait;
+use App\Models\SortTrait;
 
 /**
  * Class Item
@@ -17,7 +18,7 @@ use App\Models\SearchTrait;
  */
 class Item extends Model
 {
-    use SoftDeletes, \Znck\Eloquent\Traits\BelongsToThrough, SearchTrait;
+    use SoftDeletes, \Znck\Eloquent\Traits\BelongsToThrough, SearchTrait, SortTrait;
 
     public $table = 'items';
     protected $searchableColumns = [

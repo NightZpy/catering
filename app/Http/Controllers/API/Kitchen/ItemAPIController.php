@@ -47,10 +47,10 @@ class ItemAPIController extends InfyOmBaseController
 
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            if (\Schema::hasColumn('items', $sortCol) ) 
+            if ( \Schema::hasColumn('items', $sortCol) ) 
               $query = Item::orderBy($sortCol, $sortDir);
             else
-              $query = Item::orderBy('created_at', 'asc');
+              $query = Item::sortBy($sortCol, $sortDir);
         } else {
             $query = Item::orderBy('created_at', 'asc');
         }
@@ -60,14 +60,13 @@ class ItemAPIController extends InfyOmBaseController
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
+        $result = $query->paginate($perPage);
         if ( $sortCol && !\Schema::hasColumn('items', $sortCol) ) {
           /*\Debugbar::info($sortCol);
           if ($sortDir == 'desc')
             $result = $query->paginate($perPage)->sortByDesc($sortCol);
           else
             $result = $query->paginate($perPage)->sortBy($sortCol);*/
-        } else {
-          $result = $query->paginate($perPage);
         }
 
         return response()->json($result);

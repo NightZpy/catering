@@ -118,13 +118,13 @@ var tableColumns = [
 	},
 	{
 	    name: 'unit_name',
-	    sortField: 'unit_name',
+	    sortField: 'unit.name',
 	    title: 'Unidad',
 	    visible: true
 	},
 	{
 	    name: 'presentation_name',
-	    sortField: 'presentation_name',
+	    sortField: 'presentation.name',
 	    title: 'Presentación',
 	    visible: true
 	},
@@ -137,18 +137,17 @@ var tableColumns = [
     {
         name: 'compose_code',
         title: 'Código compuesto',
-        sortField: 'compose_code',
         visible: true
     }, 	
 	{
 	    name: 'family_name',
-	    sortField: 'family_name',
+	    sortField: 'sub_family.family.name',
 	    title: 'Familia',
 	    visible: true
 	},       
 	{
 	    name: 'sub_family_name',
-	    sortField: 'sub_family_name',
+	    sortField: 'sub_family.name',
 	    title: 'Sub-familia',
 	    visible: true
 	},       
