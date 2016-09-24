@@ -51,6 +51,10 @@ Vue.validator('unique', function (val, condition) {
     return condition;
 });
 
+Vue.validator('numeric', function (val) {
+    return /^[-+]?[0-9]+$/.test(val)
+});
+
 window.vm = new Vue({
     components: {
         modal: VueStrap.modal,
