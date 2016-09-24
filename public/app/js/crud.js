@@ -17113,6 +17113,7 @@ window.vm = new Vue({
             var related = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
             var action = arguments.length <= 3 || arguments[3] === undefined ? 'index' : arguments[3];
 
+            console.log('foreign: ' + foreign);
             var foreign = this.url.foreign[related][action];
             if (callUrl == null) callUrl = foreign.url;
 

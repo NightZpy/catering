@@ -63,7 +63,7 @@ var tableColumns = [
 	},
 	{
 	    name: 'code',
-	    sortField: 'code',
+	    sortField: 'id',
 	    title: 'Código',
 	    visible: true
 	},
@@ -78,13 +78,13 @@ var tableColumns = [
 	    sortField: 'auto_provider',
 	    match: 'auto_provider',
 	    title: 'Auto-proveedor',
-	    visible: true
+	    visible: false
 	},
 	{
 	    name: 'perishable_format',
 	    sortField: 'perishable',
 	    title: 'Perecible',
-	    visible: true
+	    visible: false
 	},
 	{
 	    name: 'decrease',
@@ -114,7 +114,7 @@ var tableColumns = [
 	    name: 'currency',
 	    sortField: 'currency',
 	    title: 'Moneda',
-	    visible: true
+	    visible: false
 	},
 	{
 	    name: 'unit_name',

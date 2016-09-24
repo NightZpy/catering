@@ -70,7 +70,7 @@
                         url: "{{ route('api.v1.families.store') }}/"
                     }
                 },
-                subFamily: { 
+                sub_family: { 
                     index: {
                         method: 'GET' ,
                         url: "{{ route('api.v1.subFamilies.index') }}/"
@@ -122,7 +122,7 @@
         };
 
         var loadSubFamilies = function () {
-            vm.getForeignData(vm.url.foreign.subFamily.byFamily.url + vm.row.family_id , 'subFamilyOptions', 'subFamily');
+            vm.getForeignData(vm.url.foreign.sub_family.byFamily.url + vm.row.family_id , 'subFamilyOptions', 'sub_family');
         };
 
         vm.$watch('formModal', function (value) {
