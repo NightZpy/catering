@@ -47,7 +47,7 @@
                     }, 
                     store: {
                         method: 'POST' ,
-                        url: "{{ route('api.v1.units.store') }}"
+                        url: "{{ route('api.v1.units.store') }}/"
                     }
                 },
                 presentation: { 
@@ -57,7 +57,7 @@
                     }, 
                     store: {
                         method: 'POST' ,
-                        url: "{{ route('api.v1.presentations.store') }}"
+                        url: "{{ route('api.v1.presentations.store') }}/"
                     }
                 },
                 family: { 
@@ -67,7 +67,7 @@
                     },
                     store: {
                         method: 'POST' ,
-                        url: "{{ route('api.v1.families.store') }}"
+                        url: "{{ route('api.v1.families.store') }}/"
                     }
                 },
                 subFamily: { 
@@ -81,7 +81,7 @@
                     },
                     store: {
                         method: 'POST' ,
-                        url: "{{ route('api.v1.subFamilies.store') }}"
+                        url: "{{ route('api.v1.subFamilies.store') }}/"
                     }
                 },
                 provider: { 
@@ -135,7 +135,7 @@
 
         vm.$watch('row.family_id', function (value) {
             loadSubFamilies();
-            this.row.subFamily.family_id = value;
+            this.row.sub_family.family_id = value;
         });
 
         vm.$watch('localModals.providerADD', function (value) {

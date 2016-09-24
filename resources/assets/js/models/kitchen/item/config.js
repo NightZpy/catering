@@ -48,7 +48,7 @@ var objectRow = {
 		id: "",
 		name: ""
 	},
-	subFamily: {
+	sub_family: {
 		id: "",
 		name: "",
 		family_id: ""

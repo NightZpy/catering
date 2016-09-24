@@ -98,7 +98,6 @@ window.vm = new Vue({
     },
     methods: {
         submit: function(model = null, type = null, related = null) {
-            var actionUrl = null;
             this.row._token = token;
             var data = this.row; 
             if (!model || model.target ) {
@@ -110,7 +109,8 @@ window.vm = new Vue({
                 } else if (this.method == 'DELETE') {
                     actionUrl = this.url.delete + this.row.id;                
                 }  
-            } else if( related ) {                     
+            } else if( related ) { 
+                console.log ('Related: ' + related)                    
                 var url = this.url.foreign[model][type].url;
                 var method = this.url.foreign[model][type].method;
                 var modelId = this.row[model]['id'];
