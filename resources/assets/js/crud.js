@@ -56,6 +56,49 @@ Vue.validator('numeric', function (val) {
     return /^[-+]?[0-9]+$/.test(val)
 });
 
+VueValidator.asset('exist', function (val) {
+    return function (resolve, reject) {
+        // server-side validation with ajax (e.g. using `fetch` case)
+        fetch('/validators/exist', {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json',
+                'x-token': 'xxxxxxxx'
+            },
+            body: JSON.stringify({ username: val })
+        }).then(function (res) {
+            if (res.status === 200) {
+                resolve(true)
+            } else if (res.status === 400) {
+                resolve(false)
+            }
+        }).catch(function (err) {
+            // something todo ...
+            reject(new Error('exist validator fail'))
+        })
+    }
+});
+
+Vue.validator('email', {
+  message: 'invalid email address', // error message with plain string
+  check: function (val) { // define validator
+    return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(val)
+  }
+})
+
+/*
+
+<div id="app">
+  <validator name="validation1">
+    address: <input type="text" v-validate:address="['email']"><br />
+    <div>
+      <p v-show="$validation1.address.email">Invalid your mail address format.</p>
+    </div>
+  </validator>
+</div>
+
+ */
+
 window.vm = new Vue({
     components: {
         modal: VueStrap.modal,
