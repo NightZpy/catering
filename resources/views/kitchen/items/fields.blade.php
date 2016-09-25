@@ -67,12 +67,19 @@
 				<!-- Name Field -->
 				<div class="form-group col-sm-6">
 				    <label for="name">Nombre:</label>
-				    <input type="text" class="form-control" v-model="row.name" v-validate:name="{ required: true, minlength: 1, maxlength: 128 }" data-type="text" />
+				    <input type="text" class="form-control" 
+				    	v-model="row.name" 
+				    	v-validate:name="{{-- ['email', 'required', 'minlength'] --}}{ email: true, required: true, minlength: 1, maxlength: 128 }" data-type="text" />
 				    <div v-if="$validation.name.invalid" class="alert alert-danger" role="alert">
-							<div v-if="$validation.name.required">
+						<div v-if="$validation.name.required">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Error:</span>
 							Custom rule(required) Message Here
+						</div>
+						<div v-if="$validation.name.email">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span>
+							@{{ $validation.name.email }}
 						</div>
 						{{-- <div v-if="$validation.name.unique">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

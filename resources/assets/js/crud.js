@@ -40,23 +40,62 @@ Vue.component('custom-error', {
   template: '<em><p class="error-{{field}}-{{validator}}">{{message}}</p></em>'
 });
 
-Vue.validator('email', function (val) {
+Vue.validator('email', {
+  message: 'Debe introducir un email válido!', // error message with plain string
+  check: function (val) { // define validator
     return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(val)
+  }
 });
 
 Vue.validator('url', function (val) {
     return /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/.test(val)
 });
 
-Vue.validator('unique', function (val) {
-    return true;
-});
-
 Vue.validator('numeric', function (val) {
     return /^[-+]?[0-9]+$/.test(val)
 });
 
-VueValidator.asset('exist', function (val) {
+function copyOwnFrom (target, source) {
+  Object.getOwnPropertyNames(source).forEach(function (propName) {
+    Object.defineProperty(target, propName, Object.getOwnPropertyDescriptor(source, propName))
+  })
+  return target
+}
+
+function ValidationError () {
+  copyOwnFrom(this, Error.apply(null, arguments))
+}
+ValidationError.prototype = Object.create(Error.prototype)
+ValidationError.prototype.constructor = ValidationError
+
+Vue.validator('exist', function (val) {
+      //this.vm.checking = true // spinner on
+      return fetch('/validations/exist', {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: val
+        })
+      }).then((res) => {
+        this.vm.checking = false // spinner off
+        return res.json()
+      }).then((json) => {
+        return Object.keys(json).length > 0 
+          ? Promise.reject(new ValidationError(json.message))
+          : Promise.resolve()
+      }).catch((error) => {
+        if (error instanceof ValidationError) {
+          return Promise.reject(error.message)
+        } else {
+          return Promise.reject('unexpected error')
+        }
+      })    
+});
+
+/*VueValidator.asset('exist', function (val) {
     return function (resolve, reject) {
         // server-side validation with ajax (e.g. using `fetch` case)
         fetch('/validators/exist', {
@@ -78,26 +117,7 @@ VueValidator.asset('exist', function (val) {
         })
     }
 });
-
-Vue.validator('email', {
-  message: 'invalid email address', // error message with plain string
-  check: function (val) { // define validator
-    return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(val)
-  }
-})
-
-/*
-
-<div id="app">
-  <validator name="validation1">
-    address: <input type="text" v-validate:address="['email']"><br />
-    <div>
-      <p v-show="$validation1.address.email">Invalid your mail address format.</p>
-    </div>
-  </validator>
-</div>
-
- */
+*/
 
 window.vm = new Vue({
     components: {
