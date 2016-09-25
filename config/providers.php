@@ -21,7 +21,7 @@ return [
             Prettus\Repository\Providers\RepositoryServiceProvider::class,
             Barryvdh\Debugbar\ServiceProvider::class, 
             DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
-            Laracasts\Generators\GeneratorsServiceProvider::class
+            Laracasts\Generators\GeneratorsServiceProvider::class,            
         ],
 
         'aliases' => [
@@ -51,6 +51,7 @@ return [
             Prettus\Repository\Providers\RepositoryServiceProvider::class,
             Arcanedev\LogViewer\LogViewerServiceProvider::class,
             'MathiasGrimm\LaravelDotEnvGen\DotEnvGenServiceProvider',
+            PrettyRoutes\ServiceProvider::class,
         ],
         'aliases' => [
             'Form'      => Collective\Html\FormFacade::class,

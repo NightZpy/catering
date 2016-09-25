@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "348af8c07c4a4b7de0106d0e1ce3f822",
-    "content-hash": "9ac8ce1349a777df2387e5ef74bc51ff",
+    "hash": "a5b1d0fb9abe9833a254584fc2b0fd17",
+    "content-hash": "c0b08694dbba8d36c880e67cfb1fbfd3",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -263,6 +263,42 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "garygreen/pretty-routes",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/garygreen/pretty-routes.git",
+                "reference": "f636424fa0b136e891b1634dbc7077f1e7734a62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/garygreen/pretty-routes/zipball/f636424fa0b136e891b1634dbc7077f1e7734a62",
+                "reference": "f636424fa0b136e891b1634dbc7077f1e7734a62",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.1.*|5.2.*|5.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PrettyRoutes\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gary Green",
+                    "email": "holegary@gmail.com"
+                }
+            ],
+            "description": "Pretty routes for Laravel 5.",
+            "time": "2016-08-26 16:03:48"
         },
         {
             "name": "geoip/geoip",
