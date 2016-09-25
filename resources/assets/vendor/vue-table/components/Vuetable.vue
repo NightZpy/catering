@@ -48,12 +48,12 @@
                                         </button>
                                         <ul class="dropdown-menu" rule="menu">
                                             <template v-for="action in itemActions">
-                                                <li>
+                                                <li v-if="action.show">
                                                     <a @click="callAction(action.name, item)" v-attr="action.extra">
                                                         <i class="{{ action.icon }}"></i> {{ action.label }}
                                                     </a>
                                                 </li>
-                                            </template>                                            
+                                            </template> 
                                         </ul>
                                     </div>
                                 </td>

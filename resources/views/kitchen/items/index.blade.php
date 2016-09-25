@@ -39,6 +39,7 @@
             store: "{{ route('api.v1.kitchen.items.store') }}",  
             update: "{{ route('api.v1.kitchen.items.update') }}/",  
             delete: "{{ route('api.v1.kitchen.items.delete') }}/",
+            unique: "{{ route('api.v1.kitchen.items.unique') }}/",
             foreign: {
                 unit: { 
                     select: {
@@ -96,6 +97,10 @@
                     relate_list: {
                         method: 'GET',
                         url: "{{ route('api.v1.kitchen.items.providers.available-providers') }}/"                        
+                    },
+                    available: {
+                        method: 'GET',
+                        url: "{{ route('api.v1.kitchen.items.providers.available') }}/"
                     }
                 },
             },
@@ -174,6 +179,13 @@
             if ( !value )
                 loadSubFamilies();
         });
+
+        var availableProviders = function () {
+            var url = vm.url.foreign.provider.available.url;
+            return vm.available( url );
+        };
+
+        vm.itemActions[3].show = availableProviders;
 
         /*vm.$watch('row.family_id', function (value) {
             if ( value.length > 0 )

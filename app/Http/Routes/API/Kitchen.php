@@ -51,6 +51,11 @@ Route::group(['prefix' => 'kitchen', 'namespace' => 'Kitchen'], function () {
 			'uses' => 'ItemAPIController@store'
 		]);	
 
+		Route::get('unique/{name?}', [
+			'as' => 'api.v1.kitchen.items.unique',
+			'uses' => 'ItemAPIController@unique'
+		]);
+
 		Route::group(['prefix' => 'providers'], function () {	
 			Route::get('{id?}', [
 				'as' => 'api.v1.kitchen.items.providers.index',

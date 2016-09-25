@@ -79,6 +79,11 @@
 							<span class="sr-only">Error:</span>
 							Custom rule(unique) Message Here
 						</div> --}}
+						{{-- <div v-if="$validation.name.unique">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span>
+							Ya existe un Item con este nombre!
+						</div> --}}
 						<div v-if="$validation.name.minlength">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Error:</span>

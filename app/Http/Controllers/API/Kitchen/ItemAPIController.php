@@ -156,6 +156,11 @@ class ItemAPIController extends InfyOmBaseController
         return $this->sendResponse($id, 'Item deleted successfully');
     }
 
+    public function unique(Request $request, $name)
+    {
+      return (Item::whereName($name)->count());
+    }
+
     public function storeProvider(Request $request, $id = null, $providerId = null)
     {
         $item = $this->repository->findWithoutFail($id);

@@ -1,4 +1,5 @@
 global.Vue = require('vue')
+window.Vue = Vue;
 var VueResource = require('vue-resource')
 //var Vuetable = require('vuetable/src/components/Vuetable.vue')
 var Vuetable = require('../vendor/vue-table/components/Vuetable.vue')
@@ -47,8 +48,8 @@ Vue.validator('url', function (val) {
     return /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/.test(val)
 });
 
-Vue.validator('unique', function (val, condition) {
-    return condition;
+Vue.validator('unique', function (val) {
+    return true;
 });
 
 Vue.validator('numeric', function (val) {
