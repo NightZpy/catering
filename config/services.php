@@ -34,5 +34,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
+    
+    'rollbar' => [
+        'access_token' => env('ROLLBAR_TOKEN'),
+        'person_fn' => 'getRollBarUser',
+        'level' => env('ROLLBAR_LEVEL'),
+    ],
 ];

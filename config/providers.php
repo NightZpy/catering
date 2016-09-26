@@ -52,6 +52,7 @@ return [
             Arcanedev\LogViewer\LogViewerServiceProvider::class,
             'MathiasGrimm\LaravelDotEnvGen\DotEnvGenServiceProvider',
             PrettyRoutes\ServiceProvider::class,
+            Jenssegers\Rollbar\RollbarServiceProvider::class,
         ],
         'aliases' => [
             'Form'      => Collective\Html\FormFacade::class,

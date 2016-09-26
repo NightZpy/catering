@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a5b1d0fb9abe9833a254584fc2b0fd17",
-    "content-hash": "c0b08694dbba8d36c880e67cfb1fbfd3",
+    "hash": "0b56372e5bdd2f397ccfa700db4ecabe",
+    "content-hash": "a28b2c4b4613cdd17bba4762984d06b5",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -490,6 +490,57 @@
                 }
             ],
             "time": "2015-04-20 18:58:01"
+        },
+        {
+            "name": "jenssegers/rollbar",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/laravel-rollbar.git",
+                "reference": "24d5b72017697cd9e4c2f4c60ea480bda8c50018"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/laravel-rollbar/zipball/24d5b72017697cd9e4c2f4c60ea480bda8c50018",
+                "reference": "24d5b72017697cd9e4c2f4c60ea480bda8c50018",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^4.0|^5.0",
+                "php": ">=5.4",
+                "rollbar/rollbar": "~0.15"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9",
+                "orchestra/testbench": "^3.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jenssegers\\Rollbar\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "https://jenssegers.com"
+                }
+            ],
+            "description": "Rollbar error monitoring integration for Laravel projects",
+            "homepage": "https://github.com/jenssegers/laravel-rollbar",
+            "keywords": [
+                "error",
+                "laravel",
+                "logging",
+                "monitoring",
+                "rollbar"
+            ],
+            "time": "2016-03-20 09:37:00"
         },
         {
             "name": "jeremeamia/SuperClosure",
@@ -1132,52 +1183,6 @@
             "time": "2015-11-04 20:07:17"
         },
         {
-            "name": "nicolaslopezj/searchable",
-            "version": "1.9.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nicolaslopezj/searchable.git",
-                "reference": "eee7c3ae94d8d0e98b397f0cf2dcb127bfddc555"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nicolaslopezj/searchable/zipball/eee7c3ae94d8d0e98b397f0cf2dcb127bfddc555",
-                "reference": "eee7c3ae94d8d0e98b397f0cf2dcb127bfddc555",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "illuminate/database": "4.2.x|~5.0",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Nicolaslopezj\\Searchable\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Lopez",
-                    "email": "nicolaslopezj@me.com"
-                }
-            ],
-            "description": "Eloquent model search trait.",
-            "keywords": [
-                "database",
-                "eloquent",
-                "laravel",
-                "model",
-                "search",
-                "searchable"
-            ],
-            "time": "2016-06-28 21:40:28"
-        },
-        {
             "name": "nikic/php-parser",
             "version": "v2.1.0",
             "source": {
@@ -1487,36 +1492,31 @@
             "time": "2016-03-09 05:03:14"
         },
         {
-            "name": "sofa/eloquence",
-            "version": "v5.2.6",
+            "name": "rollbar/rollbar",
+            "version": "v0.18.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jarektkaczyk/eloquence.git",
-                "reference": "7d52943463b6ae135d638c80c0e7e270a5ca6df6"
+                "url": "https://github.com/rollbar/rollbar-php.git",
+                "reference": "fafe13f8beb669d6bba0137f3703fa808d50cbb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jarektkaczyk/eloquence/zipball/7d52943463b6ae135d638c80c0e7e270a5ca6df6",
-                "reference": "7d52943463b6ae135d638c80c0e7e270a5ca6df6",
+                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/fafe13f8beb669d6bba0137f3703fa808d50cbb7",
+                "reference": "fafe13f8beb669d6bba0137f3703fa808d50cbb7",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "5.2.*",
-                "php": ">=5.5.9",
-                "sofa/hookable": "5.2.*"
+                "ext-curl": "*"
             },
             "require-dev": {
-                "mockery/mockery": "0.9.4",
-                "phpunit/phpunit": "4.5.0",
-                "squizlabs/php_codesniffer": "2.3.3"
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.5.*"
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Sofa\\Eloquence\\": "src"
-                },
-                "files": [
-                    "src/helpers.php"
+                "classmap": [
+                    "src/Level.php",
+                    "src/rollbar.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1525,68 +1525,21 @@
             ],
             "authors": [
                 {
-                    "name": "Jarek Tkaczyk",
-                    "email": "jarek@softonsofa.com",
-                    "homepage": "http://softonsofa.com/",
+                    "name": "Rollbar, Inc.",
+                    "email": "support@rollbar.com",
                     "role": "Developer"
                 }
             ],
-            "description": "Flexible Searchable, Mappable, Metable, Validation and more extensions for Laravel Eloquent ORM.",
+            "description": "Monitors errors and exceptions and reports them to Rollbar",
+            "homepage": "http://github.com/rollbar/rollbar-php",
             "keywords": [
-                "eloquent",
-                "laravel",
-                "mappable",
-                "metable",
-                "mutable",
-                "searchable"
+                "debugging",
+                "errors",
+                "exceptions",
+                "logging",
+                "monitoring"
             ],
-            "time": "2016-08-25 03:25:46"
-        },
-        {
-            "name": "sofa/hookable",
-            "version": "v5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jarektkaczyk/hookable.git",
-                "reference": "ae87508e072737a602832acdd62272867152c775"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jarektkaczyk/hookable/zipball/ae87508e072737a602832acdd62272867152c775",
-                "reference": "ae87508e072737a602832acdd62272867152c775",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "5.2.*",
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "crysalead/kahlan": "~1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Sofa\\Hookable\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jarek Tkaczyk",
-                    "email": "jarek@softonsofa.com",
-                    "homepage": "http://softonsofa.com/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel Eloquent hooks system.",
-            "keywords": [
-                "eloquent",
-                "laravel"
-            ],
-            "time": "2016-01-14 21:06:40"
+            "time": "2016-07-05 15:50:29"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3795,6 +3748,52 @@
             "time": "2016-05-14 08:47:34"
         },
         {
+            "name": "nicolaslopezj/searchable",
+            "version": "1.9.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nicolaslopezj/searchable.git",
+                "reference": "eee7c3ae94d8d0e98b397f0cf2dcb127bfddc555"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nicolaslopezj/searchable/zipball/eee7c3ae94d8d0e98b397f0cf2dcb127bfddc555",
+                "reference": "eee7c3ae94d8d0e98b397f0cf2dcb127bfddc555",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "illuminate/database": "4.2.x|~5.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nicolaslopezj\\Searchable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Lopez",
+                    "email": "nicolaslopezj@me.com"
+                }
+            ],
+            "description": "Eloquent model search trait.",
+            "keywords": [
+                "database",
+                "eloquent",
+                "laravel",
+                "model",
+                "search",
+                "searchable"
+            ],
+            "time": "2016-06-28 21:40:28"
+        },
+        {
             "name": "php-di/invoker",
             "version": "1.3.3",
             "source": {
@@ -4867,6 +4866,108 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2015-06-21 13:59:46"
+        },
+        {
+            "name": "sofa/eloquence",
+            "version": "v5.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jarektkaczyk/eloquence.git",
+                "reference": "7d52943463b6ae135d638c80c0e7e270a5ca6df6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jarektkaczyk/eloquence/zipball/7d52943463b6ae135d638c80c0e7e270a5ca6df6",
+                "reference": "7d52943463b6ae135d638c80c0e7e270a5ca6df6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.2.*",
+                "php": ">=5.5.9",
+                "sofa/hookable": "5.2.*"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.4",
+                "phpunit/phpunit": "4.5.0",
+                "squizlabs/php_codesniffer": "2.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sofa\\Eloquence\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jarek Tkaczyk",
+                    "email": "jarek@softonsofa.com",
+                    "homepage": "http://softonsofa.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Flexible Searchable, Mappable, Metable, Validation and more extensions for Laravel Eloquent ORM.",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "mappable",
+                "metable",
+                "mutable",
+                "searchable"
+            ],
+            "time": "2016-08-25 03:25:46"
+        },
+        {
+            "name": "sofa/hookable",
+            "version": "v5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jarektkaczyk/hookable.git",
+                "reference": "ae87508e072737a602832acdd62272867152c775"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jarektkaczyk/hookable/zipball/ae87508e072737a602832acdd62272867152c775",
+                "reference": "ae87508e072737a602832acdd62272867152c775",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.2.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "crysalead/kahlan": "~1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sofa\\Hookable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jarek Tkaczyk",
+                    "email": "jarek@softonsofa.com",
+                    "homepage": "http://softonsofa.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Eloquent hooks system.",
+            "keywords": [
+                "eloquent",
+                "laravel"
+            ],
+            "time": "2016-01-14 21:06:40"
         },
         {
             "name": "sven/env-providers",
