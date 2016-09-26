@@ -12,7 +12,7 @@ return array(
      |
      */
 
-    'enabled' => env('APP_DEBUG', null),
+    'enabled' => true,//env('APP_DEBUG', null),
 
     /*
      |--------------------------------------------------------------------------
