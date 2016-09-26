@@ -16,7 +16,7 @@ Route::get('/test', function(){
 	//dd(App\Models\Kitchen\Item::findOrFail(3)->bases->first()->pivot->base);
 	//App\Models\Kitchen\Recipe\BaseRecipe::first()->items->first()->pivot->getCostAttribute();
 	//
-	$searchableColumns = [
+	/*$searchableColumns = [
         'name', 
         'relation' => [
             'providers' => [
@@ -51,7 +51,9 @@ Route::get('/test', function(){
         } else {
             echo $value;
         }
-    }
+    }*/
+
+    Bugsnag::notifyError('ErrorType', 'Test Error');
 });
 
 Route::get('/', 'HomeController@index');

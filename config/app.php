@@ -210,6 +210,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,  
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ],
 
 ];

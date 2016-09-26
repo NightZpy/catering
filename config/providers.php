@@ -53,11 +53,13 @@ return [
             'MathiasGrimm\LaravelDotEnvGen\DotEnvGenServiceProvider',
             PrettyRoutes\ServiceProvider::class,
             Jenssegers\Rollbar\RollbarServiceProvider::class,
+            Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
         ],
         'aliases' => [
             'Form'      => Collective\Html\FormFacade::class,
             'Html'      => Collective\Html\HtmlFacade::class,
-            'Flash'     => Laracasts\Flash\Flash::class        
+            'Flash'     => Laracasts\Flash\Flash::class,
+            'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
         ],
     ],
     [
@@ -71,7 +73,7 @@ return [
 
         ],
         'aliases' => [
-
+            'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
         ],
     ],    
     [
@@ -80,7 +82,7 @@ return [
 
         ],
         'aliases' => [
-
+            'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
         ],
     ],       
 ];

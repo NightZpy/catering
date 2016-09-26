@@ -14,7 +14,8 @@
         "mathiasgrimm/laravel-dot-env-gen": "dev-master",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "geoip/geoip": "~1.14",
-        "garygreen/pretty-routes": "^0.0.1"        
+        "garygreen/pretty-routes": "^0.0.1",
+        "bugsnag/bugsnag-laravel": "^2.0"        
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
