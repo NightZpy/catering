@@ -194,7 +194,7 @@
             }
         };  
 
-        Vue.mixin({
+        /*Vue.mixin({
             methods: {
                 availableProviders: function() {
                     var url = vm.url.foreign.provider.available.url;
@@ -202,12 +202,12 @@
                 }
             }
         })
-
-        vm.availableProviders();
+*/
+        //vm.availableProviders();
 
         //vm.$mixins.push(mix);
-        
-        //vm.itemActions.push({ name: 'ADD:related:provider', label: 'Asociar proveedor', show: availableProviders(), icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Provider', 'data-toggle':"tooltip", 'data-placement': "left"} })
+        var availableProvidersUrl = vm.url.foreign.provider.available.url;
+        vm.itemActions.push({ name: 'ADD:related:provider', label: 'Asociar proveedor', show: availableProvidersUrl, icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Provider', 'data-toggle':"tooltip", 'data-placement': "left"} })
 
         /*vm.$watch('row.family_id', function (value) {
             if ( value.length > 0 )
