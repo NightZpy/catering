@@ -48,11 +48,20 @@
                                         </button>
                                         <ul class="dropdown-menu" rule="menu">
                                             <template v-for="action in itemActions">
-                                                <li v-if="action.show">
-                                                    <a @click="callAction(action.name, item)" v-attr="action.extra">
-                                                        <i class="{{ action.icon }}"></i> {{ action.label }}
-                                                    </a>
-                                                </li>
+                                                <template v-if='action.hasOwnProperty("show")'>
+                                                    <li v-if="action.show == true">
+                                                        <a @click="callAction(action.name, item)" v-attr="action.extra">
+                                                            <i class="{{ action.icon }}"></i> {{ action.label }}
+                                                        </a>
+                                                    </li>
+                                                </template> 
+                                                <template v-else>                                  
+                                                    <li>
+                                                        <a @click="callAction(action.name, item)" v-attr="action.extra">
+                                                            <i class="{{ action.icon }}"></i> {{ action.label }}
+                                                        </a>
+                                                    </li>
+                                                </template>                                               
                                             </template> 
                                         </ul>
                                     </div>

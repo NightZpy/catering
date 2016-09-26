@@ -180,12 +180,34 @@
                 loadSubFamilies();
         });
 
-        var availableProviders = function () {
+        /*var availableProviders = function () {
             var url = vm.url.foreign.provider.available.url;
             return vm.available( url );
-        };
+        };*/
 
-        vm.itemActions[3].show = availableProviders;
+        var mix = {
+            methods : {
+                availableProviders : function() {
+                    var url = vm.url.foreign.provider.available.url;
+                    return vm.available( url );
+                }
+            }
+        };  
+
+        Vue.mixin({
+            methods: {
+                availableProviders: function() {
+                    var url = vm.url.foreign.provider.available.url;
+                    return vm.available( url );
+                }
+            }
+        })
+
+        vm.availableProviders();
+
+        //vm.$mixins.push(mix);
+        
+        //vm.itemActions.push({ name: 'ADD:related:provider', label: 'Asociar proveedor', show: availableProviders(), icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Provider', 'data-toggle':"tooltip", 'data-placement': "left"} })
 
         /*vm.$watch('row.family_id', function (value) {
             if ( value.length > 0 )

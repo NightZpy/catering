@@ -127,6 +127,7 @@ window.vm = new Vue({
         CustomVueSelectTemplate
     },
     el: "#crud-app",
+    mixins: [],
     data: {
         formModal: false,
         infoModal: false,
