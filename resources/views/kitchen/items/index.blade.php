@@ -168,9 +168,11 @@
          * Load families list after add new family from add new item form
          */
         vm.$watch('localModals.family_ADD_inform', function (value) {
+            var invalid = false;
             if ( !value ) {
                 loadFamilies();
-                this.$validation.family_id.valid=true;
+                this.$validation.family_id.invalid = invalid;
+                this.$validation.family_id.valid = !invalid;
             }
         });
 
