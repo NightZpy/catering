@@ -67,7 +67,27 @@
 			</div>
 		
 		</div>
-	</div>	
+	</div>
+
+	<!-- Utensil Id Field -->
+	<div class="form-group col-sm-6">
+	    <label for="utensil_id">Utensilios:</label>
+		<v-select
+			v-validate:utensil_id="{ required: true }"
+			:options="objectToArrayObject(foreignData.utensilOptions)"
+			placeholder="Seleccione los utensilios"
+			:value.sync="row.pivot_utensil.utensil_id"
+			multiple
+			search justified required  clear-buttont>
+		</v-select>
+	    <div v-if="$validation.utensil_id.invalid" class="alert alert-danger" role="alert">
+			<div v-if="$validation.utensil_id.required">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Los utensilios son obligatorios
+			</div>
+		</div>    
+	</div>		
 
 	<!-- Description Field -->
 	<div class="form-group col-sm-6">

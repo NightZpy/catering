@@ -78,18 +78,52 @@
 				Custom rule(maxlength) Message Here
 			</div>
 		</div>
+	</div>	
+
+	<!-- Units_x_100 Field -->
+	<div class="form-group col-sm-6">
+	    <label for="units_x_100">Un. por 100 pers:</label>
+	    <input type="text" class="form-control" v-model="row.units_x_100" v-validate:units_x_100="{ required: true{{-- , numeric --}}, minlength: 1, maxlength: 10 }" data-type="text" />
+	    <div v-if="$validation.units_x_100.invalid" class="alert alert-danger" role="alert">
+			<div v-if="$validation.units_x_100.required">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(required) Message Here
+			</div>
+			{{-- <div v-if="$validation.units_x_100.numeric">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(numeric) Message Here
+			</div> --}}
+			<div v-if="$validation.units_x_100.minlength">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(minlength) Message Here
+			</div>
+			<div v-if="$validation.units_x_100.maxlength">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(maxlength) Message Here
+			</div>
+		</div>
 	</div>
 
 	<!-- Category Id Field -->
 	<div class="form-group col-sm-6">
 	    <label for="category_id">Categoria:</label>
-		<v-select
+		{{-- <v-select
 			v-validate:category_id="{ required: true }"
 			:options="objectToArrayObject(foreignData.utensilCategoriesOptions)"
 			placeholder="Seleccione una categoría"
 			:value.sync="row.category_id"
 			search justified required  clear-button  close-on-select>
-		</v-select>
+		</v-select> --}}
+		<select class="form-control" v-model="row.category_id" v-validate:category_id="{ required: true }">
+			<option value="" selected="selected">-- Seleccione presentacion --</option>
+			<option v-for="(id, name) in foreignData.utensilCategoriesOptions" v-bind:value="id">
+				@{{ name }}
+			</option>
+		</select>
 	    <div v-if="$validation.category_id.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validation.category_id.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

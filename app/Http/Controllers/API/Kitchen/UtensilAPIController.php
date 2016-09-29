@@ -12,6 +12,7 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Http\Controllers\API\DataFormat;
 
 /**
  * Class UtensilController
@@ -20,12 +21,14 @@ use Response;
 
 class UtensilAPIController extends InfyOmBaseController
 {
+    use DataFormat;
+
     /** @var  UtensilRepository */
-    private $utensilRepository;
+    private $repository;
 
     public function __construct(UtensilRepository $utensilRepo)
     {
-        $this->utensilRepository = $utensilRepo;
+        $this->repository = $utensilRepo;
     }
 
     /**
@@ -67,7 +70,7 @@ class UtensilAPIController extends InfyOmBaseController
     {
         $input = $request->all();
 
-        $utensils = $this->utensilRepository->create($input);
+        $utensils = $this->repository->create($input);
 
         return $this->sendResponse($utensils->toArray(), 'Utensil saved successfully');
     }
@@ -83,7 +86,7 @@ class UtensilAPIController extends InfyOmBaseController
     public function show($id)
     {
         /** @var Utensil $utensil */
-        $utensil = $this->utensilRepository->find($id);
+        $utensil = $this->repository->find($id);
 
         if (empty($utensil)) {
             return Response::json(ResponseUtil::makeError('Utensil not found'), 400);
@@ -106,13 +109,13 @@ class UtensilAPIController extends InfyOmBaseController
         $input = $request->all();
 
         /** @var Utensil $utensil */
-        $utensil = $this->utensilRepository->find($id);
+        $utensil = $this->repository->find($id);
 
         if (empty($utensil)) {
             return Response::json(ResponseUtil::makeError('Utensil not found'), 400);
         }
 
-        $utensil = $this->utensilRepository->update($input, $id);
+        $utensil = $this->repository->update($input, $id);
 
         return $this->sendResponse($utensil->toArray(), 'Utensil updated successfully');
     }
@@ -128,7 +131,7 @@ class UtensilAPIController extends InfyOmBaseController
     public function destroy($id)
     {
         /** @var Utensil $utensil */
-        $utensil = $this->utensilRepository->find($id);
+        $utensil = $this->repository->find($id);
 
         if (empty($utensil)) {
             return Response::json(ResponseUtil::makeError('Utensil not found'), 400);

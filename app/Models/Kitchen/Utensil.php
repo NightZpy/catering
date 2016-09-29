@@ -19,6 +19,9 @@ class Utensil extends Model
     
     protected $searchableColumns = [
         'name',
+        'stock',
+        'cost',
+        'units_x_100',
         'category' => [
             'table' => 'utensil_categories',
             'name'
@@ -37,7 +40,8 @@ class Utensil extends Model
         'name',
         'stock',
         'cost',
-        'category_id'
+        'units_x_100',
+        'category_id',        
     ];
 
     /**
@@ -49,6 +53,7 @@ class Utensil extends Model
         'name'        => 'string',
         'stock'       => 'integer',
         'cost'        => 'float',
+        'units_x_100' => 'integer',
         'category_id' => 'integer'
     ];
 
@@ -61,6 +66,7 @@ class Utensil extends Model
         'name' => 'required|min:1|max:128|unique:utensils',
         'stock' => 'required|numeric|digits_between:1,10',
         'cost' => 'required|numeric|digits_between:1,10',
+        'units_x_100' => 'required|numeric|digits_between:1,10',
         'category_id' => 'required|exists:utensil_categories,id'
     ];
 

@@ -16,34 +16,5 @@
 				El Utensilio es obligatorio
 			</div>
 		</div> 
-	</div>
-
-	<!-- Cost per quantity Field -->
-	<div class="form-group col-sm-6">
-	    <label for="quantity">Cantidad:</label>
-	    <input type="text" class="form-control" v-model="row.pivot_utensil.quantity" v-validate:quantity="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
-	    <div v-if="$validationUtensil.quantity.invalid" class="alert alert-danger" role="alert">
-			<div v-if="$validationUtensil.quantity.required">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				Custom rule(required) Message Here
-			</div>
-			{{-- <div v-if="$validationUtensil.quantity.unique">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				Custom rule(unique) Message Here
-			</div> --}}
-			<div v-if="$validationUtensil.quantity.minlength">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				Custom rule(minlength) Message Here
-			</div>
-			<div v-if="$validationUtensil.quantity.maxlength">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				Custom rule(maxlength) Message Here
-			</div>
-		
-		</div>
-	</div>			
+	</div>		
 </validator>	

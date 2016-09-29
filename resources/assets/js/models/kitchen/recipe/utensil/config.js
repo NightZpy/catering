@@ -7,8 +7,7 @@ var objectRow = {
 		stock: "",
 		category_id: ""
 	},
-	pivot_utensil: {
-		quantity: "",
+	pivot_utensil: {		
 		utensil_id: ""			
 	}
 };
@@ -26,12 +25,6 @@ var tableColumns = [
 	    title: 'Utensil',
 	    visible: true
 	},      
-	{
-	    name: 'pivot.quantity',
-	    sortField: 'pivot.quantity',
-	    title: 'Cantidad',
-	    visible: true
-	},      	
     {
         name: '__actions',
         dataClass: 'center aligned',

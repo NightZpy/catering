@@ -95,8 +95,7 @@ class Recipe extends Model
 
     public function utensils()
     {
-        return $this->belongsToMany(Utensil::class, 'recipe_utensil', 'recipe_id', 'utensil_id')
-                    ->withPivot('quantity');
+        return $this->belongsToMany(Utensil::class, 'recipe_utensil', 'recipe_id', 'utensil_id');
     }   
 
     /**

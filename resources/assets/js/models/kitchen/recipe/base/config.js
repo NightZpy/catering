@@ -40,8 +40,7 @@ var objectRow = {
 		item_id: ""			
 	},
 	pivot_utensil: {
-		quantity: "",
-		utensil_id: ""			
+		utensil_id: ""
 	}
 };
 
@@ -112,7 +111,7 @@ var actions = [
     { name: 'delete-item', label: 'Eliminar', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } },
     { name: 'ADD:related:item', relate: 'Items', label: 'Asociar item', icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Item', 'data-toggle':"tooltip", 'data-placement': "left"} },
     { name: 'LINK:related:item', relate: 'Items', label: 'Ver items', icon: 'glyphicon glyphicon-th-list', class: 'btn btn-success', extra: {title: 'Items', 'data-toggle':"tooltip", 'data-placement': "right" } },
-    { name: 'ADD:related:utensil', relate: 'Utensilios', label: 'Asociar utensilio', icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Utensil', 'data-toggle':"tooltip", 'data-placement': "left"} },
+    //{ name: 'ADD:related:utensil', relate: 'Utensilios', label: 'Asociar utensilio', icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Utensil', 'data-toggle':"tooltip", 'data-placement': "left"} },
     { name: 'LINK:related:utensil', relate: 'Utensilios', label: 'Ver utensilios', icon: 'glyphicon glyphicon-th-list', class: 'btn btn-success', extra: {title: 'Utensils', 'data-toggle':"tooltip", 'data-placement': "right" } }
 ];
 

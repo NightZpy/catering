@@ -142,6 +142,10 @@ Route::group(['prefix' => 'kitchen', 'namespace' => 'Kitchen'], function () {
 			'as' => 'api.v1.kitchen.utensils.store',
 			'uses' => 'UtensilAPIController@store'
 		]);	
+		Route::get('select-list', [
+				'as' => 'api.v1.kitchen.utensils.select-list',
+				'uses' => 'UtensilAPIController@selectList'
+			]);
 	});
 
 	Route::group(['prefix' => 'recipes', 'namespace' => 'Recipe'], function () {

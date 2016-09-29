@@ -3,6 +3,7 @@ var objectRow = {
 	name: "",
 	stock: "",
 	cost: "",
+	units_x_100: "",
 	category_id: ""
 };
 
@@ -26,6 +27,12 @@ var tableColumns = [
 	{
 	    name: 'cost',
 	    sortField: 'cost',
+	    visible: true
+	},
+	{
+	    name: 'units_x_100',
+	    sortField: 'units_x_100',
+	    title: 'Un. por 100 pers',
 	    visible: true
 	},
 	{

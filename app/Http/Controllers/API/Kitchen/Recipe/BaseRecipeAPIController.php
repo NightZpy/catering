@@ -98,7 +98,19 @@ class BaseRecipeAPIController extends InfyOmBaseController
             return Response::json(ResponseUtil::makeError('BaseRecipe not found'), 400);
         }
 
-        return $this->sendResponse($baseRecipe->toArray(), 'BaseRecipe retrieved successfully');
+        $utensils = $baseRecipe->utensils->pluck('id');
+        $baseRecipe = $baseRecipe->toArray();
+
+        $newUtensils = [];
+        if ( count ($utensils) ) {
+            foreach ($utensils as $utensilId) {
+                $newUtensils[] = (string)$utensilId;
+            }
+        }
+
+        $baseRecipe['pivot_utensil']['utensil_id'] = $newUtensils;
+
+        return $this->sendResponse($baseRecipe, 'BaseRecipe retrieved successfully');
     }
 
     /**

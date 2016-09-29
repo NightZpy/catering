@@ -18,7 +18,6 @@
         <!-- --------- Modals ---------- -->
         @include('kitchen.recipes.bases.form')
         @include('kitchen.recipes.bases.items.add')
-        @include('kitchen.recipes.bases.utensils.add')
         @include('kitchen.recipes.bases.delete')
         @include('kitchen.recipes.bases.show')
         @include('layouts.modal.info')        
@@ -70,9 +69,9 @@
                         method: 'GET' ,
                         url: "{{ route('kitchen.recipes.bases.utensils.index') }}/"
                     },
-                    relate_list: {
+                    select: {
                         method: 'GET',
-                        url: "{{ route('api.v1.kitchen.recipes.bases.utensils.available') }}/"                        
+                        url: "{{ route('api.v1.kitchen.utensils.select-list') }}/"                        
                     }
                 },
 
@@ -86,6 +85,7 @@
         vm.$watch('formModal', function (value) {
             if (value) {
                 this.getForeignData(this.url.foreign.type.select.url, 'typeOptions', 'type', 'select');
+                this.getForeignData(this.url.foreign.utensil.select.url, 'utensilOptions', 'utensil', 'select');
             }
         });
 
@@ -94,15 +94,23 @@
                 this.getForeignData(this.url.foreign.item.relate_list.url + this.row.id, 'itemOptions', 'item', 'relate_list');
         });
 
-        vm.$watch('localModals.utensilADD', function (value) {
+        /*vm.$watch('localModals.utensilADD', function (value) {
             if (value) 
                 this.getForeignData(this.url.foreign.utensil.relate_list.url + this.row.id, 'utensilOptions', 'utensil', 'relate_list');
-        });
+        });*/
 
         vm.$watch('row.pivot_item.item_id', function (value) {
             var url = apiUrl.foreign.item.show.url + value;
             this.getOneData(url, 'decrease', 'row.pivot_item.decrease');            
         });
+
+        vm.$watch('row.pivot_utensil.utensil_id', function (value) {
+            if ( value.length > 0 )
+                vm.$validation.utensil_id.invalid = false;
+            else
+                vm.$validation.utensil_id.invalid = true;
+            vm.$validation.utensil_id.valid = ! vm.$validation.utensil_id.invalid;
+        });         
     </script>
 @endpush
 
