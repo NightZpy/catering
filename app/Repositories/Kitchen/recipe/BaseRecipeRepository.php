@@ -38,6 +38,18 @@ class BaseRecipeRepository extends MyBaseRepository
         return $baseRecipe;
     }
 
+    public function update(array $attributes, $id)
+    {
+        if ( isset ( $attributes['pivot_utensil']['utensil_id'] ) && count ( $attributes['pivot_utensil']['utensil_id'] ) ) {
+            $utensils = $attributes['pivot_utensil']['utensil_id'];
+            unset ( $attributes['pivot_utensil'] );
+        }
+        $baseRecipe = parent::update($attributes, $id);
+        if ( isset ( $utensils ) ) 
+            $baseRecipe->utensils()->sync($utensils);
+        return $baseRecipe;
+    }    
+
     public function availableItems($id)
     {
         $itemsId = $this->findWithoutFail($id)->items->pluck('id');    
