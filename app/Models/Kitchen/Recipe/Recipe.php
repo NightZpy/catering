@@ -29,7 +29,7 @@ class Recipe extends Model
      */  
     protected $searchableColumns = [
         'name',
-        'servings_quantity'
+        'servings_quantity',
         'type' => [
             'table' => 'types',
             'name'

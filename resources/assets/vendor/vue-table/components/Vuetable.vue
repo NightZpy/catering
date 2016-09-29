@@ -48,11 +48,27 @@
                                         </button>
                                         <ul class="dropdown-menu" rule="menu">
                                             <template v-for="action in itemActions">
-                                                <li v-if="action.show">
-                                                    <a @click="callAction(action.name, item)" v-attr="action.extra">
-                                                        <i class="{{ action.icon }}"></i> {{ action.label }}
-                                                    </a>
-                                                </li>
+                                                <template v-if='action.hasOwnProperty("show")'>
+                                                    <li v-if="action.show == true">
+                                                        <a @click="callAction(action.name, item)" v-attr="action.extra">
+                                                            <i class="{{ action.icon }}"></i> {{ action.label }}
+                                                        </a>
+                                                    </li>
+                                                    <li v-else>
+                                                        <template v-if="available(action.show + item.id)">
+                                                            <a @click="callAction(action.name, item)" v-attr="action.extra">
+                                                                <i class="{{ action.icon }}"></i> {{ action.label }}
+                                                            </a>
+                                                        </template>
+                                                    </li>
+                                                </template> 
+                                                <template v-else>                                  
+                                                    <li>
+                                                        <a @click="callAction(action.name, item)" v-attr="action.extra">
+                                                            <i class="{{ action.icon }}"></i> {{ action.label }}
+                                                        </a>
+                                                    </li>
+                                                </template>                                               
                                             </template> 
                                         </ul>
                                     </div>
@@ -286,9 +302,24 @@ export default {
                 .replace('{from}', this.tablePagination.from || 0)
                 .replace('{to}', this.tablePagination.to || 0)
                 .replace('{total}', this.tablePagination.total || 0)
-        },
+        }
     },
     methods: {
+        available: function(url) {
+            return true;
+            var sendParams = {url: url, method: 'GET', data: {}};
+            var result = {}
+            this.$http(sendParams)
+                .then(function(data) {
+                    //result.data = data;
+                    result.success = data.success;
+                    result.ready = true;
+                },function (data, status, request) {
+                    result.success = false;
+                    result.ready = true;
+                });            
+            //return result.ready && resulta.success
+        },        
         normalizeFields: function() {
             var self = this
             var obj
