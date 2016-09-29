@@ -495,6 +495,7 @@ var createDict = function(){
   // Thrash, waste and sodomy: IE GC bug
   var iframe = require('./_dom-create')('iframe')
     , i      = enumBugKeys.length
+    , lt     = '<'
     , gt     = '>'
     , iframeDocument;
   iframe.style.display = 'none';
@@ -504,7 +505,7 @@ var createDict = function(){
   // html.removeChild(iframe);
   iframeDocument = iframe.contentWindow.document;
   iframeDocument.open();
-  iframeDocument.write('<script>document.F=Object</script' + gt);
+  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
   iframeDocument.close();
   createDict = iframeDocument.F;
   while(i--)delete createDict[PROTOTYPE][enumBugKeys[i]];
@@ -522,6 +523,7 @@ module.exports = Object.create || function create(O, Properties){
   } else result = createDict();
   return Properties === undefined ? result : dPs(result, Properties);
 };
+
 },{"./_an-object":30,"./_dom-create":37,"./_enum-bug-keys":38,"./_html":45,"./_object-dps":59,"./_shared-key":72}],58:[function(require,module,exports){
 var anObject       = require('./_an-object')
   , IE8_DOM_DEFINE = require('./_ie8-dom-define')
@@ -1174,7 +1176,6 @@ module.exports = function (str, sep) {
 
 },{}],102:[function(require,module,exports){
 // shim for using process in browser
-
 var process = module.exports = {};
 
 // cached from whatever global is present so that test runners that stub it
@@ -1185,22 +1186,84 @@ var process = module.exports = {};
 var cachedSetTimeout;
 var cachedClearTimeout;
 
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
 (function () {
-  try {
-    cachedSetTimeout = setTimeout;
-  } catch (e) {
-    cachedSetTimeout = function () {
-      throw new Error('setTimeout is not defined');
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
     }
-  }
-  try {
-    cachedClearTimeout = clearTimeout;
-  } catch (e) {
-    cachedClearTimeout = function () {
-      throw new Error('clearTimeout is not defined');
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
     }
-  }
 } ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -1225,7 +1288,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = cachedSetTimeout(cleanUpNextTick);
+    var timeout = runTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -1242,7 +1305,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    cachedClearTimeout(timeout);
+    runClearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -1254,7 +1317,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        cachedSetTimeout(drainQueue, 0);
+        runTimeout(drainQueue);
     }
 };
 
@@ -3915,7 +3978,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 },{"babel-runtime/core-js/json/stringify":1,"babel-runtime/core-js/object/create":2,"babel-runtime/core-js/object/define-properties":3,"babel-runtime/core-js/object/define-property":4,"babel-runtime/core-js/object/get-own-property-descriptor":5,"babel-runtime/core-js/object/get-own-property-names":6,"babel-runtime/core-js/object/get-own-property-symbols":7,"babel-runtime/core-js/object/get-prototype-of":8,"babel-runtime/core-js/object/is-extensible":9,"babel-runtime/core-js/object/keys":10,"babel-runtime/core-js/object/prevent-extensions":11,"babel-runtime/helpers/typeof":14}],106:[function(require,module,exports){
 (function (process){
 /*!
- * vue-validator v2.1.3
+ * vue-validator v2.1.6
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -3977,7 +4040,6 @@ babelHelpers.possibleConstructorReturn = function (self, call) {
 };
 
 babelHelpers;
-
 /**
  * Utilties
  */
@@ -4341,13 +4403,14 @@ function Override (Vue) {
 }
 
 var VALIDATE_UPDATE = '__vue-validator-validate-update__';
-var PRIORITY_VALIDATE = 16;
+var PRIORITY_VALIDATE = 4096;
 var PRIORITY_VALIDATE_CLASS = 32;
 var REGEX_FILTER = /[^|]\|[^|]/;
 var REGEX_VALIDATE_DIRECTIVE = /^v-validate(?:$|:(.*)$)/;
 var REGEX_EVENT = /^v-on:|^@/;
 
 var classId = 0; // ID for validation class
+
 
 function ValidateClass (Vue) {
   var vIf = Vue.directive('if');
@@ -4427,7 +4490,6 @@ function ValidateClass (Vue) {
 }
 
 function Validate (Vue) {
-  var vIf = Vue.directive('if');
   var FragmentFactory = Vue.FragmentFactory;
   var parseDirective = Vue.parsers.directive.parseDirective;
   var _Vue$util = Vue.util;
@@ -4458,8 +4520,9 @@ function Validate (Vue) {
    */
 
   Vue.directive('validate', {
+    deep: true,
     terminal: true,
-    priority: vIf.priority + PRIORITY_VALIDATE,
+    priority: PRIORITY_VALIDATE,
     params: ['group', 'field', 'detect-blur', 'detect-change', 'initial', 'classes'],
 
     paramWatchers: {
@@ -4525,10 +4588,10 @@ function Validate (Vue) {
         return;
       }
 
-      if (isPlainObject(value)) {
-        this.handleObject(value);
-      } else if (Array.isArray(value)) {
-        this.handleArray(value);
+      if (isPlainObject(value) || old && isPlainObject(old)) {
+        this.handleObject(value, old);
+      } else if (Array.isArray(value) || old && Array.isArray(old)) {
+        this.handleArray(value, old);
       }
 
       var options = { field: this.field, noopable: this._initialNoopValidation };
@@ -4653,15 +4716,19 @@ function Validate (Vue) {
       replace(this.anchor, this.el);
       this.anchor = null;
     },
-    handleArray: function handleArray(value) {
+    handleArray: function handleArray(value, old) {
       var _this = this;
+
+      old && this.validation.resetValidation();
 
       each(value, function (val) {
         _this.validation.setValidation(val);
       });
     },
-    handleObject: function handleObject(value) {
+    handleObject: function handleObject(value, old) {
       var _this2 = this;
+
+      old && this.validation.resetValidation();
 
       each(value, function (val, key) {
         if (isPlainObject(val)) {
@@ -4766,6 +4833,16 @@ var BaseValidation = function () {
     this._unwatch && this._unwatch();
   };
 
+  BaseValidation.prototype.resetValidation = function resetValidation() {
+    var _this2 = this;
+
+    var keys = Object.keys(this._validators);
+    each(keys, function (key, index) {
+      _this2._validators[key] = null;
+      delete _this2._validators[key];
+    });
+  };
+
   BaseValidation.prototype.setValidation = function setValidation(name, arg, msg, initial) {
     var validator = this._validators[name];
     if (!validator) {
@@ -4785,10 +4862,10 @@ var BaseValidation = function () {
   };
 
   BaseValidation.prototype.setValidationClasses = function setValidationClasses(classes) {
-    var _this2 = this;
+    var _this3 = this;
 
     each(classes, function (value, key) {
-      _this2._classes[key] = value;
+      _this3._classes[key] = value;
     });
   };
 
@@ -4846,7 +4923,7 @@ var BaseValidation = function () {
   };
 
   BaseValidation.prototype.validate = function validate(cb) {
-    var _this3 = this;
+    var _this4 = this;
 
     var noopable = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
     var el = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
@@ -4858,7 +4935,7 @@ var BaseValidation = function () {
     var valid = true;
 
     this._runValidators(function (descriptor, name, done) {
-      var asset = _this3._resolveValidator(name);
+      var asset = _this4._resolveValidator(name);
       var validator = null;
       var msg = null;
 
@@ -4889,8 +4966,8 @@ var BaseValidation = function () {
       }
 
       if (validator) {
-        var value = _this3._getValue(_this3._el);
-        _this3._invokeValidator(_this3._vm, validator, value, descriptor.arg, function (ret, err) {
+        var value = _this4._getValue(_this4._el);
+        _this4._invokeValidator(_this4._vm, validator, value, descriptor.arg, function (ret, err) {
           if (!ret) {
             valid = false;
             if (err) {
@@ -4899,7 +4976,7 @@ var BaseValidation = function () {
               results[name] = err;
             } else if (msg) {
               var error = { validator: name };
-              error.message = typeof msg === 'function' ? msg.call(_this3._vm, _this3.field, descriptor.arg) : msg;
+              error.message = typeof msg === 'function' ? msg.call(_this4._vm, _this4.field, descriptor.arg) : msg;
               errors.push(error);
               results[name] = error.message;
             } else {
@@ -4916,23 +4993,23 @@ var BaseValidation = function () {
       }
     }, function () {
       // finished
-      _this3._fireEvent(_this3._el, valid ? 'valid' : 'invalid');
+      _this4._fireEvent(_this4._el, valid ? 'valid' : 'invalid');
 
       var props = {
         valid: valid,
         invalid: !valid,
-        touched: _this3.touched,
-        untouched: !_this3.touched,
-        dirty: _this3.dirty,
-        pristine: !_this3.dirty,
-        modified: _this3.modified
+        touched: _this4.touched,
+        untouched: !_this4.touched,
+        dirty: _this4.dirty,
+        pristine: !_this4.dirty,
+        modified: _this4.modified
       };
       if (!empty(errors)) {
         props.errors = errors;
       }
       _.extend(results, props);
 
-      _this3.willUpdateClasses(results, el);
+      _this4.willUpdateClasses(results, el);
 
       cb(results);
     });
@@ -4956,15 +5033,15 @@ var BaseValidation = function () {
   };
 
   BaseValidation.prototype.willUpdateClasses = function willUpdateClasses(results) {
-    var _this4 = this;
+    var _this5 = this;
 
     var el = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
     if (this._checkClassIds(el)) {
       (function () {
-        var classIds = _this4._getClassIds(el);
-        _this4.vm.$nextTick(function () {
-          _this4.vm.$emit(VALIDATE_UPDATE, classIds, _this4, results);
+        var classIds = _this5._getClassIds(el);
+        _this5.vm.$nextTick(function () {
+          _this5.vm.$emit(VALIDATE_UPDATE, classIds, _this5, results);
         });
       })();
     } else {
@@ -5163,7 +5240,7 @@ var BaseValidation = function () {
   BaseValidation.prototype._invokeValidator = function _invokeValidator(vm, validator, val, arg, cb) {
     var future = validator.call(this, val, arg);
     if (typeof future === 'function') {
-      // function
+      // function 
       future(function () {
         // resolve
         cb(true);
@@ -5823,7 +5900,7 @@ var Validator$1 = function () {
     var validation = this._getValidationFrom(field);
     var validations = this._groupValidations[group];
 
-    validations && ! ~indexOf(validations, validation) && validations.push(validation);
+    validations && !~indexOf(validations, validation) && validations.push(validation);
   };
 
   Validator.prototype.removeGroupValidation = function removeGroupValidation(group, field) {
@@ -6506,7 +6583,7 @@ function plugin(Vue) {
   Validate(Vue);
 }
 
-plugin.version = '2.1.3';
+plugin.version = '2.1.6';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
@@ -6517,7 +6594,7 @@ module.exports = plugin;
 },{"_process":102}],107:[function(require,module,exports){
 (function (process,global){
 /*!
- * Vue.js v1.0.25
+ * Vue.js v1.0.26
  * (c) 2016 Evan You
  * Released under the MIT License.
  */
@@ -9927,7 +10004,7 @@ function traverse(val, seen) {
   }
   var isA = isArray(val);
   var isO = isObject(val);
-  if (isA || isO) {
+  if ((isA || isO) && Object.isExtensible(val)) {
     if (val.__ob__) {
       var depId = val.__ob__.dep.id;
       if (seen.has(depId)) {
@@ -11413,13 +11490,13 @@ var select = {
     this.vm.$on('hook:attached', function () {
       nextTick(_this.forceUpdate);
     });
+    if (!inDoc(el)) {
+      nextTick(this.forceUpdate);
+    }
   },
 
   update: function update(value) {
     var el = this.el;
-    if (!inDoc(el)) {
-      return nextTick(this.forceUpdate);
-    }
     el.selectedIndex = -1;
     var multi = this.multiple && isArray(value);
     var options = el.options;
@@ -16367,7 +16444,13 @@ var filters = {
 
   pluralize: function pluralize(value) {
     var args = toArray(arguments, 1);
-    return args.length > 1 ? args[value % 10 - 1] || args[args.length - 1] : args[0] + (value === 1 ? '' : 's');
+    var length = args.length;
+    if (length > 1) {
+      var index = value % 10 - 1;
+      return index in args ? args[index] : args[length - 1];
+    } else {
+      return args[0] + (value === 1 ? '' : 's');
+    }
   },
 
   /**
@@ -16569,7 +16652,7 @@ function installGlobalAPI (Vue) {
 
 installGlobalAPI(Vue);
 
-Vue.version = '1.0.25';
+Vue.version = '1.0.26';
 
 // devtools global hook
 /* istanbul ignore next */
@@ -16628,9 +16711,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-55519848", module.exports)
+    hotAPI.createRecord("_v-606b0ff8", module.exports)
   } else {
-    hotAPI.update("_v-55519848", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-606b0ff8", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"./VuetablePaginationMixin.vue":112,"vue":107,"vue-hot-reload-api":103}],110:[function(require,module,exports){
@@ -16661,9 +16744,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-e7f16b94", module.exports)
+    hotAPI.createRecord("_v-8fef440c", module.exports)
   } else {
-    hotAPI.update("_v-e7f16b94", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-8fef440c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"./VuetablePaginationMixin.vue":112,"vue":107,"vue-hot-reload-api":103}],111:[function(require,module,exports){
@@ -16729,9 +16812,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-19610ff9", module.exports)
+    hotAPI.createRecord("_v-1acc73b5", module.exports)
   } else {
-    hotAPI.update("_v-19610ff9", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-1acc73b5", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"./VuetablePaginationMixin.vue":112,"vue":107,"vue-hot-reload-api":103}],112:[function(require,module,exports){
@@ -16815,7 +16898,7 @@ exports.default = {
             return this.onEachSide * 2 + 1;
         },
         windowStart: function windowStart() {
-            if (this.tablePagination.current_page <= this.onEachSide) {
+            if (!this.tablePagination || this.tablePagination.current_page <= this.onEachSide) {
                 return 1;
             } else if (this.tablePagination.current_page >= this.totalPage - this.onEachSide) {
                 return this.totalPage - this.onEachSide * 2;
@@ -16849,9 +16932,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-eb61426e", module.exports)
+    hotAPI.createRecord("_v-b74e16e6", module.exports)
   } else {
-    hotAPI.update("_v-eb61426e", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-b74e16e6", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":107,"vue-hot-reload-api":103}],113:[function(require,module,exports){
@@ -16893,7 +16976,7 @@ var E_SERVER_ERROR = 'Error communicating with the server';
 
 Vue.config.debug = true;
 Vue.config.devtools = true;
-// Vue.config.warnExpressionErrors = true   
+// Vue.config.warnExpressionErrors = true    
 
 Vue.component('custom-error', {
     props: ['field', 'validator', 'message'],
@@ -17101,7 +17184,7 @@ window.vm = new Vue({
             var related = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
             var action = arguments.length <= 3 || arguments[3] === undefined ? 'index' : arguments[3];
 
-            console.log('foreign: ' + foreign);
+
             var foreign = this.url.foreign[related][action];
             if (callUrl == null) callUrl = foreign.url;
 
@@ -17191,7 +17274,7 @@ window.vm = new Vue({
                     errorMessages.push({ field: fieldAttr, message: errorMgs[msg] });
                 }
             }
-            //vm.$setValidationErrors(errorMessages);   
+            //vm.$setValidationErrors(errorMessages);     
         },
         closeModal: function closeModal(modalName) {
             // console.log('Modal: ' + modalName);
@@ -17332,16 +17415,16 @@ window.vm = new Vue({
                     //console.log('URL: ' + url );
                 }
             } else {
-                    this.row.id = data.id;
-                    this.getData();
-                    if (action == 'view-item') {
-                        this.modal('SHOW');
-                    } else if (action == 'edit-item') {
-                        this.modal('PATCH');
-                    } else if (action == 'delete-item') {
-                        this.modal('DELETE');
-                    }
+                this.row.id = data.id;
+                this.getData();
+                if (action == 'view-item') {
+                    this.modal('SHOW');
+                } else if (action == 'edit-item') {
+                    this.modal('PATCH');
+                } else if (action == 'delete-item') {
+                    this.modal('DELETE');
                 }
+            }
         },
         'vuetable:load-success': function vuetableLoadSuccess(response) {
             var data = response.data.data;
@@ -17387,9 +17470,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-2ea00c2b", module.exports)
+    hotAPI.createRecord("_v-0420b332", module.exports)
   } else {
-    hotAPI.update("_v-2ea00c2b", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-0420b332", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":107,"vue-hot-reload-api":103,"vue-select":105}],115:[function(require,module,exports){
@@ -19246,9 +19329,9 @@ if (module.hot) {(function () {  module.hot.accept()
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-6b402d61", module.exports)
+    hotAPI.createRecord("_v-d68ceeac", module.exports)
   } else {
-    hotAPI.update("_v-6b402d61", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-d68ceeac", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":107,"vue-hot-reload-api":103,"vueify/lib/insert-css":108}],118:[function(require,module,exports){
@@ -19366,9 +19449,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-79c1a3d4", module.exports)
+    hotAPI.createRecord("_v-f60690a6", module.exports)
   } else {
-    hotAPI.update("_v-79c1a3d4", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-f60690a6", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":107,"vue-hot-reload-api":103}],119:[function(require,module,exports){
@@ -19399,9 +19482,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-559a936d", module.exports)
+    hotAPI.createRecord("_v-61238694", module.exports)
   } else {
-    hotAPI.update("_v-559a936d", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-61238694", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"./VuetablePaginationMixin.vue":118,"vue":107,"vue-hot-reload-api":103}]},{},[113]);

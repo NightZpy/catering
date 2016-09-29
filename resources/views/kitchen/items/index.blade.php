@@ -189,6 +189,9 @@
                 loadSubFamilies();                
                 this.$validation.sub_family_id.invalid = false;
                 this.$validation.sub_family_id.valid = true;          
+            } else {
+                this.$validationsub_family.family_id.invalid = false;
+                this.$validationsub_family.family_id.valid = true;
             }
         });
 
