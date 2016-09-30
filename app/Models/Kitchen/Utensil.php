@@ -88,7 +88,9 @@ class Utensil extends Model
      */
     public function getCategoryNameAttribute()
     {
-        return $this->category->name;
+        if ( $this->category )
+            return $this->category->name;
+        return false;
     }    
 
     public function getTotalCostAttribute()
