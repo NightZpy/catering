@@ -92,7 +92,15 @@
         vm.$watch('localModals.utensilADD', function (value) {
             if (value) 
                 this.getForeignData(this.url.foreign.utensil.relate_list.url + this.row.id, 'utensilOptions', 'utensil', 'relate_list');
-        });             
+        }); 
+
+        vm.$watch('row.pivot_utensil.utensil_id', function (value) {
+            if ( value.length > 0 )
+                vm.$validation.utensil_id.invalid = false;
+            else
+                vm.$validation.utensil_id.invalid = true;
+            vm.$validation.utensil_id.valid = ! vm.$validation.utensil_id.invalid;
+        });                      
     </script>     
 @endpush
 

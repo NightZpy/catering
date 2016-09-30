@@ -117,5 +117,4 @@ var actions = [
 
 var modals = {
 	itemADD: false,
-	utensilADD: false
 };
