@@ -17,7 +17,7 @@
         </div>
         <!-- --------- Modals ---------- -->
         @include('kitchen.recipes.form')
-        @include('kitchen.recipes.utensils.add')
+        {{-- @include('kitchen.recipes.utensils.add') --}}
         @include('kitchen.recipes.base-recipes.add')
         @include('kitchen.recipes.delete')
         @include('kitchen.recipes.show')
@@ -66,9 +66,9 @@
                         method: 'GET' ,
                         url: "{{ route('kitchen.recipes.utensils.index') }}/"
                     },
-                    relate_list: {
+                    select: {
                         method: 'GET',
-                        url: "{{ route('api.v1.kitchen.recipes.utensils.available') }}/"                        
+                        url: "{{ route('api.v1.kitchen.utensils.select-list') }}/"                        
                     }
                 },
 
@@ -81,6 +81,9 @@
         vm.$watch('formModal', function (value) {
             if (value) {
                 this.getForeignData(this.url.foreign.type.select.url, 'typeOptions', 'type', 'select');
+                this.getForeignData(this.url.foreign.utensil.select.url, 'utensilOptions', 'utensil', 'select');
+            } else {
+                vm.row.pivot_utensil.utensil_id = [];
             }
         }); 
 

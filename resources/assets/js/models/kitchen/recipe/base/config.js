@@ -94,7 +94,7 @@ var tableColumns = [
 	},
 	{
 	    name: 'type.name',
-	    sortField: 'type.name',
+	    sortField: 'type-recipe_types.name',
 	    visible: true,
 	    title: 'Tipo'
 	},       

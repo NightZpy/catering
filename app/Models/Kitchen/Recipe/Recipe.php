@@ -31,13 +31,12 @@ class Recipe extends Model
         'name',
         'servings_quantity',
         'type' => [
-            'table' => 'types',
+            'table' => 'recipe_types',
             'name'
         ]
     ];  
 
     protected $dates = ['deleted_at'];
-
 
     public $fillable = [
         'name',

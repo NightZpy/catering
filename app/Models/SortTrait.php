@@ -6,26 +6,20 @@ trait SortTrait {
     {
         if ( empty ( $field ) )
             return $query;
-        
+
         $argLength = count ( explode ('.', $field) );
         if ( $argLength > 1 ) {
-
             if ( $argLength == 2 ) {
                 list($relation, $field) = explode('.', $field);
 
-                /*$relationName = explode(':', $relation);
+                $tableRelation = explode('-', $relation);
 
-                if ( count( $relationName ) > 1 ) {
-                    $relation = $relationName[1];
-                    if ($relationName[0] == 'table') {
-                        $class = get_class($faq->products()->getRelated());
-                        $table = $class::table;
-                    }
+                if ( count ( $tableRelation ) > 1 ) {
+                    $relation = $tableRelation[0];
+                    $table = $tableRelation[1];
                 } else {
                     $table = str_plural($relation);                    
-                }*/
-                $table = str_plural($relation);                    
-                
+                }
                 
                 $query->join(
                         $table, 

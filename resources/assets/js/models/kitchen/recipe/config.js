@@ -34,7 +34,6 @@ var objectRow = {
 		base_id: ""			
 	},
 	pivot_utensil: {
-		quantity: "",
 		utensil_id: ""			
 	}
 };
@@ -77,7 +76,7 @@ var tableColumns = [
 	},
 	{
 	    name: 'type.name',
-	    sortField: 'type.name',
+	    sortField: 'type-recipe_types.name',
 	    visible: true,
 	    title: 'Tipo'
 	},       
@@ -94,11 +93,9 @@ var actions = [
     { name: 'delete-item', label: 'Eliminar', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } },
     { name: 'ADD:related:base', relate: 'BaseRecipe', label: 'Asociar receta base', icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add BaseRecipe', 'data-toggle':"tooltip", 'data-placement': "left"} },
     { name: 'LINK:related:base', relate: 'BaseRecipe', label: 'Ver receta base', icon: 'glyphicon glyphicon-th-list', class: 'btn btn-success', extra: {title: 'BaseRecipes', 'data-toggle':"tooltip", 'data-placement': "right" } },
-    { name: 'ADD:related:utensil', relate: 'Utensil', label: 'Asociar utensilio', icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Utensil', 'data-toggle':"tooltip", 'data-placement': "left"} },
     { name: 'LINK:related:utensil', relate: 'Utensil', label: 'Ver utensilios', icon: 'glyphicon glyphicon-th-list', class: 'btn btn-success', extra: {title: 'Utensils', 'data-toggle':"tooltip", 'data-placement': "right" } }
 ];
 
 var modals = {
 	baseADD: false,
-	utensilADD: false
 };

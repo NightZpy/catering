@@ -26,6 +26,30 @@ class RecipeRepository extends MyBaseRepository
         return Recipe::class;
     }
 
+    public function create(array $attributes)
+    {
+        if ( isset ( $attributes['pivot_utensil']['utensil_id'] ) && count ( $attributes['pivot_utensil']['utensil_id'] ) ) {
+            $utensils = $attributes['pivot_utensil']['utensil_id'];
+            unset ( $attributes['pivot_utensil'] );
+        }
+        $recipe = parent::create($attributes);
+        if ( isset ( $utensils ) ) 
+            $recipe->utensils()->attach($utensils);
+        return $recipe;
+    }
+
+    public function update(array $attributes, $id)
+    {
+        if ( isset ( $attributes['pivot_utensil']['utensil_id'] ) && count ( $attributes['pivot_utensil']['utensil_id'] ) ) {
+            $utensils = $attributes['pivot_utensil']['utensil_id'];
+            unset ( $attributes['pivot_utensil'] );
+        }
+        $recipe = parent::update($attributes, $id);
+        if ( isset ( $utensils ) ) 
+            $recipe->utensils()->sync($utensils);
+        return $recipe;
+    }        
+
     public function availableUtensils($id)
     {
         $utensilsId = $this->findWithoutFail($id)->utensils->pluck('id');    
