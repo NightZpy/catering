@@ -31,7 +31,7 @@ class BaseRecipe extends Model
         'name',
         'servings_quantity',
         'type' => [
-            'table' => 'types',
+            'table' => 'recipe_types',
             'name'
         ]
     ];       

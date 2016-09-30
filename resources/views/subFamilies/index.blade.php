@@ -49,7 +49,7 @@
         var vm = window.vm;
         vm.$watch('formModal', function (value) {
             if (value) 
-                this.getForeignData(this.url.foreign.family.select.url, 'familyOptions', 'family');
+                this.getForeignData(this.url.foreign.family.select.url, 'familyOptions', 'family', 'select');
         });
     </script>    
 @endpush

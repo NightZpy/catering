@@ -49,13 +49,12 @@
     <script>
         var vm = window.vm;
         vm.$watch('formModal', function (value) {
-            if (value) {
+            if (value)
                 this.getForeignData(this.url.foreign.category.select.url, 'utensilCategoriesOptions', 'category', 'select')
-            }
         }); 
 
         vm.$watch('row.category_id', function (value) {
-            if ( value.length > 0 )
+            if ( value.length > 0 || value > 0 )
                 vm.$validation.category_id.invalid = false;
             else
                 vm.$validation.category_id.invalid = true;

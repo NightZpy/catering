@@ -226,7 +226,9 @@ class Item extends Model
 
     public function getPresentationNameAttribute()
     {
-        return $this->presentation->name;
+        if ($this->presentation)
+            return $this->presentation->name;
+        return false;
     }         
 
     public function getCodeAttribute()

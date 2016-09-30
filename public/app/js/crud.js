@@ -17101,7 +17101,6 @@ window.vm = new Vue({
             var related = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
             var action = arguments.length <= 3 || arguments[3] === undefined ? 'index' : arguments[3];
 
-
             var foreign = this.url.foreign[related][action];
             if (callUrl == null) callUrl = foreign.url;
 
@@ -17194,7 +17193,8 @@ window.vm = new Vue({
             //vm.$setValidationErrors(errorMessages);   
         },
         closeModal: function closeModal(modalName) {
-            // console.log('Modal: ' + modalName);
+            if (modalName == this.lastOpenModal[this.lastOpenModal.length - 1]) this.lastOpenModal.pop();
+
             if (this.localModals[modalName] != undefined) this.localModals[modalName] = false;else this.$set(modalName, false);
             //this.formModal = this.showModal = this.deleteModal = this.infoModal = false;
             this.cleanData();
@@ -17230,9 +17230,10 @@ window.vm = new Vue({
             var array = [];
             for (var key in object) {
                 if (object.hasOwnProperty(key)) {
-                    var data = {};
-                    data.label = object[key];
-                    data.value = key;
+                    var data = {
+                        'value': key,
+                        'label': object[key]
+                    };
                     array.push(data);
                 }
             }

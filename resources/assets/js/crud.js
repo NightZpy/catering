@@ -234,7 +234,6 @@ window.vm = new Vue({
                 });
         },
         getForeignData: function (callUrl = null, mapVar = null, related = null, action = 'index') {
-
             var foreign = this.url.foreign[related][action];
             if (callUrl == null)          
                 callUrl = foreign.url;
@@ -337,7 +336,9 @@ window.vm = new Vue({
             //vm.$setValidationErrors(errorMessages);     
         },
         closeModal: function(modalName) {
-            // console.log('Modal: ' + modalName);
+            if (modalName == this.lastOpenModal[ this.lastOpenModal.length - 1 ])
+                this.lastOpenModal.pop();
+                        
             if (this.localModals[modalName] != undefined)
                 this.localModals[modalName]    = false;
             else
@@ -379,9 +380,10 @@ window.vm = new Vue({
             var array = []
             for (var key in object) {
                 if (object.hasOwnProperty(key)) {
-                    var data = {}
-                    data.label = object[key];
-                    data.value = key;
+                    var data = {
+                                'value': key,
+                                'label': object[key]
+                            }
                     array.push(data);
                 }
             }
