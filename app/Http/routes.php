@@ -12,48 +12,8 @@
 */
 
 Route::get('/test', function(){
-	//dd(App\Models\Kitchen\Item::findOrFail(3)->bases);
-	//dd(App\Models\Kitchen\Item::findOrFail(3)->bases->first()->pivot->base);
-	//App\Models\Kitchen\Recipe\BaseRecipe::first()->items->first()->pivot->getCostAttribute();
-	//
-	/*$searchableColumns = [
-        'name', 
-        'relation' => [
-            'providers' => [
-                'name', 
-                'specialty'
-            ],
-            'bases' => [
-                'name'
-            ], 
-            'family' => [
-                'name'
-            ],
-            'subFamily' => [
-                'name'
-            ],
-            'unit' => [
-                'name'
-            ],
-            'presentation' => [
-                'name'
-            ]           
-        ]
-    ];
-    
-	foreach ($searchableColumns as $key => $field) {
-        $column = $field;
-        echo "<br><b>$key: ";
-        if ( is_array ( $field ) ) {
-            foreach ($field as $relation => $field) {
-            	# code...
-            }
-        } else {
-            echo $value;
-        }
-    }*/
-
-    Bugsnag::notifyError('ErrorType', 'Test Error');
+	$recipe = App\Models\Kitchen\Recipe\Recipe::first();
+    dd($recipe->bases->toArray());
 });
 
 Route::get('/', 'HomeController@index');

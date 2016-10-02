@@ -7,6 +7,7 @@ use App\Models\Kitchen\Utensil;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Kitchen\BaseRecipeItemPivot;
+use App\Models\Kitchen\BaseRecipeRecipePivot;
 use App\Models\SearchTrait;
 use App\Models\SortTrait;
 
@@ -42,7 +43,8 @@ class BaseRecipe extends Model
         'cost_mp_x_recipe',
         'cost_mp_x_recipe_format',
         'cost_mp_x_ration',
-        'cost_mp_x_ration_format'
+        'cost_mp_x_ration_format',
+        'serving_quantity_items'
     ];
 
     protected $dates = ['deleted_at'];
@@ -89,9 +91,10 @@ class BaseRecipe extends Model
      */    
     public function newPivot(Model $parent, array $attributes, $table, $exists)
     {
-        if ($parent instanceof Item) {
+        if ($parent instanceof Item) 
             return new BaseRecipeItemPivot($parent, $attributes, $table, $exists);
-        }
+        elseif ($parent instanceof Recipe) 
+            return new BaseRecipeRecipePivot($parent, $attributes, $table, $exists);
         return parent::newPivot($parent, $attributes, $table, $exists);
     }
 
@@ -134,6 +137,17 @@ class BaseRecipe extends Model
     {
         return $this->type->name;
     }      
+
+    public function getServingQuantityItemsAttribute()
+    {
+        if ( ! $this->items->count() )
+            return 0;
+        
+        $total = 0;
+        foreach ($this->items as $item) 
+            $total += $item->pivot->servings_quantity;
+        return $total;
+    }
 
     public function getCostMPXRecipeAttribute()
     {

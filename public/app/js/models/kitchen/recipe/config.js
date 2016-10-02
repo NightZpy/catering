@@ -6,6 +6,9 @@ var objectRow = {
 	photo: "",
 	type_id: "",
 	type_name: "", 
+	total_weight_format: "",
+	cost_mp_x_recipe_format: "",
+	cost_mp_x_ration_format: "",	
 	base: {
 		id: "",
 		code: "",
@@ -62,6 +65,24 @@ var tableColumns = [
 	    visible: true,
 	    title: "Raciones"
 	},
+	{
+	    name: 'total_weight_format',
+	    sortField: 'total_weight_format',
+	    visible: true,
+	    title: "Peso total"
+	},
+	{
+	    name: 'cost_mp_x_recipe_format',
+	    sortField: 'cost_mp_x_recipe_format',
+	    visible: true,
+	    title: "Costo MP X Receta"
+	},
+	{
+	    name: 'cost_mp_x_ration_format',
+	    sortField: 'cost_mp_x_ration_format',
+	    visible: true,
+	    title: "Costo MP X Ración"
+	},	
 	{
 	    name: 'description',
 	    sortField: 'description',
