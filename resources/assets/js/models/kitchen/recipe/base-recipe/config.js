@@ -33,13 +33,31 @@ var tableColumns = [
 	    sortField: 'name',
 	    title: 'Base',
 	    visible: true
-	},      
+	},  
+	{
+	    name: 'pivot.ration_weight_format',
+	    sortField: 'pivot.ration_weight',
+	    title: 'Peso por ración',
+	    visible: true
+	},	  
+	{
+	    name: 'pivot.ration_cost_format',
+	    sortField: 'pivot.ration_cost',
+	    title: 'Costo por ración',
+	    visible: true
+	},  
 	{
 	    name: 'pivot.required_quantity',
 	    sortField: 'pivot.required_quantity',
 	    title: 'Cantidad requerida',
 	    visible: true
-	},      	
+	},  
+	{
+	    name: 'pivot.cost_format',
+	    sortField: 'pivot.cost',
+	    title: 'Costo',
+	    visible: true
+	}, 		     	
     {
         name: '__actions',
         dataClass: 'center aligned',

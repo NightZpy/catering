@@ -25,7 +25,7 @@ class BaseRecipeRecipePivot extends Pivot {
 
     public function recipe()
     {
-        return $this->hasOne(Recipe::class, 'id', 'recipe_id');
+        return $this->hasOne(Recipe::class, 'id', 'recipe_id')->whereId($this->recipe_id);
     }
 
     /*    
@@ -33,15 +33,19 @@ class BaseRecipeRecipePivot extends Pivot {
         ='Recetas Base'!K6:K7/'Recetas Base'!L2*J2
      */
     public function getRationWeightAttribute()
-    {          
-        if ( !$this->base )     
+    {        
+        $base = $this->base;
+        if ( !$base )     
             return 0;
         
-        $servingQuantity = $this->base->serving_quantity_items;
-        if ( $servingQuantity == 0 || $this->base->servings_quantity == 0 || $this->recipe->servings_quantity == 0 )
+        $servingQuantity = $base->serving_quantity_items;
+        $baseServingQuantity = $base->servings_quantity;
+        $recipeServingQuantity = $this->recipe->servings_quantity;
+        return 0;  
+        if ( $servingQuantity == 0 || $baseServingQuantity == 0 || $recipeServingQuantity == 0 )
             return 0;                    
 
-        return $servingQuantity / $this->base->servings_quantity * $this->recipe->servings_quantity;
+        return $servingQuantity / $baseServingQuantity * $recipeServingQuantity;
     }
 
     public function getRationWeightFormatAttribute()

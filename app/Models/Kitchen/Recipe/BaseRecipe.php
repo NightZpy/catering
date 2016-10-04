@@ -118,6 +118,12 @@ class BaseRecipe extends Model
                         );
     }
 
+    public function recipes()
+    {
+        return $this->belongsToMany(BaseRecipe::class, 'base_recipe_recipe', 'base_id', 'recipe_id')
+                    ->withPivot('required_quantity');
+    }    
+
     public function utensils()
     {
         return $this->belongsToMany(Utensil::class, 'base_recipe_utensil', 'base_id', 'utensil_id');
@@ -142,7 +148,7 @@ class BaseRecipe extends Model
     {
         if ( ! $this->items->count() )
             return 0;
-        
+
         $total = 0;
         foreach ($this->items as $item) 
             $total += $item->pivot->servings_quantity;

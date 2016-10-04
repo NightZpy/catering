@@ -77,8 +77,7 @@
 			:options="objectToArrayObject(foreignData.utensilOptions)"
 			placeholder="Seleccione los utensilios"
 			:value.sync="row.pivot_utensil.utensil_id"
-			multiple
-			search justified required  clear-buttont>
+			multiple justified search required clear-button>
 		</v-select>
 	    <div v-if="$validation.utensil_id.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validation.utensil_id.required">

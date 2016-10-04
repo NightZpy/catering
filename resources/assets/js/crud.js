@@ -9,7 +9,6 @@ var VuetablePaginationBootstrap = require('vuetable/src/components/VuetablePagin
 var VuetablePaginationSimple = require('../vendor/vue-table/components/VuetablePaginationSimple.vue')
 var VueEditable = require('../vendor/vue-editable/vue-editable.js')
 var VueStrap = require('../vendor/vue-strap/vue-strap.min.js')
-//var VueStrapLang = require('../vendor/vue-strap/vue-strap-lang.js')
 //var VueSelect = require('vue-select');
 //var $ = require('jquery');
 //var select2 = require('select2-browserify');
@@ -122,7 +121,7 @@ Vue.validator('exist', function (val) {
 window.vm = new Vue({
     components: {
         modal: VueStrap.modal,
-        'v-select': VueStrap.select,
+        vSelect: VueStrap.select,
         'v-option': VueStrap.option,
         CustomVueSelectTemplate
     },
@@ -381,8 +380,8 @@ window.vm = new Vue({
             for (var key in object) {
                 if (object.hasOwnProperty(key)) {
                     var data = {
-                                'value': key,
-                                'label': object[key]
+                                value: key,
+                                label: object[key]
                             }
                     array.push(data);
                 }

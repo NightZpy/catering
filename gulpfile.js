@@ -34,7 +34,8 @@ elixir(function(mix) {
         'iCheck/1.0.2/icheck.min.js',
         'admin-lte/2.3.3/app.min.js',
         'dataTables/1.10.11/jquery.dataTables.min.js',
-        'dataTables/1.10.11/dataTables.bootstrap.min.js'        
+        'dataTables/1.10.11/dataTables.bootstrap.min.js',
+        'vue-components/vue-strap/vue-strap-lang.js'        
     ], 'public/app/js/app.min.js');
 
     /*mix.scripts(['../vendor/vue-strap/vue-strap.min.js'], 

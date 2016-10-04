@@ -334,7 +334,6 @@ class RecipeAPIController extends InfyOmBaseController
             $query = $query->orderBy('created_at', 'asc');
         }
 
-
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
         return response()->json($query->paginate($perPage));
     }    
