@@ -9,9 +9,6 @@ var VuetablePaginationBootstrap = require('vuetable/src/components/VuetablePagin
 var VuetablePaginationSimple = require('../vendor/vue-table/components/VuetablePaginationSimple.vue')
 var VueEditable = require('../vendor/vue-editable/vue-editable.js')
 var VueStrap = require('../vendor/vue-strap/vue-strap.min.js')
-//var VueSelect = require('vue-select');
-//var $ = require('jquery');
-//var select2 = require('select2-browserify');
 var CustomVueSelectTemplate = require('./vue-components/vue-select.vue')
 var VueValidator = require('vue-validator')
 const decamelize = require('decamelize');
@@ -20,8 +17,6 @@ Vue.use(VueResource)
 Vue.use(VueEditable)
 Vue.use(VueValidator)
 
-//Vue.component('v-select', vSelect)
-//Vue.component('v-select', VueSelect.VueSelect);
 Vue.component('vuetable', Vuetable);
 Vue.component('vuetable-pagination', VuetablePagination)
 Vue.component('vuetable-pagination-dropdown', VuetablePaginationDropdown)

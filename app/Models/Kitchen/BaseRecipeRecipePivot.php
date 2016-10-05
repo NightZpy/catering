@@ -25,7 +25,7 @@ class BaseRecipeRecipePivot extends Pivot {
 
     public function recipe()
     {
-        return $this->hasOne(Recipe::class, 'id', 'recipe_id')->whereId($this->recipe_id);
+        return $this->hasOne(Recipe::class, 'id', 'recipe_id');//->whereId($this->recipe_id);
     }
 
     /*    
@@ -34,14 +34,15 @@ class BaseRecipeRecipePivot extends Pivot {
      */
     public function getRationWeightAttribute()
     {        
-        $base = $this->base;
+        $base = BaseRecipe::findOrFail($this->base_id);
+
         if ( !$base )     
             return 0;
         
         $servingQuantity = $base->serving_quantity_items;
         $baseServingQuantity = $base->servings_quantity;
-        $recipeServingQuantity = $this->recipe->servings_quantity;
-        return 0;  
+        $recipeServingQuantity = Recipe::findOrFail($this->recipe_id)->servings_quantity;
+        
         if ( $servingQuantity == 0 || $baseServingQuantity == 0 || $recipeServingQuantity == 0 )
             return 0;                    
 
