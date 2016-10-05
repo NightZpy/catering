@@ -43,6 +43,12 @@ class BaseRecipeRecipePivot extends Pivot {
         $baseServingQuantity = $base->servings_quantity;
         $recipeServingQuantity = Recipe::findOrFail($this->recipe_id)->servings_quantity;
         
+        \Debugbar::info([
+            'base_serving_quantity_items' => $servingQuantity,
+            'base_serving_quantity' => $baseServingQuantity,
+            'recipe_serving_quantity' => $recipeServingQuantity
+        ]);
+
         if ( $servingQuantity == 0 || $baseServingQuantity == 0 || $recipeServingQuantity == 0 )
             return 0;                    
 

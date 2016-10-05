@@ -289,8 +289,17 @@ class RecipeAPIController extends InfyOmBaseController
 
         $attributes = $request->all();
         $attributes['pivot'] = $attributes['pivot_base'];
-        unset($attributes['pivot_base']);
-        
+        unset($attributes['pivot_base']);        
+        if ( isset($attributes['pivot']['base']) )
+            unset($attributes['pivot']['base']);
+
+        unset ( $attributes['pivot']['ration_weight'] );
+        unset ( $attributes['pivot']['ration_weight_format'] );
+        unset ( $attributes['pivot']['ration_cost'] );
+        unset ( $attributes['pivot']['ration_cost_format'] );
+        unset ( $attributes['pivot']['cost'] );
+        unset ( $attributes['pivot']['cost_format'] );
+
         $exists = $this->repository
              ->findWithoutFail($id)
              ->bases()
