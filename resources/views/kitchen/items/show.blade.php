@@ -2,4 +2,4 @@
 
 @section('modal-show-title')
 Item
-@stop
+@stop							
