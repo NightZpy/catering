@@ -62,7 +62,7 @@ class ItemAPIController extends InfyOmBaseController
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
         $result = $query->paginate($perPage);
         if ( $sortCol && !\Schema::hasColumn('items', $sortCol) ) {
-          /*\Debugbar::info($sortCol);
+          /*
           if ($sortDir == 'desc')
             $result = $query->paginate($perPage)->sortByDesc($sortCol);
           else

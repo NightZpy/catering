@@ -70,8 +70,6 @@ class SubFamilyAPIController extends InfyOmBaseController
 
         $subFamilies = $this->subFamilyRepository->create($input);
 
-        \Debugbar::info($subFamilies);
-
         return $this->sendResponse($subFamilies->toArray(), 'SubFamily saved successfully');
     }
 
