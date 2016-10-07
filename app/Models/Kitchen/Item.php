@@ -284,7 +284,7 @@ class Item extends Model
         $provider = $this->low_provider;
         if ($provider)
             return $provider->pivot->price;
-        return false;
+        return 0;
     }
 
     public function getLowProviderAttribute()
