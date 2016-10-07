@@ -4,56 +4,81 @@
 Recipe
 @stop
 
+@section('styles')
+<style>
+	.table-xls-main-title > thead,
+	.table-xls-main-title > tbody > tr:nth-child(3) > th:last-child,
+	.table-xls-main-title > tbody > tr:nth-child(n+4) > td:last-child,
+	.table-xls-main-title > tbody > tr:nth-child(n+6) {
+		background-color: rgb(60, 141, 188);
+		color: white;
+ 		text-align:center;
+    	vertical-align:middle;		
+	}
+
+	.table-xls-main-title > thead > tr > td,
+	.table-xls-main-title > tbody > tr > td {
+		font-style: oblique;
+	}	
+
+	.table-xls-main-title > tbody > tr:nth-child(2) > th:nth-child(-n+2),
+	.table-xls-main-title > tbody > tr:nth-child(3) {
+		background-color: rgb(157, 198, 221);
+		color: white;
+	}	
+
+	/*.table-xls-main-title > tbody > tr:nth-child(n+4) > td:nth-child(-n+6) {
+		border-bottom: 2px solid rgb(157, 198, 221);
+	}
+
+	.table-xls-main-title > tbody > tr:nth-last-child(-n+3) {
+		border-bottom: 1px solid white;
+	}*/
+
+	.table-xls-main-title > thead > tr > td:nth-child(n+1),
+	.table-xls-main-title > thead > tr > th:nth-child(n+1) {
+		vertical-align:middle;
+	}
+
+	.table-xls-main-title > thead > tr > td:nth-child(n+1) {
+		text-align: left;
+	}
+
+	.table-xls-main-title > thead > tr > th:nth-child(n+1) {
+		text-align: right;
+	}
+
+</style>
+@stop
+
 @section('content-show')
-	{{-- <div class="row">
-		<div class="col-sm-5">
-			Nombre de la receta: <strong>@{{ row.name }}</strong>
-		</div>
-		<div class="col-sm-3">
-			Código: <strong>@{{ row.code }}</strong>
-		</div>
-		<div class="col-sm-offset-1 col-sm-3">
-			N. Raciones: <strong>@{{ row.servings_quantity }}</strong>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-5">Tipo de receta: <strong>@{{ row.type_name }}</strong></div>
-	</div>
-	<div class="row">
-		<div class="col-sm-5">
-		Ingredientes
-			<div class="col-sm-4">
-				Código
-				<div class="col-sm-12">aaaaaaaaaaaaa</div>
-				<div class="col-sm-12">aaaaaaaaaaaaa</div>
-			</div>				
-			<div class="col-sm-8">
-				Descripción
-				<div class="col-sm-12">bbbbbbbbbbbbbb</div>
-				<div class="col-sm-12">bbbbbbbbbbbbbb</div>
-			</div>
-		</div>
-		<div class="col-sm-5">Utilización en receta final</div>
-	</div> --}}	
 	<div class="table-responsive">
-		<table class="table table-striped">
+		<table class="table table-xls-main-title">
 			<thead>
-				<th style="background-color: rgb(255, 255, 204)" colspan="3">Nombre de la receta:</th>
-				<td style="background-color: rgb(255, 255, 204)">@{{ row.name }}</td>
-				<th>Código:</th>
-				<td>@{{ row.code }}</td>
-				<th></th>
-				<th class="text-right">Raciones:</th>
-				<td colspan="2">@{{ row.servings_quantity }}</td>
+				<tr>
+					<th colspan="3">Receta:</th>
+					<td>@{{ row.name }}</td>
+					<th>Código:</th>
+					<td>@{{ row.code }}</td>
+					<th></th>
+					<th class="text-right">Raciones:</th>
+					<td colspan="2">@{{ row.servings_quantity }}</td>
+				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<th style="background-color: rgb(255, 255, 204)" colspan="3">Tipo de receta:</th>
-					<td style="background-color: rgb(255, 255, 204)">@{{ row.type_name }}</td>
+					<th colspan="3">Tipo:</th>
+					<td>@{{ row.type_name }}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 				<tr>
 					<th class="text-center" colspan="4">Ingredientes</th>
 					<th class="text-center" colspan="4">Utilización en receta final</th>
+					<th></th>	
 				</tr>
 				<tr>
 					<th class="text-center">Código</th>
@@ -79,14 +104,14 @@ Recipe
 						<td colspan="2">@{{ pivot.pivot.cost_format }}</td>
 					</tr>
 				</template>
-				<tr style="background-color: rgb(204, 255, 255)">
+				<tr>
 					<td style="background-color: white" colspan="4"></td>
 					<th>Peso total</th>
 					<td>@{{ row.total_weight_format }}</td>
 					<th colspan="2">Costo MP X Receta</th>
 					<td colspan="2">@{{ row.cost_mp_x_recipe_format }}</td>
 				</tr>
-				<tr style="background-color: rgb(204, 255, 255)">
+				<tr>
 					<td style="background-color: white" colspan="6"></td>
 					<th colspan="2">Costo MP X Ración</th>
 					<td colspan="2">@{{ row.cost_mp_x_ration_format }}</td>

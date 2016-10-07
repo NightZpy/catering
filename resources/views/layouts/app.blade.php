@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" href="/app/css/app.min.css">
     @stack('vue-styles')
+    @yield('styles')
 </head>
 <body class="skin-blue sidebar-mini">
 
