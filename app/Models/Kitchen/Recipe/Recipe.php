@@ -122,7 +122,7 @@ class Recipe extends Model
      */
     public function getCodeAttribute()
     {
-        return 'RCT-' . $this->id;
+        return 'RCFNL-' . $this->id;
     }      
 
     public function getTypeNameAttribute()

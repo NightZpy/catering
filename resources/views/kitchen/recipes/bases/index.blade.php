@@ -100,8 +100,10 @@
         });*/
 
         vm.$watch('row.pivot_item.item_id', function (value) {
-            var url = apiUrl.foreign.item.show.url + value;
-            this.getOneData(url, 'decrease', 'row.pivot_item.decrease');            
+            if (value != undefined) {
+                var url = apiUrl.foreign.item.show.url + value;
+                this.getOneData(url, 'decrease', 'row.pivot_item.decrease');            
+            }
         });
 
         vm.$watch('row.pivot_utensil.utensil_id', function (value) {
