@@ -19,11 +19,13 @@ elixir(function(mix) {
     ], 'public/app/css/vue-styles.css');
 
     mix.styles([
+        'custom/recipe/utensils.css',
         'custom/recipe/recipe-tabs.css',
         'custom/recipe/base-recipe-show.css'
     ], 'public/app/css/custom/recipe/base-show.css');
 
     mix.styles([
+        'custom/recipe/utensils.css',
         'custom/recipe/recipe-tabs.css',
         'custom/recipe/recipe-show.css'
     ], 'public/app/css/custom/recipe/show.css');

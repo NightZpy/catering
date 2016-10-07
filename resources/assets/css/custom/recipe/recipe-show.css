@@ -8,7 +8,7 @@
 .table-xls-main-title > tbody > tr:nth-child(n+6) {
 	background-color: rgb(60, 141, 188);
 	color: white;
-		text-align:center;
+	text-align:center;
 	vertical-align:middle;		
 }
 
