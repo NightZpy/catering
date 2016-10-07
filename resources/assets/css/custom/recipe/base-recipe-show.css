@@ -1,0 +1,52 @@
+/*
+ * --------------------------- Table Styles ----------------------------
+ */
+
+.table-xls-main-title > thead,
+.table-xls-main-title > tbody > tr:nth-child(2) > th:last-child,
+.table-xls-main-title > tbody > tr:nth-child(n+3) > td:last-child,
+.table-xls-main-title > tfoot {
+	background-color: rgb(60, 141, 188);
+	color: white;
+		text-align:center;
+	vertical-align:middle;		
+}
+
+.table-xls-main-title > tbody > tr:nth-child(1) > th:nth-child(-n+3),
+.table-xls-main-title > tbody > tr:nth-child(2) > th:nth-child(-n+9) {
+	background-color: rgb(157, 198, 221);
+		text-align:center;
+	vertical-align:middle;	
+	color: white;		
+}	
+
+.table-xls-main-title > tfoot > tr > td:nth-child(1) {
+	background-color: white;
+}	
+
+.table-xls-main-title > thead > tr > td,
+.table-xls-main-title > tbody > tr > td {
+	font-style: oblique;
+}	
+
+
+/*.table-xls-main-title > tbody > tr:nth-child(n+4) > td:nth-child(-n+6) {
+	border-bottom: 2px solid rgb(157, 198, 221);
+}
+
+.table-xls-main-title > tbody > tr:nth-last-child(-n+3) {
+	border-bottom: 1px solid white;
+}*/
+
+.table-xls-main-title > thead > tr > td:nth-child(n+1),
+.table-xls-main-title > thead > tr > th:nth-child(n+1) {
+	vertical-align:middle;
+}
+
+.table-xls-main-title > thead > tr > td:nth-child(n+1) {
+	text-align: left;
+}
+
+.table-xls-main-title > thead > tr > th:nth-child(n+1) {
+	text-align: right;
+}

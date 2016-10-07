@@ -29,7 +29,9 @@ class Utensil extends Model
     ];     
 
     protected $appends = [
+        'code',
         'category_name',
+        'cost_format',
         'total_cost',
         'total_cost_format'
     ];
@@ -91,7 +93,17 @@ class Utensil extends Model
         if ( $this->category )
             return $this->category->name;
         return false;
-    }    
+    } 
+
+    public function getCodeAttribute()
+    {
+       return ( $this->id < 10 ? '0' . $this->id : $this->id );
+    }       
+
+    public function getCostFormatAttribute()
+    {
+       return number_format($this->cost, '2', ',', '.');
+    } 
 
     public function getTotalCostAttribute()
     {

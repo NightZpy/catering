@@ -1,0 +1,4 @@
+.nav-tabs-custom>.nav-tabs> li:nth-child(-n+3) > a {
+	font-weight: bold;
+	font-size: 20px;
+}

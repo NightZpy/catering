@@ -19,6 +19,16 @@ elixir(function(mix) {
     ], 'public/app/css/vue-styles.css');
 
     mix.styles([
+        'custom/recipe/recipe-tabs.css',
+        'custom/recipe/base-recipe-show.css'
+    ], 'public/app/css/custom/recipe/base-show.css');
+
+    mix.styles([
+        'custom/recipe/recipe-tabs.css',
+        'custom/recipe/recipe-show.css'
+    ], 'public/app/css/custom/recipe/show.css');
+
+    mix.styles([
         'bootstrap/3.3.6/bootstrap.min.css',
         'font-awesome/4.5.0/font-awesome.min.css',
         'select2/4.0.2/select2.min.css',
