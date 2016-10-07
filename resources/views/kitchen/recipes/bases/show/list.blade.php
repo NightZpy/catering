@@ -39,7 +39,7 @@
 				 	<td>@{{ item.name }}</td>
 				 	<td>@{{ item.unit.symbol }}</td>
 				 	<td>@{{ item.pivot.purchase_quantity }}</td>
-				 	<td>@{{ item.pivot.cost_format }}</td>
+				 	<td>@{{ item.cost_format }}</td>
 				 	<td>@{{ item.pivot.decrease }}</td>
 				 	<td>@{{ item.unit.symbol }}</td>
 				 	<td>@{{ item.pivot.servings_quantity }}</td>

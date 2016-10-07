@@ -88,7 +88,8 @@
         var vm = window.vm; 
         vm.$watch('row.pivot_item.item_id', function (value) {
             var url = apiUrl.foreign.item.showOne.url + value;
-            this.getOneData(url, 'decrease', 'row.pivot_item.decrease');            
+            this.getOneData(url, 'decrease', 'row.pivot_item.decrease');         
+            this.getOneData(url, 'cost', 'row.pivot_item.cost');   
         });
 
         var loadRelateItems = function () {
