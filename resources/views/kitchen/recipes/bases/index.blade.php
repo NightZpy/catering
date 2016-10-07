@@ -100,7 +100,7 @@
         });*/
 
         vm.$watch('row.pivot_item.item_id', function (value) {
-            if (value != undefined) {
+            if (value >= 0) {
                 var url = apiUrl.foreign.item.show.url + value;
                 this.getOneData(url, 'decrease', 'row.pivot_item.decrease');            
             }
