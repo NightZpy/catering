@@ -65,6 +65,7 @@ class Item extends Model
         'price_format',
         'selected_format',
         'cost',
+        'cost_format',
         'low_provider',
         'family_id'
     ]; 
@@ -286,6 +287,11 @@ class Item extends Model
             return $provider->pivot->price;
         return 0;
     }
+
+    public function getCostFormatAttribute()
+    {
+        return number_format($this->cost, 2, ',', '.');
+    }    
 
     public function getLowProviderAttribute()
     {

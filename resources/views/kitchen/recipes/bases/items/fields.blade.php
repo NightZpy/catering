@@ -50,6 +50,16 @@
 		</div>
 	</div>
 
+	<!-- Cost Read Field -->
+	<div class="form-group col-sm-6">
+	    <label for="cost">Costo:</label>
+	    <input 
+	    	type="text" class="form-control" style="background-color: yellow; font-weight: bold" 
+	    	v-model="row.pivot_item.cost" 
+	    	data-type="text" 
+	    	disabled="disabled" />
+	</div>
+
 	<!-- Purchase quantity Field -->
 	<div class="form-group col-sm-6">
 	    <label for="purchase_quantity">Cantidad de compra:</label>

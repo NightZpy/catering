@@ -3,7 +3,7 @@
 	title="@yield('modal-show-title')" 
 	:show.sync="showModal" 
 	effect="fade" 
-	{{ $large }}
+	{{ $large or null }}
 	width="{{ $width or 800 }}">
 	<div slot="modal-header" class="modal-header">
 		<h4 class="modal-title">
@@ -15,7 +15,7 @@
 			@include('layouts.flash')
 			<div class="box box-primary">
 				<div class="box-body">					
-					@if ( $content )
+					@if ( isset ($content) )
 						@yield('content-show')
 					@else
 						<div class="row">

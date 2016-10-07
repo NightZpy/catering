@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<th>Codigo</th>
-				<th>Descripcion</th>
+				<th>Nombre</th>
 				<th>Unidad</th>
 				<th>Cantidad compra</th>
 				<th>Costo por cantidad</th>
@@ -36,10 +36,10 @@
 			<template v-for="item in row.items">
 				<tr>
 				 	<td>@{{ item.code }}</td>
-				 	<td>@{{ item.description }}</td>
+				 	<td>@{{ item.name }}</td>
 				 	<td>@{{ item.unit.symbol }}</td>
 				 	<td>@{{ item.pivot.purchase_quantity }}</td>
-				 	<td>@{{ item.pivot.cost_per_quantity_format }}</td>
+				 	<td>@{{ item.pivot.cost_format }}</td>
 				 	<td>@{{ item.pivot.decrease }}</td>
 				 	<td>@{{ item.unit.symbol }}</td>
 				 	<td>@{{ item.pivot.servings_quantity }}</td>
