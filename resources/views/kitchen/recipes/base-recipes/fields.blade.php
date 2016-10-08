@@ -1,5 +1,5 @@
 <validator name="validationBase">	
-	<!-- Cost per required_quantity Field -->
+	<!-- required_quantity Field -->
 	<div class="form-group col-sm-6">
 	    <label for="required_quantity">Cantidad requerida:</label>
 	    <input type="text" class="form-control" v-model="row.pivot_base.required_quantity" v-validate:required_quantity="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
@@ -9,11 +9,6 @@
 				<span class="sr-only">Error:</span>
 				Custom rule(required) Message Here
 			</div>
-			{{-- <div v-if="$validationBase.required_quantity.unique">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				Custom rule(unique) Message Here
-			</div> --}}
 			<div v-if="$validationBase.required_quantity.minlength">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
@@ -45,5 +40,17 @@
 				La receta base es obligatoria
 			</div>
 		</div> 
+	</div>	
+
+	<!-- required_quantity Field -->
+	<div class="form-group col-sm-6">
+	    <label for="cost">Costo:</label>
+	    <input
+	    	style="background-color: yellow" 
+	    	type="text" 
+	    	class="form-control" 
+	    	v-model="row.pivot_base.cost"
+	    	disabled="disabled"  
+	    	data-type="text" />
 	</div>			
 </validator>	

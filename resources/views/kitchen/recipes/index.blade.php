@@ -101,7 +101,23 @@
             else
                 vm.$validation.utensil_id.invalid = true;
             vm.$validation.utensil_id.valid = ! vm.$validation.utensil_id.invalid;
-        });                      
+        });    
+
+        vm.$watch('row.pivot_base.base_id', function (value) {
+            if ( value > 0 && this.row.pivot_base.required_quantity > 0) {
+                this.row.pivot_base.cost = this.row.pivot_base.required_quantity * value;
+            } else {
+                this.row.pivot_base.cost = 0;
+            }
+        });    
+
+        vm.$watch('row.pivot_base.required_quantity', function (value) {
+            if ( value > 0 && this.row.pivot_base.base_id > 0) {
+                this.row.pivot_base.cost = this.row.pivot_base.base_id * value;
+            } else {
+                this.row.pivot_base.cost = 0;
+            }
+        });                                    
     </script>     
 @endpush
 
