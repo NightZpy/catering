@@ -79,7 +79,30 @@
             }
         };
     </script>
-    <script src="/app/js/crud.js"></script>    
+    <script src="/app/js/crud.js"></script>   
+    <script>
+        var baseCost = function () {
+            var bases = vm.foreignData.baseOptions;
+            for (var i = 0; i < bases.length; i++) 
+                if ( bases[i].id == vm.row.pivot_base.base_id ) 
+                    return (bases[i].cost_mp_x_ration * vm.row.pivot_base.required_quantity).toLocaleString();
+            return 0;            
+        }
+
+        vm.$watch('row.pivot_base.base_id', function (value) {
+            if ( value > 0 && this.row.pivot_base.required_quantity > 0)
+                this.row.pivot_base.cost =  baseCost();
+            else 
+                this.row.pivot_base.cost = 0;
+        });    
+
+        vm.$watch('row.pivot_base.required_quantity', function (value) {
+            if ( value > 0 && this.row.pivot_base.base_id > 0)
+                this.row.pivot_base.cost = baseCost();
+            else
+                this.row.pivot_base.cost = 0;
+        });       
+    </script>        
 @endpush
 
 @push('vue-styles')
