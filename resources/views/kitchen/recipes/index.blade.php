@@ -103,20 +103,40 @@
             vm.$validation.utensil_id.valid = ! vm.$validation.utensil_id.invalid;
         });    
 
+        var baseCost = function () {
+            var bases = vm.foreignData.baseOptions;
+            for (var i = 0; i < bases.length; i++) {
+                console.log( bases[i].id + '==' + vm.row.pivot_base.base_id );
+                if ( bases[i].id == vm.row.pivot_base.base_id ) {
+                    console.log(bases[i].cost_mp_x_ration + ' * ' + vm.row.pivot_base.required_quantity)
+                    return bases[i].cost_mp_x_ration * vm.row.pivot_base.required_quantity;
+                }
+            }
+            return 0;            
+        }
+
         vm.$watch('row.pivot_base.base_id', function (value) {
+            //console.log(value);
             if ( value > 0 && this.row.pivot_base.required_quantity > 0) {
-                this.row.pivot_base.cost = this.row.pivot_base.required_quantity * value;
-            } else {
+                console.log('BaseCost: ' + baseCost());
+                this.row.pivot_base.cost =  baseCost();
+            }
+            else {
                 this.row.pivot_base.cost = 0;
             }
+
+            console.log(this.row.pivot_base.cost);
         });    
 
         vm.$watch('row.pivot_base.required_quantity', function (value) {
+            //console.log(value);
             if ( value > 0 && this.row.pivot_base.base_id > 0) {
-                this.row.pivot_base.cost = this.row.pivot_base.base_id * value;
+                console.log('BaseCost: ' + baseCost());
+                this.row.pivot_base.cost = baseCost();
             } else {
                 this.row.pivot_base.cost = 0;
             }
+            console.log(this.row.pivot_base.cost);
         });                                    
     </script>     
 @endpush
