@@ -44,7 +44,7 @@
 
 	<!-- Cost Field -->
 	<div class="form-group col-sm-6">
-	    <label for="cost">Costo: @{{ row.pivot_base.cost }}</label>
+	    <label for="cost">Costo: @{{ row.pivot_base.required_quantity }}</label>
 	    <input
 	    	style="background-color: yellow; font-weight: bold" 
 	    	type="text" 
