@@ -34,7 +34,8 @@ var objectRow = {
 	},
 	pivot_base: {
 		required_quantity: "",
-		base_id: ""			
+		base_id: "",
+		cost: 0			
 	},
 	pivot_utensil: {
 		utensil_id: ""			

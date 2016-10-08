@@ -44,12 +44,13 @@
 
 	<!-- Cost Field -->
 	<div class="form-group col-sm-6">
-	    <label for="cost">Costo: @{{ row.pivot_base.required_quantity }}</label>
+	    <label for="cost">Costo: </label>
 	    <input
 	    	style="background-color: yellow; font-weight: bold" 
 	    	type="text" 
 	    	class="form-control" 
 	    	v-model="row.pivot_base.cost"
+	    	disabled="disabled"
 	    	data-type="text" />
 	</div>			
 </validator>	
