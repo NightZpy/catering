@@ -109,7 +109,7 @@
                 console.log( bases[i].id + '==' + vm.row.pivot_base.base_id );
                 if ( bases[i].id == vm.row.pivot_base.base_id ) {
                     console.log(bases[i].cost_mp_x_ration + ' * ' + vm.row.pivot_base.required_quantity)
-                    return bases[i].cost_mp_x_ration * vm.row.pivot_base.required_quantity;
+                    return (bases[i].cost_mp_x_ration * vm.row.pivot_base.required_quantity).toLocaleString();
                 }
             }
             return 0;            
