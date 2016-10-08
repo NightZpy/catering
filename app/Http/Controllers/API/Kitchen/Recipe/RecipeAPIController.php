@@ -360,7 +360,7 @@ class RecipeAPIController extends InfyOmBaseController
 
     public function availableBases(Request $request, $id = null)
     {
-        $baseRecipes = $this->repository->availableBases($id)->pluck('name', 'id')->toArray();
+        $baseRecipes = $this->repository->availableBases($id)->toArray();
         //$baseRecipes = $this->repository->all()->pluck('name', 'id')->toArray();
         if (empty($baseRecipes))
             return Response::json(ResponseUtil::makeError('BaseRecipes not found'), 400);        

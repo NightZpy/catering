@@ -33,10 +33,10 @@
 	    <label for="base_id">Receta base:</label>
 		<select class="form-control" v-model="row.pivot_base.base_id" v-validate:base_id="{ required: true }">
 			<option selected="selected">-- Seleccione una receta base --</option>
-			<option v-for="(id, name) in foreignData.baseOptions" 
-				v-bind:selected="id == row.base.id"
-				v-bind:value="id">		
-				@{{ name }}
+			<option v-for="base in foreignData.baseOptions" 
+				v-bind:selected="base.id == row.base.id"
+				v-bind:value="base.id">		
+				@{{ base.name }} - @{{ base.type_name }}
 			</option>
 		</select>
 	    <div v-if="$validationBase.base_id.invalid" class="alert alert-danger" role="alert">
