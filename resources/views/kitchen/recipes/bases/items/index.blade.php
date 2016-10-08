@@ -90,6 +90,12 @@
             var url = apiUrl.foreign.item.showOne.url + value;
             this.getOneData(url, 'decrease', 'row.pivot_item.decrease');         
             this.getOneData(url, 'cost', 'row.pivot_item.cost');   
+
+            if ( value > 0 )
+                vm.$validationItem.item_id.invalid = false;
+            else
+                vm.$validationItem.item_id.invalid = true;
+            vm.$validationItem.item_id.valid = ! vm.$validationItem.item_id.invalid;            
         });
 
         var loadRelateItems = function () {
@@ -105,6 +111,7 @@
             if (value) 
                 loadRelateItems();
         });
+
     </script>     
 @endpush
 

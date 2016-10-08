@@ -113,7 +113,8 @@
             else
                 vm.$validation.utensil_id.invalid = true;
             vm.$validation.utensil_id.valid = ! vm.$validation.utensil_id.invalid;
-        });         
+        }); 
+
     </script>
 @endpush
 
