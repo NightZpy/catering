@@ -87,15 +87,16 @@
     <script>
         var vm = window.vm; 
         vm.$watch('row.pivot_item.item_id', function (value) {
-            var url = apiUrl.foreign.item.showOne.url + value;
-            this.getOneData(url, 'decrease', 'row.pivot_item.decrease');         
-            this.getOneData(url, 'cost', 'row.pivot_item.cost');   
 
-            if ( value > 0 )
-                vm.$validationItem.item_id.invalid = false;
-            else
+            if ( value > 0 ) {
+                var url = apiUrl.foreign.item.showOne.url + value;
+                this.getOneData(url, 'decrease', 'row.pivot_item.decrease');         
+                this.getOneData(url, 'cost', 'row.pivot_item.cost');   
+                vm.$validationItem.item_id.invalid = false;                    
+            } else {
                 vm.$validationItem.item_id.invalid = true;
-            vm.$validationItem.item_id.valid = ! vm.$validationItem.item_id.invalid;            
+            }
+            vm.$validationItem.item_id.valid = ! vm.$validationItem.item_id.invalid;        
         });
 
         var loadRelateItems = function () {
