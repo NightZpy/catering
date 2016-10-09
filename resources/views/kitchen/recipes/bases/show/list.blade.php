@@ -1,4 +1,4 @@
-<template v-if="row.items.length > 0">
+<template v-if="row.items && row.items.length > 0">
 	<div class="table-responsive">
 		<table class="table table-xls-main-title">
 			<thead>
