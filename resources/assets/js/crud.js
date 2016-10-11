@@ -289,7 +289,8 @@ window.vm = new Vue({
                     var field = decamelize(actions[0]);
                     this.row[ field + '_id' ] = data.id; 
                 }
-                vm.$set(map, data);
+                //vm.$set(map, data);
+                //vm.row = data;
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE')
                 this.$broadcast('vuetable:reload');
@@ -298,6 +299,7 @@ window.vm = new Vue({
             vm.flashType = 'success'; 
         },
         failed: function(response) {
+            console.log(JSON.stringify(response));
             vm.flashMessage = vm.defaultErrorMessage;
             vm.flashType = vm.flashTypeDanger;
             if (response.data.errors) {

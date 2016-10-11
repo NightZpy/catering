@@ -28,9 +28,9 @@
 		<button type="button" class="btn btn-success" 
 			v-if="{{  '$validation' . $model }}.valid"
 			@click="submit(
-				{{ ( isset ($model) ? "'" . lcfirst($model) . "'" : 'null' ) }}, 
-				{{ ( isset ($type) ? "'" . $type . "'" : 'null' ) }}, 
-				{{ ( isset ($related) ? "'" . $related . "'" : 'null' ) }})"
+				{{ ( isset ($model) 	? "'" 	. lcfirst($model) . "'" : 'null' ) }}, 
+				{{ ( isset ($type) 		? "'" 	. $type 	. "'" : 'null' ) }}, 
+				{{ ( isset ($related) 	? "'" 	. $related 	. "'" : 'null' ) }})"
 		>Save</button>
 	</div>	
 </modal>

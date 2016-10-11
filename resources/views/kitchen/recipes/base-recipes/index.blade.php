@@ -53,7 +53,7 @@
                     }, 
                     index: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.kitchen.recipes.base-recipes.available') }}/"
+                        url: "{{ route('api.v1.kitchen.recipes.bases.index') }}/"
                     },
                     show: {
                         method: 'GET' ,
@@ -63,6 +63,10 @@
                         method: 'GET',
                         url: "{{ route('api.v1.kitchen.recipes.base-recipes.available') }}/"                        
                     },
+                    select: {
+                        method: 'GET',
+                        url: "{{ route('api.v1.kitchen.recipes.bases.select-list') }}/"                        
+                    },                    
                     already_associate: {
                         method: 'GET',
                         url: "{{ route('api.v1.kitchen.recipes.base-recipes.already-associate') }}/"
@@ -88,6 +92,16 @@
                     return (bases[i].cost_mp_x_ration * vm.row.pivot_base.required_quantity).toLocaleString();
             return 0;            
         }
+
+        vm.$watch('localModals.baseADD', function (value) {
+            if (value) 
+                this.getForeignData(this.url.foreign.base.relate_list.url + this.row.id, 'baseOptions', 'base', 'relate_list');
+        });
+
+        vm.$watch('localModals.baseEDIT', function (value) {
+            if (value) 
+                this.getForeignData(this.url.foreign.base.index.url, 'baseOptions', 'base', 'index');
+        });
 
         vm.$watch('row.pivot_base.base_id', function (value) {
             if ( value > 0 && this.row.pivot_base.required_quantity > 0)

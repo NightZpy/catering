@@ -289,6 +289,10 @@ Route::group(['prefix' => 'kitchen', 'namespace' => 'Kitchen'], function () {
 				'as' => 'api.v1.kitchen.recipes.bases.store',
 				'uses' => 'BaseRecipeAPIController@store'
 			]);
+			Route::get('select-list', [
+				'as' => 'api.v1.kitchen.recipes.bases.select-list',
+				'uses' => 'BaseRecipeAPIController@selectList'
+			]);
 
 			Route::group(['prefix' => 'items'], function () {	
 				Route::get('{id?}', [

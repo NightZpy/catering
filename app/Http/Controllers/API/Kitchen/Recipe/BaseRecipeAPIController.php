@@ -14,6 +14,7 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Http\Controllers\API\DataFormat;
 
 /**
  * Class BaseRecipeController
@@ -22,6 +23,8 @@ use Response;
 
 class BaseRecipeAPIController extends InfyOmBaseController
 {
+    use DataFormat;
+
     /** @var  BaseRecipeRepository */
     private $repository;
 

@@ -24,7 +24,7 @@
 	</div>
 
 	<!-- base Id Field -->
-	<div class="form-group col-sm-6" @click="getForeignData('{{ route('api.v1.kitchen.recipes.base-recipes.available') }}/' + row.id, 'baseOptions', 'base')" class="form-group col-sm-6">
+	<div class="form-group col-sm-6" class="form-group col-sm-6">
 	    <label for="base_id">Receta base:</label>
 		<select class="form-control" v-model="row.pivot_base.base_id" v-validate:base_id="{ required: true }">
 			<option selected="selected">-- Seleccione una receta base --</option>
