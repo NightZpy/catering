@@ -107,13 +107,21 @@
             }
         });
 
+        vm.$watch('row.type_id', function (value) {
+            if ( value > 0 )
+                vm.$validation.type_id.invalid = false;
+            else
+                vm.$validation.type_id.invalid = true;
+            vm.$validation.type_id.valid = ! vm.$validation.type_id.invalid;
+        }); 
+
         vm.$watch('row.pivot_utensil.utensil_id', function (value) {
             if ( value.length > 0 )
                 vm.$validation.utensil_id.invalid = false;
             else
                 vm.$validation.utensil_id.invalid = true;
             vm.$validation.utensil_id.valid = ! vm.$validation.utensil_id.invalid;
-        }); 
+        });         
 
     </script>
 @endpush
