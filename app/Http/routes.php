@@ -12,8 +12,9 @@
 */
 
 Route::get('/test', function(){
-	$recipe = App\Models\Kitchen\Recipe\Recipe::first();
-    dd($recipe->bases->toArray());
+	return true;
+	/*$recipe = App\Models\Kitchen\Recipe\Recipe::first();
+    dd($recipe->bases->toArray());*/
 });
 
 Route::get('/', 'HomeController@index');

@@ -49,6 +49,10 @@ Vue.validator('numeric', function (val) {
     return /^[-+]?[0-9]+$/.test(val)
 });
 
+Vue.validator('unique', function (val) {
+    return false;
+});
+/*
 function copyOwnFrom (target, source) {
   Object.getOwnPropertyNames(source).forEach(function (propName) {
     Object.defineProperty(target, propName, Object.getOwnPropertyDescriptor(source, propName))
@@ -64,14 +68,15 @@ ValidationError.prototype.constructor = ValidationError
 
 Vue.validator('exist', function (val) {
       //this.vm.checking = true // spinner on
-      return fetch('/validations/exist', {
-        method: 'post',
+      return fetch('/test', {
+        method: 'get',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          username: val
+          username: val,
+          _token: token
         })
       }).then((res) => {
         this.vm.checking = false // spinner off
@@ -87,7 +92,7 @@ Vue.validator('exist', function (val) {
           return Promise.reject('unexpected error')
         }
       })    
-});
+});*/
 
 /*VueValidator.asset('exist', function (val) {
     return function (resolve, reject) {

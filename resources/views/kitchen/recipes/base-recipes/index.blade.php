@@ -103,6 +103,13 @@
                 this.getForeignData(this.url.foreign.base.index.url, 'baseOptions', 'base', 'index');
         });
 
+/*        vm.$watch('row.pivot_base.required_quantity', function (value) {
+            if ( value )               
+                    vm.$validationBase.required_quantity.unique = false;
+                else
+                    vm.$validationBase.required_quantity.unique = true;              
+        });  */
+
         vm.$watch('row.pivot_base.base_id', function (value) {
             if ( value > 0 && this.row.pivot_base.required_quantity > 0)
                 this.row.pivot_base.cost =  baseCost();

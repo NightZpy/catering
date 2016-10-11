@@ -2,7 +2,7 @@
 	<!-- required_quantity Field -->
 	<div class="form-group col-sm-6">
 	    <label for="required_quantity">Cantidad requerida:</label>
-	    <input type="text" class="form-control" v-model="row.pivot_base.required_quantity" v-validate:required_quantity="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
+	    <input type="text" class="form-control" v-model="row.pivot_base.required_quantity" v-validate:required_quantity="{ required: true, minlength: 1, maxlength: 13, numeric: true }" data-type="text" />
 	    <div v-if="$validationBase.required_quantity.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validationBase.required_quantity.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -19,7 +19,11 @@
 				<span class="sr-only">Error:</span>
 				Custom rule(maxlength) Message Here
 			</div>
-		
+			<div v-if="$validationBase.required_quantity.numeric">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Sólo se permiten números!
+			</div>
 		</div>
 	</div>
 
