@@ -51,6 +51,14 @@
             if (value) 
                 this.getForeignData(this.url.foreign.family.select.url, 'familyOptions', 'family', 'select');
         });
+
+        vm.$watch('row.family_id', function (value) {
+            if ( value > 0 )
+                vm.$validation.family_id.invalid = false;
+            else
+                vm.$validation.family_id.invalid = true;
+            vm.$validation.family_id.valid = ! vm.$validation.family_id.invalid;
+        });
     </script>    
 @endpush
 
