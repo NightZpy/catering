@@ -5,8 +5,8 @@
             <i class="fa fa-angle-left pull-right"></i>
         </span>
     </a>
-    <ul class="treeview-menu menu-open" style="display: block;">
-        <li class="{{ Request::is('items*') ? 'active' : '' }}">
+    <ul class="treeview-menu {{ Request::is('kitchen*') ? 'menu-open' : '' }}" style="display: block;">
+        <li class="{{ Request::is('kitchen*') ? 'active' : '' }}">
             <a href="{!! route('kitchen.items.index') !!}"><i class="fa fa-circle-o"></i><span>Almacen</span></a>
         </li>
         <li class="active">
@@ -15,11 +15,11 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </span>
             </a>
-            <ul class="treeview-menu menu-open" style="display: block;">
-                <li class="{{ Request::is('utensils*') ? 'active' : '' }}">
+            <ul class="treeview-menu {{ Request::is('kitchen.utensils*') ? 'menu-open' : '' }}" style="display: block;">
+                <li class="{{ Request::is('kitchen.utensils.index') ? 'active' : '' }}">
                     <a href="{!! route('kitchen.utensils.index') !!}"><i class="fa fa-edit"></i><span>Lista</span></a>
                 </li>            
-                <li class="{{ Request::is('utensils.categories*') ? 'active' : '' }}">
+                <li class="{{ Request::is('kitchen.utensils.categories.index') ? 'active' : '' }}">
                     <a href="{!! route('kitchen.utensils.categories.index') !!}"><i class="fa fa-edit"></i><span>Categorías</span></a>
                 </li>
             </ul>
@@ -30,16 +30,16 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </span>
             </a>
-            <ul class="treeview-menu menu-open" style="display: block;">
-                <li class="{{ Request::is('recipes.types*') ? 'active' : '' }}">
+            <ul class="treeview-menu {{ Request::is('kitchen.recipes*') ? 'menu-open' : '' }}" style="display: block;">
+                <li class="{{ Request::is('kitchen.recipes.types.index') ? 'active' : '' }}">
                     <a href="{!! route('kitchen.recipes.types.index') !!}"><i class="fa fa-edit"></i><span>Tipo</span></a>
                 </li>
 
-                <li class="{{ Request::is('recipes.bases*') ? 'active' : '' }}">
+                <li class="{{ Request::is('kitchen.recipes.bases.index') ? 'active' : '' }}">
                     <a href="{!! route('kitchen.recipes.bases.index') !!}"><i class="fa fa-edit"></i><span>Base</span></a>
                 </li>
 
-                <li class="{{ Request::is('recipes*') ? 'active' : '' }}">
+                <li class="{{ Request::is('kitchen.recipes.index') ? 'active' : '' }}">
                     <a href="{!! route('kitchen.recipes.index') !!}"><i class="fa fa-edit"></i><span>Final</span></a>
                 </li>
             </ul>
@@ -50,11 +50,11 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </span>
             </a>
-            <ul class="treeview-menu menu-open" style="display: block;">
-                <li class="{{ Request::is('families*') ? 'active' : '' }}">
+            <ul class="treeview-menu {{ Request::is('families*') ? 'menu-open' : '' }}" style="display: block;">
+                <li class="{{ Request::is('families.index') ? 'active' : '' }}">
                     <a href="{!! route('families.index') !!}"><i class="fa fa-edit"></i><span>Families</span></a>
                 </li>
-                <li class="{{ Request::is('subFamilies*') ? 'active' : '' }}">
+                <li class="{{ Request::is('subFamilies.index') ? 'active' : '' }}">
                     <a href="{!! route('subFamilies.index') !!}"><i class="fa fa-edit"></i><span>SubFamilies</span></a>
                 </li>
             </ul>
@@ -65,7 +65,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </span>
             </a>
-            <ul class="treeview-menu menu-open" style="display: block;">
+            <ul class="treeview-menu {{ Request::is('units*') OR Request::is('presentations*') ? 'menu-open' : '' }}" style="display: block;">
                 <li>
                     <a href="{!! route('units.index') !!}">
                         <i class="fa fa-edit"></i>
