@@ -294,7 +294,7 @@ window.vm = new Vue({
                     var field = decamelize(actions[0]);
                     this.row[ field + '_id' ] = data.id; 
                 }
-                //vm.$set(map, data);
+                vm.$set(map, data);
                 //vm.row = data;
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE')
