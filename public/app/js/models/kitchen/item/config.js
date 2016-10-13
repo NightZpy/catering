@@ -62,9 +62,15 @@ var tableColumns = [
 	    visible: false
 	},
 	{
-	    name: 'code',
-	    sortField: 'id',
-	    title: 'Código',
+	    name: 'family_name',
+	    sortField: 'sub_family.family.name',
+	    title: 'Familia',
+	    visible: true
+	},       
+	{
+	    name: 'sub_family_name',
+	    sortField: 'sub_family.name',
+	    title: 'Sub-familia',
 	    visible: true
 	},
 	{
@@ -72,6 +78,53 @@ var tableColumns = [
 	    sortField: 'name',
 	    title: 'Nombre',
 	    visible: true
+	},	    	
+	{
+	    name: 'type',
+	    sortField: 'type',
+	    title: 'Tipo',
+	    visible: true
+	},	
+	{
+	    name: 'unit_name',
+	    sortField: 'unit.name',
+	    title: 'Unidad',
+	    visible: true
+	},
+	{
+	    name: 'presentation_name',
+	    sortField: 'presentation.name',
+	    title: 'Presentación',
+	    visible: true
+	},	
+	{
+	    name: 'current_stock',
+	    sortField: 'current_stock',
+	    title: 'Cantidad',
+	    visible: true
+	},	
+	{
+	    name: 'decrease',
+	    sortField: 'decrease',
+	    title: 'Merma',
+	    visible: true
+	},		
+    {
+        name: 'compose_code',
+        title: 'Código compuesto',
+        visible: true
+    }, 
+	{
+	    name: 'min_stock',
+	    sortField: 'min_stock',
+	    title: 'Stock mínimo',
+	    visible: true
+	},    		
+	{
+	    name: 'code',
+	    sortField: 'id',
+	    title: 'Código',
+	    visible: false
 	},
 	{
 	    name: 'auto_provider_format',
@@ -87,70 +140,17 @@ var tableColumns = [
 	    visible: false
 	},
 	{
-	    name: 'decrease',
-	    sortField: 'decrease',
-	    title: 'Merma',
-	    visible: true
-	},	
-	{
-	    name: 'min_stock',
-	    sortField: 'min_stock',
-	    title: 'Stock mínimo',
-	    visible: true
-	},
-	{
-	    name: 'current_stock',
-	    sortField: 'current_stock',
-	    title: 'Cantidad',
-	    visible: true
-	},
-	{
 	    name: 'to_buy',
 	    sortField: 'to_buy',
 	    title: 'Comprar',
-	    visible: true
+	    visible: false
 	},	
 	{
 	    name: 'currency',
 	    sortField: 'currency',
 	    title: 'Moneda',
 	    visible: false
-	},
-	{
-	    name: 'unit_name',
-	    sortField: 'unit.name',
-	    title: 'Unidad',
-	    visible: true
-	},
-	{
-	    name: 'presentation_name',
-	    sortField: 'presentation.name',
-	    title: 'Presentación',
-	    visible: true
-	},
-	{
-	    name: 'type',
-	    sortField: 'type',
-	    title: 'Tipo',
-	    visible: true
-	},
-    {
-        name: 'compose_code',
-        title: 'Código compuesto',
-        visible: true
-    }, 	
-	{
-	    name: 'family_name',
-	    sortField: 'sub_family.family.name',
-	    title: 'Familia',
-	    visible: true
-	},       
-	{
-	    name: 'sub_family_name',
-	    sortField: 'sub_family.name',
-	    title: 'Sub-familia',
-	    visible: true
-	},       
+	},   
     {
         name: '__actions',
         dataClass: 'center aligned',
