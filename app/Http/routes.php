@@ -12,6 +12,9 @@
 */
 
 Route::get('/test', function(){
+	return json_encode(DB::table('users')
+						->whereEmail("nightzpy@gmail.com")
+						->count());
 	return true;
 	/*$recipe = App\Models\Kitchen\Recipe\Recipe::first();
     dd($recipe->bases->toArray());*/
