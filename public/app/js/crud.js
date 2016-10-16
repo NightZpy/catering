@@ -17170,11 +17170,13 @@ window.vm = new Vue({
                 }
             }, function (response) {});
         },
-        available: function available(url) {
+        available: function available(url, map, data) {
             this.sendData(url, 'GET').then(function (response) {
-                return true;
+                ;
+                data = response.data.success;
+                this.$set(map, data);
             }, function (response) {
-                return false;
+                this.$set(map, false);
             });
         },
         getForeignData: function getForeignData() {

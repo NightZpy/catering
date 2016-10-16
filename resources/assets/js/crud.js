@@ -224,12 +224,13 @@ window.vm = new Vue({
                     function(response) {}
                 );             
         },
-        available: function(url) {
+        available: function(url, map, data) {
             this.sendData(url, 'GET')
-                .then(function (response){
-                    return true;
+                .then(function (response){;
+                    data = response.data.success
+                    this.$set(map, data);
                 }, function (response){
-                    return false;
+                    this.$set(map, false);
                 });
         },
         getForeignData: function (callUrl = null, mapVar = null, related = null, action = 'index') {
