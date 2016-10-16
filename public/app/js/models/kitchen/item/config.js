@@ -163,7 +163,7 @@ var actions = [
     { name: 'edit-item', label: 'Editar', show: true, icon: 'glyphicon glyphicon-pencil', class: 'btn btn-warning', extra: {title: 'Edit', 'data-toggle':"tooltip", 'data-placement': "top"} },
     { name: 'delete-item', label: 'Eliminar', show: true, icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } },
     //{ name: 'addProviderToItem', label: '', icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {title: 'Add Provider', 'data-toggle':"tooltip", 'data-placement': "right" } },
-    //{ name: 'ADD:related:provider', label: 'Asociar proveedor', show: true, icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Provider', 'data-toggle':"tooltip", 'data-placement': "left"} },
+    { name: 'ADD:related:provider', label: 'Asociar proveedor', show: true, icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Provider', 'data-toggle':"tooltip", 'data-placement': "left"} },
     { name: 'LINK:related:provider', label: 'Ver proveedores', show: true, icon: 'glyphicon glyphicon-th-list', class: 'btn btn-success', extra: {title: 'Providers', 'data-toggle':"tooltip", 'data-placement': "right" } }
 ];
 

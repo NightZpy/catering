@@ -227,7 +227,7 @@ class ItemAPIController extends InfyOmBaseController
                   ->orWhere("specialty", "like", $value)
                   ->orWhere("district", "like", $value)
                   ->orWhere("contact", "like", $value)
-                  ->orWhere("email", "like", $value);
+                  ->orWhere("email", "like", $valcue);
             });
         }
 
