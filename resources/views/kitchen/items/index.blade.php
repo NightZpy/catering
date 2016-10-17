@@ -94,7 +94,7 @@
                         method: 'GET' ,
                         url: "{{ route('kitchen.items.providers.index') }}/"
                     },
-                    relate_list: {
+                    available_providers: {
                         method: 'GET',
                         url: "{{ route('api.v1.kitchen.items.providers.available-providers') }}/"                        
                     },
@@ -130,6 +130,10 @@
             vm.getForeignData(vm.url.foreign.sub_family.byFamily.url + vm.row.family_id , 'subFamilyOptions', 'sub_family');
         };
 
+        var loadAvailableProviders = function () {
+            vm.getForeignData(vm.url.foreign.provider.available_providers.url + vm.row.id, 'providerOptions', 'provider', 'available_providers');
+        }        
+
         vm.$watch('formModal', function (value) {
             if (value) {
                 loadUnits();
@@ -144,9 +148,16 @@
         });
 
         vm.$watch('localModals.providerADD', function (value) {
-            if ( value ) 
-                this.getForeignData(this.url.foreign.provider.relate_list.url + this.row.id, 'providerOptions', 'provider', 'relate_list');
-        });
+            if (value) {
+                console.log(vm.available ( vm.url.foreign.provider.available.url + vm.row.id ));
+                if ( ! vm.available ( vm.url.foreign.provider.available.url + vm.row.id )) {
+                    vm.localModals.providerADD = false;
+                    alert('No hay proveedores disponibles!');
+                } else {
+                    loadAvailableProviders();
+                }
+            }
+        });  
 
         /**
          * Load unit list after add new unit from add new item form
@@ -194,35 +205,6 @@
                 this.$validationsub_family.family_id.valid = true;
             }
         });
-
-        /*var availableProviders = function () {
-            var url = vm.url.foreign.provider.available.url;
-            return vm.available( url );
-        };*/
-
-        var mix = {
-            methods : {
-                availableProviders : function() {
-                    var url = vm.url.foreign.provider.available.url;
-                    return vm.available( url );
-                }
-            }
-        };  
-
-        /*Vue.mixin({
-            methods: {
-                availableProviders: function() {
-                    var url = vm.url.foreign.provider.available.url;
-                    return vm.available( url );
-                }
-            }
-        })
-*/
-        //vm.availableProviders();
-
-        //vm.$mixins.push(mix);
-        var availableProvidersUrl = vm.url.foreign.provider.available.url;
-        vm.itemActions.push({ name: 'ADD:related:provider', label: 'Asociar proveedor', show: availableProvidersUrl, icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Provider', 'data-toggle':"tooltip", 'data-placement': "left"} })
 
         /*vm.$watch('row.family_id', function (value) {
             if ( value.length > 0 )

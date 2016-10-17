@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f49254a20e50b065aa8d8bbf136aca27",
     "content-hash": "8da3d78def99a39758d96f735041fe68",
     "packages": [
         {
@@ -583,16 +582,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.2.1",
+            "version": "6.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427"
+                "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/3f808fba627f2c5b69e2501217bf31af349c1427",
-                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ebf29dee597f02f09f4d5bbecc68230ea9b08f60",
+                "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60",
                 "shasum": ""
             },
             "require": {
@@ -641,7 +640,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-07-15 17:22:37"
+            "time": "2016-10-08 15:01:37"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1232,16 +1231,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.27",
+            "version": "1.0.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "50e2045ed70a7e75a5e30bc3662904f3b67af8a9"
+                "reference": "a9663643ff2d16d7f66ed1e0d3212c5491bc9044"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/50e2045ed70a7e75a5e30bc3662904f3b67af8a9",
-                "reference": "50e2045ed70a7e75a5e30bc3662904f3b67af8a9",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a9663643ff2d16d7f66ed1e0d3212c5491bc9044",
+                "reference": "a9663643ff2d16d7f66ed1e0d3212c5491bc9044",
                 "shasum": ""
             },
             "require": {
@@ -1311,7 +1310,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-08-10 08:55:11"
+            "time": "2016-10-07 12:20:37"
         },
         {
             "name": "mathiasgrimm/laravel-dot-env-gen",
@@ -1836,16 +1835,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "5277094ed527a1c4477177d102fe4c53551953e0"
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/5277094ed527a1c4477177d102fe4c53551953e0",
-                "reference": "5277094ed527a1c4477177d102fe4c53551953e0",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
                 "shasum": ""
             },
             "require": {
@@ -1879,7 +1878,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-09-19 16:02:08"
+            "time": "2016-10-10 12:19:37"
         },
         {
             "name": "psy/psysh",
@@ -2175,7 +2174,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -3004,16 +3003,16 @@
         },
         {
             "name": "arcanedev/support",
-            "version": "3.16.0",
+            "version": "3.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ARCANEDEV/Support.git",
-                "reference": "ca5bfaed3e74dd8b652e7fcde19fc72fdaee4018"
+                "reference": "79e78435df2e2e453915260cbdb47181211661b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ARCANEDEV/Support/zipball/ca5bfaed3e74dd8b652e7fcde19fc72fdaee4018",
-                "reference": "ca5bfaed3e74dd8b652e7fcde19fc72fdaee4018",
+                "url": "https://api.github.com/repos/ARCANEDEV/Support/zipball/79e78435df2e2e453915260cbdb47181211661b3",
+                "reference": "79e78435df2e2e453915260cbdb47181211661b3",
                 "shasum": ""
             },
             "require": {
@@ -3059,7 +3058,7 @@
                 "laravel",
                 "support"
             ],
-            "time": "2016-09-27 17:09:07"
+            "time": "2016-10-07 18:11:30"
         },
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -3882,16 +3881,16 @@
         },
         {
             "name": "mnapoli/front-yaml",
-            "version": "1.5.1",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mnapoli/FrontYAML.git",
-                "reference": "702982070dae3f3635eda4f41ab4725b38a0e63a"
+                "reference": "f10c1dfee1604d15c2b0ab6826eecc1111d65543"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mnapoli/FrontYAML/zipball/702982070dae3f3635eda4f41ab4725b38a0e63a",
-                "reference": "702982070dae3f3635eda4f41ab4725b38a0e63a",
+                "url": "https://api.github.com/repos/mnapoli/FrontYAML/zipball/f10c1dfee1604d15c2b0ab6826eecc1111d65543",
+                "reference": "f10c1dfee1604d15c2b0ab6826eecc1111d65543",
                 "shasum": ""
             },
             "require": {
@@ -3912,7 +3911,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2016-04-15 11:49:09"
+            "time": "2016-10-01 11:06:51"
         },
         {
             "name": "mnapoli/silly",
@@ -4073,16 +4072,16 @@
         },
         {
             "name": "mpociot/laravel-apidoc-generator",
-            "version": "1.6.4",
+            "version": "1.6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpociot/laravel-apidoc-generator.git",
-                "reference": "2b989671f0d23561c529313c17ac5eaa4ddb9518"
+                "reference": "f76ce805fd148a312be704fbad453a132ee69a30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpociot/laravel-apidoc-generator/zipball/2b989671f0d23561c529313c17ac5eaa4ddb9518",
-                "reference": "2b989671f0d23561c529313c17ac5eaa4ddb9518",
+                "url": "https://api.github.com/repos/mpociot/laravel-apidoc-generator/zipball/f76ce805fd148a312be704fbad453a132ee69a30",
+                "reference": "f76ce805fd148a312be704fbad453a132ee69a30",
                 "shasum": ""
             },
             "require": {
@@ -4122,7 +4121,7 @@
                 "documentation",
                 "laravel"
             ],
-            "time": "2016-09-14 09:43:33"
+            "time": "2016-10-06 12:43:28"
         },
         {
             "name": "mpociot/reflection-docblock",
@@ -4208,52 +4207,6 @@
             ],
             "description": "A simple Artisan command to view the schema of any Eloquent model",
             "time": "2016-05-14 08:47:34"
-        },
-        {
-            "name": "nicolaslopezj/searchable",
-            "version": "1.9.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nicolaslopezj/searchable.git",
-                "reference": "eee7c3ae94d8d0e98b397f0cf2dcb127bfddc555"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nicolaslopezj/searchable/zipball/eee7c3ae94d8d0e98b397f0cf2dcb127bfddc555",
-                "reference": "eee7c3ae94d8d0e98b397f0cf2dcb127bfddc555",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "illuminate/database": "4.2.x|~5.0",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Nicolaslopezj\\Searchable\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Lopez",
-                    "email": "nicolaslopezj@me.com"
-                }
-            ],
-            "description": "Eloquent model search trait.",
-            "keywords": [
-                "database",
-                "eloquent",
-                "laravel",
-                "model",
-                "search",
-                "searchable"
-            ],
-            "time": "2016-06-28 21:40:28"
         },
         {
             "name": "php-di/invoker",
@@ -4354,16 +4307,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd"
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/9270140b940ff02e58ec577c237274e92cd40cdd",
-                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/8331b5efe816ae05461b7ca1e721c01b46bafb3e",
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e",
                 "shasum": ""
             },
             "require": {
@@ -4395,7 +4348,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2016-06-10 09:48:41"
+            "time": "2016-09-30 07:12:33"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -4879,16 +4832,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.5.0",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "a6d15c8618ea3951fd54d34e326b68d3d0bc0786"
+                "reference": "a07797b986671b0dc823885a81d5e3516b931599"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/a6d15c8618ea3951fd54d34e326b68d3d0bc0786",
-                "reference": "a6d15c8618ea3951fd54d34e326b68d3d0bc0786",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/a07797b986671b0dc823885a81d5e3516b931599",
+                "reference": "a07797b986671b0dc823885a81d5e3516b931599",
                 "shasum": ""
             },
             "require": {
@@ -4955,7 +4908,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-08-02 18:39:32"
+            "time": "2016-10-02 15:51:17"
         },
         {
             "name": "sebastian/comparator",
@@ -5330,108 +5283,6 @@
             "time": "2015-06-21 13:59:46"
         },
         {
-            "name": "sofa/eloquence",
-            "version": "v5.2.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jarektkaczyk/eloquence.git",
-                "reference": "7d52943463b6ae135d638c80c0e7e270a5ca6df6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jarektkaczyk/eloquence/zipball/7d52943463b6ae135d638c80c0e7e270a5ca6df6",
-                "reference": "7d52943463b6ae135d638c80c0e7e270a5ca6df6",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "5.2.*",
-                "php": ">=5.5.9",
-                "sofa/hookable": "5.2.*"
-            },
-            "require-dev": {
-                "mockery/mockery": "0.9.4",
-                "phpunit/phpunit": "4.5.0",
-                "squizlabs/php_codesniffer": "2.3.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Sofa\\Eloquence\\": "src"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jarek Tkaczyk",
-                    "email": "jarek@softonsofa.com",
-                    "homepage": "http://softonsofa.com/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Flexible Searchable, Mappable, Metable, Validation and more extensions for Laravel Eloquent ORM.",
-            "keywords": [
-                "eloquent",
-                "laravel",
-                "mappable",
-                "metable",
-                "mutable",
-                "searchable"
-            ],
-            "time": "2016-08-25 03:25:46"
-        },
-        {
-            "name": "sofa/hookable",
-            "version": "v5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jarektkaczyk/hookable.git",
-                "reference": "ae87508e072737a602832acdd62272867152c775"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jarektkaczyk/hookable/zipball/ae87508e072737a602832acdd62272867152c775",
-                "reference": "ae87508e072737a602832acdd62272867152c775",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "5.2.*",
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "crysalead/kahlan": "~1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Sofa\\Hookable\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jarek Tkaczyk",
-                    "email": "jarek@softonsofa.com",
-                    "homepage": "http://softonsofa.com/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel Eloquent hooks system.",
-            "keywords": [
-                "eloquent",
-                "laravel"
-            ],
-            "time": "2016-01-14 21:06:40"
-        },
-        {
             "name": "sven/env-providers",
             "version": "3.0.0",
             "source": {
@@ -5481,16 +5332,16 @@
         },
         {
             "name": "symfony/class-loader",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/class-loader.git",
-                "reference": "2d0ba77c46ecc96a6641009a98f72632216811ba"
+                "reference": "bcb072aba46ddf3b1a496438c63be6be647739aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/class-loader/zipball/2d0ba77c46ecc96a6641009a98f72632216811ba",
-                "reference": "2d0ba77c46ecc96a6641009a98f72632216811ba",
+                "url": "https://api.github.com/repos/symfony/class-loader/zipball/bcb072aba46ddf3b1a496438c63be6be647739aa",
+                "reference": "bcb072aba46ddf3b1a496438c63be6be647739aa",
                 "shasum": ""
             },
             "require": {
@@ -5533,7 +5384,7 @@
             ],
             "description": "Symfony ClassLoader Component",
             "homepage": "https://symfony.com",
-            "time": "2016-08-23 13:39:15"
+            "time": "2016-09-06 23:30:54"
         },
         {
             "name": "symfony/css-selector",
@@ -5646,16 +5497,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "f291ed25eb1435bddbe8a96caaef16469c2a092d"
+                "reference": "368b9738d4033c8b93454cb0dbd45d305135a6d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/f291ed25eb1435bddbe8a96caaef16469c2a092d",
-                "reference": "f291ed25eb1435bddbe8a96caaef16469c2a092d",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/368b9738d4033c8b93454cb0dbd45d305135a6d3",
+                "reference": "368b9738d4033c8b93454cb0dbd45d305135a6d3",
                 "shasum": ""
             },
             "require": {
@@ -5691,7 +5542,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-02 02:12:52"
+            "time": "2016-09-25 08:27:07"
         },
         {
             "name": "webmozart/assert",
@@ -5745,16 +5596,16 @@
         },
         {
             "name": "windwalker/renderer",
-            "version": "3.0",
+            "version": "3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ventoviro/windwalker-renderer.git",
-                "reference": "74bbb426fe90677af1d57ca49437ac15b5caf777"
+                "reference": "9fb60cbf382cd48694f6452c1f7b87268392e756"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ventoviro/windwalker-renderer/zipball/74bbb426fe90677af1d57ca49437ac15b5caf777",
-                "reference": "74bbb426fe90677af1d57ca49437ac15b5caf777",
+                "url": "https://api.github.com/repos/ventoviro/windwalker-renderer/zipball/9fb60cbf382cd48694f6452c1f7b87268392e756",
+                "reference": "9fb60cbf382cd48694f6452c1f7b87268392e756",
                 "shasum": ""
             },
             "require": {
@@ -5798,20 +5649,20 @@
                 "renderer",
                 "windwalker"
             ],
-            "time": "2016-07-18 11:05:31"
+            "time": "2016-10-11 13:17:06"
         },
         {
             "name": "windwalker/structure",
-            "version": "3.0",
+            "version": "3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ventoviro/windwalker-structure.git",
-                "reference": "eefcbfebe56af8b4474f78bbd94e52d0590e9ead"
+                "reference": "7951da6e0ec9a412e97d6f751605188c55785562"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ventoviro/windwalker-structure/zipball/eefcbfebe56af8b4474f78bbd94e52d0590e9ead",
-                "reference": "eefcbfebe56af8b4474f78bbd94e52d0590e9ead",
+                "url": "https://api.github.com/repos/ventoviro/windwalker-structure/zipball/7951da6e0ec9a412e97d6f751605188c55785562",
+                "reference": "7951da6e0ec9a412e97d6f751605188c55785562",
                 "shasum": ""
             },
             "require": {
@@ -5846,7 +5697,7 @@
                 "structure",
                 "windwalker"
             ],
-            "time": "2016-07-18 11:04:07"
+            "time": "2016-10-11 13:17:06"
         }
     ],
     "aliases": [],
