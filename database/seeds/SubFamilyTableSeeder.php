@@ -17,7 +17,6 @@ class SubFamilyTableSeeder extends Seeder
             $familyCode =  rand(1, 20);
             $subFamily = [
                 'name' => "SubFamily-$i", 
-                'code' => $i,
                 'family_id' => $familyCode
             ];
             SubFamily::create($subFamily);

@@ -4,7 +4,7 @@
             'modalSync'     => 'providerEDIT',
             'modalClose'    => 'providerEDIT',
             'model'         => 'Provider',
-            'related'       => 'provider',
+            'related'       => true,
             'type'			=> 'store',
             'content'       => view('kitchen.items.providers.fields')
 	]);

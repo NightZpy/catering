@@ -36,16 +36,31 @@
             update: "{{ route('api.v1.kitchen.utensils.update') }}/",  
             delete: "{{ route('api.v1.kitchen.utensils.delete') }}/",
             foreign: {
-                utensil_category: { 
-                    index: {
+                category: { 
+                    select: {
                         method: 'GET' ,
-                        url: "{{ route('api.v1.units.index') }}/"
+                        url: "{{ route('api.v1.kitchen.utensils.categories.select-list') }}/"
                     }
                 },
             }
         };
-    </script>
-    <script src="/app/js/crud.js"></script>    
+    </script>  
+    <script src="/app/js/crud.js"></script>   
+    <script>
+        var vm = window.vm;
+        vm.$watch('formModal', function (value) {
+            if (value)
+                this.getForeignData(this.url.foreign.category.select.url, 'utensilCategoriesOptions', 'category', 'select')
+        }); 
+
+        vm.$watch('row.category_id', function (value) {
+            if ( value.length > 0 || value > 0 )
+                vm.$validation.category_id.invalid = false;
+            else
+                vm.$validation.category_id.invalid = true;
+            vm.$validation.category_id.valid = ! vm.$validation.category_id.invalid;
+        });        
+    </script>       
 @endpush
 
 @push('vue-styles')

@@ -13,6 +13,7 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Http\Controllers\API\DataFormat;
 
 /**
  * Class ItemController
@@ -21,6 +22,8 @@ use Response;
 
 class ItemAPIController extends InfyOmBaseController
 {
+    use DataFormat;    
+
     /** @var  ItemRepository */
     private $repository;
     private $providerRepository;
@@ -40,30 +43,33 @@ class ItemAPIController extends InfyOmBaseController
      */
     public function index(Request $request)
     {
+        //return Item::search($request->filter)->get();
+
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = Item::orderBy($sortCol, $sortDir);
+            if ( \Schema::hasColumn('items', $sortCol) ) 
+              $query = Item::orderBy($sortCol, $sortDir);
+            else
+              $query = Item::sortBy($sortCol, $sortDir);
         } else {
             $query = Item::orderBy('created_at', 'asc');
         }
 
         if ($request->exists('filter')) {
-            $query->where(function($q) use($request) {
-                $value = "%{$request->filter}%";
-                $q->where("code", "like", $value)
-                  ->orWhere("name", "like", $value)
-                  ->orWhere("auto_provider", "like", $value)
-                  ->orWhere("perishable", "like", $value)
-                  ->orWhere("currency", "like", $value)
-                  ->orWhere("unit_id", "like", $value)
-                  ->orWhere("presentation_id", "like", $value)
-                  ->orWhere("type_id", "like", $value)
-                  ->orWhere("sub_family_id", "like", $value);
-            });
+          $query->search("{$request->filter}");                     
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
-        return response()->json($query->paginate($perPage));    
+        $result = $query->paginate($perPage);
+        if ( $sortCol && !\Schema::hasColumn('items', $sortCol) ) {
+          /*
+          if ($sortDir == 'desc')
+            $result = $query->paginate($perPage)->sortByDesc($sortCol);
+          else
+            $result = $query->paginate($perPage)->sortBy($sortCol);*/
+        }
+
+        return response()->json($result);
     }
 
     /**
@@ -150,6 +156,11 @@ class ItemAPIController extends InfyOmBaseController
         return $this->sendResponse($id, 'Item deleted successfully');
     }
 
+    public function unique(Request $request, $name)
+    {
+      return (Item::whereName($name)->count());
+    }
+
     public function storeProvider(Request $request, $id = null, $providerId = null)
     {
         $item = $this->repository->findWithoutFail($id);
@@ -166,18 +177,17 @@ class ItemAPIController extends InfyOmBaseController
         }
 
         $attributes = $request->all();
+        $attributes['pivot'] = $attributes['pivot_provider'];
+        unset($attributes['pivot_provider']);
 
         if (isset($attributes['pivot']['selected']) && $attributes['pivot']['selected'] && !$item->auto_provider)
-            $attributes['pivot']['selected'] = True; 
-
-        if ($providerId)
-            $attributes['pivot']['provider_id'] = $provider->id;     
+            $attributes['pivot']['selected'] = True;   
 
         $exists = $this->repository
              ->findWithoutFail($id)
              ->providers()
              ->whereProviderId($providerId)->count();
-
+        
         if ($exists) {
           $item->providers()->updateExistingPivot($providerId, $attributes['pivot']);
         } else {
@@ -217,7 +227,7 @@ class ItemAPIController extends InfyOmBaseController
                   ->orWhere("specialty", "like", $value)
                   ->orWhere("district", "like", $value)
                   ->orWhere("contact", "like", $value)
-                  ->orWhere("email", "like", $value);
+                  ->orWhere("email", "like", $valcue);
             });
         }
 
@@ -247,8 +257,8 @@ class ItemAPIController extends InfyOmBaseController
 
         $item = $this->repository->findWithoutFail($id)->toArray();
         $data = $item;
-        $provider = $provider->toArray();
-        $data['pivot'] = $provider['pivot'];
+        $provider = $provider->toArray();    
+        $data['pivot_provider'] = $provider['pivot'];
         unset($provider['pivot']);
         $data['provider'] = $provider;
         return $this->sendResponse($data, 'Provider associated to Item successfully retrieve');
@@ -270,11 +280,12 @@ class ItemAPIController extends InfyOmBaseController
         $item = $this->repository->findWithoutFail($id);
         if (empty($item))
             return Response::json(ResponseUtil::makeError('Item not found'), 400); 
-        $provider = ['provider_id' => '', 'price' => '', 'selected' => ''];
-        if ($item->providers()->whereProviderId($providerId)->count()) {
+
+        $provider = $item->providers()->whereProviderId($providerId)->count();
+        if ($provider) {
             $item->providers()->detach($providerId);
-            $item = $item->toArray();
-            $item['provider'] = $provider;
+            //$item = $item->toArray();
+            //$item['provider'] = $provider;
             return $this->sendResponse($request->all(), 'Provider successfully detached from item');
         }
         return Response::json(ResponseUtil::makeError('Provider could not be detached from item'), 400);

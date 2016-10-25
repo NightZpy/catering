@@ -26,8 +26,11 @@
 			@click="closeModal('{{ $modalClose }}')"
 		>Close</button>
 		<button type="button" class="btn btn-success" 
-			@click="submit('{{ $related or 'null' }}', '{{ $type or 'null' }}')"
 			v-if="{{  '$validation' . $model }}.valid"
+			@click="submit(
+				{{ ( isset ($model) 	? "'" 	. lcfirst($model) . "'" : 'null' ) }}, 
+				{{ ( isset ($type) 		? "'" 	. $type 	. "'" : 'null' ) }}, 
+				{{ ( isset ($related) 	? "'" 	. $related 	. "'" : 'null' ) }})"
 		>Save</button>
 	</div>	
 </modal>

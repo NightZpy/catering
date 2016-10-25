@@ -18,35 +18,5 @@
         "primary": false,
         "inForm": true,
         "inIndex": true
-    },
-    {
-        "fieldInput": "created_at:dateTime",
-        "htmlType": "date",
-        "validations": "",
-        "searchable": false,
-        "fillable": false,
-        "primary": false,
-        "inForm": false,
-        "inIndex": false
-    },
-    {
-        "fieldInput": "updated_at:dateTime",
-        "htmlType": "date",
-        "validations": "",
-        "searchable": false,
-        "fillable": false,
-        "primary": false,
-        "inForm": false,
-        "inIndex": false
-    },
-    {
-        "fieldInput": "deleted_at:dateTime",
-        "htmlType": "date",
-        "validations": "",
-        "searchable": false,
-        "fillable": true,
-        "primary": false,
-        "inForm": false,
-        "inIndex": false
     }
 ]

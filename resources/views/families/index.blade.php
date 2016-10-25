@@ -46,7 +46,7 @@
         };
     
     </script>    
-    <script src="/app/js/models/family-config.js"></script>
+    <script src="/app/js/models/family/config.js"></script>
     <script src="/app/js/crud.js"></script> 
 @endpush
 

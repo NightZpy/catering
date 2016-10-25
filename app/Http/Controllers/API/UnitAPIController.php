@@ -12,6 +12,7 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Http\Controllers\API\DataFormat;
 
 /**
  * Class UnitController
@@ -20,12 +21,14 @@ use Response;
 
 class UnitAPIController extends InfyOmBaseController
 {
+    use DataFormat;
+
     /** @var  UnitRepository */
-    private $unitRepository;
+    private $repository;
 
     public function __construct(UnitRepository $unitRepo)
     {
-        $this->unitRepository = $unitRepo;
+        $this->repository = $unitRepo;
     }
 
     /**
@@ -39,17 +42,16 @@ class UnitAPIController extends InfyOmBaseController
     {
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = Unit::orderBy($sortCol, $sortDir);
+            if ( \Schema::hasColumn('units', $sortCol) ) 
+              $query = Unit::orderBy($sortCol, $sortDir);
+            else
+              $query = Unit::sortBy($sortCol, $sortDir);
         } else {
             $query = Unit::orderBy('created_at', 'asc');
         }
 
         if ($request->exists('filter')) {
-            $query->where(function($q) use($request) {
-                $value = "%{$request->filter}%";
-                $q->where("name", "like", $value)
-                  ->orWhere("symbol", "like", $value);
-            });
+            $query->search("{$request->filter}");
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
@@ -68,7 +70,7 @@ class UnitAPIController extends InfyOmBaseController
     {
         $input = $request->all();
 
-        $units = $this->unitRepository->create($input);
+        $units = $this->repository->create($input);
 
         return $this->sendResponse($units->toArray(), 'Unit saved successfully');
     }
@@ -84,7 +86,7 @@ class UnitAPIController extends InfyOmBaseController
     public function show($id)
     {
         /** @var Unit $unit */
-        $unit = $this->unitRepository->find($id);
+        $unit = $this->repository->find($id);
 
         if (empty($unit)) {
             return Response::json(ResponseUtil::makeError('Unit not found'), 400);
@@ -107,13 +109,13 @@ class UnitAPIController extends InfyOmBaseController
         $input = $request->all();
 
         /** @var Unit $unit */
-        $unit = $this->unitRepository->find($id);
+        $unit = $this->repository->find($id);
 
         if (empty($unit)) {
             return Response::json(ResponseUtil::makeError('Unit not found'), 400);
         }
 
-        $unit = $this->unitRepository->update($input, $id);
+        $unit = $this->repository->update($input, $id);
 
         return $this->sendResponse($unit->toArray(), 'Unit updated successfully');
     }
@@ -129,7 +131,7 @@ class UnitAPIController extends InfyOmBaseController
     public function destroy($id)
     {
         /** @var Unit $unit */
-        $unit = $this->unitRepository->find($id);
+        $unit = $this->repository->find($id);
 
         if (empty($unit)) {
             return Response::json(ResponseUtil::makeError('Unit not found'), 400);

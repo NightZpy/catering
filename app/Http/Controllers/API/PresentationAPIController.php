@@ -12,6 +12,7 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Http\Controllers\API\DataFormat;
 
 /**
  * Class PresentationController
@@ -20,12 +21,14 @@ use Response;
 
 class PresentationAPIController extends InfyOmBaseController
 {
+    use DataFormat;
+
     /** @var  PresentationRepository */
-    private $presentationRepository;
+    private $repository;
 
     public function __construct(PresentationRepository $presentationRepo)
     {
-        $this->presentationRepository = $presentationRepo;
+        $this->repository = $presentationRepo;
     }
 
     /**
@@ -39,16 +42,16 @@ class PresentationAPIController extends InfyOmBaseController
     {
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = Presentation::orderBy($sortCol, $sortDir);
+            if ( \Schema::hasColumn('presentations', $sortCol) ) 
+              $query = Presentation::orderBy($sortCol, $sortDir);
+            else
+              $query = Presentation::sortBy($sortCol, $sortDir);
         } else {
             $query = Presentation::orderBy('created_at', 'asc');
         }
 
         if ($request->exists('filter')) {
-            $query->where(function($q) use($request) {
-                $value = "%{$request->filter}%";
-                $q->where("name", "like", $value);
-            });
+            $query->search("{$request->filter}");
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
@@ -67,7 +70,7 @@ class PresentationAPIController extends InfyOmBaseController
     {
         $input = $request->all();
 
-        $presentations = $this->presentationRepository->create($input);
+        $presentations = $this->repository->create($input);
 
         return $this->sendResponse($presentations->toArray(), 'Presentation saved successfully');
     }
@@ -83,7 +86,7 @@ class PresentationAPIController extends InfyOmBaseController
     public function show($id)
     {
         /** @var Presentation $presentation */
-        $presentation = $this->presentationRepository->find($id);
+        $presentation = $this->repository->find($id);
 
         if (empty($presentation)) {
             return Response::json(ResponseUtil::makeError('Presentation not found'), 400);
@@ -106,13 +109,13 @@ class PresentationAPIController extends InfyOmBaseController
         $input = $request->all();
 
         /** @var Presentation $presentation */
-        $presentation = $this->presentationRepository->find($id);
+        $presentation = $this->repository->find($id);
 
         if (empty($presentation)) {
             return Response::json(ResponseUtil::makeError('Presentation not found'), 400);
         }
 
-        $presentation = $this->presentationRepository->update($input, $id);
+        $presentation = $this->repository->update($input, $id);
 
         return $this->sendResponse($presentation->toArray(), 'Presentation updated successfully');
     }
@@ -128,7 +131,7 @@ class PresentationAPIController extends InfyOmBaseController
     public function destroy($id)
     {
         /** @var Presentation $presentation */
-        $presentation = $this->presentationRepository->find($id);
+        $presentation = $this->repository->find($id);
 
         if (empty($presentation)) {
             return Response::json(ResponseUtil::makeError('Presentation not found'), 400);

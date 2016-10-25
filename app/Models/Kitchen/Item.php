@@ -1,14 +1,16 @@
 <?php
-
 namespace App\Models\Kitchen;
 
+use App\Models\Family;
+use App\Models\Kitchen\Recipe\BaseRecipe;
+use App\Models\Presentation;
+use App\Models\SubFamily;
+use App\Models\Type;
+use App\Models\Unit;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Family;
-use App\Models\SubFamily;
-use App\Models\Unit;
-use App\Models\Presentation;
-use App\Models\Type;
+use App\Models\SearchTrait;
+use App\Models\SortTrait;
 
 /**
  * Class Item
@@ -16,30 +18,63 @@ use App\Models\Type;
  */
 class Item extends Model
 {
-    use SoftDeletes, \Znck\Eloquent\Traits\BelongsToThrough;
-
+    use SoftDeletes, \Znck\Eloquent\Traits\BelongsToThrough, SearchTrait, SortTrait;
 
     public $table = 'items';
+    protected $searchableColumns = [
+        'name', 
+        'type',
+        'providers' => [
+            'name', 
+            'specialty'
+        ],
+        'bases' => [
+            'table' => 'base_recipes',
+            'name'
+        ], 
+        'family' => [
+            'table' => 'families',
+            'name'
+        ],
+        'subFamily' => [
+            'table' => 'sub_families',
+            'name'
+        ],
+        'unit' => [
+            'table' => 'units',
+            'name'
+        ],
+        'presentation' => [
+            'table' => 'presentations',
+            'name'
+        ]               
+    ];
+
     
     protected $appends = [
+        'code',
         'auto_provider_format',
         'perishable_format',
         'unit_name', 
         'presentation_name', 
-        'type_name', 
         'family_code', 
         'family_name', 
         'sub_family_code', 
         'sub_family_name', 
         'compose_code',
         'price_format',
-        'selected_format'
-    ];    
+        'selected_format',
+        'cost',
+        'cost_format',
+        'low_provider',
+        'family_id'
+    ]; 
+
+
 
     protected $dates = ['deleted_at'];
 
     public $fillable = [
-        'code',
         'name',
         'auto_provider',
         'perishable',
@@ -47,9 +82,10 @@ class Item extends Model
         'current_stock',
         'to_buy',
         'currency',
+        'decrease',
+        'type',
         'unit_id',
         'presentation_id',
-        'type_id',
         'sub_family_id'
     ];
 
@@ -59,15 +95,16 @@ class Item extends Model
      * @var array
      */
     protected $casts = [
-        'code' => 'string',
-        'name' => 'string',
-        'auto_provider' => 'boolean',
-        'perishable' => 'boolean',
-        'currency' => 'string',
-        'unit_id' => 'integer',
+        'code'            => 'string',
+        'name'            => 'string',
+        'auto_provider'   => 'boolean',
+        'perishable'      => 'boolean',
+        'currency'        => 'string',
+        'unit_id'         => 'integer',
         'presentation_id' => 'integer',
-        'type_id' => 'integer',
-        'sub_family_id' => 'integer'
+        'type'            => 'string',
+        'sub_family_id'   => 'integer',
+        'decrease'        => 'float'
     ];
 
     /**
@@ -76,19 +113,34 @@ class Item extends Model
      * @var array
      */
     public static $rules = [
-        //'code' => 'required|min:1|max:128',
-        'name' => 'required|min:1|max:128|unique:items',
-        'auto_provider' => 'required|boolean',
-        'perishable' => 'required|boolean',
-        'min_stock' => 'required|digits_between:1,4',
-        'current_stock' => 'required|digits_between:1,4',
-        'current_stock' => 'required|digits_between:1,4',
-        'currency' => 'required|min:1|max:128',
-        'unit_id' => 'required|exists:units,id',
+        //'code'          => 'required|min:1|max:128',
+        'name'            => 'required|min:1|max:128|unique:items',
+        'auto_provider'   => 'required|boolean',
+        'perishable'      => 'required|boolean',
+        'decrease'        => 'required|numeric|digits_between:1,3',
+        'min_stock'       => 'required|digits_between:1,4',
+        'current_stock'   => 'required|digits_between:1,4',
+        'current_stock'   => 'required|digits_between:1,4',
+        'currency'        => 'required|min:1|max:128',
+        'unit_id'         => 'required|exists:units,id',
         'presentation_id' => 'required|exists:presentations,id',
-        'type_id' => 'required|exists:types,id',
-        'sub_family_id' => 'required|exists:sub_families,id'
+        'type'            => 'required|min:1|max:128',
+        'sub_family_id'   => 'required|exists:sub_families,id'
     ];
+
+    /**
+     *
+     *-------------------- Overwrite pivot
+     *
+     */    
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof BaseRecipe) {
+            return new BaseRecipeItemPivot($parent, $attributes, $table, $exists);
+        }
+        return parent::newPivot($parent, $attributes, $table, $exists);
+    }
+    
 
     /**
      *
@@ -115,14 +167,20 @@ class Item extends Model
         return $this->belongsTo(Presentation::class);
     }
 
-    public function type()
-    {
-        return $this->belongsTo(Type::class);
-    }
-
     public function providers()
     {
         return $this->belongsToMany(Provider::class)->withPivot('price', 'selected');
+    }
+
+    public function bases()
+    {
+        return $this->belongsToMany(BaseRecipe::class, 'base_recipe_item', 'base_id', 'item_id')
+                    ->withPivot(
+                        'purchase_quantity', 
+                        'decrease',
+                        'servings_quantity',
+                        'cost_per_quantity'
+                    );
     }
 
     /**
@@ -130,14 +188,26 @@ class Item extends Model
      *-------------------- Accessors and Mutators
      *
      */
+    
+    public function getFamilyIdAttribute()
+    {
+    	if ($this->family)   
+        	return $this->family->id;
+        return false;
+    }
+
     public function getFamilyCodeAttribute()
     {
-        return $this->family->code;
+    	if ($this->family)    	
+        	return $this->family->code;
+        return false;
     }
 
     public function getFamilyNameAttribute()
     {
-        return $this->family->name;
+    	if ($this->family) 
+        	return $this->family->name;
+        return false;
     }    
 
     public function getSubFamilyCodeAttribute()
@@ -153,21 +223,18 @@ class Item extends Model
     public function getUnitNameAttribute()
     {
         return $this->unit->name;
-    }
-
-    public function getTypeNameAttribute()
-    {
-        return $this->type->name;
-    }   
+    }  
 
     public function getPresentationNameAttribute()
     {
-        return $this->presentation->name;
+        if ($this->presentation)
+            return $this->presentation->name;
+        return false;
     }         
 
     public function getCodeAttribute()
     {
-        $code = $this->attributes['code'];
+        $code = $this->id;
         if ($code < 10)
             $code = '00' . $code;
         elseif ($code < 100) 
@@ -178,9 +245,12 @@ class Item extends Model
 
     public function getComposeCodeAttribute()
     {
-        $familyCode = $this->family->code;
-        $subFamilyCode = $this->subFamily->code;
-        return $familyCode . $subFamilyCode . $this->code;
+    	if ($this->family) {  
+	        $familyCode = $this->family->code;
+	        $subFamilyCode = $this->subFamily->code;
+	        return $familyCode . $subFamilyCode . $this->code;
+	    }
+	    return false;
     }  
 
     public function getAutoProviderFormatAttribute()
@@ -206,4 +276,31 @@ class Item extends Model
             return ($this->pivot->selected ? 'Si': 'No');
         return false;
     } 
+
+    public function getCostAttribute()
+    {
+        foreach ($this->providers as $provider) 
+            if ($provider->pivot->selected == 1)
+                return $provider->pivot->price; 
+        $provider = $this->low_provider;
+        if ($provider)
+            return $provider->pivot->price;
+        return 0;
+    }
+
+    public function getCostFormatAttribute()
+    {
+        return number_format($this->cost, 2, ',', '.');
+    }    
+
+    public function getLowProviderAttribute()
+    {
+        if ($this->providers) {
+            $sorted = $this->providers->sortBy(function ($provider, $key) {
+                return $provider->pivot->price;
+            });
+            return $sorted->first();
+        }
+        return false;
+    }
 }

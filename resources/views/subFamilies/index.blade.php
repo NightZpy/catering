@@ -24,7 +24,7 @@
 @endsection
 
 @push('vue-scripts')  
-    <script src="/app/js/models/subFamily-config.js"></script>
+    <script src="/app/js/models/family/sub/config.js"></script>
     <script>
         var token = '{{ csrf_token() }}';
         var fieldInitOrder = 'id';
@@ -35,18 +35,31 @@
             update: "{{ route('api.v1.subFamilies.update') }}/",  
             delete: "{{ route('api.v1.subFamilies.delete') }}/",
             foreign: {
-                index: [{
-                   method: 'GET' ,
-                   url: "{{ route('api.v1.inputMaterials.basic') }}/"
-                }]
-            },
-            validation: {
-                unique: "",
-                code: "",
+                family: {
+                    select: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.families.select-list') }}/"
+                    }
+                }
             }
         };
     </script>
     <script src="/app/js/crud.js"></script>    
+    <script>
+        var vm = window.vm;
+        vm.$watch('formModal', function (value) {
+            if (value) 
+                this.getForeignData(this.url.foreign.family.select.url, 'familyOptions', 'family', 'select');
+        });
+
+        vm.$watch('row.family_id', function (value) {
+            if ( value > 0 )
+                vm.$validation.family_id.invalid = false;
+            else
+                vm.$validation.family_id.invalid = true;
+            vm.$validation.family_id.valid = ! vm.$validation.family_id.invalid;
+        });
+    </script>    
 @endpush
 
 @push('vue-styles')

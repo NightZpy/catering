@@ -25,7 +25,6 @@ class UpdateFamilyAPIRequest extends MyAPIRequest
     {
         $rules = Family::$rules;
         $rules['name'] = $rules['name'] . ',name,' . $this->id;
-        $rules['code'] = $rules['code'] . ',code,' . $this->id;
         return $rules;    
     }
 }

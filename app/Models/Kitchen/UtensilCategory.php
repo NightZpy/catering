@@ -4,6 +4,8 @@ namespace App\Models\Kitchen;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\SearchTrait;
+use App\Models\SortTrait;
 
 /**
  * Class UtensilCategory
@@ -11,10 +13,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class UtensilCategory extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchTrait, SortTrait;
 
     public $table = 'utensil_categories';
-    
+
+    protected $searchableColumns = [
+        'name'
+    ];     
 
     protected $dates = ['deleted_at'];
 

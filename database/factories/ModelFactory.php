@@ -43,16 +43,6 @@ $factory->define(App\Models\Kitchen\Provider::class, function (Faker\Generator $
     ];
 });
 
-$factory->define(App\Models\Type::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->unique()->randomElement([
-            'Panadería',
-            'Light',
-            'Dulces'
-        ])
-    ];
-});
-
 $factory->define(App\Models\Presentation::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->unique()->randomElement([

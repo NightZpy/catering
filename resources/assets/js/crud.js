@@ -1,21 +1,22 @@
-var Vue = require('vue')
+global.Vue = require('vue')
+window.Vue = Vue;
 var VueResource = require('vue-resource')
-var Vuetable = require('vuetable/src/components/Vuetable.vue')
+//var Vuetable = require('vuetable/src/components/Vuetable.vue')
+var Vuetable = require('../vendor/vue-table/components/Vuetable.vue')
 var VuetablePagination = require('vuetable/src/components/VuetablePagination.vue')
 var VuetablePaginationDropdown = require('vuetable/src/components/VuetablePaginationDropdown.vue')
 var VuetablePaginationBootstrap = require('vuetable/src/components/VuetablePaginationBootstrap.vue')
 var VuetablePaginationSimple = require('../vendor/vue-table/components/VuetablePaginationSimple.vue')
 var VueEditable = require('../vendor/vue-editable/vue-editable.js')
 var VueStrap = require('../vendor/vue-strap/vue-strap.min.js')
-var vSelect = require('vue-select')
 var CustomVueSelectTemplate = require('./vue-components/vue-select.vue')
 var VueValidator = require('vue-validator')
+const decamelize = require('decamelize');
 
 Vue.use(VueResource)
 Vue.use(VueEditable)
 Vue.use(VueValidator)
 
-Vue.component('v-select', vSelect)
 Vue.component('vuetable', Vuetable);
 Vue.component('vuetable-pagination', VuetablePagination)
 Vue.component('vuetable-pagination-dropdown', VuetablePaginationDropdown)
@@ -33,34 +34,111 @@ Vue.component('custom-error', {
   template: '<em><p class="error-{{field}}-{{validator}}">{{message}}</p></em>'
 });
 
-Vue.validator('email', function (val) {
+Vue.validator('email', {
+  message: 'Debe introducir un email válido!', // error message with plain string
+  check: function (val) { // define validator
     return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(val)
+  }
 });
 
 Vue.validator('url', function (val) {
     return /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/.test(val)
 });
 
-Vue.validator('unique', function (val, condition) {
-    return condition;
+Vue.validator('numeric', function (val) {
+    return /^[-+]?[0-9]+$/.test(val)
 });
 
-var vm = new Vue({
+Vue.validator('unique', function (val) {
+    return false;
+});
+/*
+function copyOwnFrom (target, source) {
+  Object.getOwnPropertyNames(source).forEach(function (propName) {
+    Object.defineProperty(target, propName, Object.getOwnPropertyDescriptor(source, propName))
+  })
+  return target
+}
+
+function ValidationError () {
+  copyOwnFrom(this, Error.apply(null, arguments))
+}
+ValidationError.prototype = Object.create(Error.prototype)
+ValidationError.prototype.constructor = ValidationError
+
+Vue.validator('exist', function (val) {
+      //this.vm.checking = true // spinner on
+      return fetch('/test', {
+        method: 'get',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: val,
+          _token: token
+        })
+      }).then((res) => {
+        this.vm.checking = false // spinner off
+        return res.json()
+      }).then((json) => {
+        return Object.keys(json).length > 0 
+          ? Promise.reject(new ValidationError(json.message))
+          : Promise.resolve()
+      }).catch((error) => {
+        if (error instanceof ValidationError) {
+          return Promise.reject(error.message)
+        } else {
+          return Promise.reject('unexpected error')
+        }
+      })    
+});*/
+
+/*VueValidator.asset('exist', function (val) {
+    return function (resolve, reject) {
+        // server-side validation with ajax (e.g. using `fetch` case)
+        fetch('/validators/exist', {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json',
+                'x-token': 'xxxxxxxx'
+            },
+            body: JSON.stringify({ username: val })
+        }).then(function (res) {
+            if (res.status === 200) {
+                resolve(true)
+            } else if (res.status === 400) {
+                resolve(false)
+            }
+        }).catch(function (err) {
+            // something todo ...
+            reject(new Error('exist validator fail'))
+        })
+    }
+});
+*/
+
+window.vm = new Vue({
     components: {
         modal: VueStrap.modal,
+        vSelect: VueStrap.select,
+        'v-option': VueStrap.option,
         CustomVueSelectTemplate
     },
     el: "#crud-app",
+    mixins: [],
     data: {
         formModal: false,
         infoModal: false,
         showModal: false,
         deleteModal: false,
+        lastOpenModal: [],
         localModals: (typeof(modals) !== 'undefined' ? modals : {}),
         flashMessage: null,
         defaultErrorMessage: 'Some errors in sended data, please check!.',
         flashTypeDanger: 'danger',
         flashType: null,
+        successSubmit: false,
         submitMessage: "",
         url: apiUrl,           
         row: objectRow,
@@ -87,11 +165,10 @@ var vm = new Vue({
         }
     },
     methods: {
-        submit: function(related = null, type = null) {
+        submit: function(model = null, type = null, related = null) {
             this.row._token = token;
-            //console.log('Related: ' + related + ' | Type: ' + type);
-            //console.log('Event: ' + e);
-            if (!related || related.target ) {
+            var data = this.row; 
+            if (!model || model.target ) {
                 var actionUrl = this.url.store;
                 if (this.method == 'PATCH' || this.method == 'POST') {
                     if (this.method == 'PATCH') {
@@ -99,42 +176,65 @@ var vm = new Vue({
                     }  
                 } else if (this.method == 'DELETE') {
                     actionUrl = this.url.delete + this.row.id;                
-                    console.log('ActionUrl: ' + actionUrl)
-                }                            
-            } else {                     
-                var url = this.url.foreign[related][type].url;
-                var method = this.url.foreign[related][type].method;
-                var relatedId = this.row[related]['id'];
-                console.log('Related: ' + relatedId);
-                if (!relatedId) {
-                    relatedId = this.row.pivot[related + '_id'];
-                }
-                var actionUrl = url + this.row.id + '/' + relatedId;
-                this.method = method;
+                }  
+            } else if( related ) { 
+                console.log ('Related: ' + related)                    
+                var url = this.url.foreign[model][type].url;
+                var method = this.url.foreign[model][type].method;
+                var modelId = this.row[model]['id'];
+                //var modelKey = 'pivot_' + model;
+                //console.log('Related: ' + modelId);
+                /*if (!modelId) {
+                    modelId = this.row[modelKey][model + '_id'];
+                }*/
+                actionUrl = url + this.row.id + '/' + modelId;
+                this.method = method;  
+            } else {
+                actionUrl = this.url.foreign[model][type].url;
+                this.method = this.url.foreign[model][type].method;  
+                data = this.row[model];
+                data._token = token;   
             }
-            //this.$http({actionUrl, this.method, data}).then(this.success, this.failed);
-            this.sendData(actionUrl, this.method, this.row)
+            this.sendData(actionUrl, this.method, data)
                 .then(this.success, this.failed);
         },
         getData: function (url = null) {
             if (!url) {
                 this.sendData(this.url.show + this.row.id, 'GET')
-                .then(this.success, this.failed);                
+                .then(this.success2, this.failed);                
             } else {
                this.sendData(url, 'GET')
-                .then(this.success, this.failed);    
+                .then(this.success2, this.failed);    
             }
         },
-        available: function(url) {
+        getOneData: function(url, field, assign) {
+            var sendParams = {
+                url: url, 
+                method: 'GET', 
+                data: {}
+            };
+            this.$http(sendParams)
+                .then(
+                    function(response) {
+                        if (response.data.data) {
+                            var data = response.data.data;
+                            this.$set(assign, data[field]);
+                        }
+                    }, 
+                    function(response) {}
+                );             
+        },
+        available: function(url, map, data) {
             this.sendData(url, 'GET')
-                .then(function (response){
-                    return true;
+                .then(function (response){;
+                    data = response.data.success
+                    this.$set(map, data);
                 }, function (response){
-                    return false;
+                    this.$set(map, false);
                 });
         },
-        getForeignData: function (callUrl = null, mapVar = null, related = null) {
-            var foreign = this.url.foreign[related].index;
+        getForeignData: function (callUrl = null, mapVar = null, related = null, action = 'index') {
+            var foreign = this.url.foreign[related][action];
             if (callUrl == null)          
                 callUrl = foreign.url;
 
@@ -145,8 +245,11 @@ var vm = new Vue({
                         if (response.data.data) {
                             var data = response.data.data;
                             var currentForeignData = vm.foreignData; 
-                            currentForeignData[mapVar] = data;                            
-                            currentForeignData[mapVar + 'Count'] = data.length;                            
+                            currentForeignData[mapVar] = data;        
+                            var count = data.length;
+                            if (count === undefined)
+                                count = Object.keys(data).length
+                            currentForeignData[mapVar + 'Count'] = count;
                             vm.foreignData.push(currentForeignData);
                         }
                     }, 
@@ -161,18 +264,48 @@ var vm = new Vue({
             this.flashMessage = '';
             this.flashType = '';
         },            
-        success: function(response) {
-            if (response.data.data) {
+        success: function(response) { 
+            var lastOpenModal = this.lastOpenModal.pop();              
+            if ( response.data.data ) {
                 var data = response.data.data;
-                vm.$set('row', data);
+                var actions = lastOpenModal.split('_');
+                var map = 'row';
+                if ( actions.length && actions[2] == 'inform' ) {
+                    map += '.' + actions[0];
+                    var field = decamelize(actions[0]);
+                    this.row[ field + '_id' ] = data.id; 
+                }
+                vm.$set(map, data);
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE')
                 this.$broadcast('vuetable:reload');
             var message = response.data.message;
             vm.flashMessage = message;
             vm.flashType = 'success';
+            this.closeModal(lastOpenModal);  
+        },
+        success2: function(response) {
+            var lastOpenModal = this.lastOpenModal[0]; 
+            if (response.data.data) { 
+                var data = response.data.data;
+                var actions = lastOpenModal.split('_');
+                var map = 'row';
+                if ( actions.length && actions[2] == 'inform' ) {
+                    map += '.' + actions[0];
+                    var field = decamelize(actions[0]);
+                    this.row[ field + '_id' ] = data.id; 
+                }
+                vm.$set(map, data);
+                //vm.row = data;
+            }
+            if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE')
+                this.$broadcast('vuetable:reload');
+            var message = response.data.message;
+            vm.flashMessage = message;
+            vm.flashType = 'success'; 
         },
         failed: function(response) {
+            console.log(JSON.stringify(response));
             vm.flashMessage = vm.defaultErrorMessage;
             vm.flashType = vm.flashTypeDanger;
             if (response.data.errors) {
@@ -205,7 +338,9 @@ var vm = new Vue({
             //vm.$setValidationErrors(errorMessages);     
         },
         closeModal: function(modalName) {
-            console.log('Modal: ' + modalName);
+            if (modalName == this.lastOpenModal[ this.lastOpenModal.length - 1 ])
+                this.lastOpenModal.pop();
+                        
             if (this.localModals[modalName] != undefined)
                 this.localModals[modalName]    = false;
             else
@@ -224,19 +359,37 @@ var vm = new Vue({
         },
         modal: function(type) {  
             if (type == 'PATCH' || type == 'POST') {
+                this.lastOpenModal.push('formModal');
                 this.method = type;
                 this.formModal = true;
             } else if (type == 'SHOW') {
+                this.lastOpenModal.push('showModal');
                 this.method = type;
                 this.showModal = true;
             } else if (type == 'DELETE') {
+                this.lastOpenModal.push('deleteModal');
                 this.method = type;
                 this.deleteModal = true;
             } else if (type == 'INFO') {
+                this.lastOpenModal.push('infoModal');
                 this.infoModal = true;
             } else {
+                this.lastOpenModal.push(type);
                 this.localModals[type] = true;                
             }
+        },
+        objectToArrayObject: function(object) {
+            var array = []
+            for (var key in object) {
+                if (object.hasOwnProperty(key)) {
+                    var data = {
+                                value: key,
+                                label: object[key]
+                            }
+                    array.push(data);
+                }
+            }
+            return array;
         },
         /*
          * Table methods
@@ -312,8 +465,8 @@ var vm = new Vue({
          },
         'vuetable:action': function(action, data) {
             this.cleanData();
-            console.log('Data: ' + data.name              + ' | Action: ' + action);
-            console.log('Data: ' + JSON.stringify(data));
+            //console.log('Data: ' + data.name              + ' | Action: ' + action);
+            //console.log('Data: ' + JSON.stringify(data));
             var size = action.split(':').length;
             // console.log('SIZE: ' + size);
             if (size > 1) {
@@ -346,7 +499,6 @@ var vm = new Vue({
                 if (action == 'view-item') {
                     this.modal('SHOW');
                 } else if (action == 'edit-item') {
-                    this.getData();
                     this.modal('PATCH');                
                 } else if (action == 'delete-item') {
                     this.modal('DELETE');

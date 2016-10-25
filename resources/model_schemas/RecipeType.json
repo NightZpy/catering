@@ -1,0 +1,22 @@
+[
+    {
+        "fieldInput": "id:increments",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "fieldInput": "name:string,128",
+        "htmlType": "text",
+        "validations": "required|min:1|max:128|unique:recipe_types",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true
+    }
+]

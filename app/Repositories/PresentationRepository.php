@@ -3,9 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\Presentation;
-use InfyOm\Generator\Common\BaseRepository;
+use App\Repositories\MyBaseRepository;
 
-class PresentationRepository extends BaseRepository
+class PresentationRepository extends MyBaseRepository
 {
     /**
      * @var array

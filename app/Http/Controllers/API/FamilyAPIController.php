@@ -12,6 +12,7 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Http\Controllers\API\DataFormat;
 
 /**
  * Class FamilyController
@@ -20,12 +21,14 @@ use Response;
 
 class FamilyAPIController extends InfyOmBaseController
 {
+    use DataFormat;
+
     /** @var  FamilyRepository */
-    private $familyRepository;
+    private $repository;
 
     public function __construct(FamilyRepository $familyRepo)
     {
-        $this->familyRepository = $familyRepo;
+        $this->repository = $familyRepo;
     }
 
     /**
@@ -39,18 +42,16 @@ class FamilyAPIController extends InfyOmBaseController
     {
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = Family::orderBy($sortCol, $sortDir);
+            if ( \Schema::hasColumn('families', $sortCol) ) 
+              $query = Family::orderBy($sortCol, $sortDir);
+            else
+              $query = Family::sortBy($sortCol, $sortDir);
         } else {
             $query = Family::orderBy('created_at', 'asc');
         }
 
         if ($request->exists('filter')) {
-            $query->where(function($q) use($request) {
-                $value = "%{$request->filter}%";
-                $q->where("name", "like", $value)
-                  ->orWhere("code", "like", $value)
-                  ->orWhere("input_material_id", "like", $value);
-            });
+            $query->search("{$request->filter}");
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
@@ -69,7 +70,7 @@ class FamilyAPIController extends InfyOmBaseController
     {
         $input = $request->all();
 
-        $families = $this->familyRepository->create($input);
+        $families = $this->repository->create($input);
 
         return $this->sendResponse($families->toArray(), 'Family saved successfully');
     }
@@ -85,7 +86,7 @@ class FamilyAPIController extends InfyOmBaseController
     public function show($id)
     {
         /** @var Family $family */
-        $family = $this->familyRepository->find($id);
+        $family = $this->repository->find($id);
 
         if (empty($family)) {
             return Response::json(ResponseUtil::makeError('Family not found'), 400);
@@ -108,13 +109,13 @@ class FamilyAPIController extends InfyOmBaseController
         $input = $request->all();
 
         /** @var Family $family */
-        $family = $this->familyRepository->find($id);
+        $family = $this->repository->find($id);
 
         if (empty($family)) {
             return Response::json(ResponseUtil::makeError('Family not found'), 400);
         }
 
-        $family = $this->familyRepository->update($input, $id);
+        $family = $this->repository->update($input, $id);
 
         return $this->sendResponse($family->toArray(), 'Family updated successfully');
     }
@@ -130,7 +131,7 @@ class FamilyAPIController extends InfyOmBaseController
     public function destroy($id)
     {
         /** @var Family $family */
-        $family = $this->familyRepository->find($id);
+        $family = $this->repository->find($id);
 
         if (empty($family)) {
             return Response::json(ResponseUtil::makeError('Family not found'), 400);

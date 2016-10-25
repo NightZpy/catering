@@ -18,7 +18,7 @@
 			@click="closeModal('{{ $modalClose }}')"
 		>Close</button>
 		<button type="button" class="btn btn-success" 
-			@click="submit('{{ $related or 'null' }}', '{{ $type or 'null' }}')"
+			@click="submit('{{ ( $model ? lcfirst($model) : 'null' ) }}', '{{ $type or 'null' }}', '{{ $related or 'null' }}')"
 		>Delete</button>
 	</div>
 </modal>

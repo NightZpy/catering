@@ -5,7 +5,7 @@
         <section class="content-header">
             <h1 class="pull-left">Providers from Item: <strong>{{ $item->name }}</strong></h1>
             <div class="btn-group pull-right">
-                <a v-if="!available('{{ route('api.v1.kitchen.items.providers.available', $item->id) }}')" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('providerADD')">Add New</a>
+                <a v-if="available ( url.foreign.provider.available.url )" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('providerADD')">Add New</a>
                 <a class="btn btn-primary pull-right bg-olive btn-flat" href="{{ route('kitchen.items.index') }}" style="margin-top: -10px;margin-bottom: 5px">Almacen</a>
             </div>
         </section>
@@ -59,13 +59,17 @@
                         method: 'GET' ,
                         url: "{{ route('api.v1.kitchen.items.providers.show') }}/"
                     },
-                    relate_list: {
+                    available_providers: {
                         method: 'GET',
                         url: "{{ route('api.v1.kitchen.items.providers.available-providers') }}/"                        
                     },
                     already_associate: {
                         method: 'GET',
                         url: "{{ route('api.v1.kitchen.items.providers.already-associate') }}/"
+                    },
+                    available: {
+                        method: 'GET',
+                        url: "{{ route('api.v1.kitchen.items.providers.available', $item->id) }}/"
                     },
                     delete: {
                         method: 'DELETE',
@@ -79,7 +83,30 @@
             }
         };
     </script>
-    <script src="/app/js/crud.js"></script>    
+    <script src="/app/js/crud.js"></script>  
+    <script>
+        var vm = window.vm;
+
+        var loadAvailableProviders = function () {
+            vm.getForeignData(vm.url.foreign.provider.available_providers.url + vm.row.id, 'providerOptions', 'provider', 'available_providers');
+        }
+
+        vm.$watch('localModals.providerADD', function (value) {
+            if (value) {
+                if ( ! vm.available ( vm.url.foreign.provider.available.url )) {
+                    vm.localModals.providerADD = false;
+                    alert('No hay proveedores disponibles!');
+                } else {
+                    loadAvailableProviders();
+                }
+            }
+        });  
+
+        vm.$watch('localModals.providerEDIT', function (value) {
+            if (value)
+                 loadAvailableProviders();
+        });      
+    </script>       
 @endpush
 
 @push('vue-styles')

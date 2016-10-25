@@ -5,6 +5,8 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Kitchen\Item;
+use App\Models\SearchTrait;
+use App\Models\SortTrait;
 
 /**
  * Class SubFamily
@@ -12,11 +14,23 @@ use App\Models\Kitchen\Item;
  */
 class SubFamily extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchTrait, SortTrait;
 
     public $table = 'sub_families';
 
+    protected $searchableColumns = [
+        'name',
+        'family' => [
+            'table' => 'families',
+            'name'
+        ],
+        'items' => [
+            'name'
+        ]
+    ];      
+
     protected $appends = [
+        'code',
         'family_code', 
         'family_name', 
     ];
@@ -25,9 +39,7 @@ class SubFamily extends Model
 
     public $fillable = [
         'name',
-        'code',
-        'input_material_id',
-        'families'
+        'family_id'
     ];
 
     /**
@@ -48,7 +60,6 @@ class SubFamily extends Model
      */
     public static $rules = [
         'name' => 'required|min:1|max:128|unique:sub_families',
-        'code' => 'required|min:1|max:10|unique:sub_families',
         'family_id' => 'required|exists:families,id',
     ];
 
@@ -72,21 +83,27 @@ class SubFamily extends Model
      *-------------------- Accessors and Mutators
      *
      */
+    public function getCodeAttribute()
+    {
+        $code = $this->id;
+        if ($code < 10)
+            $code = '00' . $code;       
+        
+        return $code;
+    }  
+
     public function getFamilyCodeAttribute()
     {
-        return $this->family->code;
+        if ($this->family)   
+            return $this->family->code;
+        return false;
     }
 
     public function getFamilyNameAttribute()
     {
-        return $this->family->name;
+        if ($this->family)   
+            return $this->family->name;
+        return false;
     }
 
-    public function getCodeAttribute()
-    {
-        $code = $this->attributes['code'];
-        if ($code < 10)
-            $code = '0' . $code;
-        return $code;
-    }    
 }
