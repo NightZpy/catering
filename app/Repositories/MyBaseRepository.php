@@ -6,9 +6,6 @@ use InfyOm\Generator\Common\BaseRepository;
 
 abstract class MyBaseRepository extends BaseRepository
 {
-    public function forSelect() {
-        return $this->all()->pluck('name', 'id');
-    }
 
     private function checkPivotAttributes($key, $attributes)
     {
