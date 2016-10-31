@@ -23,6 +23,13 @@ Vue.component('vuetable-pagination-dropdown', VuetablePaginationDropdown)
 Vue.component('vuetable-pagination-bootstrap', VuetablePaginationBootstrap)
 Vue.component('vuetable-pagination-simple', VuetablePaginationSimple)
 
+Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
+Vue.http.options.crossOrigin = true;
+Vue.http.options.emulateJSON = true;
+Vue.http.options.emulateHTTP = true;
+
+
+
 var E_SERVER_ERROR = 'Error communicating with the server';
 
 Vue.config.debug = true
