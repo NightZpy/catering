@@ -195,6 +195,7 @@ window.vm = new Vue({
                 data = this.row[model];
                 data._token = token;   
             }
+            //console.log(JSON.stringify(data));
             this.sendData(actionUrl, this.method, data)
                 .then(this.success, this.failed);
         },
@@ -338,6 +339,7 @@ window.vm = new Vue({
             //vm.$setValidationErrors(errorMessages);     
         },
         closeModal: function(modalName) {
+            //console.log(modalName);
             if (modalName == this.lastOpenModal[ this.lastOpenModal.length - 1 ])
                 this.lastOpenModal.pop();
                         
