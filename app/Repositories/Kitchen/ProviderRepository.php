@@ -3,6 +3,7 @@
 namespace App\Repositories\Kitchen;
 
 use App\Models\Kitchen\Provider;
+use App\Models\Kitchen\Item;
 use InfyOm\Generator\Common\BaseRepository;
 
 class ProviderRepository extends BaseRepository
@@ -43,5 +44,11 @@ class ProviderRepository extends BaseRepository
         $provider = parent::update($attributes, $id);
         //$this->updatePivot($provider, 'items', $attributes);
         return $provider;        
+    }    
+
+    public function availableItems($id)
+    {
+        $itemsId = $this->findWithoutFail($id)->items->pluck('id');    
+        return Item::whereNotIn('id', $itemsId)->get();
     }    
 }
