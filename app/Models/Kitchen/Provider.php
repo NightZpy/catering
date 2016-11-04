@@ -89,7 +89,7 @@ class Provider extends Model
      */
     public function items()
     {
-        return $this->belongsToMany(Item::class);
+        return $this->belongsToMany(Item::class)->withPivot('price', 'selected');;
     }
 
     /*
