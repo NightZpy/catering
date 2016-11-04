@@ -1,25 +1,25 @@
-<validator name="validationRelationItem">			
+<validator name="validationPivot_item">			
 	<!-- Price Field -->
 	<div class="form-group col-sm-6">
 	    <label for="price">Precio:</label>
 	    <input type="text" class="form-control" v-model="row.pivot_item.price" v-validate:price="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
-	    <div v-if="$validationRelationItem.price.invalid" class="alert alert-danger" role="alert">
-			<div v-if="$validationRelationItem.price.required">
+	    <div v-if="$validationPivot_item.price.invalid" class="alert alert-danger" role="alert">
+			<div v-if="$validationPivot_item.price.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(required) Message Here
 			</div>
-			{{-- <div v-if="$validationRelationItem.price.unique">
+			{{-- <div v-if="$validationPivot_item.price.unique">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(unique) Message Here
 			</div> --}}
-			<div v-if="$validationRelationItem.price.minlength">
+			<div v-if="$validationPivot_item.price.minlength">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(minlength) Message Here
 			</div>
-			<div v-if="$validationRelationItem.price.maxlength">
+			<div v-if="$validationPivot_item.price.maxlength">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(maxlength) Message Here
@@ -39,8 +39,8 @@
 				<input type="radio" id="selected" value="0" v-model="row.pivot_item.selected" v-validate:selected> No
 			</label>
 		</div>
-		<div v-if="$validationRelationItem.selected.invalid" class="alert alert-danger" role="alert">
-			<div v-if="$validationRelationItem.selected.required">
+		<div v-if="$validationPivot_item.selected.invalid" class="alert alert-danger" role="alert">
+			<div v-if="$validationPivot_item.selected.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(required) Message Here
@@ -53,9 +53,9 @@
 	    <label for="item_id">Item:</label>
 		{{-- <v-select></v-select> --}}
 		<div class="input-group">
-			<select class="form-control" v-model="row.pivot_item.item_id" v-validate:item_id="{ required: true }">
-				<option value="" selected="selected">-- Seleccione un proveedor --</option>
-				<option v-for="option in foreignData.providerOptions" v-bind:value="option.id">		
+			<select class="form-control" v-model="row.pivot_item.id" v-validate:item_id="{ required: true }">
+				<option value="" selected="selected">-- Seleccione un item --</option>
+				<option v-for="option in foreignData.itemsOptions" v-bind:value="option.id">		
 					@{{ option.name }}
 				</option>
 			</select>
@@ -65,8 +65,8 @@
 	    		</button>
 		  	</span>
 		</div>
-	    <div v-if="$validationRelationItem.item_id.invalid" class="alert alert-danger" role="alert">
-			<div v-if="$validationRelationItem.item_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	    <div v-if="$validationPivot_item.item_id.invalid" class="alert alert-danger" role="alert">
+			<div v-if="$validationPivot_item.item_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				El item es obligatorio
 			</div>
