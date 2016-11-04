@@ -6,6 +6,7 @@ use App\Http\Requests\API\Kitchen\CreateProviderAPIRequest;
 use App\Http\Requests\API\Kitchen\UpdateProviderAPIRequest;
 use App\Models\Kitchen\Provider;
 use App\Repositories\Kitchen\ProviderRepository;
+use App\Repositories\Kitchen\ItemRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController as InfyOmBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -22,10 +23,11 @@ class ProviderAPIController extends InfyOmBaseController
 {
     /** @var  ProviderRepository */
     private $providerRepository;
-
-    public function __construct(ProviderRepository $providerRepo)
+    private $itemRepository;
+    public function __construct(ProviderRepository $providerRepo, ItemRepository $itemRepository)
     {
         $this->providerRepository = $providerRepo;
+        $this->itemRepository = $itemRepository;
     }
 
     /**
@@ -145,5 +147,45 @@ class ProviderAPIController extends InfyOmBaseController
         if (empty($items))
             return Response::json(ResponseUtil::makeError('Items not found'), 400);        
         return $this->sendResponse($items, 'Provider retrieve successfully');
+    }
+
+    public function storeItem(Request $request, $id = null, $itemId = null)
+    {
+
+        $provider = $this->providerRepository->findWithoutFail($id);
+
+        if (empty($provider)) {
+            return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+        }
+
+        if ($itemId) {
+            $item = $this->itemRepository->findWithoutFail($itemId);
+            if (empty($item)) {
+                return Response::json(ResponseUtil::makeError('Item not found'), 400);
+            }            
+        }
+
+        $data = $request->all();
+        $item_id = $data['pivot_item']['id'];
+        unset($data['pivot_item']['id']);
+        $attributes['pivot'] = $data['pivot_item'];
+        $attributes['pivot']['item_id'] = $item_id;
+        unset($data['pivot_item']);
+
+        if (isset($attributes['pivot']['selected']) && $attributes['pivot']['selected'] && !$item->auto_provider)
+            $attributes['pivot']['selected'] = True;   
+
+        $exists = $this->providerRepository
+             ->findWithoutFail($id)
+             ->items()
+             ->whereItemId($itemId)->count();
+        
+        if ($exists) {
+          $provider->items()->updateExistingPivot($itemId, $attributes['pivot']);
+        } else {
+          $this->providerRepository->createPivot($provider, 'pivot', $attributes, 'items', 'item');
+        } 
+
+        return $this->sendResponse($request->all(), 'Item associated to Provider successfully');
     }
 }
