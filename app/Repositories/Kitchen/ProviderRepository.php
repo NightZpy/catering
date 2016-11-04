@@ -5,8 +5,9 @@ namespace App\Repositories\Kitchen;
 use App\Models\Kitchen\Provider;
 use App\Models\Kitchen\Item;
 use InfyOm\Generator\Common\BaseRepository;
+use App\Repositories\MyBaseRepository;
 
-class ProviderRepository extends BaseRepository
+class ProviderRepository extends MyBaseRepository
 {
     /**
      * @var array
