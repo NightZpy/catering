@@ -188,4 +188,34 @@ class ProviderAPIController extends InfyOmBaseController
 
         return $this->sendResponse($request->all(), 'Item associated to Provider successfully');
     }
+
+    public function items(Request $request, $id = null)
+    {
+        $provider = $this->providerRepository->findWithoutFail($id);
+
+        if (empty($provider)) {
+            //Flash::error('Item not found');
+            return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+        }
+
+        if (empty($provider->items)) {
+            //Flash::error('Item not found');
+            return Response::json(ResponseUtil::makeError('Not Items for provider'), 400);
+        }         
+
+        $query = $provider->items();
+        if (request()->has('sort')) {
+            list($sortCol, $sortDir) = explode('|', request()->sort);
+            $query = $query->orderBy($sortCol, $sortDir);
+        } else {
+            $query = $query->orderBy('created_at', 'asc');
+        }
+
+        if ($request->exists('filter')) {
+          $query->search("{$request->filter}");                     
+        }
+
+        $perPage = request()->has('per_page') ? (int) request()->per_page : null;
+        return response()->json($query->paginate($perPage));
+    }
 }
