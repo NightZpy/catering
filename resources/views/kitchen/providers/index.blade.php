@@ -91,8 +91,22 @@
                     store: {
                         method: 'POST' ,
                         url: "{{ route('api.v1.kitchen.items.store') }}/"
+                    },
+                    available_items: {
+                        method: 'GET',
+                        url: "{{ route('api.v1.kitchen.providers.items.available') }}/"                        
+                    },
+                    index: {
+                        method: 'GET' ,
+                        url: "{{ route('kitchen.providers.items.index') }}/"
                     }
                 },
+                pivot_item:{
+                    associate:{
+                        method: 'PATCH',
+                        url: "{{ route('api.v1.kitchen.providers.items.store') }}/"
+                    }
+                }
             }
         };
     </script>
@@ -116,13 +130,17 @@
             vm.getForeignData(vm.url.foreign.sub_family.byFamily.url + vm.row.item.family_id , 'subFamilyOptions', 'sub_family');
         };
 
+        var loadAvailableProviders = function () {
+            vm.getForeignData(vm.url.foreign.item.available_items.url + vm.row.id, 'itemsOptions', 'item', 'available_items');
+        } 
+
         vm.$watch('localModals.itemADD', function (value) {
             if(value)
             {
                 loadUnits();
                 loadPresentations();
                 loadFamilies();
-                //console.log(JSON.stringify(vm.row));
+                loadAvailableProviders();
             }
         })
 
