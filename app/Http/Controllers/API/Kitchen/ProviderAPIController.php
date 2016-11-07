@@ -232,4 +232,20 @@ class ProviderAPIController extends InfyOmBaseController
         $data['item'] = $item;
         return $this->sendResponse($data, 'Provider associated to Item successfully retrieve');
     }
+
+    public function deleteItem(Request $request, $id = null, $itemId = null)
+    {
+        $provider = $this->providerRepository->findWithoutFail($id);
+
+        if (empty($provider)){
+            return Response::json(ResponseUtil::makeError('Provider not found'), 400); 
+        }
+
+        $item = $provider->items()->whereItemId($itemId)->count();
+        if ($item) {
+            $provider->items()->detach($itemId);
+            return $this->sendResponse($request->all(), 'Provider successfully detached from item');
+        }
+        return Response::json(ResponseUtil::makeError('Provider could not be detached from item'), 400);
+    }
 }
