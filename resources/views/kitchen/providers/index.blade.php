@@ -130,7 +130,7 @@
             vm.getForeignData(vm.url.foreign.sub_family.byFamily.url + vm.row.item.family_id , 'subFamilyOptions', 'sub_family');
         };
 
-        var loadAvailableProviders = function () {
+        var loadAvailableItems = function () {
             vm.getForeignData(vm.url.foreign.item.available_items.url + vm.row.id, 'itemsOptions', 'item', 'available_items');
         } 
 
@@ -140,7 +140,7 @@
                 loadUnits();
                 loadPresentations();
                 loadFamilies();
-                loadAvailableProviders();
+                loadAvailableItems();
             }
         })
 
