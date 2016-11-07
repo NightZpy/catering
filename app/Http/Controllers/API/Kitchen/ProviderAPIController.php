@@ -149,6 +149,14 @@ class ProviderAPIController extends InfyOmBaseController
         return $this->sendResponse($items, 'Provider retrieve successfully');
     }
 
+    public function hasAvailableItems(Request $request, $id = null)
+    {
+        $items = $this->providerRepository->availableItems($id)->toArray();
+        if (empty($items))
+            return Response::json(ResponseUtil::makeError('Items not found'), 400);        
+        return $this->sendResponse(True, 'Items retrieve successfully');        
+    }
+
     public function storeItem(Request $request, $id = null, $itemId = null)
     {
 
