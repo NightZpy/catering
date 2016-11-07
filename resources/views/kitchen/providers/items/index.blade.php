@@ -21,10 +21,10 @@
         @include('kitchen.providers.items.show')
         <!-- (Edit) -->
         @include('kitchen.providers.items.edit')
+        @include('kitchen.providers.items.add')
         <!-- (Delete) -->
         @include('kitchen.providers.items.delete')
 
-        @include('kitchen.providers.items.add')
         @include('kitchen.items.units.add')             
         @include('kitchen.items.presentations.add')             
         @include('kitchen.items.families.add')             
@@ -105,9 +105,9 @@
                         method: 'GET' ,
                         url: "{{ route('api.v1.kitchen.providers.items.show') }}/"
                     },
-                    available_providers: {
+                    available_items: {
                         method: 'GET',
-                        url: "/"                        
+                        url: "{{ route('api.v1.kitchen.providers.items.available') }}/"                        
                     },
                     already_associate: {
                         method: 'GET',
@@ -137,16 +137,17 @@
             vm.getForeignData(vm.url.foreign.family.select.url, 'familyOptions', 'family', 'select');
         };
 
+        var loadAvailableItems = function () {
+            vm.getForeignData(vm.url.foreign.item.available_items.url + vm.row.id, 'itemsOptions', 'item', 'available_items');
+        } 
 
         /**
          * Load families list after add new family from add new item form
          */
-        vm.$watch('localModals.family_ADD_inform', function (value) {
-            if ( !value ) {
+        vm.$watch('localModals.itemEDIT', function (value) {
+            if (value) {
                 loadFamilies();
-                console.log(value);
-                console.log(JSON.stringify(this.row.family));
-                console.log(JSON.stringify(this.foreignData.familyOptions));
+                loadAvailableItems();
             }
         });
 
