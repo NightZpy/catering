@@ -17,7 +17,8 @@
         </div>
         <!-- --------- Modals ---------- -->  
         @include('kitchen.items.form')
-        @include('kitchen.items.providers.add')             
+        @include('kitchen.items.providers.add') 
+        @include('kitchen.items.providers.add_new')                    
         @include('kitchen.items.units.add')             
         @include('kitchen.items.presentations.add')             
         @include('kitchen.items.families.add')             
@@ -148,14 +149,17 @@
         });
 
         vm.$watch('localModals.providerADD', function (value) {
-            if (value) {
-                console.log(vm.available ( vm.url.foreign.provider.available.url + vm.row.id ));
+            if (value) 
+            {
+                /*console.log(vm.available ( vm.url.foreign.provider.available.url + vm.row.id ));
                 if ( ! vm.available ( vm.url.foreign.provider.available.url + vm.row.id )) {
                     vm.localModals.providerADD = false;
                     alert('No hay proveedores disponibles!');
                 } else {
                     loadAvailableProviders();
-                }
+                }*/
+
+                console.log("Proveedor");
             }
         });  
 
