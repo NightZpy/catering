@@ -66,7 +66,7 @@ Route::group(['prefix' => 'kitchen', 'namespace' => 'Kitchen'], function () {
 				'as' => 'api.v1.kitchen.items.providers.store',
 				'uses' => 'ItemAPIController@storeProvider'
 			]);*/	
-			Route::delete('{id?}/{providerId?}', [
+			Route::delete('{id?}/{itemId?}', [
 				'as' => 'api.v1.kitchen.providers.items.delete',
 				'uses' => 'ProviderAPIController@deleteItem'
 			]);	
