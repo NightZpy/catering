@@ -119,7 +119,7 @@
                     },
                     delete: {
                         method: 'DELETE',
-                        url: "{{ route('api.v1.kitchen.providers.items.delete') }}//"
+                        url: "{{ route('api.v1.kitchen.providers.items.delete') }}/"
                     }
                 },
             },
