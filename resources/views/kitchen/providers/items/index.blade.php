@@ -12,24 +12,144 @@
         <div class="content" style="padding-top: 30px;">
             <div class="box box-primary">
                 <div class="box-body">
-                    {{--@include('kitchen.providers.items.table')--}}
+                    @include('kitchen.providers.items.table')
                 </div>
             </div>
         </div>
         <!-- --------- Modals ---------- -->
-        <!-- (Add) -->
+        <!-- (Show) -->
+        @include('kitchen.providers.items.show')
+        <!-- (Edit) -->
+        @include('kitchen.providers.items.edit')
+        <!-- (Delete) -->
+        @include('kitchen.providers.items.delete')
+
+        @include('kitchen.providers.items.add')
+        @include('kitchen.items.units.add')             
+        @include('kitchen.items.presentations.add')             
+        @include('kitchen.items.families.add')             
+        @include('kitchen.items.families.sub.add')
+
       
     </div>
 @endsection
 
 @push('vue-scripts')  
-    <script src="/app/js/models/kitchen/item/provider/config.js"></script>
+    <script src="/app/js/models/kitchen/provider/item/config.js"></script>
     <script>
-        
+        objectRow.id = "{{ $provider->id }}";
+        var token = '{{ csrf_token() }}';
+        var fieldInitOrder = 'id';
+        var apiUrl = { 
+            show:  "{{ route('api.v1.kitchen.providers.items.show', $provider->id) }}/",
+            index: "",  
+            store: "",  
+            update: "/",
+            delete: "/",
+            foreign: 
+            {
+                unit: { 
+                    select: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.units.select-list') }}/"
+                    }, 
+                    store: {
+                        method: 'POST' ,
+                        url: "{{ route('api.v1.units.store') }}/"
+                    }
+                },
+                presentation: { 
+                    select: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.presentations.select-list') }}/"
+                    }, 
+                    store: {
+                        method: 'POST' ,
+                        url: "{{ route('api.v1.presentations.store') }}/"
+                    }
+                },
+                family: { 
+                    select: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.families.select-list') }}/"
+                    },
+                    store: {
+                        method: 'POST' ,
+                        url: "{{ route('api.v1.families.store') }}/"
+                    }
+                },
+                sub_family: { 
+                    index: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.subFamilies.index') }}/"
+                    },
+                    byFamily: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.subFamilies.byFamily') }}/"
+                    },
+                    store: {
+                        method: 'POST' ,
+                        url: "{{ route('api.v1.subFamilies.store') }}/"
+                    }
+                },
+                item: {
+                    store: {
+                        method: 'PATCH' ,
+                        url: "/"
+                    }, 
+                    index: {
+                        method: 'GET' ,
+                        url: "/"
+                    },
+                    show: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.kitchen.providers.items.show') }}/"
+                    },
+                    available_providers: {
+                        method: 'GET',
+                        url: "/"                        
+                    },
+                    already_associate: {
+                        method: 'GET',
+                        url: "/"
+                    },
+                    available: {
+                        method: 'GET',
+                        url: "/"
+                    },
+                    delete: {
+                        method: 'DELETE',
+                        url: "/"
+                    }
+                },
+            },
+            validation: {
+                unique: "",
+                code: "",
+            }
+        };
     </script>
     <script src="/app/js/crud.js"></script>  
     <script>
         var vm = window.vm;
+
+        var loadFamilies = function () {
+            vm.getForeignData(vm.url.foreign.family.select.url, 'familyOptions', 'family', 'select');
+        };
+
+
+        /**
+         * Load families list after add new family from add new item form
+         */
+        vm.$watch('localModals.family_ADD_inform', function (value) {
+            if ( !value ) {
+                loadFamilies();
+                console.log(value);
+                console.log(JSON.stringify(this.row.family));
+                console.log(JSON.stringify(this.foreignData.familyOptions));
+            }
+        });
+
     </script>       
 @endpush
 
