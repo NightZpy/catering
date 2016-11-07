@@ -226,9 +226,11 @@ window.vm = new Vue({
                 );             
         },
         available: function(url, map, data) {
+            console.log("Entro");
             this.sendData(url, 'GET')
                 .then(function (response){;
                     data = response.data.success
+                    console.log(JSON.stringify(data));
                     this.$set(map, data);
                 }, function (response){
                     this.$set(map, false);
@@ -277,6 +279,7 @@ window.vm = new Vue({
                     this.row[ field + '_id' ] = data.id; 
                 }
                 vm.$set(map, data);
+                console.log(JSON.stringify(this.row));
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE')
                 this.$broadcast('vuetable:reload');
@@ -284,6 +287,7 @@ window.vm = new Vue({
             vm.flashMessage = message;
             vm.flashType = 'success';
             this.closeModal(lastOpenModal);  
+            console.log(response);
         },
         success2: function(response) {
             var lastOpenModal = this.lastOpenModal[0]; 
@@ -298,6 +302,7 @@ window.vm = new Vue({
                 }
                 vm.$set(map, data);
                 //vm.row = data;
+                console.log("Cargo el objeto");
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE')
                 this.$broadcast('vuetable:reload');
