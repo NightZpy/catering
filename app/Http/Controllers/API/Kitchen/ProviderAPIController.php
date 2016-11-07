@@ -244,8 +244,8 @@ class ProviderAPIController extends InfyOmBaseController
         $item = $provider->items()->whereItemId($itemId)->count();
         if ($item) {
             $provider->items()->detach($itemId);
-            return $this->sendResponse($request->all(), 'Provider successfully detached from item');
+            return $this->sendResponse($request->all(), 'Item successfully detached from provider');
         }
-        return Response::json(ResponseUtil::makeError('Provider could not be detached from item'), 400);
+        return Response::json(ResponseUtil::makeError('Item could not be detached from provider'), 400);
     }
 }
