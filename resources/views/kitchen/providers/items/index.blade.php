@@ -45,7 +45,7 @@
             index: "",  
             store: "",  
             update: "/",
-            delete: "/",
+            delete: "{{ route('api.v1.kitchen.providers.items.delete', $provider->id) }}/",
             foreign: 
             {
                 unit: { 
@@ -119,7 +119,7 @@
                     },
                     delete: {
                         method: 'DELETE',
-                        url: "/"
+                        url: "{{ route('api.v1.kitchen.providers.items.delete') }}//"
                     }
                 },
             },
