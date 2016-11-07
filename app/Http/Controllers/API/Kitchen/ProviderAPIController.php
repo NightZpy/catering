@@ -218,4 +218,18 @@ class ProviderAPIController extends InfyOmBaseController
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
         return response()->json($query->paginate($perPage));
     }
+
+    public function item(Request $request, $id = null, $itemId = null)
+    {
+        $item = $this->providerRepository->findWithoutFail($id)->items()->whereItemId($itemId)
+        ->first();
+
+        $provider = $this->providerRepository->findWithoutFail($id)->toArray();
+        $data = $provider;
+        $item = $item->toArray();    
+        $data['pivot_item'] = $item['pivot'];
+        unset($item['pivot']);
+        $data['item'] = $item;
+        return $this->sendResponse($data, 'Provider associated to Item successfully retrieve');
+    }
 }
