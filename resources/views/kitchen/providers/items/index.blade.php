@@ -5,7 +5,7 @@
         <section class="content-header">
             <h1 class="pull-left">Items from Providers: <strong>{{ $provider->name }}</strong></h1>
             <div class="btn-group pull-right">
-                <a v-if="available ( url.foreign.provider.available.url )" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('providerADD')">Add New</a>
+                <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('itemADD')">Add Item</a>
                 <a class="btn btn-primary pull-right bg-olive btn-flat" href="{{ route('kitchen.items.index') }}" style="margin-top: -10px;margin-bottom: 5px">Almacen</a>
             </div>
         </section>
@@ -20,6 +20,7 @@
         <!-- (Show) -->
         @include('kitchen.providers.items.show')
         <!-- (Edit) -->
+        @include('kitchen.providers.items.add_new')
         @include('kitchen.providers.items.edit')
         @include('kitchen.providers.items.add')
         <!-- (Delete) -->
@@ -94,8 +95,8 @@
                 },
                 item: {
                     store: {
-                        method: 'PATCH' ,
-                        url: "/"
+                        method: 'POST' ,
+                        url: "{{ route('api.v1.kitchen.items.store') }}/"
                     }, 
                     index: {
                         method: 'GET' ,
@@ -107,7 +108,7 @@
                     },
                     available_items: {
                         method: 'GET',
-                        url: "{{ route('api.v1.kitchen.providers.items.available') }}/"                        
+                        url: "{{ route('api.v1.kitchen.providers.items.available-items') }}/"                        
                     },
                     already_associate: {
                         method: 'GET',
@@ -115,13 +116,19 @@
                     },
                     available: {
                         method: 'GET',
-                        url: "/"
+                        url: "{{ route('api.v1.kitchen.providers.items.available', $provider->id) }}/"
                     },
                     delete: {
                         method: 'DELETE',
                         url: "{{ route('api.v1.kitchen.providers.items.delete') }}/"
                     }
                 },
+                pivot_item:{
+                    associate:{
+                        method: 'PATCH',
+                        url: "{{ route('api.v1.kitchen.providers.items.store') }}/"
+                    }
+                }
             },
             validation: {
                 unique: "",
@@ -132,6 +139,18 @@
     <script src="/app/js/crud.js"></script>  
     <script>
         var vm = window.vm;
+
+        var loadUnits = function () {
+            vm.getForeignData(vm.url.foreign.unit.select.url, 'unitOptions', 'unit', 'select');
+        };
+
+        var loadPresentations = function () {
+            vm.getForeignData(vm.url.foreign.presentation.select.url, 'presentationOptions', 'presentation', 'select');
+        };
+
+        var loadSubFamilies = function () {
+            vm.getForeignData(vm.url.foreign.sub_family.byFamily.url + vm.row.item.family_id , 'subFamilyOptions', 'sub_family');
+        };
 
         var loadFamilies = function () {
             vm.getForeignData(vm.url.foreign.family.select.url, 'familyOptions', 'family', 'select');
@@ -146,10 +165,30 @@
          */
         vm.$watch('localModals.itemEDIT', function (value) {
             if (value) {
+                loadUnits();
+                loadPresentations();
+                loadFamilies();
+
+                /*console.log(value);
+                console.log(JSON.stringify(this.row));
+                console.log(JSON.stringify(this.row.family));
+                console.log(JSON.stringify(this.foreignData.familyOptions));*/
+            }
+        });
+
+        vm.$watch('localModals.itemADD', function (value) {
+            if (value) {
+                loadUnits();
+                loadPresentations();
                 loadFamilies();
                 loadAvailableItems();
             }
         });
+
+        vm.$watch('row.item.family_id', function (value) {
+            loadSubFamilies();
+        });
+
 
     </script>       
 @endpush
