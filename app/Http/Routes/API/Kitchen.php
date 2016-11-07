@@ -65,11 +65,11 @@ Route::group(['prefix' => 'kitchen', 'namespace' => 'Kitchen'], function () {
 			Route::patch('{id?}/{providerId?}', [
 				'as' => 'api.v1.kitchen.items.providers.store',
 				'uses' => 'ItemAPIController@storeProvider'
-			]);	
+			]);*/	
 			Route::delete('{id?}/{providerId?}', [
-				'as' => 'api.v1.kitchen.items.providers.delete',
-				'uses' => 'ItemAPIController@deleteProvider'
-			]);*/		
+				'as' => 'api.v1.kitchen.providers.items.delete',
+				'uses' => 'ProviderAPIController@deleteItem'
+			]);	
 		});
 
 	});	
