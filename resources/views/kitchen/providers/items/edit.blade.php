@@ -5,7 +5,7 @@
             'modalClose'    => 'itemEDIT',
             'model'         => 'Pivot_item',
             'related'       => true,
-            'type'			=> 'store',
+            'type'			=> 'associate',
             'content'       => view('kitchen.providers.items.fields_new')
 	]);
 ?>
