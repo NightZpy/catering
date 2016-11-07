@@ -94,7 +94,7 @@
                     },
                     available_items: {
                         method: 'GET',
-                        url: "{{ route('api.v1.kitchen.providers.items.available') }}/"                        
+                        url: "{{ route('api.v1.kitchen.providers.items.available-items') }}/"                        
                     },
                     index: {
                         method: 'GET' ,
