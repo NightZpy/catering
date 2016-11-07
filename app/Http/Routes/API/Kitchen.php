@@ -29,7 +29,7 @@ Route::group(['prefix' => 'kitchen', 'namespace' => 'Kitchen'], function () {
 		]);
 
 		Route::get('available-list/{id?}', [
-			'as' => 'api.v1.kitchen.providers.items.available',
+			'as' => 'api.v1.kitchen.providers.items.available-items',
 			'uses' => 'ProviderAPIController@availableItems'
 		]);
 
@@ -50,14 +50,16 @@ Route::group(['prefix' => 'kitchen', 'namespace' => 'Kitchen'], function () {
 				'uses' => 'ProviderAPIController@item'
 			]);
 
+			Route::get('available/{id?}', [
+				'as' => 'api.v1.kitchen.providers.items.available',
+				'uses' => 'ProviderAPIController@hasAvailableItems'
+			]);
+
 			/*Route::get('available-list/{id?}', [
 				'as' => 'api.v1.kitchen.items.providers.available-providers',
 				'uses' => 'ItemAPIController@availableProviders'
 			]);
-			Route::get('available/{id?}', [
-				'as' => 'api.v1.kitchen.items.providers.available',
-				'uses' => 'ItemAPIController@hasAvailableProviders'
-			]);
+			
 			Route::get('exists/{id?}/{providerId?}', [
 				'as' => 'api.v1.kitchen.items.providers.already-associate',
 				'uses' => 'ItemAPIController@alreadyAssociate'
