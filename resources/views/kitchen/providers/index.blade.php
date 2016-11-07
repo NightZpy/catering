@@ -21,7 +21,7 @@
         @include('kitchen.providers.show')
         @include('layouts.modal.info')    
          <!-- (Items) -->
-         @include('kitchen.providers.items.add_new')
+        @include('kitchen.providers.items.add_new')
         @include('kitchen.providers.items.add')
         @include('kitchen.items.units.add')             
         @include('kitchen.items.presentations.add')             
