@@ -18,7 +18,7 @@
         <!-- --------- Modals ---------- -->  
         @include('kitchen.items.form')
         @include('kitchen.items.providers.add') 
-        @include('kitchen.items.providers.add_new')                    
+        {{--@include('kitchen.items.providers.add_new')--}}                    
         @include('kitchen.items.units.add')             
         @include('kitchen.items.presentations.add')             
         @include('kitchen.items.families.add')             
