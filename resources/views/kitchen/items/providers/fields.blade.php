@@ -60,11 +60,11 @@
 					@{{ option.name }}
 				</option>
 			</select>
-			<span class="input-group-btn">
+			<!--<span class="input-group-btn">
 				<button class="btn btn-primary" @click="modal('provider_ADD')">
 		    		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 	    		</button>
-		  	</span>
+		  	</span>-->
 		</div>
 	    <div v-if="$validationProvider.provider_id.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validationProvider.provider_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
