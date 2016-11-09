@@ -22,7 +22,7 @@
         @include('layouts.modal.info')    
          <!-- (Items) -->
         @include('kitchen.providers.items.add_new') <!--kitchen.providers.items.fields_new validationPivot_item-->
-        @include('kitchen.providers.items.add') <!--kitchen.providers.items.fields validationItem-->
+        {{--@include('kitchen.providers.items.add')--}} <!--kitchen.providers.items.fields validationItem-->
         @include('kitchen.items.units.add')             
         @include('kitchen.items.presentations.add')             
         @include('kitchen.items.families.add')             
