@@ -178,10 +178,12 @@ window.vm = new Vue({
                     actionUrl = this.url.delete + this.row.id;                
                 }  
             } else if( related ) { 
-                console.log ('Related: ' + related)                    
+                console.log ('Related: ' + related)       
+                console.log ('Model: ' + model)                    
                 var url = this.url.foreign[model][type].url;
                 var method = this.url.foreign[model][type].method;
                 var modelId = this.row[model]['id'];
+                console.log ('Id: ' + this.row[model]['id'])                    
                 //var modelKey = 'pivot_' + model;
                 //console.log('Related: ' + modelId);
                 /*if (!modelId) {
@@ -195,7 +197,8 @@ window.vm = new Vue({
                 data = this.row[model];
                 data._token = token;   
             }
-            //console.log(JSON.stringify(data));
+            
+            console.log(JSON.stringify(data));
             this.sendData(actionUrl, this.method, data)
                 .then(this.success, this.failed);
         },

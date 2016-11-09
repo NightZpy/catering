@@ -168,7 +168,7 @@
                 loadUnits();
                 loadPresentations();
                 loadFamilies();
-
+                loadAvailableItems();
                 /*console.log(value);
                 console.log(JSON.stringify(this.row));
                 console.log(JSON.stringify(this.row.family));

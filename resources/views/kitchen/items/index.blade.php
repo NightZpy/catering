@@ -149,18 +149,18 @@
         });
 
         vm.$watch('localModals.providerADD', function (value) {
-            if (value) 
+            /*if (value) 
             {
-                /*console.log(vm.available ( vm.url.foreign.provider.available.url + vm.row.id ));
+                console.log(vm.available ( vm.url.foreign.provider.available.url + vm.row.id ));
                 if ( ! vm.available ( vm.url.foreign.provider.available.url + vm.row.id )) {
                     vm.localModals.providerADD = false;
                     alert('No hay proveedores disponibles!');
                 } else {
                     loadAvailableProviders();
-                }*/
-
+                }
                 console.log("Proveedor");
-            }
+            }*/
+            loadAvailableProviders();
         });  
 
         /**

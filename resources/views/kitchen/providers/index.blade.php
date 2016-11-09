@@ -3,7 +3,7 @@
 @section('content')
     <div id="crud-app">
         <section class="content-header">
-            <h1 class="pull-left">Providers</h1>
+            <h1 class="pull-left">Proveedores</h1>
             <h1 class="pull-right">
                <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('POST')">Add New</a>
             </h1>
@@ -16,13 +16,13 @@
             </div>
         </div>
         <!-- --------- Modals ---------- -->
-        @include('kitchen.providers.form')
+        @include('kitchen.providers.form') <!--kitchen.providers.field $validation-->
         @include('kitchen.providers.delete')
         @include('kitchen.providers.show')
         @include('layouts.modal.info')    
          <!-- (Items) -->
-        @include('kitchen.providers.items.add_new')
-        @include('kitchen.providers.items.add')
+        @include('kitchen.providers.items.add_new') <!--kitchen.providers.items.fields_new validationPivot_item-->
+        @include('kitchen.providers.items.add') <!--kitchen.providers.items.fields validationItem-->
         @include('kitchen.items.units.add')             
         @include('kitchen.items.presentations.add')             
         @include('kitchen.items.families.add')             
@@ -123,6 +123,7 @@
         };
 
         var loadFamilies = function () {
+            console.log("Familias");
             vm.getForeignData(vm.url.foreign.family.select.url, 'familyOptions', 'family', 'select');
         };
 
@@ -146,21 +147,21 @@
 
         vm.$watch('row.item.family_id', function (value) {
             loadSubFamilies();
-            this.row.sub_family.family_id = value;
+            //this.row.sub_family.family_id = value;
         });
 
 
-        /**
+         /**
          * Load families list after add new family from add new item form
          */
         vm.$watch('localModals.family_ADD_inform', function (value) {
-            if ( !value ) {
-                console.log(value);
+            if (!value) {
                 loadFamilies();
-                /*this.$validation.family_id.invalid = false;
-                this.$validation.family_id.valid = true;*/
+                /*this.$validationItem.family_id.invalid = false;
+                this.$validationItem.family_id.valid = true;*/
             }
         });
+
 
     </script>
 @endpush

@@ -31,9 +31,10 @@ var objectRow = {
 		sub_family_id: "",
 	},
 	pivot_item: {
+		id:"",
 		price: "",
 		selected: "",      
-		id: ""			
+		item_id: ""			
 	},
 	unit: {
 		id: "",

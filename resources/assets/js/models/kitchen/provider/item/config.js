@@ -34,7 +34,7 @@ var objectRow =
 	pivot_item: {
 		price: "",
 		selected: "",      
-		id: ""			
+		item_id: ""			
 	},
 	unit: {
 		id: "",

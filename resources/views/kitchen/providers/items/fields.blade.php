@@ -13,7 +13,7 @@
 						<select class="form-control" v-model="row.item.family_id" v-validate:family_id="{ required: true }">
 							<option value="" selected="selected">-- Seleccione familia --</option>
 							<option v-for="(id, name) in foreignData.familyOptions" v-bind:value="id">		
-								@{{ name }}
+								@{{ name }} @{{ id }}
 							</option>
 						</select>
 						{{-- <v-select

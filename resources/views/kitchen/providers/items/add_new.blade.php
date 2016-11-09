@@ -1,6 +1,6 @@
 <?php
 	extract([
-            'modalTitle'    => 'Add Item to provider ',
+            'modalTitle'    => 'Agregar Item a proveedor',
             'modalSync'     => 'itemADD',
             'modalClose'    => 'itemADD',
             'model'         => 'Pivot_item',
