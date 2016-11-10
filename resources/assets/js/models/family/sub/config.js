@@ -42,10 +42,12 @@ var tableColumns = [
     {
         name: 'created_at',
         sortField: 'created_at',
+        title: 'Creada en',
         visible: false
     },
     {
         name: 'updated_at',
+        title:'Actualizada en',
         sortField: 'updated_at',
         visible: false
     },       
