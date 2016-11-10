@@ -24,13 +24,13 @@
 	<div slot="modal-footer" class="modal-footer">
 		<button type="button" class="btn btn-default" 
 			@click="closeModal('{{ $modalClose }}')"
-		>{{ trans('units.template.buttons.close') }}</button>
+		>{{ trans('modals.buttons.close') }}</button>
 		<button type="button" class="btn btn-success" 
 			v-if="{{  '$validation' . $model }}.valid"
 			@click="submit(
 				{{ ( isset ($model) 	? "'" 	. lcfirst($model) . "'" : 'null' ) }}, 
 				{{ ( isset ($type) 		? "'" 	. $type 	. "'" : 'null' ) }}, 
 				{{ ( isset ($related) 	? "'" 	. $related 	. "'" : 'null' ) }})"
-		>{{ trans('units.template.buttons.save') }}</button>
+		>{{ trans('modals.buttons.save') }}</button>
 	</div>	
 </modal>

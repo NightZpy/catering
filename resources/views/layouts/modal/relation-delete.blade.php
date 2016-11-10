@@ -16,7 +16,7 @@
 	<div slot="modal-footer" class="modal-footer">
 		<button type="button" class="btn btn-default" 
 			@click="closeModal('{{ $modalClose }}')"
-		>{{ trans('units.template.buttons.close') }}</button>
+		>{{ trans('modals.buttons.close') }}</button>
 		<button type="button" class="btn btn-success" 
 			@click="submit('{{ ( $model ? lcfirst($model) : 'null' ) }}', '{{ $type or 'null' }}', '{{ $related or 'null' }}')"
 		>Delete</button>

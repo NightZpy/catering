@@ -10,7 +10,7 @@
 		</div>
 	</div>
 	<div slot="modal-footer" class="modal-footer">
-		<button type="button" class="btn btn-default" @click='closeModal("deleteModal")'>{{ trans('units.template.buttons.cancel') }}</button>
-		<button type="button" class="btn btn-success" @click="submit(@yield('submit', ''))">{{ trans('units.template.buttons.accept') }}</button>
+		<button type="button" class="btn btn-default" @click='closeModal("deleteModal")'>{{ trans('modals.buttons.cancel') }}</button>
+		<button type="button" class="btn btn-success" @click="submit(@yield('submit', ''))">{{ trans('modals.buttons.accept') }}</button>
 	</div>
 </modal>

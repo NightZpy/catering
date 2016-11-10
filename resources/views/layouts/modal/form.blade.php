@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	<div slot="modal-footer" class="modal-footer">
-		<button type="button" class="btn btn-default" @click='closeModal("formModal")'>{{ trans('units.template.buttons.close') }}</button>
-		<button type="button" class="btn btn-success" @click="submit" v-if="$validation.valid">{{ trans('units.template.buttons.save') }}</button>
+		<button type="button" class="btn btn-default" @click='closeModal("formModal")'>{{ trans('modals.buttons.close') }}</button>
+		<button type="button" class="btn btn-success" @click="submit" v-if="$validation.valid">{{ trans('modals.buttons.save') }}</button>
 	</div>	
 </modal>
