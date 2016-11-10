@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    
     <div id="crud-app">
         <section class="content-header">
-            <h1 class="pull-left">Units</h1>
+            <h1 class="pull-left">{{ trans('units.index.main-title') }}</h1>
             <h1 class="pull-right">
-               <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('POST')">Add New</a>
+               <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('POST')">{{ trans('units.index.buttons.add-new') }}</a>
             </h1>
         </section>
         <div class="content" style="padding-top: 30px;">
