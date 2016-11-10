@@ -49,6 +49,6 @@
 	<div slot="modal-footer" class="modal-footer">
 		<button type="button" class="btn btn-default" 
 			@click="closeModal({{ $modalClose }})"
-		>Cerrar</button>
+		>{{ trans('units.template.buttons.close') }}</button>
 	</div>	
 </modal>
