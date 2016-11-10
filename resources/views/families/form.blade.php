@@ -1,7 +1,7 @@
 @extends('layouts.modal.form')
 
 @section('modal-form-title')
-Family Form
+{{ trans('families.template.form-add-title') }}
 @stop
 
 @section('modal-form-content')
