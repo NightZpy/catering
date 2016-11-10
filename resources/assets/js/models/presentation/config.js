@@ -14,21 +14,25 @@ var tableColumns = [
 	},
 	{
 	    name: 'name',
+	    title: 'Nombre',
 	    sortField: 'name',
 	    visible: true
 	},
 	{
 	    name: 'created_at',
+	    title: 'Creado en',
 	    sortField: 'created_at',
 	    visible: false
 	},
 	{
 	    name: 'updated_at',
+	    title: 'Actualizando en',
 	    sortField: 'updated_at',
-	    visible: false
+	    visible: false 
 	},
 	{
 	    name: 'deleted_at',
+	    title:'Eliminado en',
 	    sortField: 'deleted_at',
 	    visible: false
 	},       
