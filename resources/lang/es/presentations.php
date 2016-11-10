@@ -16,11 +16,11 @@
 				'name' => 'nombre'
 			],
 			'messages' => [
-				'success' => 'Unidad recuperada correctamente',
-				'failed' => 'Unidad no encontrada',
-				'saved' => 'Unidad agregada correctamente',
-				'updated' => 'Unidad actualizada correctamente', 
-				'deleted' => 'Unidad eliminada correctamente'
+				'success' => 'Presentación recuperada correctamente',
+				'failed' => 'Presentación no encontrada',
+				'saved' => 'Presentación agregada correctamente',
+				'updated' => 'Presentación actualizada correctamente', 
+				'deleted' => 'Presentación eliminada correctamente'
 			],
 		], 
 		'template' => [
