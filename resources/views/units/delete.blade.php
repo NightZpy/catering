@@ -1,5 +1,5 @@
 @extends('layouts.modal.delete')
 
 @section('modal-delete-title')
-Delete Unit!
+{{ trans('units.template.form-delete-title') }}
 @stop
