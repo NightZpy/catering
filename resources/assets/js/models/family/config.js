@@ -28,11 +28,13 @@ var tableColumns = [
     },
     {
         name: 'created_at',
+        title: 'Creado en',
         sortField: 'created_at',
         visible: false
     },
     {
         name: 'updated_at',
+        title: 'Actualizado en',
         sortField: 'updated_at',
         visible: false
     },       
