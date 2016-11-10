@@ -1,7 +1,7 @@
 <?php  
 	return [
 		'index' => [
-			'main-title' => 'Unidades',
+			'main-title' => 'Presentaciones',
 			'buttons' => [
 				'add-new' => 'Añadir nuevo',
 				'search' => 'Buscar',
@@ -24,8 +24,8 @@
 			],
 		], 
 		'template' => [
-			'form-add-title' => 'Datos unidad',
-			'form-show-title' => 'Unidad',
-			'form-delete-title' => 'Eliminar Unidad',
+			'form-add-title' => 'Datos de la presentación',
+			'form-show-title' => 'Datos de la presentación',
+			'form-delete-title' => 'Eliminar presentación',
 		]
 	];
