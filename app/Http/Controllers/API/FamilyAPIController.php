@@ -72,7 +72,7 @@ class FamilyAPIController extends InfyOmBaseController
 
         $families = $this->repository->create($input);
 
-        return $this->sendResponse($families->toArray(), 'Family saved successfully');
+        return $this->sendResponse($families->toArray(), trans('families.index.messages.saved'));
     }
 
     /**
@@ -89,10 +89,10 @@ class FamilyAPIController extends InfyOmBaseController
         $family = $this->repository->find($id);
 
         if (empty($family)) {
-            return Response::json(ResponseUtil::makeError('Family not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('families.index.messages.failed')), 400);
         }
 
-        return $this->sendResponse($family->toArray(), 'Family retrieved successfully');
+        return $this->sendResponse($family->toArray(), trans('families.index.messages.success'));
     }
 
     /**
@@ -112,12 +112,12 @@ class FamilyAPIController extends InfyOmBaseController
         $family = $this->repository->find($id);
 
         if (empty($family)) {
-            return Response::json(ResponseUtil::makeError('Family not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('families.index.messages.failed')), 400);
         }
 
         $family = $this->repository->update($input, $id);
 
-        return $this->sendResponse($family->toArray(), 'Family updated successfully');
+        return $this->sendResponse($family->toArray(), trans('families.index.messages.updated'));
     }
 
     /**
@@ -134,12 +134,12 @@ class FamilyAPIController extends InfyOmBaseController
         $family = $this->repository->find($id);
 
         if (empty($family)) {
-            return Response::json(ResponseUtil::makeError('Family not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('families.index.messages.failed')), 400);
         }
 
         $family->delete();
 
-        return $this->sendResponse($id, 'Family deleted successfully');
+        return $this->sendResponse($id, trans('families.index.messages.deleted'));
     }
 
     public function checkUnique($field, $value = null)
