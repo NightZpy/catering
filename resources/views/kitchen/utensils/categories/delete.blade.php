@@ -1,5 +1,5 @@
 @extends('layouts.modal.delete')
 
 @section('modal-delete-title')
-Delete UtensilCategory!
+{{ trans('utensilsCategory.template.form-delete-title') }}
 @stop
