@@ -24,8 +24,8 @@
 			],
 		], 
 		'template' => [
-			'form-add-title' => 'Datos utensilios',
-			'form-show-title' => 'Utensilios',
-			'form-delete-title' => 'Eliminar utensilios',
+			'form-add-title' => 'Datos utensilio',
+			'form-show-title' => 'Utensilio',
+			'form-delete-title' => '¡Eliminar utensilio!',
 		]
 	];
