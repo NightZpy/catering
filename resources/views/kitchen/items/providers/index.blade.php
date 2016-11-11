@@ -3,9 +3,9 @@
 @section('content')
     <div id="crud-app">
         <section class="content-header">
-            <h1 class="pull-left">Providers from Item: <strong>{{ $item->name }}</strong></h1>
+            <h1 class="pull-left">Proveedor para artículo: <strong>{{ $item->name }}</strong></h1>
             <div class="btn-group pull-right">
-                <a v-if="available ( url.foreign.provider.available.url )" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('providerADD')">Add New</a>
+                <a v-if="available ( url.foreign.provider.available.url )" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('providerADD')">Añadir Nuevo</a>
                 <a class="btn btn-primary pull-right bg-olive btn-flat" href="{{ route('kitchen.items.index') }}" style="margin-top: -10px;margin-bottom: 5px">Almacen</a>
             </div>
         </section>

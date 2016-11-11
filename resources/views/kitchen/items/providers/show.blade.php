@@ -1,6 +1,6 @@
 <?php 
 	extract([
-            'modalTitle'    => 'Details for ',
+            'modalTitle'    => 'Detalles para ',
             'modalSync'     => 'providerSHOW',
             'modalClose'    => "'providerSHOW'",
             'model'         => 'Provider',

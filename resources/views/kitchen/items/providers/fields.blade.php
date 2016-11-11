@@ -1,7 +1,6 @@
 <validator name="validationProvider">			
 	<!-- Price Field -->
 	<div class="form-group col-sm-6">
-	Providers
 	    <label for="price">Precio:</label>
 	    <input type="text" class="form-control" v-model="row.pivot_provider.price" v-validate:price="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
 	    <div v-if="$validationProvider.price.invalid" class="alert alert-danger" role="alert">

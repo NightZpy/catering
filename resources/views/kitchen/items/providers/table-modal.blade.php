@@ -1,19 +1,20 @@
 @extends('layouts.modal.relation-table')
 
 @section('modal-relation-table-title')
-Add Provider to Item Form
+Fromulario Agregar Proveedor a Artículo 
 @stop
 
 @section('modal-sync')
-providers
+Proveedores
 @stop
 
 @section('modal-close')
 	'providers'
+	'proveedores'
 @stop
 
 @section('model')
-Provider
+Proveedor
 @stop
 
 @section('modal-relation-table-content')

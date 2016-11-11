@@ -1,7 +1,7 @@
 <validator name="validationUnit">			
 	<!-- Name Field -->
 	<div class="form-group col-sm-6">
-	    <label for="name">Name:</label>
+	    <label for="name">Nombre:</label>
 	    <input type="text" class="form-control" v-model="row.unit.name" v-validate:name="{ required: true, minlength: 1, maxlength: 128{{-- , unique: units --}} }" data-type="text" />
 	    <div v-if="$validationUnit.name.invalid" class="alert alert-danger" role="alert">
 				<div v-if="$validationUnit.name.required">
@@ -30,7 +30,7 @@
 
 	<!-- Symbol Field -->
 	<div class="form-group col-sm-6">
-	    <label for="symbol">Symbol:</label>
+	    <label for="symbol">Símbolo:</label>
 	    <input type="text" class="form-control" v-model="row.unit.symbol" v-validate:symbol="{ minlength: 1, maxlength: 128{{-- , unique: units --}} }" data-type="text" />
 	    <div v-if="$validationUnit.symbol.invalid" class="alert alert-danger" role="alert">
 				<div v-if="$validationUnit.symbol.minlength">

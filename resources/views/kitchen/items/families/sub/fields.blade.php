@@ -1,7 +1,7 @@
 <validator name="validationsub_family">			
 	<!-- Name Field -->
 	<div class="form-group col-sm-6">
-	    <label for="name">Name:</label>	
+	    <label for="name">Nombre:</label>	
 	    <input type="text" class="form-control" v-model="row.sub_family.name" v-validate:name="{ required: true, minlength: 1, maxlength: 128{{--, unique: checkUnique('{{ route('api.v1.families.check-unique', 'name') }}') --}} }" data-type="text" />
 	    <div v-if="$validationsub_family.name.invalid" class="alert alert-danger" role="alert">
 				<div v-if="$validationsub_family.name.required">
