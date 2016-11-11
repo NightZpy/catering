@@ -71,7 +71,7 @@ class ProviderAPIController extends InfyOmBaseController
 
         $providers = $this->providerRepository->create($input);
 
-        return $this->sendResponse($providers->toArray(), 'Provider saved successfully');
+        return $this->sendResponse($providers->toArray(), trans('providers.index.messages.saved'));
     }
 
     /**
@@ -88,10 +88,10 @@ class ProviderAPIController extends InfyOmBaseController
         $provider = $this->providerRepository->find($id);
 
         if (empty($provider)) {
-            return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('providers.index.messages.failed')), 400);
         }
 
-        return $this->sendResponse($provider->toArray(), 'Provider retrieved successfully');
+        return $this->sendResponse($provider->toArray(), trans('providers.index.messages.success'));
     }
 
     /**
@@ -111,12 +111,12 @@ class ProviderAPIController extends InfyOmBaseController
         $provider = $this->providerRepository->find($id);
 
         if (empty($provider)) {
-            return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('providers.index.messages.failed')), 400);
         }
 
         $provider = $this->providerRepository->update($input, $id);
 
-        return $this->sendResponse($provider->toArray(), 'Provider updated successfully');
+        return $this->sendResponse($provider->toArray(), trans('providers.index.messages.updated'));
     }
 
     /**
@@ -133,12 +133,12 @@ class ProviderAPIController extends InfyOmBaseController
         $provider = $this->providerRepository->find($id);
 
         if (empty($provider)) {
-            return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('providers.index.messages.failed')), 400);
         }
 
         $provider->delete();
 
-        return $this->sendResponse($id, 'Provider deleted successfully');
+        return $this->sendResponse($id, trans('providers.index.messages.deleted'));
     }
 
     public function availableItems(Request $request, $id = null)
