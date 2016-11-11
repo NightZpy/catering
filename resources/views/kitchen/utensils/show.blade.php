@@ -1,5 +1,5 @@
 @extends('layouts.modal.show')
 
 @section('modal-show-title')
-Utensil
+{{ trans('utensils.template.form-show-title') }}
 @stop
