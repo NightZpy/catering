@@ -6,5 +6,8 @@
 			'cancel' => 'Cancelar',
 			'accept' => 'Aceptar',
 			'go' => '¡Ir!'
-		]
+		],
+		'labels' => [
+			'name' => 'Nombre'
+		],
 	];
