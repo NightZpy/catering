@@ -1,5 +1,5 @@
 @extends('layouts.modal.show')
 
 @section('modal-show-title')
-Item
+{{ trans('store.template.form-show-title') }}
 @stop							
