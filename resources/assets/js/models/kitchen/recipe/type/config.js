@@ -11,6 +11,7 @@ var tableColumns = [
 	},
 	{
 	    name: 'name',
+	    title: 'nombre',
 	    sortField: 'name',
 	    visible: true
 	},       
