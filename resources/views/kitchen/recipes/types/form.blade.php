@@ -1,7 +1,7 @@
 @extends('layouts.modal.form')
 
 @section('modal-form-title')
-RecipeType Form
+{{ trans('recipeType.template.form-add-title') }}
 @stop
 
 @section('modal-form-content')
