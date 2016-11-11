@@ -1,6 +1,6 @@
 <?php
 	extract([
-            'modalTitle'    => 'Add Provider to {{ row.name }}',
+            'modalTitle'    => 'Agregar porveedor a {{ row.name }}',
             'modalSync'     => 'providerADD',
             'modalClose'    => 'providerADD',
             'model'         => 'Provider',
