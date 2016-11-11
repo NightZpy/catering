@@ -139,6 +139,6 @@ class UtensilCategoryAPIController extends InfyOmBaseController
 
         $utensilCategory->delete();
 
-        return $this->sendResponse($id, trans('utensilsCategory.index.messages.destroy'));
+        return $this->sendResponse($id, trans('utensilsCategory.index.messages.deleted'));
     }
 }
