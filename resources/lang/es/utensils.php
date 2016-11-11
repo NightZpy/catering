@@ -16,11 +16,11 @@
 				'name' => 'nombre'
 			],
 			'messages' => [
-				'success' => 'Utensilios recuperada correctamente',
-				'failed' => 'Utensilios no encontrada',
-				'saved' => 'Utensilios agregada correctamente',
-				'updated' => 'Utensilios actualizada correctamente', 
-				'deleted' => 'Utensilios eliminada correctamente'
+				'success' => 'Utensilio recuperado correctamente',
+				'failed' => 'Utensilio no encontrado',
+				'saved' => 'Utensilio agregado correctamente',
+				'updated' => 'Utensilio actualizado correctamente', 
+				'deleted' => 'Utensilio eliminado correctamente'
 			],
 		], 
 		'template' => [
