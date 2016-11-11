@@ -86,7 +86,7 @@ class ItemAPIController extends InfyOmBaseController
 
         $items = $this->repository->create($input);
 
-        return $this->sendResponse($items->toArray(), 'Item saved successfully');
+        return $this->sendResponse($items->toArray(), trans('store.index.messages.saved'));
     }
 
     /**
@@ -103,10 +103,10 @@ class ItemAPIController extends InfyOmBaseController
         $item = $this->repository->find($id);
 
         if (empty($item)) {
-            return Response::json(ResponseUtil::makeError('Item not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('store.index.messages.failed')), 400);
         }
 
-        return $this->sendResponse($item->toArray(), 'Item retrieved successfully');
+        return $this->sendResponse($item->toArray(), trans('store.index.messages.success'));
     }
 
     /**
@@ -126,12 +126,12 @@ class ItemAPIController extends InfyOmBaseController
         $item = $this->repository->find($id);
 
         if (empty($item)) {
-            return Response::json(ResponseUtil::makeError('Item not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('store.index.messages.failed')), 400);
         }
 
         $item = $this->repository->update($input, $id);
 
-        return $this->sendResponse($item->toArray(), 'Item updated successfully');
+        return $this->sendResponse($item->toArray(), trans('store.index.messages.updated'));
     }
 
     /**
@@ -148,12 +148,12 @@ class ItemAPIController extends InfyOmBaseController
         $item = $this->repository->find($id);
 
         if (empty($item)) {
-            return Response::json(ResponseUtil::makeError('Item not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('store.index.messages.failed')), 400);
         }
 
         $item->delete();
 
-        return $this->sendResponse($id, 'Item deleted successfully');
+        return $this->sendResponse($id, trans('store.index.messages.deleted'));
     }
 
     public function unique(Request $request, $name)
