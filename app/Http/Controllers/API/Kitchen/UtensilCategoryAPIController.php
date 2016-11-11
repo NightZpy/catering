@@ -72,7 +72,7 @@ class UtensilCategoryAPIController extends InfyOmBaseController
 
         $utensilCategories = $this->repository->create($input);
 
-        return $this->sendResponse($utensilCategories->toArray(), 'UtensilCategory saved successfully');
+        return $this->sendResponse($utensilCategories->toArray(), trans('utensilsCategory.index.messages.saved'));
     }
 
     /**
@@ -89,10 +89,10 @@ class UtensilCategoryAPIController extends InfyOmBaseController
         $utensilCategory = $this->repository->find($id);
 
         if (empty($utensilCategory)) {
-            return Response::json(ResponseUtil::makeError('UtensilCategory not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('utensilsCategory.index.messages.failed')), 400);
         }
 
-        return $this->sendResponse($utensilCategory->toArray(), 'UtensilCategory retrieved successfully');
+        return $this->sendResponse($utensilCategory->toArray(), trans('utensilsCategory.index.messages.success'));
     }
 
     /**
@@ -112,12 +112,12 @@ class UtensilCategoryAPIController extends InfyOmBaseController
         $utensilCategory = $this->repository->find($id);
 
         if (empty($utensilCategory)) {
-            return Response::json(ResponseUtil::makeError('UtensilCategory not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('utensilsCategory.index.messages.failed')), 400);
         }
 
         $utensilCategory = $this->repository->update($input, $id);
 
-        return $this->sendResponse($utensilCategory->toArray(), 'UtensilCategory updated successfully');
+        return $this->sendResponse($utensilCategory->toArray(), trans('utensilsCategory.index.messages.updated'));
     }
 
     /**
@@ -134,11 +134,11 @@ class UtensilCategoryAPIController extends InfyOmBaseController
         $utensilCategory = $this->repository->find($id);
 
         if (empty($utensilCategory)) {
-            return Response::json(ResponseUtil::makeError('UtensilCategory not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('utensilsCategory.index.messages.failed')), 400);
         }
 
         $utensilCategory->delete();
 
-        return $this->sendResponse($id, 'UtensilCategory deleted successfully');
+        return $this->sendResponse($id, trans('utensilsCategory.index.messages.destroy'));
     }
 }
