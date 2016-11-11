@@ -7,7 +7,7 @@
 				'search' => 'Buscar',
 				'reset' => 'Reiniciar',
 				'simple' => 'Simple',
-				'detail' => 'Detallado',
+				'detail' => 'Detallada',
 				'dropdown' => 'Desplegable', 
 			],
 			'labels' => [
@@ -16,11 +16,11 @@
 				'name' => 'nombre'
 			],
 			'messages' => [
-				'success' => 'Categoría de utensilio recuperado correctamente',
-				'failed' => 'Categoría de utensilio no encontrado',
-				'saved' => 'Categoría de utensilio agregado correctamente',
-				'updated' => 'Categoría de utensilio actualizado correctamente', 
-				'deleted' => 'Categoría de utensilio eliminado correctamente'
+				'success' => 'Categoría de utensilio recuperada correctamente',
+				'failed' => 'Categoría de utensilio no encontrada',
+				'saved' => 'Categoría de utensilio agregada correctamente',
+				'updated' => 'Categoría de utensilio actualizada correctamente', 
+				'deleted' => 'Categoría de utensilio eliminada correctamente'
 			],
 		], 
 		'template' => [
