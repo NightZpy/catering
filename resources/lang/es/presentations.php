@@ -26,6 +26,6 @@
 		'template' => [
 			'form-add-title' => 'Datos de la presentación',
 			'form-show-title' => 'Datos de la presentación',
-			'form-delete-title' => 'Eliminar presentación',
+			'form-delete-title' => '¡Eliminar presentación!',
 		]
 	];

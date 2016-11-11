@@ -26,6 +26,6 @@
 		'template' => [
 			'form-add-title' => 'Datos de la familia',
 			'form-show-title' => 'Familia',
-			'form-delete-title' => 'Eliminar familia!',
+			'form-delete-title' => '¡Eliminar familia!',
 		]
 	];

@@ -26,6 +26,6 @@
 		'template' => [
 			'form-add-title' => 'Datos de la subfamilia',
 			'form-show-title' => 'Subfamilia',
-			'form-delete-title' => 'Eliminar subfamilia!',
+			'form-delete-title' => '¡Eliminar subfamilia!',
 		]
 	];
