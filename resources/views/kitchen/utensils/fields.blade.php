@@ -87,18 +87,18 @@
 	<!-- Units_x_100 Field -->
 	<div class="form-group col-sm-6">
 	    <label for="units_x_100">Un. por 100 pers:</label>
-	    <input type="text" class="form-control" v-model="row.units_x_100" v-validate:units_x_100="{ required: true{{-- , numeric --}}, minlength: 1, maxlength: 10 }" data-type="text" />
+	    <input type="text" class="form-control" v-model="row.units_x_100" v-validate:units_x_100="{ required: true, numeric:true, minlength: 1, maxlength: 10 }" data-type="text" />
 	    <div v-if="$validation.units_x_100.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validation.units_x_100.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(required) Message Here
 			</div>
-			{{-- <div v-if="$validation.units_x_100.numeric">
+			<div v-if="$validation.units_x_100.numeric">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(numeric) Message Here
-			</div> --}}
+			</div>
 			<div v-if="$validation.units_x_100.minlength">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
