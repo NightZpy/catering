@@ -31,7 +31,7 @@
 	<!-- Family Id Field -->
 	<div class="form-group col-sm-6" class="form-group col-sm-6">
 	    <label for="family_id">Familia:</label>
-		<select class="form-control" v-model="row.sub_family.family_id" v-validate:family_id="{ required: true }">
+		<select class="form-control" v-model="row.sub_family.family_id" v-validate:family_id="{ required: true, integer:true }">
 			<option value="" selected="selected">-- Seleccione una familia --</option>
 			<option v-for="(id, name) in foreignData.familyOptions" v-bind:value="id">
 				@{{ name }}
@@ -41,6 +41,10 @@
 			<div v-if="$validationsub_family.family_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				La familia es obligatoria
+			</div>
+			<div v-if="$validationsub_family.family_id.integer"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(integer) Message Here
 			</div>
 		</div> 
 	</div>
