@@ -52,6 +52,10 @@ Vue.validator('numeric', function (val) {
 Vue.validator('unique', function (val) {
     return false;
 });
+
+Vue.validator('boolean', function (val) {
+    return /^(true|false|1|0)$/.test(val)
+});
 /*
 function copyOwnFrom (target, source) {
   Object.getOwnPropertyNames(source).forEach(function (propName) {
