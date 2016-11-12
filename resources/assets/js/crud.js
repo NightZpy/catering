@@ -58,7 +58,6 @@ Vue.validator('boolean', function (val) {
 });
 
 Vue.validator('integer', function(val){
-    console.log(/^\d+$/.test(val));
     return  /^\d+$/.test(val)
 });
 
