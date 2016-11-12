@@ -38,11 +38,6 @@
 				<span class="sr-only">Error:</span>
 				Custom rule(required) Message Here
 			</div>
-			{{-- <div v-if="$validation.stock.numeric">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				Custom rule(numeric) Message Here
-			</div> --}}
 			<div v-if="$validation.stock.minlength">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
@@ -71,11 +66,6 @@
 				<span class="sr-only">Error:</span>
 				Custom rule(required) Message Here
 			</div>
-			{{-- <div v-if="$validation.cost.numeric">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				Custom rule(numeric) Message Here
-			</div> --}}
 			<div v-if="$validation.cost.minlength">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
