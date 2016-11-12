@@ -31,7 +31,7 @@
 	<!-- Stock Field -->
 	<div class="form-group col-sm-6">
 	    <label for="stock">Stock:</label>
-	    <input type="text" class="form-control" v-model="row.stock" v-validate:stock="{ required: true{{-- , numeric --}},  minlength: 1, maxlength: 10 }" data-type="text" />
+	    <input type="text" class="form-control" v-model="row.stock" v-validate:stock="{ required: true, numeric:true,  minlength: 1, maxlength: 10 }" data-type="text" />
 	    <div v-if="$validation.stock.invalid" class="alert alert-danger" role="alert">
 				<div v-if="$validation.stock.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -52,6 +52,11 @@
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(maxlength) Message Here
+			</div>
+			<div v-if="$validation.stock.numeric">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(numeric) Message Here
 			</div>
 		</div>
 	</div>	
