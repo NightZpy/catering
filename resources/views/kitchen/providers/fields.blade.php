@@ -97,10 +97,10 @@
     <input type="text" class="form-control" v-model="row.phone" v-validate:phone="{ required: true, {{-- numeric, --}} minlength: 7, maxlength: 20 }" data-type="text" />
     <div v-if="$validation.phone.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validation.phone.required">
-			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-			<span class="sr-only">Error:</span>
-			Custom rule(required) Message Here
-		</div>
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(required) Message Here
+			</div>
 		{{-- <div v-if="$validation.phone.numeric">
 			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 			<span class="sr-only">Error:</span>
