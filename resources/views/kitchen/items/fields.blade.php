@@ -309,7 +309,7 @@
 					<label for="perishable">Perecible:</label>
 					<div class="btn-group">
 						<label class="btn btn-default">
-							<input type="radio" id="perishable" value="1" v-model="row.perishable" v-validate:perishable="{ required: true }"> Si
+							<input type="radio" id="perishable" value="1" v-model="row.perishable" v-validate:perishable="{ required: true, boolean:true }"> Si
 						</label>
 						<label class="btn btn-default">
 							<input type="radio" id="perishable" value="0" v-model="row.perishable" v-validate:perishable> No
@@ -321,6 +321,11 @@
 							<span class="sr-only">Error:</span>
 							Custom rule(required) Message Here
 						</div>
+						<div v-if="$validation.perishable.boolean">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span>
+							Custom rule(boolean) Message Here
+						</div>
 					</div>
 				</div>		
 
@@ -329,7 +334,7 @@
 					<label for="auto_provider">Auto Proveedor:</label>
 					<div class="btn-group">
 						<label class="btn btn-default">
-							<input type="radio" id="auto_provider" value="1" v-model="row.auto_provider" v-validate:auto_provider="{ required: true }"> Si
+							<input type="radio" id="auto_provider" value="1" v-model="row.auto_provider" v-validate:auto_provider="{ required: true, boolean: true }"> Si
 						</label>
 						<label class="btn btn-default">
 							<input type="radio" id="auto_provider" value="0" v-model="row.auto_provider" v-validate:auto_provider> No
@@ -340,6 +345,11 @@
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Error:</span>
 							Custom rule(required) Message Here
+						</div>
+						<div v-if="$validation.auto_provider.boolean">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span>
+							Custom rule(boolean) Message Here
 						</div>
 					</div>
 				</div>				
