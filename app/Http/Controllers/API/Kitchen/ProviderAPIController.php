@@ -160,7 +160,7 @@ class ProviderAPIController extends InfyOmBaseController
     public function storeItem(Request $request, $id = null, $itemId = null)
     {
 
-        /*$provider = $this->providerRepository->findWithoutFail($id);
+        $provider = $this->providerRepository->findWithoutFail($id);
 
         if (empty($provider)) {
             return Response::json(ResponseUtil::makeError('Provider not found'), 400);
@@ -194,9 +194,7 @@ class ProviderAPIController extends InfyOmBaseController
           $this->providerRepository->createPivot($provider, 'pivot', $attributes, 'items', 'item');
         } 
 
-        return $this->sendResponse($request->all(), 'Item associated to Provider successfully');*/
-
-        return Response::json($request->all());
+        return $this->sendResponse($request->all(), 'Item associated to Provider successfully');
     }
 
     public function items(Request $request, $id = null)
