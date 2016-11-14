@@ -72,7 +72,7 @@ class RecipeTypeAPIController extends InfyOmBaseController
 
         $recipeTypes = $this->repository->create($input);
 
-        return $this->sendResponse($recipeTypes->toArray(), 'RecipeType saved successfully');
+        return $this->sendResponse($recipeTypes->toArray(), trans('recipeType.index.messages.saved'));
     }
 
     /**
@@ -89,10 +89,10 @@ class RecipeTypeAPIController extends InfyOmBaseController
         $recipeType = $this->repository->find($id);
 
         if (empty($recipeType)) {
-            return Response::json(ResponseUtil::makeError('RecipeType not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('recipeType.index.messages.failed')), 400);
         }
 
-        return $this->sendResponse($recipeType->toArray(), 'RecipeType retrieved successfully');
+        return $this->sendResponse($recipeType->toArray(), trans('recipeType.index.messages.success'));
     }
 
     /**
@@ -112,12 +112,12 @@ class RecipeTypeAPIController extends InfyOmBaseController
         $recipeType = $this->repository->find($id);
 
         if (empty($recipeType)) {
-            return Response::json(ResponseUtil::makeError('RecipeType not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('recipeType.index.messages.failed')), 400);
         }
 
         $recipeType = $this->repository->update($input, $id);
 
-        return $this->sendResponse($recipeType->toArray(), 'RecipeType updated successfully');
+        return $this->sendResponse($recipeType->toArray(), trans('recipeType.index.messages.updated'));
     }
 
     /**
@@ -134,11 +134,11 @@ class RecipeTypeAPIController extends InfyOmBaseController
         $recipeType = $this->repository->find($id);
 
         if (empty($recipeType)) {
-            return Response::json(ResponseUtil::makeError('RecipeType not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('recipeType.index.messages.failed')), 400);
         }
 
         $recipeType->delete();
 
-        return $this->sendResponse($id, 'RecipeType deleted successfully');
+        return $this->sendResponse($id, trans('recipeType.index.messages.deleted'));
     }
 }
