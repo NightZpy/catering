@@ -1,6 +1,6 @@
 <?php 
 	extract([
-            'modalTitle'    => 'Edit {{ row.item.name }} for {{ row.name }}',
+            'modalTitle'    => 'Editar {{ row.item.name }} para {{ row.name }}',
             'modalSync'     => 'itemEDIT',
             'modalClose'    => 'itemEDIT',
             'model'         => 'Item',
