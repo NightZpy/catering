@@ -75,7 +75,7 @@ class RecipeAPIController extends InfyOmBaseController
 
         $recipes = $this->repository->create($input);
 
-        return $this->sendResponse($recipes->toArray(), 'Recipe saved successfully');
+        return $this->sendResponse($recipes->toArray(), trans('recipes.index.messages.saved'));
     }
 
     /**
@@ -92,7 +92,7 @@ class RecipeAPIController extends InfyOmBaseController
         $recipe = $this->repository->find($id);
 
         if (empty($recipe)) {
-            return Response::json(ResponseUtil::makeError('Recipe not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('recipes.index.messages.failed')), 400);
         }
         $utensils = $recipe->utensils->pluck('id');
         $bases    = $recipe->bases;
@@ -108,7 +108,7 @@ class RecipeAPIController extends InfyOmBaseController
         $recipe['pivot_utensil']['utensil_id'] = $newUtensils;        
         $recipe['pivot_base'] = $bases;
 
-        return $this->sendResponse($recipe, 'Recipe retrieved successfully');
+        return $this->sendResponse($recipe, trans('recipes.index.messages.success'));
     }
 
     /**
@@ -128,12 +128,12 @@ class RecipeAPIController extends InfyOmBaseController
         $recipe = $this->repository->find($id);
 
         if (empty($recipe)) {
-            return Response::json(ResponseUtil::makeError('Recipe not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('recipes.index.messages.failed')), 400);
         }
 
         $recipe = $this->repository->update($input, $id);
 
-        return $this->sendResponse($recipe->toArray(), 'Recipe updated successfully');
+        return $this->sendResponse($recipe->toArray(), trans('recipes.index.messages.updated'));
     }
 
     /**
@@ -150,12 +150,12 @@ class RecipeAPIController extends InfyOmBaseController
         $recipe = $this->repository->find($id);
 
         if (empty($recipe)) {
-            return Response::json(ResponseUtil::makeError('Recipe not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('recipes.index.messages.failed')), 400);
         }
 
         $recipe->delete();
 
-        return $this->sendResponse($id, 'Recipe deleted successfully');
+        return $this->sendResponse($id, trans('recipes.index.messages.deleted'));
     }
 
     public function storeUtensil(Request $request, $id = null, $utensilId = null)
@@ -163,7 +163,7 @@ class RecipeAPIController extends InfyOmBaseController
         $recipe = $this->repository->findWithoutFail($id);
 
         if (empty($recipe)) {
-            return Response::json(ResponseUtil::makeError('Recipe not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('recipes.index.messages.failed')), 400);
         }
 
         if ($utensilId) {
