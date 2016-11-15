@@ -166,13 +166,13 @@ class ItemAPIController extends InfyOmBaseController
         $item = $this->repository->findWithoutFail($id);
 
         if (empty($item)) {
-            return Response::json(ResponseUtil::makeError('Item not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('store.index.messages.item')), 400);
         }
 
         if ($providerId) {
             $provider = $this->providerRepository->findWithoutFail($providerId);
             if (empty($provider)) {
-                return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+                return Response::json(ResponseUtil::makeError(trans('store.index.messages.provider')), 400);
             }            
         }
 
@@ -194,7 +194,7 @@ class ItemAPIController extends InfyOmBaseController
           $this->repository->createPivot($item, 'pivot', $attributes, 'providers', 'provider');
         } 
 
-        return $this->sendResponse($request->all(), 'Provider associated to Item successfully');
+        return $this->sendResponse($request->all(), trans('store.index.messages.provider-associated'));
     }
 
     public function providers(Request $request, $id = null)
@@ -203,12 +203,12 @@ class ItemAPIController extends InfyOmBaseController
 
         if (empty($item)) {
             //Flash::error('Item not found');
-            return Response::json(ResponseUtil::makeError('Item not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('store.index.messages.item')), 400);
         }
 
         if (empty($item->providers)) {
             //Flash::error('Item not found');
-            return Response::json(ResponseUtil::makeError('Not Providers for Item'), 400);
+            return Response::json(ResponseUtil::makeError(trans('store.index.messages.not-provider-item')), 400);
         }         
 
         $query = $item->providers();
@@ -239,16 +239,16 @@ class ItemAPIController extends InfyOmBaseController
     {
         $providers = $this->repository->availableProviders($id)->toArray();
         if (empty($providers))
-            return Response::json(ResponseUtil::makeError('Providers not found'), 400);        
-        return $this->sendResponse($providers, 'Provider retrieve successfully');
+            return Response::json(ResponseUtil::makeError(trans('store.index.messages.provider')), 400);        
+        return $this->sendResponse($providers, trans('store.index.messages.provider-retrieve'));
     }
 
     public function hasAvailableProviders(Request $request, $id = null)
     {
         $providers = $this->repository->availableProviders($id)->toArray();
         if (empty($providers))
-            return Response::json(ResponseUtil::makeError('Providers not found'), 400);        
-        return $this->sendResponse(True, 'Provider retrieve successfully');        
+            return Response::json(ResponseUtil::makeError(trans('store.index.messages.provider')), 400);        
+        return $this->sendResponse(True, trans('store.index.messages.provider-retrieve'));        
     }
 
 
@@ -261,33 +261,33 @@ class ItemAPIController extends InfyOmBaseController
         $data['pivot_provider'] = $provider['pivot'];
         unset($provider['pivot']);
         $data['provider'] = $provider;
-        return $this->sendResponse($data, 'Provider associated to Item successfully retrieve');
+        return $this->sendResponse($data, trans('store.index.messages.provider-associated-data'));
     }
 
     public function alreadyAssociate(Request $request, $id = null, $providerId = null)
     {
         $item = $this->repository->findWithoutFail($id);
         if (empty($item))
-            return Response::json(ResponseUtil::makeError('Item not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('store.index.messages.item')), 400);
 
         if ($item->providers()->whereProviderId($providerId)->count()) 
-            return $this->sendResponse([True], 'Provider already associate to item');
-        return $this->sendResponse([False], 'Provider not associate yet to item');   
+            return $this->sendResponse([True], trans('store.index.messages.provider-already-associate'));
+        return $this->sendResponse([False], trans('store.index.messages.provider-not-associate'));   
     }
 
     public function deleteProvider(Request $request, $id = null, $providerId = null)
     {
         $item = $this->repository->findWithoutFail($id);
         if (empty($item))
-            return Response::json(ResponseUtil::makeError('Item not found'), 400); 
+            return Response::json(ResponseUtil::makeError(trans('store.index.messages.item')), 400); 
 
         $provider = $item->providers()->whereProviderId($providerId)->count();
         if ($provider) {
             $item->providers()->detach($providerId);
             //$item = $item->toArray();
             //$item['provider'] = $provider;
-            return $this->sendResponse($request->all(), 'Provider successfully detached from item');
+            return $this->sendResponse($request->all(), trans('store.index.messages.provider-detached'));
         }
-        return Response::json(ResponseUtil::makeError('Provider could not be detached from item'), 400);
+        return Response::json(ResponseUtil::makeError(trans('store.index.messages.provider-not-detached')), 400);
     }
 }
