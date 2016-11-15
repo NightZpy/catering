@@ -1,6 +1,6 @@
 <?php
 	extract([
-            'modalTitle'    => 'Add Item to {{ row.name }}',
+            'modalTitle'    => 'Agregar artículo a {{ row.name }}',
             'modalSync'     => 'itemADD',
             'modalClose'    => 'itemADD',
             'model'         => 'Item',
