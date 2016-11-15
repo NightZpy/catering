@@ -1,6 +1,6 @@
 <?php
 	extract([
-            'modalTitle'    => 'Add Base to {{ row.name }}',
+            'modalTitle'    => 'Agregar base a {{ row.name }}',
             'modalSync'     => 'baseADD',
             'modalClose'    => 'baseADD',
             'model'         => 'Base',
