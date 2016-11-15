@@ -1,7 +1,7 @@
 @extends('layouts.modal.show', ['content' => true, 'width' => 1200, 'large' => 'large'])
 
 @section('modal-show-title')
-Recipe
+{{ trans('recipes.template.form-show-title') }}
 @stop
 
 @push('styles')
@@ -11,10 +11,10 @@ Recipe
 @section('content-show')
 	<div class="nav-tabs-custom">
 		<ul class="nav nav-tabs pull-right tabs-show">
-			<li class="active"><a href="#list" data-toggle="tab">Lista</a></li>
-			<li><a href="#utensils" data-toggle="tab">Utensilios</a></li>
-			<li><a href="#description" data-toggle="tab">Descripción</a></li>
-			<li class="pull-left header"><i class="fa fa-th"></i> <strong>Receta: </strong>@{{ row.name }}</li>
+			<li class="active"><a href="#list" data-toggle="tab">{{ trans('recipes.show.labels.list') }}</a></li>
+			<li><a href="#utensils" data-toggle="tab">{{ trans('recipes.show.labels.Utensils') }}</a></li>
+			<li><a href="#description" data-toggle="tab">{{ trans('recipes.show.labels.Description') }}</a></li>
+			<li class="pull-left header"><i class="fa fa-th"></i> <strong>{{ trans('recipes.show.labels.Recipe') }}: </strong>@{{ row.name }}</li>
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane active" id="list">

@@ -1,5 +1,5 @@
 @extends('layouts.modal.delete')
 
 @section('modal-delete-title')
-Delete Recipe!
+{{ trans('recipes.template.form-delete-title') }}
 @stop
