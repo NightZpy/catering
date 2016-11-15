@@ -16,11 +16,11 @@
 				'name' => 'nombre'
 			],
 			'messages' => [
-				'success' => 'Receta base recuperada correctamente',
-				'failed' => 'Receta base no encontrada',
-				'saved' => 'Receta base agregada correctamente',
-				'updated' => 'Receta base actualizada correctamente', 
-				'deleted' => 'Receta base eliminada correctamente'
+				'success' => 'Receta recuperada correctamente',
+				'failed' => 'Receta no encontrada',
+				'saved' => 'Receta agregada correctamente',
+				'updated' => 'Receta actualizada correctamente', 
+				'deleted' => 'Receta eliminada correctamente'
 			],
 		], 
 		'show' => [
@@ -32,8 +32,8 @@
 			],
 		],
 		'template' => [
-			'form-add-title' => 'Datos de la receta base',
-			'form-show-title' => 'Receta base',
-			'form-delete-title' => '¡Eliminar receta base!',
+			'form-add-title' => 'Datos de la receta',
+			'form-show-title' => 'Receta',
+			'form-delete-title' => '¡Eliminar receta!',
 		]
 	];
