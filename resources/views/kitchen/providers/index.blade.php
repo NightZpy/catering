@@ -135,7 +135,7 @@
             vm.getForeignData(vm.url.foreign.item.available_items.url + vm.row.id, 'itemsOptions', 'item', 'available_items');
         } 
 
-        /*vm.$watch('localModals.itemADD', function (value) {
+        vm.$watch('localModals.itemADD', function (value) {
             if(value)
             {
                 loadUnits();
@@ -145,7 +145,7 @@
             }
         })
 
-        vm.$watch('row.item.family_id', function (value) {
+        /*vm.$watch('row.item.family_id', function (value) {
             loadSubFamilies();
             //this.row.sub_family.family_id = value;
         });
