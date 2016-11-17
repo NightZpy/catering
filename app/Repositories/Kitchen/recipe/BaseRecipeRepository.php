@@ -28,6 +28,10 @@ class BaseRecipeRepository extends MyBaseRepository
 
     public function create(array $attributes)
     {
+        $utensils = array_filter($attributes['pivot_utensil']['utensil_id']);
+        unset($attributes['pivot_utensil']['utensil_id']);
+        $attributes['pivot_utensil']['utensil_id'] = $utensils;
+
         if ( isset ( $attributes['pivot_utensil']['utensil_id'] ) && count ( $attributes['pivot_utensil']['utensil_id'] ) ) {
             $utensils = $attributes['pivot_utensil']['utensil_id'];
             unset ( $attributes['pivot_utensil'] );
