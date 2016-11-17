@@ -223,7 +223,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
 
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
-            $query = $query->orderBy($sortCol, $sortDir);
+            $query = $query->sortBy($sortCol, $sortDir);
         } else {
             $query = $query->orderBy('created_at', 'asc');
         }
