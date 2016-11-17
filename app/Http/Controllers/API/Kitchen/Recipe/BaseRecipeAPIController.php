@@ -220,26 +220,18 @@ class BaseRecipeAPIController extends InfyOmBaseController
         }         
 
         $query = $baseRecipe->items();
-        if ($request->exists('filter')) {
-            $value = "%{$request->filter}%";
-            $query->where(function($q) use($value) {
-                $q->orWhere("name", "like", $value);
-            });
-            //$query = $baseRecipe->items()->search($value);
-        }
 
         if (request()->has('sort')) {
-            list($sortCol, $sortDir) = explode('|', request()->sort);           
-
-            if ($sortCol == 'cost') {
-                $query->join('item_provider', 'items.id', '=', 'item_provider.item_id');
-                $sortCol = 'item_provider.price';
-                $query->groupBy('item_provider.item_id');
-            }
+            list($sortCol, $sortDir) = explode('|', request()->sort);
             $query = $query->orderBy($sortCol, $sortDir);
         } else {
             $query = $query->orderBy('created_at', 'asc');
-        }        
+        }
+
+        if ($request->exists('filter')) {
+          $query->search("{$request->filter}");                     
+        }     
+          
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
         return response()->json($query->paginate($perPage));
     }    
