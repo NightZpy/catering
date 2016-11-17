@@ -526,6 +526,7 @@ window.vm = new Vue({
         },
         'vuetable:load-success': function(response) {
             var data = response.data.data;
+            console.log(response);
             //onLoadSuccess(data, this.highlight, this.searchFor);
         },
         'vuetable:load-error': function(response) {
