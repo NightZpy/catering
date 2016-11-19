@@ -168,13 +168,13 @@ class BaseRecipeAPIController extends InfyOmBaseController
         $baseRecipe = $this->repository->findWithoutFail($id);
 
         if (empty($baseRecipe)) {
-            return Response::json(ResponseUtil::makeError('Base Recipe not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.failed')), 400);
         }
 
         if ($itemId) {
             $item = $this->itemRepository->findWithoutFail($itemId);
             if (empty($item)) {
-                return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+                return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.item-not-found')), 400);
             }            
         }
 
@@ -202,7 +202,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
           $this->repository->createPivot($baseRecipe, 'pivot', $attributes, 'items', 'item');
         } 
 
-        return $this->sendResponse($request->all(), 'Item associated to Base Recipe successfully');
+        return $this->sendResponse($request->all(), trans('baseRecipes.index.messages.item-associated'));
     }    
 
     public function items(Request $request, $id = null)
@@ -211,12 +211,12 @@ class BaseRecipeAPIController extends InfyOmBaseController
 
         if (empty($baseRecipe)) {
             //Flash::error('Base Recipe not found');
-            return Response::json(ResponseUtil::makeError('Base Recipe not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.failed')), 400);
         }
 
         if (empty($baseRecipe->items)) {
             //Flash::error('Base Recipe not found');
-            return Response::json(ResponseUtil::makeError('Not Providers for Base Recipe'), 400);
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.item-not-found')), 400);
         }         
 
         $query = $baseRecipe->items();
@@ -244,7 +244,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
         $data['pivot_item'] = $item['pivot'];
         unset($item['pivot']);        
         $data['item'] = $item;
-        return $this->sendResponse($data, 'Item associated to Item successfully retrieve');
+        return $this->sendResponse($data, trans('baseRecipes.index.messages.item-located'));
     }
 
     public function availableItems(Request $request, $id = null)
@@ -261,32 +261,32 @@ class BaseRecipeAPIController extends InfyOmBaseController
         }, $items);
 
         if (empty($items))
-            return Response::json(ResponseUtil::makeError('Items not found'), 400);        
-        return $this->sendResponse($items, 'Item retrieve successfully');
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.item-not-found')), 400);        
+        return $this->sendResponse($items, trans('baseRecipes.index.messages.item-retrieved'));
     }
 
     public function hasAvailableItems(Request $request, $id = null)
     {
         $items = $this->repository->availableItems($id)->toArray();
         if (empty($items))
-            return Response::json(ResponseUtil::makeError('Items not found'), 400);        
-        return $this->sendResponse(True, 'Item retrieve successfully');        
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.items-not-foun')), 400);        
+        return $this->sendResponse(True, trans('baseRecipes.index.messages.item-retrieved'));        
     }    
 
     public function deleteItem(Request $request, $id = null, $itemId = null)
     {
         $baseRecipe = $this->repository->findWithoutFail($id);
         if (empty($baseRecipe))
-            return Response::json(ResponseUtil::makeError('BaseRecipe not found'), 400); 
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.failed')), 400); 
         
         $item = $baseRecipe->items()->whereItemId($itemId)->count();
         if ($item) {
             $baseRecipe->items()->detach($itemId);
             //$baseRecipe = $baseRecipe->toArray();
             //$baseRecipe['item'] = $item;
-            return $this->sendResponse($request->all(), 'Item successfully detached from BaseRecipe');
+            return $this->sendResponse($request->all(), trans('baseRecipes.index.messages.item-detached'));
         }
-        return Response::json(ResponseUtil::makeError('Item could not be detached from baseRecipe'), 400);
+        return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.item-not-detached')), 400);
     }    
 
     public function storeUtensil(Request $request, $id = null, $utensilId = null)
@@ -294,13 +294,13 @@ class BaseRecipeAPIController extends InfyOmBaseController
         $baseRecipe = $this->repository->findWithoutFail($id);
 
         if (empty($baseRecipe)) {
-            return Response::json(ResponseUtil::makeError('Base Recipe not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.failed')), 400);
         }
 
         if ($utensilId) {
             $utensil = $this->utensilRepository->findWithoutFail($utensilId);
             if (empty($utensil)) {
-                return Response::json(ResponseUtil::makeError('Utensil not found'), 400);
+                return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.utensil-not-found')), 400);
             }            
         }
 
@@ -319,7 +319,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
           $this->repository->createPivot($baseRecipe, 'pivot', $attributes, 'utensils', 'utensil');
         } 
 
-        return $this->sendResponse($request->all(), 'Utensil associated to Base Recipe successfully');
+        return $this->sendResponse($request->all(), trans('baseRecipes.index.messages.utensil-associated'));
     }    
 
     public function utensils(Request $request, $id = null)
@@ -328,12 +328,12 @@ class BaseRecipeAPIController extends InfyOmBaseController
 
         if (empty($baseRecipe)) {
             //Flash::error('Base Recipe not found');
-            return Response::json(ResponseUtil::makeError('Base Recipe not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.failed')), 400);
         }
 
         if (empty($baseRecipe->utensils)) {
             //Flash::error('Base Recipe not found');
-            return Response::json(ResponseUtil::makeError('Not Utensils for Base Recipe'), 400);
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.utensil-not-found')), 400);
         }         
 
         $query = $baseRecipe->utensils();
@@ -366,7 +366,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
         $data['pivot_utensil'] = $utensil['pivot'];
         unset($utensil['pivot']);        
         $data['utensil'] = $utensil;
-        return $this->sendResponse($data, 'Utensil associated to BaseRecipe successfully retrieve');
+        return $this->sendResponse($data, trans('baseRecipes.index.messages.utensil-associated'));
     }
 
     public function availableUtensils(Request $request, $id = null)
@@ -374,31 +374,31 @@ class BaseRecipeAPIController extends InfyOmBaseController
         $utensils = $this->repository->availableUtensils($id)->pluck('name', 'id')->toArray();
         //$utensils = $this->repository->all()->pluck('name', 'id')->toArray();
         if (empty($utensils))
-            return Response::json(ResponseUtil::makeError('Utensils not found'), 400);        
-        return $this->sendResponse($utensils, 'Utensil retrieve successfully');
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.failed')), 400);        
+        return $this->sendResponse($utensils, trans('baseRecipes.index.messages.utensil-retrieve'));
     }
 
     public function hasAvailableUtensils(Request $request, $id = null)
     {
         $utensils = $this->repository->availableUtensils($id)->toArray();
         if (empty($utensils))
-            return Response::json(ResponseUtil::makeError('Utensils not found'), 400);        
-        return $this->sendResponse(True, 'Utensil retrieve successfully');        
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.utensil-not-found')), 400);        
+        return $this->sendResponse(True, trans('baseRecipes.index.messages.utensil-retrieve'));        
     }    
 
     public function deleteUtensil(Request $request, $id = null, $utensilId = null)
     {
         $baseRecipe = $this->repository->findWithoutFail($id);
         if (empty($baseRecipe))
-            return Response::json(ResponseUtil::makeError('BaseRecipe not found'), 400); 
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.failed')), 400); 
         
         $utensil = $baseRecipe->utensils()->whereUtensilId($utensilId)->count();
         if ($utensil) {
             $baseRecipe->utensils()->detach($utensilId);
             //$baseRecipe = $baseRecipe->toArray();
             //$baseRecipe['utensil'] = $utensil;
-            return $this->sendResponse($request->all(), 'Utensil successfully detached from BaseRecipe');
+            return $this->sendResponse($request->all(), trans('baseRecipes.index.messages.utensil-detached'));
         }
-        return Response::json(ResponseUtil::makeError('Utensil could not be detached from baseRecipe'), 400);
+        return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.utensil-not-detached')), 400);
     }      
 }
