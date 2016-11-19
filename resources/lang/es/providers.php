@@ -23,7 +23,7 @@
 				'deleted' => 'Proveedor eliminado correctamente',
 				'item-not-found' => 'No se encontro el artículo',
 				'item-retrieve' => 'artícul encontro correctamente',
-				'item-associated' => 'Artículos asociado correctamente a proveedor',
+				'item-associated' => 'Artículo asociado correctamente a proveedor',
 				'not-item' => 'No hay artículos asociados al proveedor',
 				'item-detached' => 'Artículos eliminado correctamente del proveedor',
 				'item-not-detached' => 'Artículos no pude ser eliminado correctamente del proveedor'
