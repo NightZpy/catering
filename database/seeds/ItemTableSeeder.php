@@ -37,6 +37,7 @@ class ItemTableSeeder extends Seeder
                 'currency' => '$',
                 'unit_id' => rand(1, 3),
                 'type' => 'Type-' . rand(1, 25),
+                'item_type_id' => rand(1, 20),
                 'presentation_id' => rand(1, 3),
                 'sub_family_id' => rand(1, 60)
             ];  
