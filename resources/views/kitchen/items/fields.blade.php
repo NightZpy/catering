@@ -64,6 +64,32 @@
 					</div> 
 				</div>
 
+
+				<!-- Item Type Id Field -->
+				<div class="form-group col-sm-6">
+				    <label for="item_type_id">Tipo de item:</label>
+				    <div class="input-group">
+						<select class="form-control" v-model="row.item_type_id" v-validate:item_type_id="{ required: true }">
+							<option value="" selected="selected">-- Seleccione Tipo de item --</option>
+							<option v-for="(id, name) in foreignData.itemTypesOptions" v-bind:value="id">
+								@{{ name }}
+							</option>
+						</select>
+						<span class="input-group-btn">
+	    					<button class="btn btn-primary" @click="modal('presentation_ADD_inform')">
+	    						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    						</button>
+	  					</span>
+  					</div>
+				    <div v-if="$validation.item_type_id.invalid" class="alert alert-danger" role="alert">
+						<div v-if="$validation.item_type_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span>
+							El tipo de item es obligatorio
+						</div>
+					</div> 
+				</div>	
+
+
 				<!-- Name Field -->
 				<div class="form-group col-sm-6">
 				    <label for="name">Nombre:</label>
