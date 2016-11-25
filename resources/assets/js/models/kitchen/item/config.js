@@ -97,6 +97,12 @@ var tableColumns = [
 	    visible: true
 	},
 	{
+	    name: 'item_type_name',
+	    sortField: 'item_type.name',
+	    title: 'Tipo de item',
+	    visible: true
+	},
+	{
 	    name: 'presentation_name',
 	    sortField: 'presentation.name',
 	    title: 'Presentación',
