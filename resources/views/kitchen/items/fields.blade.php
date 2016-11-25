@@ -76,7 +76,7 @@
 							</option>
 						</select>
 						<span class="input-group-btn">
-	    					<button class="btn btn-primary" @click="modal('presentation_ADD_inform')">
+	    					<button class="btn btn-primary" @click="modal('itemType_ADD_inform')">
 	    						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     						</button>
 	  					</span>
