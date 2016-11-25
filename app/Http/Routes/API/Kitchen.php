@@ -135,6 +135,23 @@ Route::group(['prefix' => 'kitchen', 'namespace' => 'Kitchen'], function () {
 		});
 	});
 
+
+	Route::group(['prefix' => 'itemTypes'], function () {	
+
+			Route::post('store', [
+				'as' => 'api.v1.kitchen.item.types.store',
+				'uses' => 'ItemTypeAPIController@store'
+			]);
+			Route::get('select-list', [
+				'as' => 'api.v1.kitchen.item.types.select-list',
+				'uses' => 'ItemTypeAPIController@index'
+			]);
+	});	
+
+
+
+
+
 	/* 
 	 * ------------------- Route API CRUD for UtensilCategory ---------------
 	 */
