@@ -22,7 +22,8 @@
         @include('kitchen.items.units.add')             
         @include('kitchen.items.presentations.add')             
         @include('kitchen.items.families.add')             
-        @include('kitchen.items.families.sub.add')             
+        @include('kitchen.items.families.sub.add')
+        @include('kitchen.items.itemTypes.add')             
         @include('kitchen.items.delete')
         @include('kitchen.items.show')
         @include('layouts.modal.info')        
@@ -186,6 +187,15 @@
                 loadUnits();
                 this.$validation.unit_id.invalid = false;
                 this.$validation.unit_id.valid = true;
+            }
+        });
+
+        /**
+         * Load families list after add new family from add new item form
+         */
+        vm.$watch('localModals.itemType_ADD_inform', function (value) {
+            if ( !value ) {
+                loadItemTypes();
             }
         });
 
