@@ -45,6 +45,10 @@ class Item extends Model
             'table' => 'units',
             'name'
         ],
+        'itemType' => [
+            'table' => 'item_types',
+            'name'
+        ],
         'presentation' => [
             'table' => 'presentations',
             'name'
@@ -57,6 +61,7 @@ class Item extends Model
         'auto_provider_format',
         'perishable_format',
         'unit_name', 
+        'item_type_name',
         'presentation_name', 
         'family_code', 
         'family_name', 
@@ -232,6 +237,11 @@ class Item extends Model
     {
         return $this->unit->name;
     }  
+
+    public function getItemTypeNameAttribute()
+    {
+        return $this->itemType->name;
+    }
 
     public function getPresentationNameAttribute()
     {
