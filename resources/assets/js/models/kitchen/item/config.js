@@ -53,6 +53,10 @@ var objectRow = {
 		id: "",
 		name: "",
 		family_id: ""
+	},
+	item_type: {
+		id: "",
+		name: "",
 	}
 };
 
@@ -174,5 +178,6 @@ var modals = {
 	unit_ADD_inform: false,
 	presentation_ADD_inform: false,
 	family_ADD_inform: false,
-	subFamily_ADD_inform: false
+	subFamily_ADD_inform: false,
+	itemType_ADD_inform:false
 };
