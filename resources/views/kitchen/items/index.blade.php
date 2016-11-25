@@ -52,6 +52,16 @@
                         url: "{{ route('api.v1.units.store') }}/"
                     }
                 },
+                item_type: { 
+                    select: {
+                        method: 'GET' ,
+                        url: "{{ route('api.v1.kitchen.item.types.select-list') }}/"
+                    }, 
+                    store: {
+                        method: 'POST' ,
+                        url: "{{ route('api.v1.kitchen.item.types.store') }}/"
+                    }
+                },
                 presentation: { 
                     select: {
                         method: 'GET' ,
@@ -119,6 +129,10 @@
             vm.getForeignData(vm.url.foreign.unit.select.url, 'unitOptions', 'unit', 'select');
         };
 
+        var loadItemTypes = function () {
+            vm.getForeignData(vm.url.foreign.item_type.select.url, 'itemTypesOptions', 'item_type', 'select');
+        };
+
         var loadPresentations = function () {
             vm.getForeignData(vm.url.foreign.presentation.select.url, 'presentationOptions', 'presentation', 'select');
         };
@@ -140,6 +154,7 @@
                 loadUnits();
                 loadPresentations();
                 loadFamilies();
+                loadItemTypes();
             }
         });
 
