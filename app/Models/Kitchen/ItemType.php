@@ -12,6 +12,8 @@ class ItemType extends Model
 
 	use SoftDeletes, SearchTrait, SortTrait;
 
+    public $table = 'item_types';
+
     protected $searchableColumns = [
         'name'
     ];    
