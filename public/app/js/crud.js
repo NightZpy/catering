@@ -17052,9 +17052,11 @@ window.vm = new Vue({
                 }
             } else if (related) {
                 console.log('Related: ' + related);
+                console.log('Model: ' + model);
                 var url = this.url.foreign[model][type].url;
                 var method = this.url.foreign[model][type].method;
                 var modelId = this.row[model]['id'];
+                console.log('Id: ' + this.row[model]['id']);
                 //var modelKey = 'pivot_' + model;
                 //console.log('Related: ' + modelId);
                 /*if (!modelId) {
@@ -17068,6 +17070,8 @@ window.vm = new Vue({
                 data = this.row[model];
                 data._token = token;
             }
+
+            console.log(JSON.stringify(data));
             this.sendData(actionUrl, this.method, data).then(this.success, this.failed);
         },
         getData: function getData() {
@@ -17093,9 +17097,11 @@ window.vm = new Vue({
             }, function (response) {});
         },
         available: function available(url, map, data) {
+            console.log("Entro");
             this.sendData(url, 'GET').then(function (response) {
                 ;
                 data = response.data.success;
+                console.log(JSON.stringify(data));
                 this.$set(map, data);
             }, function (response) {
                 this.$set(map, false);
@@ -17145,12 +17151,14 @@ window.vm = new Vue({
                     this.row[field + '_id'] = data.id;
                 }
                 vm.$set(map, data);
+                console.log(JSON.stringify(this.row));
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE') this.$broadcast('vuetable:reload');
             var message = response.data.message;
             vm.flashMessage = message;
             vm.flashType = 'success';
             this.closeModal(lastOpenModal);
+            console.log(response);
         },
         success2: function success2(response) {
             var lastOpenModal = this.lastOpenModal[0];
@@ -17165,6 +17173,7 @@ window.vm = new Vue({
                 }
                 vm.$set(map, data);
                 //vm.row = data;
+                console.log("Cargo el objeto");
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE') this.$broadcast('vuetable:reload');
             var message = response.data.message;
@@ -17201,6 +17210,7 @@ window.vm = new Vue({
             //vm.$setValidationErrors(errorMessages);   
         },
         closeModal: function closeModal(modalName) {
+            //console.log(modalName);
             if (modalName == this.lastOpenModal[this.lastOpenModal.length - 1]) this.lastOpenModal.pop();
 
             if (this.localModals[modalName] != undefined) this.localModals[modalName] = false;else this.$set(modalName, false);

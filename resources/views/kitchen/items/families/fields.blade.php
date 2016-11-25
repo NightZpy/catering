@@ -24,7 +24,6 @@
 				<span class="sr-only">Error:</span>
 				Custom rule(unique) Message Here
 			</div> --}}
-		
 		</div>
 	</div>	
 </validator>

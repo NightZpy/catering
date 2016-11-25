@@ -12,7 +12,48 @@ var objectRow = {
 	email: "",
 	created_at: "",
 	updated_at: "",
-	deleted_at: ""
+	deleted_at: "",
+	item:{
+		id: "",
+		code: "",
+		name: "",
+		auto_provider: "",
+		perishable: "",
+		decrease: "",
+		to_buy: "",
+		min_stock: "",
+		current_stock: "",
+		currency: "",
+		unit_id: "",
+		presentation_id: "",
+		type: "",
+		family_id: "",
+		sub_family_id: "",
+	},
+	pivot_item: {
+		id:"",
+		price: "",
+		selected: "",      
+		item_id: ""			
+	},
+	unit: {
+		id: "",
+		name: "",
+		symbol: ""
+	},
+	presentation: {
+		id: "",
+		name: ""
+	},
+	family: {
+		id: "",
+		name: ""
+	},
+	sub_family: {
+		id: "",
+		name: "",
+		family_id: ""
+	}
 };
 
 var tableColumns = [
@@ -93,10 +134,19 @@ var tableColumns = [
     }        
 ];
 
-var modals = {};
-
 var actions = [
             { name: 'view-item', label: 'Ver', icon: 'glyphicon glyphicon-zoom-in', class: 'btn btn-info', extra: {'title': 'View', 'data-toggle':"tooltip", 'data-placement': "left"} },
             { name: 'edit-item', label: 'Editar', icon: 'glyphicon glyphicon-pencil', class: 'btn btn-warning', extra: {title: 'Edit', 'data-toggle':"tooltip", 'data-placement': "top"} },
-            { name: 'delete-item', label: 'Eliminar', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } }
+            { name: 'delete-item', label: 'Eliminar', icon: 'glyphicon glyphicon-remove', class: 'btn btn-danger', extra: {title: 'Delete', 'data-toggle':"tooltip", 'data-placement': "right" } },
+            { name: 'ADD:related:item', label: 'Asociar Item', show: true, icon: 'glyphicon glyphicon-plus', class: 'btn btn-success', extra: {'title': 'Add Item', 'data-toggle':"tooltip", 'data-placement': "left"} },
+			{ name: 'LINK:related:item', label: 'Ver items', show: true, icon: 'glyphicon glyphicon-th-list', class: 'btn btn-success', extra: {title: 'Items', 'data-toggle':"tooltip", 'data-placement': "right" } }
 ];
+
+var modals = {
+	itemADD: false,
+	unit_ADD_inform: false,
+	presentation_ADD_inform: false,
+	family_ADD_inform: false,
+	subFamily_ADD_inform: false,
+	item_ADD_inform: false
+};

@@ -68,5 +68,5 @@ var modals = {
 	providerADD: false,
 	providerSHOW: false,
 	providerEDIT: false,
-	providerDELETE: false
+	providerDELETE: false,
 };

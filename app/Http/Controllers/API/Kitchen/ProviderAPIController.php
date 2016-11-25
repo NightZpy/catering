@@ -6,6 +6,7 @@ use App\Http\Requests\API\Kitchen\CreateProviderAPIRequest;
 use App\Http\Requests\API\Kitchen\UpdateProviderAPIRequest;
 use App\Models\Kitchen\Provider;
 use App\Repositories\Kitchen\ProviderRepository;
+use App\Repositories\Kitchen\ItemRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController as InfyOmBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -22,10 +23,11 @@ class ProviderAPIController extends InfyOmBaseController
 {
     /** @var  ProviderRepository */
     private $providerRepository;
-
-    public function __construct(ProviderRepository $providerRepo)
+    private $itemRepository;
+    public function __construct(ProviderRepository $providerRepo, ItemRepository $itemRepository)
     {
         $this->providerRepository = $providerRepo;
+        $this->itemRepository = $itemRepository;
     }
 
     /**
@@ -137,5 +139,123 @@ class ProviderAPIController extends InfyOmBaseController
         $provider->delete();
 
         return $this->sendResponse($id, 'Provider deleted successfully');
+    }
+
+    public function availableItems(Request $request, $id = null)
+    {
+        $items = $this->providerRepository->availableItems($id)->toArray();
+        if (empty($items))
+            return Response::json(ResponseUtil::makeError('Items not found'), 400);        
+        return $this->sendResponse($items, 'Provider retrieve successfully');
+    }
+
+    public function hasAvailableItems(Request $request, $id = null)
+    {
+        $items = $this->providerRepository->availableItems($id)->toArray();
+        if (empty($items))
+            return Response::json(ResponseUtil::makeError('Items not found'), 400);        
+        return $this->sendResponse(True, 'Items retrieve successfully');        
+    }
+
+    public function storeItem(Request $request, $id = null, $itemId = null)
+    {
+
+        /*$provider = $this->providerRepository->findWithoutFail($id);
+
+        if (empty($provider)) {
+            return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+        }
+
+        if ($itemId) {
+            $item = $this->itemRepository->findWithoutFail($itemId);
+            if (empty($item)) {
+                return Response::json(ResponseUtil::makeError('Item not found'), 400);
+            }            
+        }
+
+        $data = $request->all();
+        $item_id = $data['pivot_item']['id'];
+        unset($data['pivot_item']['id']);
+        $attributes['pivot'] = $data['pivot_item'];
+        $attributes['pivot']['item_id'] = $item_id;
+        unset($data['pivot_item']);
+
+        if (isset($attributes['pivot']['selected']) && $attributes['pivot']['selected'] && !$item->auto_provider)
+            $attributes['pivot']['selected'] = True;   
+
+        $exists = $this->providerRepository
+             ->findWithoutFail($id)
+             ->items()
+             ->whereItemId($itemId)->count();
+        
+        if ($exists) {
+          $provider->items()->updateExistingPivot($itemId, $attributes['pivot']);
+        } else {
+          $this->providerRepository->createPivot($provider, 'pivot', $attributes, 'items', 'item');
+        } 
+
+        return $this->sendResponse($request->all(), 'Item associated to Provider successfully');*/
+
+        return Response::json($request->all());
+    }
+
+    public function items(Request $request, $id = null)
+    {
+        $provider = $this->providerRepository->findWithoutFail($id);
+
+        if (empty($provider)) {
+            //Flash::error('Item not found');
+            return Response::json(ResponseUtil::makeError('Provider not found'), 400);
+        }
+
+        if (empty($provider->items)) {
+            //Flash::error('Item not found');
+            return Response::json(ResponseUtil::makeError('Not Items for provider'), 400);
+        }         
+
+        $query = $provider->items();
+        if (request()->has('sort')) {
+            list($sortCol, $sortDir) = explode('|', request()->sort);
+            $query = $query->orderBy($sortCol, $sortDir);
+        } else {
+            $query = $query->orderBy('created_at', 'asc');
+        }
+
+        if ($request->exists('filter')) {
+          $query->search("{$request->filter}");                     
+        }
+
+        $perPage = request()->has('per_page') ? (int) request()->per_page : null;
+        return response()->json($query->paginate($perPage));
+    }
+
+    public function item(Request $request, $id = null, $itemId = null)
+    {
+        $item = $this->providerRepository->findWithoutFail($id)->items()->whereItemId($itemId)
+        ->first();
+
+        $provider = $this->providerRepository->findWithoutFail($id)->toArray();
+        $data = $provider;
+        $item = $item->toArray();    
+        $data['pivot_item'] = $item['pivot'];
+        unset($item['pivot']);
+        $data['item'] = $item;
+        return $this->sendResponse($data, 'Provider associated to Item successfully retrieve');
+    }
+
+    public function deleteItem(Request $request, $id = null, $itemId = null)
+    {
+        $provider = $this->providerRepository->findWithoutFail($id);
+
+        if (empty($provider)){
+            return Response::json(ResponseUtil::makeError('Provider not found'), 400); 
+        }
+
+        $item = $provider->items()->whereItemId($itemId)->count();
+        if ($item) {
+            $provider->items()->detach($itemId);
+            return $this->sendResponse($request->all(), 'Item successfully detached from provider');
+        }
+        return Response::json(ResponseUtil::makeError('Item could not be detached from provider'), 400);
     }
 }

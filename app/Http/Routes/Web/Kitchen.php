@@ -34,6 +34,16 @@ Route::group(['prefix' => 'kitchen'], function () {
 				return view('kitchen.providers.index');
 			}
 		]);	
+
+		Route::group(['prefix' => 'items'], function() {
+			Route::get('{provider?}', [
+				'as' => 'kitchen.providers.items.index',
+				'uses' => function (App\Models\Kitchen\Provider $provider) {
+					return view('kitchen.providers.items.index', compact('provider'));
+				}
+			]);
+		});
+
 	});
 
 	Route::group(['prefix' => 'utensils'], function() {
