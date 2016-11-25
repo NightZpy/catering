@@ -3,9 +3,9 @@
 @section('content')
     <div id="crud-app">
         <section class="content-header">
-            <h1 class="pull-left">Proveedores</h1>
+            <h1 class="pull-left">{{ trans('providers.index.main-title') }}</h1>
             <h1 class="pull-right">
-               <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('POST')">Add New</a>
+               <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('POST')">{{ trans('providers.index.buttons.add-new') }}</a>
             </h1>
         </section>
         <div class="content" style="padding-top: 30px;">
@@ -145,22 +145,18 @@
             }
         })
 
-        vm.$watch('row.item.family_id', function (value) {
+        /*vm.$watch('row.item.family_id', function (value) {
             loadSubFamilies();
             //this.row.sub_family.family_id = value;
         });
 
-
-         /**
-         * Load families list after add new family from add new item form
-         */
         vm.$watch('localModals.family_ADD_inform', function (value) {
             if (!value) {
                 loadFamilies();
-                /*this.$validationItem.family_id.invalid = false;
-                this.$validationItem.family_id.valid = true;*/
+                this.$validationItem.family_id.invalid = false;
+                this.$validationItem.family_id.valid = true;
             }
-        });
+        });*/
 
 
     </script>

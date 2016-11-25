@@ -64,31 +64,37 @@ var tableColumns = [
 	},
 	{
 	    name: 'code',
+	    title: 'Codigo',
 	    sortField: 'code',
 	    visible: true
 	},
 	{
 	    name: 'name',
+	    title: 'Nombre',
 	    sortField: 'name',
 	    visible: true
 	},
 	{
 	    name: 'specialty',
+	    title: 'Especialidad',
 	    sortField: 'specialty',
 	    visible: true
 	},
 	{
 	    name: 'district',
+	    title: 'Distrito', 
 	    sortField: 'district',
 	    visible: false
 	},
 	{
 	    name: 'address',
+	    title: 'Dirección',
 	    sortField: 'address',
 	    visible: false
 	},
 	{
 	    name: 'phone',
+	    title: 'Teléfono',
 	    sortField: 'phone',
 	    visible: true
 	},
@@ -104,6 +110,7 @@ var tableColumns = [
 	},
 	{
 	    name: 'contact',
+	    title: 'Contacto',
 	    sortField: 'contact',
 	    visible: true
 	},
@@ -114,16 +121,19 @@ var tableColumns = [
 	},
 	{
 	    name: 'created_at',
+	    title:'Creado en',
 	    sortField: 'created_at',
 	    visible: false
 	},
 	{
 	    name: 'updated_at',
+	    title: 'Actualizado en',
 	    sortField: 'updated_at',
 	    visible: false
 	},
 	{
 	    name: 'deleted_at',
+	    title: 'Borrado en',
 	    sortField: 'deleted_at',
 	    visible: false
 	},       

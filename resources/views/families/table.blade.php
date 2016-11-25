@@ -1,21 +1,21 @@
 <div class="row">
     <div class="col-md-5">
         <div class="form-inline form-group">
-            <label>Search:</label>
+            <label>{{ trans('families.index.buttons.search') }}</label>
             <input v-model="searchFor" class="form-control" @keyup.enter="setFilter">
             <button class="btn btn-primary" @click="setFilter"><i class="glyphicon glyphicon-search"></i></button>
-            <button class="btn btn-default" @click="resetFilter">Reset</button>
+            <button class="btn btn-default" @click="resetFilter">{{ trans('families.index.buttons.reset') }}</button>
         </div>
     </div>
     <div class="col-md-7">
         <div class="dropdown form-inline pull-right">
-            <label>Pagination Style:</label>
+            <label>{{ trans('families.index.labels.pagination-style') }}</label>
             <select class="form-control" v-model="paginationComponent">
-                <option value="vuetable-pagination-simple">Simple</option>
-                <option value="vuetable-pagination-bootstrap">Detail</option>
-                <option value="vuetable-pagination-dropdown">Dropdown</option>
+                <option value="vuetable-pagination-simple">{{ trans('families.index.buttons.simple') }}</option>
+                <option value="vuetable-pagination-bootstrap">{{ trans('families.index.buttons.detail') }}</option>
+                <option value="vuetable-pagination-dropdown">{{ trans('families.index.buttons.dropdown') }}</option>
             </select>
-            <label>Items per page:</label>
+            <label>{{ trans('families.index.labels.items-per-page') }}</label>
             <select class="form-control" v-model="perPage">
                 <option value=10>10</option>
                 <option value=15>15</option>

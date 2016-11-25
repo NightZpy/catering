@@ -97,10 +97,10 @@
     <input type="text" class="form-control" v-model="row.phone" v-validate:phone="{ required: true, {{-- numeric, --}} minlength: 7, maxlength: 20 }" data-type="text" />
     <div v-if="$validation.phone.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validation.phone.required">
-			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-			<span class="sr-only">Error:</span>
-			Custom rule(required) Message Here
-		</div>
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				Custom rule(required) Message Here
+			</div>
 		{{-- <div v-if="$validation.phone.numeric">
 			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 			<span class="sr-only">Error:</span>
@@ -122,13 +122,13 @@
 <!-- Movil1 Field -->
 <div class="form-group col-sm-6">
     <label for="movil1">Movil1:</label>
-    <input type="text" class="form-control" v-model="row.movil1" v-validate:movil1="{ {{-- numeric, --}} minlength: 7, maxlength: 20 }" data-type="text" />
+    <input type="text" class="form-control" v-model="row.movil1" v-validate:movil1="{ numeric:true, minlength: 7, maxlength: 20 }" data-type="text" />
     <div v-if="$validation.movil1.invalid" class="alert alert-danger" role="alert">
-		{{-- <div v-if="$validation.movil1.numeric">
+		<div v-if="$validation.movil1.numeric">
 			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 			<span class="sr-only">Error:</span>
 			Custom rule(numeric) Message Here
-		</div> --}}
+		</div>
 		<div v-if="$validation.movil1.minlength">
 			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 			<span class="sr-only">Error:</span>
@@ -145,13 +145,13 @@
 <!-- Movil2 Field -->
 <div class="form-group col-sm-6">
     <label for="movil2">Movil2:</label>
-    <input type="text" class="form-control" v-model="row.movil2" v-validate:movil2="{ {{-- numeric, --}} minlength: 7, maxlength: 20 }" data-type="text" />
+    <input type="text" class="form-control" v-model="row.movil2" v-validate:movil2="{ numeric:true, minlength: 7, maxlength: 20 }" data-type="text" />
     <div v-if="$validation.movil2.invalid" class="alert alert-danger" role="alert">
-		{{-- <div v-if="$validation.movil2.numeric">
+		<div v-if="$validation.movil2.numeric">
 			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 			<span class="sr-only">Error:</span>
 			Custom rule(numeric) Message Here
-		</div> --}}
+		</div>
 		<div v-if="$validation.movil2.minlength">
 			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 			<span class="sr-only">Error:</span>

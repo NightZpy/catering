@@ -1,6 +1,6 @@
 <?php 
 	extract([
-            'modalTitle'    => 'Edit Provider for ' . $item->name,
+            'modalTitle'    => 'Editar Proveedor a ' . $item->name,
             'modalSync'     => 'providerEDIT',
             'modalClose'    => 'providerEDIT',
             'model'         => 'Provider',

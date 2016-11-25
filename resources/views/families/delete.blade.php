@@ -1,5 +1,5 @@
 @extends('layouts.modal.delete')
 
 @section('modal-delete-title')
-Delete Family!
+{{ trans('families.template.form-delete-title') }}
 @stop

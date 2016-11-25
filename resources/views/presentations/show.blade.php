@@ -1,5 +1,5 @@
 @extends('layouts.modal.show')
 
 @section('modal-show-title')
-Presentation
+{{ trans('presentations.template.form-show-title') }}
 @stop

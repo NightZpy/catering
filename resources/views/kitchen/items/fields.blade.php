@@ -239,7 +239,7 @@
 				<!-- min Stock Field -->
 				<div class="form-group col-sm-6">
 				    <label for="decrease">Merma:</label>
-				    <input type="text" class="form-control" v-model="row.decrease" v-validate:decrease="{ required: true, minlength: 1, maxlength: 4 }" data-type="text" />
+				    <input type="text" class="form-control" v-model="row.decrease" v-validate:decrease="{ required: true, numeric:true ,minlength: 1, maxlength: 4 }" data-type="text" />
 				    <div v-if="$validation.decrease.invalid" class="alert alert-danger" role="alert">
 							<div v-if="$validation.decrease.required">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -255,6 +255,11 @@
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Error:</span>
 							Custom rule(maxlength) Message Here
+						</div>
+						<div v-if="$validation.decrease.numeric">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span>
+							Custom rule(numeric) Message Here
 						</div>
 					</div>
 				</div>					
@@ -335,7 +340,7 @@
 					<label for="perishable">Perecible:</label>
 					<div class="btn-group">
 						<label class="btn btn-default">
-							<input type="radio" id="perishable" value="1" v-model="row.perishable" v-validate:perishable="{ required: true }"> Si
+							<input type="radio" id="perishable" value="1" v-model="row.perishable" v-validate:perishable="{ required: true, boolean:true }"> Si
 						</label>
 						<label class="btn btn-default">
 							<input type="radio" id="perishable" value="0" v-model="row.perishable" v-validate:perishable> No
@@ -347,6 +352,11 @@
 							<span class="sr-only">Error:</span>
 							Custom rule(required) Message Here
 						</div>
+						<div v-if="$validation.perishable.boolean">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span>
+							Custom rule(boolean) Message Here
+						</div>
 					</div>
 				</div>		
 
@@ -355,7 +365,7 @@
 					<label for="auto_provider">Auto Proveedor:</label>
 					<div class="btn-group">
 						<label class="btn btn-default">
-							<input type="radio" id="auto_provider" value="1" v-model="row.auto_provider" v-validate:auto_provider="{ required: true }"> Si
+							<input type="radio" id="auto_provider" value="1" v-model="row.auto_provider" v-validate:auto_provider="{ required: true, boolean: true }"> Si
 						</label>
 						<label class="btn btn-default">
 							<input type="radio" id="auto_provider" value="0" v-model="row.auto_provider" v-validate:auto_provider> No
@@ -366,6 +376,11 @@
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Error:</span>
 							Custom rule(required) Message Here
+						</div>
+						<div v-if="$validation.auto_provider.boolean">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span>
+							Custom rule(boolean) Message Here
 						</div>
 					</div>
 				</div>				

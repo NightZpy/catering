@@ -72,7 +72,7 @@ class UnitAPIController extends InfyOmBaseController
 
         $units = $this->repository->create($input);
 
-        return $this->sendResponse($units->toArray(), 'Unit saved successfully');
+        return $this->sendResponse($units->toArray(), trans('units.index.messages.saved'));
     }
 
     /**
@@ -89,10 +89,10 @@ class UnitAPIController extends InfyOmBaseController
         $unit = $this->repository->find($id);
 
         if (empty($unit)) {
-            return Response::json(ResponseUtil::makeError('Unit not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('units.index.messages.failed')), 400);
         }
 
-        return $this->sendResponse($unit->toArray(), 'Unit retrieved successfully');
+        return $this->sendResponse($unit->toArray(), trans('units.index.messages.success'));
     }
 
     /**
@@ -112,12 +112,12 @@ class UnitAPIController extends InfyOmBaseController
         $unit = $this->repository->find($id);
 
         if (empty($unit)) {
-            return Response::json(ResponseUtil::makeError('Unit not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('units.index.messages.failed')), 400);
         }
 
         $unit = $this->repository->update($input, $id);
 
-        return $this->sendResponse($unit->toArray(), 'Unit updated successfully');
+        return $this->sendResponse($unit->toArray(), trans('units.index.messages.updated'));
     }
 
     /**
@@ -134,11 +134,11 @@ class UnitAPIController extends InfyOmBaseController
         $unit = $this->repository->find($id);
 
         if (empty($unit)) {
-            return Response::json(ResponseUtil::makeError('Unit not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('units.index.messages.failed')), 400);
         }
 
         $unit->delete();
 
-        return $this->sendResponse($id, 'Unit deleted successfully');
+        return $this->sendResponse($id, trans('units.index.messages.deleted'));
     }
 }

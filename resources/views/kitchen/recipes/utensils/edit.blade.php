@@ -1,6 +1,6 @@
 <?php 
 	extract([
-            'modalTitle'    => 'Edit {{ row.utensil.name }} for {{ row.name }}',
+            'modalTitle'    => 'Editar {{ row.utensil.name }} para {{ row.name }}',
             'modalSync'     => 'utensilEDIT',
             'modalClose'    => 'utensilEDIT',
             'model'         => 'Utensil',

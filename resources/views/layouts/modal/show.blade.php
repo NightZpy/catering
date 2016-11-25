@@ -38,6 +38,6 @@
 		</div>
 	</div>
 	<div slot="modal-footer" class="modal-footer">
-		<button type="button" class="btn btn-default" @click='closeModal("showModal")'>Cerrar</button>
+		<button type="button" class="btn btn-default" @click='closeModal("showModal")'>{{ trans('modals.buttons.close') }}</button>
 	</div>	
 </modal>

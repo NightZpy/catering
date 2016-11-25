@@ -3,9 +3,9 @@
 @section('content')
     <div id="crud-app">
         <section class="content-header">
-            <h1 class="pull-left">Almacen</h1>
+            <h1 class="pull-left">{{ trans('store.index.main-title') }}</h1>
             <h1 class="pull-right">
-               <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('POST')">Add New</a>
+               <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('POST')">{{ trans('store.index.buttons.add-new') }}</a>
             </h1>
         </section>
         <div class="content" style="padding-top: 30px;">
@@ -165,7 +165,7 @@
         });
 
         vm.$watch('localModals.providerADD', function (value) {
-            /*if (value) 
+            if (value) 
             {
                 console.log(vm.available ( vm.url.foreign.provider.available.url + vm.row.id ));
                 if ( ! vm.available ( vm.url.foreign.provider.available.url + vm.row.id )) {
@@ -175,8 +175,7 @@
                     loadAvailableProviders();
                 }
                 console.log("Proveedor");
-            }*/
-            loadAvailableProviders();
+            }
         });  
 
         /**

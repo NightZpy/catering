@@ -75,8 +75,8 @@
 		<v-select
 			v-validate:utensil_id="{ required: true }"
 			:options="objectToArrayObject(foreignData.utensilOptions)"
-			placeholder="Seleccione los utensilios"
 			:value.sync="row.pivot_utensil.utensil_id"
+			placeholder="Seleccione los utensilios"
 			multiple justified search required clear-button>
 		</v-select>
 	    <div v-if="$validation.utensil_id.invalid" class="alert alert-danger" role="alert">

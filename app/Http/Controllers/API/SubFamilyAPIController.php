@@ -70,7 +70,7 @@ class SubFamilyAPIController extends InfyOmBaseController
 
         $subFamilies = $this->subFamilyRepository->create($input);
 
-        return $this->sendResponse($subFamilies->toArray(), 'SubFamily saved successfully');
+        return $this->sendResponse($subFamilies->toArray(), trans('subfamilies.index.messages.saved'));
     }
 
     /**
@@ -87,10 +87,10 @@ class SubFamilyAPIController extends InfyOmBaseController
         $subFamily = $this->subFamilyRepository->find($id);
 
         if (empty($subFamily)) {
-            return Response::json(ResponseUtil::makeError('SubFamily not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('subfamilies.index.messages.failed')), 400);
         }
 
-        return $this->sendResponse($subFamily->toArray(), 'SubFamily retrieved successfully');
+        return $this->sendResponse($subFamily->toArray(), trans('subfamilies.index.messages.success'));
     }
 
     /**
@@ -110,12 +110,12 @@ class SubFamilyAPIController extends InfyOmBaseController
         $subFamily = $this->subFamilyRepository->find($id);
 
         if (empty($subFamily)) {
-            return Response::json(ResponseUtil::makeError('SubFamily not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('subfamilies.index.messages.failed')), 400);
         }
 
         $subFamily = $this->subFamilyRepository->update($input, $id);
 
-        return $this->sendResponse($subFamily->toArray(), 'SubFamily updated successfully');
+        return $this->sendResponse($subFamily->toArray(), trans('subfamilies.index.messages.updated'));
     }
 
     /**
@@ -132,12 +132,12 @@ class SubFamilyAPIController extends InfyOmBaseController
         $subFamily = $this->subFamilyRepository->find($id);
 
         if (empty($subFamily)) {
-            return Response::json(ResponseUtil::makeError('SubFamily not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('subfamilies.index.messages.failed')), 400);
         }
 
         $subFamily->delete();
 
-        return $this->sendResponse($id, 'SubFamily deleted successfully');
+        return $this->sendResponse($id, trans('subfamilies.index.messages.deleted'));
     }
 
     public function byFamily(Request $request, $familyId = null)
@@ -148,11 +148,11 @@ class SubFamilyAPIController extends InfyOmBaseController
         $family = $this->familyRepository->find($familyId);
 
         if (empty($family))
-            return Response::json(ResponseUtil::makeError('Family not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('families.index.messages.failed')), 400);
 
         if (empty($family->subFamilies))
-            return Response::json(ResponseUtil::makeError('Subfamilies not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('subfamilies.index.messages.failed')), 400);
 
-        return $this->sendResponse($family->subFamilies->toArray(), 'Subfamilies retrieved successfully');
+        return $this->sendResponse($family->subFamilies->toArray(), trans('subfamilies.index.messages.success'));
     }
 }

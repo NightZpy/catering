@@ -72,7 +72,7 @@ class UtensilAPIController extends InfyOmBaseController
 
         $utensils = $this->repository->create($input);
 
-        return $this->sendResponse($utensils->toArray(), 'Utensil saved successfully');
+        return $this->sendResponse($utensils->toArray(), trans('utensils.index.messages.saved'));
     }
 
     /**
@@ -89,10 +89,10 @@ class UtensilAPIController extends InfyOmBaseController
         $utensil = $this->repository->find($id);
 
         if (empty($utensil)) {
-            return Response::json(ResponseUtil::makeError('Utensil not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('utensils.index.messages.failed')), 400);
         }
 
-        return $this->sendResponse($utensil->toArray(), 'Utensil retrieved successfully');
+        return $this->sendResponse($utensil->toArray(), trans('utensils.index.messages.success'));
     }
 
     /**
@@ -112,12 +112,12 @@ class UtensilAPIController extends InfyOmBaseController
         $utensil = $this->repository->find($id);
 
         if (empty($utensil)) {
-            return Response::json(ResponseUtil::makeError('Utensil not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('utensils.index.messages.failed')), 400);
         }
 
         $utensil = $this->repository->update($input, $id);
 
-        return $this->sendResponse($utensil->toArray(), 'Utensil updated successfully');
+        return $this->sendResponse($utensil->toArray(), trans('utensils.index.messages.updated'));
     }
 
     /**
@@ -134,11 +134,11 @@ class UtensilAPIController extends InfyOmBaseController
         $utensil = $this->repository->find($id);
 
         if (empty($utensil)) {
-            return Response::json(ResponseUtil::makeError('Utensil not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('utensils.index.messages.failed')), 400);
         }
 
         $utensil->delete();
 
-        return $this->sendResponse($id, 'Utensil deleted successfully');
+        return $this->sendResponse($id, trans('utensils.index.messages.deleted'));
     }
 }

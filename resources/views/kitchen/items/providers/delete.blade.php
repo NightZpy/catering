@@ -1,6 +1,6 @@
 <?php
 	extract([
-            'modalTitle'    => 'Delete Provider ({{ row.provider.name }}) associate to <em>' . $item->name . '</em>!',
+            'modalTitle'    => 'Eliminar Proveedor ({{ row.provider.name }}) asociado a <em>' . $item->name . '</em>!',
             'modalSync'     => 'providerDELETE',
             'modalClose'    => 'providerDELETE',
             'model'         => 'Provider',

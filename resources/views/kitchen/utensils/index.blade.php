@@ -3,9 +3,9 @@
 @section('content')
     <div id="crud-app">
         <section class="content-header">
-            <h1 class="pull-left"><strong>Utencilios</strong></h1>
+            <h1 class="pull-left"><strong>{{ trans('utensils.index.main-title') }}</strong></h1>
             <div class="btn-group pull-right">
-                <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('POST')">Add New</a>
+                <a class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('POST')">{{ trans('utensils.index.buttons.add-new') }}</a>
                 <a class="btn btn-primary pull-right bg-olive btn-flat" href="{{ route('kitchen.utensils.categories.index') }}" style="margin-top: -10px;margin-bottom: 5px">Categorias</a>
             </div>
         </section>        

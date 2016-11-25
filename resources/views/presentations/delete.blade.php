@@ -1,5 +1,5 @@
 @extends('layouts.modal.delete')
 
 @section('modal-delete-title')
-Delete Presentation!
+{{ trans('presentations.template.form-delete-title') }}
 @stop

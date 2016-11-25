@@ -53,7 +53,7 @@
 	    <label for="item_id">Item:</label>
 		{{-- <v-select></v-select> --}}
 		<div class="input-group">
-			<select class="form-control" v-model="row.pivot_item.item_id" v-validate:item_id="{ required: true }">
+			<select class="form-control" v-model="row.pivot_item.id" v-validate:item_id="{ required: true }">
 				<option value="" selected="selected">-- Seleccione un item --</option>
 				<option v-for="option in foreignData.itemsOptions" v-bind:value="option.id">		
 					@{{ option.name }}

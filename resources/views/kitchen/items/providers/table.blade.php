@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-md-5">
         <div class="form-inline form-group">
-            <label>Search:</label>
+            <label>Buscar:</label>
             <input v-model="searchFor" class="form-control" @keyup.enter="setFilter">
             <button class="btn btn-primary" @click="setFilter"><i class="glyphicon glyphicon-search"></i></button>
-            <button class="btn btn-default" @click="resetFilter">Reset</button>
+            <button class="btn btn-default" @click="resetFilter">Reiniciar</button>
         </div>
     </div>
     <div class="col-md-7">
@@ -12,10 +12,10 @@
             <label>Pagination Style:</label>
             <select class="form-control" v-model="paginationComponent">
                 <option value="vuetable-pagination-simple">Simple</option>
-                <option value="vuetable-pagination-bootstrap">Detail</option>
-                <option value="vuetable-pagination-dropdown">Dropdown</option>
+                <option value="vuetable-pagination-bootstrap">Detallado</option>
+                <option value="vuetable-pagination-dropdown">Desplegable</option>
             </select>
-            <label>Items per page:</label>
+            <label>Artículos por pagina:</label>
             <select class="form-control" v-model="perPage">
                 <option value=10>10</option>
                 <option value=15>15</option>

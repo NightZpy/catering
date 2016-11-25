@@ -1,6 +1,6 @@
 <?php
 	extract([
-            'modalTitle'    => 'Delete Utensil ({{ row.utensil.name }}) associate to <em>' . $recipe->name . '</em>!',
+            'modalTitle'    => 'Eliminar Utensilio ({{ row.utensil.name }}) asociado a <em>' . $recipe->name . '</em>!',
             'modalSync'     => 'utensilDELETE',
             'modalClose'    => 'utensilDELETE',
             'model'         => 'Utensil',

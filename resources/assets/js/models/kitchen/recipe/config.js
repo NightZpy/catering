@@ -93,6 +93,7 @@ var tableColumns = [
 	},
 	{
 	    name: 'photo',
+	    title: 'Foto',
 	    sortField: 'photo',
 	    visible: false
 	},

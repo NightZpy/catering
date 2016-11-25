@@ -13,15 +13,18 @@ var tableColumns = [
 	{
 	    name: 'name',
 	    sortField: 'name',
+	    title: 'Nombre',
 	    visible: true
 	},
 	{
 	    name: 'symbol',
 	    sortField: 'symbol',
+	    title: 'Símbolo',
 	    visible: true
 	},       
     {
         name: '__actions',
+        //title:'Acciones',
         dataClass: 'center aligned',
         callback: null
     }        

@@ -1,5 +1,5 @@
 @extends('layouts.modal.show')
 
 @section('modal-show-title')
-SubFamily
+{{ trans('subfamilies.template.form-show-title') }}
 @stop

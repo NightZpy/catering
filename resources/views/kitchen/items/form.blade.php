@@ -1,7 +1,7 @@
 @extends('layouts.modal.form')
 
 @section('modal-form-title')
-Item Form
+{{ trans('store.template.form-add-title') }}
 @stop
 
 @section('modal-form-content')

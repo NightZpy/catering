@@ -49,25 +49,25 @@ var tableColumns = [
 	},      
 	{
 	    name: 'pivot.purchase_quantity',
-	    sortField: 'pivot.purchase_quantity',
+	    sortField: 'purchase_quantity',
 	    title: 'Cantidad compra',
 	    visible: true
 	},      
 	{
 	    name: 'cost',
-	    sortField: 'cost',
-	    title: 'Costo por cantidad',
+	    sortField: 'pivot.cost',
+	    title: 'Costo por cantidad', //Error
 	    visible: true
 	},      
 	{
 	    name: 'pivot.decrease',
-	    sortField: 'pivot.decrease',
+	    sortField: 'decrease',
 	    title: 'Merma',
 	    visible: true
 	}, 	
 	{
 	    name: 'pivot.servings_quantity',
-	    sortField: 'pivot.servings_quantity',
+	    sortField: 'servings_quantity',
 	    title: 'Ración',
 	    visible: true
 	},		

@@ -72,7 +72,7 @@ class PresentationAPIController extends InfyOmBaseController
 
         $presentations = $this->repository->create($input);
 
-        return $this->sendResponse($presentations->toArray(), 'Presentation saved successfully');
+        return $this->sendResponse($presentations->toArray(), trans('presentations.index.messages.saved'));
     }
 
     /**
@@ -89,10 +89,10 @@ class PresentationAPIController extends InfyOmBaseController
         $presentation = $this->repository->find($id);
 
         if (empty($presentation)) {
-            return Response::json(ResponseUtil::makeError('Presentation not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('presentations.index.messages.failed')), 400);
         }
 
-        return $this->sendResponse($presentation->toArray(), 'Presentation retrieved successfully');
+        return $this->sendResponse($presentation->toArray(), trans('presentations.index.messages.success'));
     }
 
     /**
@@ -112,12 +112,12 @@ class PresentationAPIController extends InfyOmBaseController
         $presentation = $this->repository->find($id);
 
         if (empty($presentation)) {
-            return Response::json(ResponseUtil::makeError('Presentation not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('presentations.index.messages.failed')), 400);
         }
 
         $presentation = $this->repository->update($input, $id);
 
-        return $this->sendResponse($presentation->toArray(), 'Presentation updated successfully');
+        return $this->sendResponse($presentation->toArray(), trans('presentations.index.messages.updated'));
     }
 
     /**
@@ -134,11 +134,11 @@ class PresentationAPIController extends InfyOmBaseController
         $presentation = $this->repository->find($id);
 
         if (empty($presentation)) {
-            return Response::json(ResponseUtil::makeError('Presentation not found'), 400);
+            return Response::json(ResponseUtil::makeError(trans('presentations.index.messages.failed')), 400);
         }
 
         $presentation->delete();
 
-        return $this->sendResponse($id, 'Presentation deleted successfully');
+        return $this->sendResponse($id, trans('presentations.index.messages.deleted'));
     }
 }

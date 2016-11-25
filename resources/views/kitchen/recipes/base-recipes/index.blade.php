@@ -5,7 +5,7 @@
         <section class="content-header">
             <h1 class="pull-left">Recetas base para la receta: <strong>{{ $recipe->name }}</strong></h1>
             <div class="btn-group pull-right">
-                <a v-if="!available('{{ route('api.v1.kitchen.recipes.base-recipes.has-available', $recipe->id) }}')" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('baseADD')">Add New</a>
+                <a v-if="!available('{{ route('api.v1.kitchen.recipes.base-recipes.has-available', $recipe->id) }}')" class="btn btn-primary pull-right" href="#" style="margin-top: -10px;margin-bottom: 5px" @click="modal('baseADD')">Agregar nueva</a>
                 <a class="btn btn-primary pull-right bg-olive btn-flat" href="{{ route('kitchen.recipes.index') }}" style="margin-top: -10px;margin-bottom: 5px">Recetas</a>
             </div>
         </section>
