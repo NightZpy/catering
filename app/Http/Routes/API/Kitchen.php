@@ -144,7 +144,7 @@ Route::group(['prefix' => 'kitchen', 'namespace' => 'Kitchen'], function () {
 			]);
 			Route::get('select-list', [
 				'as' => 'api.v1.kitchen.item.types.select-list',
-				'uses' => 'ItemTypeAPIController@index'
+				'uses' => 'ItemTypeAPIController@selectList'
 			]);
 	});	
 
