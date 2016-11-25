@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RecipeTypeTableSeeder::class);
         $this->call(BaseRecipeTableSeeder::class);
         $this->call(RecipeTableSeeder::class);
+        $this->call(ItemTypeTableSeeder::class);
         Model::reguard();
     }
 }
