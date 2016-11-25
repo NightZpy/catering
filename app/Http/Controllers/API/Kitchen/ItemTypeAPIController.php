@@ -8,13 +8,21 @@ use App\Http\Requests;
 
 use App\Http\Controllers\AppBaseController as InfyOmBaseController;
 
-
 use App\Http\Controllers\API\DataFormat;
+
+use App\Repositories\Kitchen\ItemTypeRepository;
 
 
 class ItemTypeAPIController extends InfyOmBaseController
 {
-	use DataFormat;    
+	use DataFormat;
+	    
+	private $repository;
+
+	public function __construct(ItemTypeRepository $itemTypeRepository)
+	{
+		$this->repository = $itemTypeRepository;
+	}
 
     public function index()
     {
