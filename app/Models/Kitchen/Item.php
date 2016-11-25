@@ -7,6 +7,7 @@ use App\Models\Presentation;
 use App\Models\SubFamily;
 use App\Models\Type;
 use App\Models\Unit;
+use App\Models\Kitchen\ItemType;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\SearchTrait;
@@ -162,6 +163,11 @@ class Item extends Model
     public function unit()
     {
         return $this->belongsTo(Unit::class);
+    }
+
+    public function itemType()
+    {
+        return $this->belongsTo(ItemType::class);
     }
 
     public function presentation()
