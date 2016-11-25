@@ -14,6 +14,7 @@ var objectRow = {
 	type: "",
 	family_id: "",
 	sub_family_id: "",
+	item_type_id: "",
 	provider: {
 		id: "",
 		code: "",
