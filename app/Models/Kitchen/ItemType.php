@@ -39,6 +39,6 @@ class ItemType extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|min:1|max:128|unique:families',
+        'name' => 'required|min:1|max:128|unique:item_types',
     ];
 }
