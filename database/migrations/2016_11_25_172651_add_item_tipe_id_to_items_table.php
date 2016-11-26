@@ -14,10 +14,10 @@ class AddItemTipeIdToItemsTable extends Migration
     {
         Schema::table('items', function (Blueprint $table) {
             $table->integer('item_type_id')->unsigned()->index()->after('type');
-            $table->foreign('item_type_id', 'items_item_type_id_foreign')
+            /*$table->foreign('item_type_id', 'items_item_type_id_foreign')
                 ->references('id')
                 ->on('item_types')
-                ->onDelete('cascade');
+                ->onDelete('cascade');*/
         });
     }
 
@@ -28,9 +28,9 @@ class AddItemTipeIdToItemsTable extends Migration
      */
     public function down()
     {
-        Schema::table('items', function (Blueprint $table) {
+        /*Schema::table('items', function (Blueprint $table) {
             $table->dropForeign('items_item_type_id_foreign');
             $table->dropColumn('item_type_id');
-        });
+        });*/
     }
 }
