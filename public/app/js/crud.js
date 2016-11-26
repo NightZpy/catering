@@ -16921,6 +16921,17 @@ Vue.validator('numeric', function (val) {
 Vue.validator('unique', function (val) {
     return false;
 });
+
+Vue.validator('boolean', function (val) {
+    return (/^(true|false|1|0)$/.test(val)
+    );
+});
+
+Vue.validator('integer', function (val) {
+    return (/^\d+$/.test(val)
+    );
+});
+
 /*
 function copyOwnFrom (target, source) {
   Object.getOwnPropertyNames(source).forEach(function (propName) {
@@ -17364,6 +17375,7 @@ window.vm = new Vue({
         },
         'vuetable:load-success': function vuetableLoadSuccess(response) {
             var data = response.data.data;
+            console.log(response);
             //onLoadSuccess(data, this.highlight, this.searchFor);
         },
         'vuetable:load-error': function vuetableLoadError(response) {
