@@ -14,7 +14,7 @@ class AddItemTipeIdToItemsTable extends Migration
     {
         Schema::table('items', function (Blueprint $table) {
             $table->integer('item_type_id')->unsigned()->index()->after('type');
-            $table->foreign('item_type_id', 'item_type_foreign')
+            $table->foreign('item_type_id', 'items_item_type_id_foreign')
                 ->references('id')
                 ->on('item_types')
                 ->onDelete('cascade');
