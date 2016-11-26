@@ -240,7 +240,9 @@ class Item extends Model
 
     public function getItemTypeNameAttribute()
     {
-        return $this->itemType->name;
+        if ($this->itemType)
+            return $this->itemType->name;
+        return false;
     }
 
     public function getPresentationNameAttribute()
