@@ -127,7 +127,9 @@ class Recipe extends Model
 
     public function getTypeNameAttribute()
     {
-        return $this->type->name;
+        if ($this->type)
+            return $this->type->name;
+        return false;
     } 
 
     public function getTotalWeightAttribute()
