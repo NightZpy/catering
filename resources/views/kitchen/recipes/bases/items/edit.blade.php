@@ -5,7 +5,7 @@
             'modalClose'    => 'itemEDIT',
             'model'         => 'Item',
             'related'       => true,
-            'type'			=> 'store',
+            'type'			=> 'edit',
             'content'       => view('kitchen.recipes.bases.items.fields')
 	]);
 ?>

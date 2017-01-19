@@ -379,6 +379,10 @@ Route::group(['prefix' => 'kitchen', 'namespace' => 'Kitchen'], function () {
 					'as' => 'api.v1.kitchen.recipes.bases.items.already-associate',
 					'uses' => 'BaseRecipeAPIController@alreadyAssociateItem'
 				]);		
+				Route::patch('update/{id?}/{itemId?}', [
+					'as' => 'api.v1.kitchen.recipes.bases.items.update',
+					'uses' => 'BaseRecipeAPIController@updateItem'
+				]);				
 				Route::patch('{id?}/{itemId?}', [
 					'as' => 'api.v1.kitchen.recipes.bases.items.store',
 					'uses' => 'BaseRecipeAPIController@storeItem'

@@ -43,13 +43,17 @@
             show:  "{{ route('api.v1.kitchen.recipes.bases.items.show', $baseRecipe->id) }}/",
             index: "{{ route('api.v1.kitchen.recipes.bases.items.available', $baseRecipe->id) }}",  
             store: "{{ route('api.v1.kitchen.recipes.bases.items.store', $baseRecipe->id) }}",  
-            update: "{{ route('api.v1.kitchen.recipes.bases.items.store', $baseRecipe->id) }}/",
+            update: "{{ route('api.v1.kitchen.recipes.bases.items.update', $baseRecipe->id) }}/",
             delete: "{{ route('api.v1.kitchen.recipes.bases.items.delete', $baseRecipe->id) }}/",
             foreign: {
                 item: {
                     store: {
                         method: 'PATCH' ,
                         url: "{{ route('api.v1.kitchen.recipes.bases.items.store') }}/"
+                    },
+                    edit: {
+                        method: 'PATCH' ,
+                        url: "{{ route('api.v1.kitchen.recipes.bases.items.update') }}/"
                     }, 
                     index: {
                         method: 'GET' ,

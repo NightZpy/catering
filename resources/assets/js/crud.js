@@ -133,8 +133,8 @@ Vue.validator('exist', function (val) {
     }
 });
 */
-
-window.vm = new Vue({
+var vm = 0;
+window.vm = vm = new Vue({
     components: {
         modal: VueStrap.modal,
         vSelect: VueStrap.select,
@@ -194,8 +194,9 @@ window.vm = new Vue({
                     actionUrl = this.url.delete + this.row.id;                
                 }  
             } else if( related ) { 
-                console.log ('Related: ' + related)       
-                console.log ('Model: ' + model)                    
+                console.log ('Related: ' + related)
+                console.log ('Model: ' + model)
+                console.log ('Type: ' + type)
                 var url = this.url.foreign[model][type].url;
                 var method = this.url.foreign[model][type].method;
                 var modelId = this.row[model]['id'];
@@ -211,7 +212,7 @@ window.vm = new Vue({
                 actionUrl = this.url.foreign[model][type].url;
                 this.method = this.url.foreign[model][type].method;  
                 data = this.row[model];
-                data._token = token;   
+                data._token = token;
             }
             
             console.log(JSON.stringify(data));
@@ -245,14 +246,14 @@ window.vm = new Vue({
                 );             
         },
         available: function(url, map, data) {
-            console.log("Entro");
             this.sendData(url, 'GET')
-                .then(function (response){;
-                    data = response.data.success
-                    console.log(JSON.stringify(data));
-                    this.$set(map, data);
+                .then(function (response){
+                    data = response.data.success;
+                    //vm.$set(map, data);
+                    return data;
                 }, function (response){
-                    this.$set(map, false);
+                    //vm.$set(map, false);
+                    return false;
                 });
         },
         getForeignData: function (callUrl = null, mapVar = null, related = null, action = 'index') {
@@ -321,7 +322,6 @@ window.vm = new Vue({
                 }
                 vm.$set(map, data);
                 //vm.row = data;
-                console.log("Cargo el objeto");
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE')
                 this.$broadcast('vuetable:reload');
@@ -330,7 +330,7 @@ window.vm = new Vue({
             vm.flashType = 'success'; 
         },
         failed: function(response) {
-            console.log(JSON.stringify(response));
+            //console.log(JSON.stringify(response));
             vm.flashMessage = vm.defaultErrorMessage;
             vm.flashType = vm.flashTypeDanger;
             if (response.data.errors) {
@@ -469,7 +469,7 @@ window.vm = new Vue({
         'vuetable:row-clicked': function(data, event) {
         },
         'vuetable:cell-dblclicked': function(item, field, event) {
-            this.$editable(event, function(value){
+            /*this.$editable(event, function(value){
                 item = JSON.stringify(item);
                 var data = JSON.parse(item);  
                 data._token = token;
@@ -487,7 +487,7 @@ window.vm = new Vue({
                     event.target.setAttribute("style", "background-color: red");
                     event.target.setAttribute("title", response.data.errors[field.name]);
                 });             
-            });
+            });*/
          },
         'vuetable:action': function(action, data) {
             this.cleanData();

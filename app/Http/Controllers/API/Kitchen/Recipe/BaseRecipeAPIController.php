@@ -179,6 +179,7 @@ class BaseRecipeAPIController extends InfyOmBaseController
         }
 
         $attributes = $request->all();
+        \Debugbar::info($attributes);
         unset($attributes['pivot_item']['total_quantity']);
         unset($attributes['pivot_item']['total_quantity_format']);
         unset($attributes['pivot_item']['cost']);
@@ -203,6 +204,46 @@ class BaseRecipeAPIController extends InfyOmBaseController
         } 
 
         return $this->sendResponse($request->all(), trans('baseRecipes.index.messages.item-associated'));
+    }    
+
+    public function updateItem(Request $request, $id = null, $itemId = null)
+    {
+        $baseRecipe = $this->repository->findWithoutFail($id);
+
+        if (empty($baseRecipe)) {
+            return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.failed')), 400);
+        }
+
+        if ($itemId) {
+            $item = $this->itemRepository->findWithoutFail($itemId);
+            if (empty($item)) {
+                return Response::json(ResponseUtil::makeError(trans('baseRecipes.index.messages.item-not-found')), 400);
+            }            
+        }
+
+        $attributes = $request->all();
+
+        unset($attributes['pivot_item']['total_quantity']);
+        unset($attributes['pivot_item']['total_quantity_format']);
+        unset($attributes['pivot_item']['cost']);
+        unset($attributes['pivot_item']['cost_format']);
+        if (isset($attributes['pivot_item']['base']))
+            unset($attributes['pivot_item']['base']);
+        $pivot = $attributes['pivot_item'];
+        unset($attributes['pivot_item']);
+        
+        $exists = $this->repository
+             ->findWithoutFail($id)
+             ->items()
+             ->whereItemId($itemId)->count();
+
+        if ( isset( $pivot['item'] ) )
+            unset( $pivot['item'] );
+        
+        if ($exists) 
+          $baseRecipe->items()->updateExistingPivot($itemId, $pivot);
+
+        return $this->sendResponse($request->all(), trans('baseRecipes.index.messages.item-updated'));
     }    
 
     public function items(Request $request, $id = null)
@@ -242,15 +283,18 @@ class BaseRecipeAPIController extends InfyOmBaseController
         $data = $baseRecipe;
         $item = $item->toArray();        
         $data['pivot_item'] = $item['pivot'];
-        unset($item['pivot']);        
-        $data['item'] = $item;
+        unset($item['pivot']);
+        unset($data['items']);
+        unset($data['pivot_item']['item']);
+        unset($item['providers']);
+        $data['item'] = $item;        
+        //\Debugbar::info('-------------------------------------------');
+        //\Debugbar::info($data);
         return $this->sendResponse($data, trans('baseRecipes.index.messages.item-located'));
     }
 
     public function availableItems(Request $request, $id = null)
     {
-        //$items = $this->repository->availableItems($id)->pluck('name', 'id')->toArray();
-        //$items = $this->repository->all()->toArray();
         $items = $this->itemRepository->all()->toArray();
         $items = array_map(function ($item) {
             return [

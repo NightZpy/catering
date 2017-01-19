@@ -12,7 +12,7 @@
 			],
 			'labels' => [
 				'pagination-style' => 'Estilo de paginación:',
-				'items-per-page' => 'Artículos por página:',
+				'items-per-page' => 'Items por página:',
 				'name' => 'nombre'
 			],
 			'messages' => [
@@ -22,11 +22,12 @@
 				'updated' => 'Receta base actualizada correctamente', 
 				'deleted' => 'Receta base eliminada correctamente',
 				'provider-not-found' => 'No se encontro al proveedor',
-				'item-located' => 'Artículo encontro',
-				'item-associated' => 'Artículo asociado a Receta base correctamente',
-				'item-retrieved' => 'Artículo recuperado correctamente',
+				'item-located' => 'Item encontrado',
+				'item-associated' => 'Item asociado a Receta base correctamente',
+				'item-retrieved' => 'Item recuperado correctamente',
+				'item-updated' => 'Item actualizado correctamente',
 				'item-not-found' => 'No se encontro el artículo',
-				'item-detached' => 'Artículo eliminado correctamente de BaseRecipe',
+				'item-detached' => 'Item eliminado correctamente de BaseRecipe',
 				'item-not-detached' => 'El artículo no se pudo eliminar de BaseRecipe',
 				'utensil-not-found' => 'No se encontro el Utensilio',
 				'utensil-associated' => 'Utensilio asociado correctamente a BaseRecipe',

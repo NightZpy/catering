@@ -16628,9 +16628,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-38fb0a79", module.exports)
+    hotAPI.createRecord("_v-55519848", module.exports)
   } else {
-    hotAPI.update("_v-38fb0a79", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-55519848", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"./VuetablePaginationMixin.vue":112,"vue":107,"vue-hot-reload-api":103}],110:[function(require,module,exports){
@@ -16661,9 +16661,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-2cecbf25", module.exports)
+    hotAPI.createRecord("_v-e7f16b94", module.exports)
   } else {
-    hotAPI.update("_v-2cecbf25", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-e7f16b94", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"./VuetablePaginationMixin.vue":112,"vue":107,"vue-hot-reload-api":103}],111:[function(require,module,exports){
@@ -16729,9 +16729,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-1e91c12a", module.exports)
+    hotAPI.createRecord("_v-19610ff9", module.exports)
   } else {
-    hotAPI.update("_v-1e91c12a", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-19610ff9", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"./VuetablePaginationMixin.vue":112,"vue":107,"vue-hot-reload-api":103}],112:[function(require,module,exports){
@@ -16849,9 +16849,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-645aa338", module.exports)
+    hotAPI.createRecord("_v-eb61426e", module.exports)
   } else {
-    hotAPI.update("_v-645aa338", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-eb61426e", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":107,"vue-hot-reload-api":103}],113:[function(require,module,exports){
@@ -16997,8 +16997,8 @@ Vue.validator('exist', function (val) {
     }
 });
 */
-
-window.vm = new Vue({
+var vm = 0;
+window.vm = vm = new Vue({
     components: {
         modal: VueStrap.modal,
         vSelect: VueStrap.select,
@@ -17064,6 +17064,7 @@ window.vm = new Vue({
             } else if (related) {
                 console.log('Related: ' + related);
                 console.log('Model: ' + model);
+                console.log('Type: ' + type);
                 var url = this.url.foreign[model][type].url;
                 var method = this.url.foreign[model][type].method;
                 var modelId = this.row[model]['id'];
@@ -17108,14 +17109,13 @@ window.vm = new Vue({
             }, function (response) {});
         },
         available: function available(url, map, data) {
-            console.log("Entro");
             this.sendData(url, 'GET').then(function (response) {
-                ;
                 data = response.data.success;
-                console.log(JSON.stringify(data));
-                this.$set(map, data);
+                //vm.$set(map, data);
+                return data;
             }, function (response) {
-                this.$set(map, false);
+                //vm.$set(map, false);
+                return false;
             });
         },
         getForeignData: function getForeignData() {
@@ -17184,7 +17184,6 @@ window.vm = new Vue({
                 }
                 vm.$set(map, data);
                 //vm.row = data;
-                console.log("Cargo el objeto");
             }
             if (this.method == 'POST' || this.method == 'PATCH' || this.method == 'DELETE') this.$broadcast('vuetable:reload');
             var message = response.data.message;
@@ -17192,7 +17191,7 @@ window.vm = new Vue({
             vm.flashType = 'success';
         },
         failed: function failed(response) {
-            console.log(JSON.stringify(response));
+            //console.log(JSON.stringify(response));
             vm.flashMessage = vm.defaultErrorMessage;
             vm.flashType = vm.flashTypeDanger;
             if (response.data.errors) {
@@ -17313,12 +17312,13 @@ window.vm = new Vue({
         'vuetable:row-changed': function vuetableRowChanged(data) {},
         'vuetable:row-clicked': function vuetableRowClicked(data, event) {},
         'vuetable:cell-dblclicked': function vuetableCellDblclicked(item, field, event) {
-            this.$editable(event, function (value) {
+            /*this.$editable(event, function(value){
                 item = JSON.stringify(item);
-                var data = JSON.parse(item);
+                var data = JSON.parse(item);  
                 data._token = token;
                 data[field.name] = value;
-                vm.sendData(vm.url.update + data.id, 'PATCH', data).then(function (response) {
+                vm.sendData(vm.url.update + data.id, 'PATCH', data).then(
+                function (response) {                    
                     event.target.setAttribute("style", "background-color: #f5f5f5");
                 }, function (response) {
                     vm.flashMessage = vm.defaultErrorMessage;
@@ -17329,8 +17329,8 @@ window.vm = new Vue({
                     vm.modal('INFO');
                     event.target.setAttribute("style", "background-color: red");
                     event.target.setAttribute("title", response.data.errors[field.name]);
-                });
-            });
+                });             
+            });*/
         },
         'vuetable:action': function vuetableAction(action, data) {
             this.cleanData();
@@ -17418,9 +17418,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-df2c51c8", module.exports)
+    hotAPI.createRecord("_v-2ea00c2b", module.exports)
   } else {
-    hotAPI.update("_v-df2c51c8", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-2ea00c2b", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":107,"vue-hot-reload-api":103,"vue-select":105}],115:[function(require,module,exports){
@@ -18011,9 +18011,9 @@ if (module.hot) {(function () {  module.hot.accept()
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-93339742", module.exports)
+    hotAPI.createRecord("_v-6b402d61", module.exports)
   } else {
-    hotAPI.update("_v-93339742", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-6b402d61", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":107,"vue-hot-reload-api":103,"vueify/lib/insert-css":108}],118:[function(require,module,exports){
@@ -18131,9 +18131,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-41268b58", module.exports)
+    hotAPI.createRecord("_v-79c1a3d4", module.exports)
   } else {
-    hotAPI.update("_v-41268b58", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-79c1a3d4", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":107,"vue-hot-reload-api":103}],119:[function(require,module,exports){
@@ -18164,9 +18164,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-cf02432a", module.exports)
+    hotAPI.createRecord("_v-559a936d", module.exports)
   } else {
-    hotAPI.update("_v-cf02432a", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-559a936d", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"./VuetablePaginationMixin.vue":118,"vue":107,"vue-hot-reload-api":103}]},{},[113]);
