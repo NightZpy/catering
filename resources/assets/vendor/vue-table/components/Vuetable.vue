@@ -41,8 +41,8 @@
                                 </td>
                                 <td v-if="field.name == '__actions'" class="vuetable-actions {{field.dataClass}}">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-default">Acciones</button>
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                            Acciones
                                             <span class="caret"></span>
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
