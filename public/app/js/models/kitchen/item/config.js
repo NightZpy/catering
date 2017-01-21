@@ -150,12 +150,12 @@ var tableColumns = [
 	    title: 'Perecible',
 	    visible: false
 	},
-	/*{
+	{
 	    name: 'to_buy',
 	    sortField: 'to_buy',
 	    title: 'Comprar',
 	    visible: false
-	},*/	
+	},	
 	{
 	    name: 'currency',
 	    sortField: 'currency',

@@ -262,9 +262,15 @@
 				</div>
 
 				<!-- to_buy Field -->
-				{{-- <div class="form-group col-sm-6">
+				<div class="form-group col-sm-6">
 				    <label for="to_buy">Cantidad a comprar:</label>
-				    <input type="number" class="form-control" v-model="row.to_buy" v-validate:to_buy="{ required: true, minlength: 1, maxlength: 4 }" data-type="text" />
+				    <input type="number" 
+				    	class="form-control" 
+				    	style="background-color: yellow; font-weight: bold"
+				    	v-model="row.to_buy" 
+				    	v-validate:to_buy="{ required: true, minlength: 1, maxlength: 4 }" 
+				    	data-type="text"
+				    	disabled="disabled" />
 				    <div v-if="$validation.to_buy.invalid" class="alert alert-danger" role="alert">
 							<div v-if="$validation.to_buy.required">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -283,7 +289,7 @@
 						</div>
 					
 					</div>
-				</div> --}}
+				</div>
 
 				<!-- Perishable Field -->
 				<div class="form-group col-sm-6">

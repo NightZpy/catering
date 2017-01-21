@@ -73,7 +73,8 @@ class Item extends Model
         'cost',
         'cost_format',
         'low_provider',
-        'family_id'
+        'family_id',
+        'to_buy'
     ]; 
 
 
@@ -86,7 +87,6 @@ class Item extends Model
         'perishable',
         'min_stock',
         'current_stock',
-        'to_buy',
         'currency',
         'decrease',
         'type',
@@ -104,8 +104,8 @@ class Item extends Model
     protected $casts = [
         'code'            => 'string',
         'name'            => 'string',
-        'auto_provider'   => 'boolean',
-        'perishable'      => 'boolean',
+        //'auto_provider'   => 'boolean',
+        //'perishable'      => 'boolean',
         'currency'        => 'string',
         'unit_id'         => 'integer',
         'presentation_id' => 'integer',
@@ -122,8 +122,8 @@ class Item extends Model
     public static $rules = [
         //'code'          => 'required|min:1|max:128',
         'name'            => 'required|min:1|max:128|unique:items',
-        'auto_provider'   => 'required|boolean',
-        'perishable'      => 'required|boolean',
+        'auto_provider'   => 'required',
+        'perishable'      => 'required',
         'decrease'        => 'required|numeric|digits_between:1,3',
         'min_stock'       => 'required|digits_between:1,4',
         'current_stock'   => 'required|digits_between:1,4',
@@ -322,5 +322,10 @@ class Item extends Model
             return $sorted->first();
         }
         return false;
+    }
+
+    public function getToBuyAttribute($value='')
+    {
+        return ($this->min_stock <= $this->current_stock ? 0 : $this->min_stock - $this->current_stock);
     }
 }
