@@ -132,7 +132,7 @@ class Item extends Model
         'unit_id'         => 'required|exists:units,id',
         'presentation_id' => 'required|exists:presentations,id',
         'type'            => 'required|min:1|max:128',
-        'item_type_id'   => 'required|exists:item_types,id',
+        //'item_type_id'   => 'required|exists:item_types,id',
         'sub_family_id'   => 'required|exists:sub_families,id'
     ];
 

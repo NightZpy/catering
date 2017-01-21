@@ -64,32 +64,6 @@
 					</div> 
 				</div>
 
-
-				<!-- Item Type Id Field -->
-				<div class="form-group col-sm-6">
-				    <label for="item_type_id">Tipo de item:</label>
-				    <div class="input-group">
-						<select class="form-control" v-model="row.item_type_id" v-validate:item_type_id="{ required: true }">
-							<option value="" selected="selected">-- Seleccione Tipo de item --</option>
-							<option v-for="(id, name) in foreignData.itemTypesOptions" v-bind:value="id">
-								@{{ name }}
-							</option>
-						</select>
-						<span class="input-group-btn">
-	    					<button class="btn btn-primary" @click="modal('itemType_ADD_inform')">
-	    						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-    						</button>
-	  					</span>
-  					</div>
-				    <div v-if="$validation.item_type_id.invalid" class="alert alert-danger" role="alert">
-						<div v-if="$validation.item_type_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-							El tipo de item es obligatorio
-						</div>
-					</div> 
-				</div>	
-
-
 				<!-- Name Field -->
 				<div class="form-group col-sm-6">
 				    <label for="name">Nombre:</label>
@@ -209,37 +183,13 @@
 				</div>	              
 			</div>
 			<div class="tab-pane" id="storage">
-				<!-- Currency Field -->
-				<div class="form-group col-sm-6">
-				    <label for="currency">Moneda:</label>
-				    <input type="text" class="form-control" v-model="row.currency" v-validate:currency="{ required: true, minlength: 1, maxlength: 128 }" 
-				    data-type="text" 
-				    placeholder="Soles"
-				    value="Soles" />
-				    <div v-if="$validation.currency.invalid" class="alert alert-danger" role="alert">
-							<div v-if="$validation.currency.required">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-							Custom rule(required) Message Here
-						</div>
-						<div v-if="$validation.currency.minlength">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-							Custom rule(minlength) Message Here
-						</div>
-						<div v-if="$validation.currency.maxlength">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-							Custom rule(maxlength) Message Here
-						</div>
-					
-					</div>
-				</div>
-
 				<!-- min Stock Field -->
 				<div class="form-group col-sm-6">
 				    <label for="decrease">Merma:</label>
-				    <input type="text" class="form-control" v-model="row.decrease" v-validate:decrease="{ required: true, numeric:true ,minlength: 1, maxlength: 4 }" data-type="text" />
+				    <div class="input-group">
+				    	<input type="text" class="form-control" v-model="row.decrease" v-validate:decrease="{ required: true, numeric:true ,minlength: 1, maxlength: 4 }" data-type="text" />
+				    	<span class="input-group-addon"><i class="fa fa-percent"></i></span>
+				    </div>
 				    <div v-if="$validation.decrease.invalid" class="alert alert-danger" role="alert">
 							<div v-if="$validation.decrease.required">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -312,7 +262,7 @@
 				</div>
 
 				<!-- to_buy Field -->
-				<div class="form-group col-sm-6">
+				{{-- <div class="form-group col-sm-6">
 				    <label for="to_buy">Cantidad a comprar:</label>
 				    <input type="number" class="form-control" v-model="row.to_buy" v-validate:to_buy="{ required: true, minlength: 1, maxlength: 4 }" data-type="text" />
 				    <div v-if="$validation.to_buy.invalid" class="alert alert-danger" role="alert">
@@ -333,16 +283,16 @@
 						</div>
 					
 					</div>
-				</div>
+				</div> --}}
 
 				<!-- Perishable Field -->
 				<div class="form-group col-sm-6">
 					<label for="perishable">Perecible:</label>
 					<div class="btn-group">
-						<label class="btn btn-default">
+						<label class="{{-- btn btn-default --}}">
 							<input type="radio" id="perishable" value="1" v-model="row.perishable" v-validate:perishable="{ required: true, boolean:true }"> Si
 						</label>
-						<label class="btn btn-default">
+						<label class="{{-- btn btn-default --}}">
 							<input type="radio" id="perishable" value="0" v-model="row.perishable" v-validate:perishable> No
 						</label>
 					</div>
@@ -364,10 +314,10 @@
 				<div class="form-group col-sm-6">
 					<label for="auto_provider">Auto Proveedor:</label>
 					<div class="btn-group">
-						<label class="btn btn-default">
+						<label class="{{-- btn btn-default --}}">
 							<input type="radio" id="auto_provider" value="1" v-model="row.auto_provider" v-validate:auto_provider="{ required: true, boolean: true }"> Si
 						</label>
-						<label class="btn btn-default">
+						<label class="{{-- btn btn-default --}}">
 							<input type="radio" id="auto_provider" value="0" v-model="row.auto_provider" v-validate:auto_provider> No
 						</label>
 					</div>
@@ -383,7 +333,34 @@
 							Custom rule(boolean) Message Here
 						</div>
 					</div>
-				</div>				
+				</div>	
+
+				<!-- Currency Field -->
+				<div class="form-group col-sm-6">
+				    <label for="currency">Moneda:</label>
+				    <input type="text" class="form-control" v-model="row.currency" v-validate:currency="{ required: true, minlength: 1, maxlength: 128 }" 
+				    data-type="text" 
+				    placeholder="Soles"
+				    value="Soles" />
+				    <div v-if="$validation.currency.invalid" class="alert alert-danger" role="alert">
+							<div v-if="$validation.currency.required">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span>
+							Custom rule(required) Message Here
+						</div>
+						<div v-if="$validation.currency.minlength">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span>
+							Custom rule(minlength) Message Here
+						</div>
+						<div v-if="$validation.currency.maxlength">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span>
+							Custom rule(maxlength) Message Here
+						</div>
+					
+					</div>
+				</div>							
 			</div>
 		</div>
 	</div>						

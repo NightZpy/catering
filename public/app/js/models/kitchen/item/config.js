@@ -14,7 +14,7 @@ var objectRow = {
 	type: "",
 	family_id: "",
 	sub_family_id: "",
-	item_type_id: "",
+	/*item_type_id: "",*/
 	provider: {
 		id: "",
 		code: "",
@@ -54,10 +54,10 @@ var objectRow = {
 		name: "",
 		family_id: ""
 	},
-	item_type: {
+	/*item_type: {
 		id: "",
 		name: "",
-	}
+	}*/
 };
 
 var tableColumns = [
@@ -96,12 +96,12 @@ var tableColumns = [
 	    title: 'Unidad',
 	    visible: true
 	},
-	{
+	/*{
 	    name: 'item_type_name',
 	    sortField: 'item_type.name',
 	    title: 'Tipo de item',
 	    visible: true
-	},
+	},*/
 	{
 	    name: 'presentation_name',
 	    sortField: 'presentation.name',
