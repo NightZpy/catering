@@ -45,10 +45,10 @@ class Item extends Model
             'table' => 'units',
             'name'
         ],
-        'itemType' => [
+        /*'itemType' => [
             'table' => 'item_types',
             'name'
-        ],
+        ],*/
         'presentation' => [
             'table' => 'presentations',
             'name'
@@ -90,7 +90,6 @@ class Item extends Model
         'currency',
         'decrease',
         'type',
-        'item_type_id',
         'unit_id',
         'presentation_id',
         'sub_family_id'
@@ -189,7 +188,7 @@ class Item extends Model
     {
         return $this->belongsToMany(BaseRecipe::class, 'base_recipe_item', 'base_id', 'item_id')
                     ->withPivot(
-                        'purchase_quantity', 
+                        /*'purchase_quantity', */
                         'decrease',
                         'servings_quantity',
                         'cost_per_quantity'

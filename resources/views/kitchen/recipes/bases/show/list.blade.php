@@ -29,7 +29,6 @@
 					<th>Cantidad compra</th>
 					<th>Costo por cantidad</th>
 					<th>Merma</th>
-					<th>Unidad</th>
 					<th>Cant. Racion</th>
 					<th>Cant. Total</th>
 					<th>Costo</th>
@@ -37,12 +36,11 @@
 				<template v-for="item in row.items">
 					<tr>
 					 	<td>@{{ item.code }}</td>
-					 	<td>@{{ item.name }}</td>
+					 	<td>@{{ item.name + ' - ' + item.type }}</td>
 					 	<td>@{{ item.unit.symbol }}</td>
-					 	<td>@{{ item.pivot.purchase_quantity }}</td>
+					 	<td>@{{ item.current_stock }}</td>
 					 	<td>@{{ item.cost_format }}</td>
 					 	<td>@{{ item.pivot.decrease }}</td>
-					 	<td>@{{ item.unit.symbol }}</td>
 					 	<td>@{{ item.pivot.servings_quantity }}</td>
 					 	<td>@{{ item.pivot.total_quantity_format }}</td>
 					 	<td>@{{ item.pivot.cost_format }}</td>

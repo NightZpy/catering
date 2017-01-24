@@ -39,9 +39,9 @@ class BaseRecipeItemPivot extends Pivot {
 
     public function getCostAttribute()
     {
-        if ($this->purchase_quantity == 0)
+        if ($this->item->current_stock == 0)
             return 0;
-        return $this->totalQuantity * $this->item->cost / $this->purchase_quantity;
+        return $this->totalQuantity * $this->item->cost / $this->item->current_stock;
     }   
 
     public function getCostFormatAttribute()

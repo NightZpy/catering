@@ -103,7 +103,9 @@
             if (value >= 0) {
                 var url = apiUrl.foreign.item.show.url + value;
                 this.getOneData(url, 'decrease', 'row.pivot_item.decrease');            
-                this.getOneData(url, 'cost', 'row.pivot_item.cost');            
+                this.getOneData(url, 'cost', 'row.pivot_item.cost');  
+                this.getOneData(url, 'current_stock', 'row.item.current_stock');   
+                this.getOneData(url, 'unit_name', 'row.unit.name');             
             }
         });
 

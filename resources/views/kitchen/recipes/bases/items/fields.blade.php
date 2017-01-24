@@ -18,14 +18,30 @@
 		</div> 
 	</div>
 
+	<div class="form-group col-sm-6">
+	    <label for="current_stock">Cantidad de compra:</label>
+	    <input 
+	    	type="text" 
+	    	class="form-control" 
+	    	v-model="row.item.current_stock"  
+	    	data-type="text" 
+	    	disabled="disabled" 
+	    	style="background-color: yellow; font-weight: bold"
+	    />
+	</div>	
+
 	<!-- Decrease Field -->
 	<div class="form-group col-sm-6">
 	    <label for="decrease">Merma:</label>
 	    <input 
-	    	type="text" class="form-control" style="background-color: yellow; font-weight: bold" 
+	    	type="text" 
+	    	class="form-control"  
 	    	v-model="row.pivot_item.decrease" 
-	    	v-validate:decrease="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
-	    <div v-if="$validationItem.decrease.invalid" class="alert alert-danger" role="alert">
+	    	v-validate:decrease="{ required: true, minlength: 1, maxlength: 13 }" 
+	    	data-type="text" 
+	    	style="background-color: yellow; font-weight: bold"
+    	/>	   
+    	<div v-if="$validationItem.decrease.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validationItem.decrease.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
@@ -54,27 +70,35 @@
 	<div class="form-group col-sm-6">
 	    <label for="cost">Costo:</label>
 	    <input 
-	    	type="text" class="form-control" style="background-color: yellow; font-weight: bold" 
 	    	v-model="row.pivot_item.cost" 
 	    	data-type="text" 
-	    	disabled="disabled" />
+	    	disabled="disabled"
+	    	type="text" class="form-control" style="background-color: yellow; font-weight: bold" 
+	    />	    
 	</div>
 
 	<!-- Purchase quantity Field -->
-	<div class="form-group col-sm-6">
+	{{-- <div class="form-group col-sm-6">
 	    <label for="purchase_quantity">Cantidad de compra:</label>
-	    <input type="text" class="form-control" v-model="row.pivot_item.purchase_quantity" v-validate:purchase_quantity="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
+	    <input 
+	    	type="text" 
+	    	class="form-control" 
+	    	v-model="row.pivot_item.purchase_quantity" 
+	    	v-validate:purchase_quantity="{ required: true, minlength: 1, maxlength: 13 }" 
+	    	data-type="text" 
+	    	disabled="disabled" 
+	    />
 	    <div v-if="$validationItem.purchase_quantity.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validationItem.purchase_quantity.required">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(required) Message Here
 			</div>
-			{{-- <div v-if="$validationItem.purchase_quantity.unique">
+			<div v-if="$validationItem.purchase_quantity.unique">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				Custom rule(unique) Message Here
-			</div> --}}
+			</div>
 			<div v-if="$validationItem.purchase_quantity.minlength">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
@@ -87,11 +111,11 @@
 			</div>
 		
 		</div>
-	</div>
+	</div> --}}
 
 	<!-- Decrease Field -->
 	<div class="form-group col-sm-6">
-	    <label for="servings_quantity">Ración:</label>
+	    <label for="servings_quantity">Ración de insumo:</label>
 	    <input type="text" class="form-control" v-model="row.pivot_item.servings_quantity" v-validate:servings_quantity="{ required: true, minlength: 1, maxlength: 13 }" data-type="text" />
 	    <div v-if="$validationItem.servings_quantity.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validationItem.servings_quantity.required">
@@ -116,5 +140,18 @@
 			</div>
 		
 		</div>
-	</div>				
+	</div>	
+
+	<!-- Unit field -->
+	<div class="form-group col-sm-6">
+	    <label for="unit">Unidad:</label>
+	    <input 
+	    	type="text" 
+	    	class="form-control" 
+	    	v-model="row.unit.name" 
+	    	data-type="text" 
+	    	disabled="disabled" 
+	    	style="background-color: yellow; font-weight: bold"
+	    />	    
+	</div>			
 </validator>	

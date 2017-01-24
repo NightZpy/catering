@@ -96,6 +96,8 @@
                 var url = apiUrl.foreign.item.showOne.url + value;
                 this.getOneData(url, 'decrease', 'row.pivot_item.decrease');         
                 this.getOneData(url, 'cost', 'row.pivot_item.cost');   
+                this.getOneData(url, 'current_stock', 'row.item.current_stock');   
+                this.getOneData(url, 'unit_name', 'row.unit.name');   
                 vm.$validationItem.item_id.invalid = false;                    
             } else {
                 vm.$validationItem.item_id.invalid = true;

@@ -22,8 +22,11 @@ var objectRow = {
 		updated_at: "",
 		deleted_at: ""
 	},
+	unit: {
+		name: ""
+	},
 	pivot_item: {
-		purchase_quantity: "",
+		//purchase_quantity: "",
 		decrease: "" ,
 		servings_quantity: "",
 		item_id: "",
@@ -48,11 +51,29 @@ var tableColumns = [
 	    visible: true
 	},      
 	{
+	    name: 'presentation_name',
+	    sortField: 'presentation.name',
+	    title: 'Presentación',
+	    visible: true
+	},
+	{
+	    name: 'unit_name',
+	    sortField: 'unit.name',
+	    title: 'Unidad',
+	    visible: true
+	},  	
+	/*{
 	    name: 'pivot.purchase_quantity',
 	    sortField: 'purchase_quantity',
 	    title: 'Cantidad compra',
 	    visible: true
-	},      
+	}, */     
+	{
+	    name: 'current_stock',
+	    sortField: 'current_stock',
+	    title: 'Cantidad compra',
+	    visible: true
+	}, 
 	{
 	    name: 'cost',
 	    sortField: 'pivot.cost',
@@ -68,7 +89,7 @@ var tableColumns = [
 	{
 	    name: 'pivot.servings_quantity',
 	    sortField: 'servings_quantity',
-	    title: 'Ración',
+	    title: 'Ración de insumo',
 	    visible: true
 	},		
 	{

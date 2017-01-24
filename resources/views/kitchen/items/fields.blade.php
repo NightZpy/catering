@@ -267,28 +267,9 @@
 				    <input type="number" 
 				    	class="form-control" 
 				    	style="background-color: yellow; font-weight: bold"
-				    	v-model="row.to_buy" 
-				    	v-validate:to_buy="{ required: true, minlength: 1, maxlength: 4 }" 
+				    	v-model="row.to_buy"
 				    	data-type="text"
 				    	disabled="disabled" />
-				    <div v-if="$validation.to_buy.invalid" class="alert alert-danger" role="alert">
-							<div v-if="$validation.to_buy.required">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-							Custom rule(required) Message Here
-						</div>
-						<div v-if="$validation.to_buy.minlength">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-							Custom rule(minlength) Message Here
-						</div>
-						<div v-if="$validation.to_buy.maxlength">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-							Custom rule(maxlength) Message Here
-						</div>
-					
-					</div>
 				</div>
 
 				<!-- Perishable Field -->

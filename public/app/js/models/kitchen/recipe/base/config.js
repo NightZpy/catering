@@ -34,7 +34,7 @@ var objectRow = {
 		deleted_at: ""
 	},
 	pivot_item: {
-		purchase_quantity: "",
+		//purchase_quantity: "",
 		decrease: "" ,
 		servings_quantity: "",
 		item_id: ""			
