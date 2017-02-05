@@ -91,6 +91,18 @@ var tableColumns = [
 	    visible: true
 	},	
 	{
+	    name: 'presentation_name',
+	    sortField: 'presentation.name',
+	    title: 'Presentación',
+	    visible: true
+	},	
+	{
+	    name: 'current_stock',
+	    sortField: 'current_stock',
+	    title: 'Cantidad',
+	    visible: true
+	},			
+	{
 	    name: 'unit_name',
 	    sortField: 'unit.name',
 	    title: 'Unidad',
@@ -103,34 +115,22 @@ var tableColumns = [
 	    visible: true
 	},*/
 	{
-	    name: 'presentation_name',
-	    sortField: 'presentation.name',
-	    title: 'Presentación',
-	    visible: true
-	},	
-	{
-	    name: 'current_stock',
-	    sortField: 'current_stock',
-	    title: 'Cantidad',
-	    visible: true
-	},	
-	{
 	    name: 'decrease',
 	    sortField: 'decrease',
 	    title: 'Merma',
 	    visible: true
 	},		
-    {
-        name: 'compose_code',
-        title: 'Código compuesto',
-        visible: true
-    }, 
 	{
 	    name: 'min_stock',
 	    sortField: 'min_stock',
 	    title: 'Stock mínimo',
 	    visible: true
-	},    		
+	},    	
+    {
+        name: 'compose_code',
+        title: 'Código compuesto',
+        visible: false
+    }, 		
 	{
 	    name: 'code',
 	    sortField: 'id',
