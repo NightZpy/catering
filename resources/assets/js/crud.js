@@ -283,7 +283,12 @@ window.vm = vm = new Vue({
             return this.$http({url: callUrl, method: method, data: data});
         },            
         cleanData: function() {
+            console.log('Cleaning--------------------')
             this.row = objectRow;
+            console.log('objectRow--------------------')
+            console.log(JSON.stringify(objectRow))
+            console.log('this.row--------------------')
+            console.log(JSON.stringify(this.row))
             this.flashMessage = '';
             this.flashType = '';
         },            
@@ -307,7 +312,7 @@ window.vm = vm = new Vue({
             vm.flashMessage = message;
             vm.flashType = 'success';
             this.closeModal(lastOpenModal);  
-            console.log(response);
+            //console.log(response);
         },
         success2: function(response) {
             var lastOpenModal = this.lastOpenModal[0]; 
@@ -328,6 +333,7 @@ window.vm = vm = new Vue({
             var message = response.data.message;
             vm.flashMessage = message;
             vm.flashType = 'success'; 
+            //this.closeModal(lastOpenModal); 
         },
         failed: function(response) {
             //console.log(JSON.stringify(response));
@@ -336,6 +342,7 @@ window.vm = vm = new Vue({
             if (response.data.errors) {
                 vm.updateErrors(response.data.errors);
             }
+            //this.cleanData();
         },
         isObject: function(object) {
             return  object instanceof Object;
@@ -363,7 +370,8 @@ window.vm = vm = new Vue({
             //vm.$setValidationErrors(errorMessages);     
         },
         closeModal: function(modalName) {
-            //console.log(modalName);
+            console.log(modalName + ': close');
+            this.cleanData();  
             if (modalName == this.lastOpenModal[ this.lastOpenModal.length - 1 ])
                 this.lastOpenModal.pop();
                         
@@ -372,7 +380,6 @@ window.vm = vm = new Vue({
             else
                 this.$set(modalName, false);
             //this.formModal = this.showModal = this.deleteModal = this.infoModal = false;
-            this.cleanData();  
         },
         visible: function(field) {
             for (var column in this.columns) {

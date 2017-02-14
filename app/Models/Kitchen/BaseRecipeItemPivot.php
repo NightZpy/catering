@@ -36,7 +36,7 @@ class BaseRecipeItemPivot extends Pivot {
 
     public function getTotalQuantityFormatAttribute()
     {
-        return number_format($this->totalQuantity, 2, ',', '.');
+        return number_format($this->totalQuantity, 4, ',', '.');
     }      
 
     public function getCostAttribute()
@@ -48,7 +48,7 @@ class BaseRecipeItemPivot extends Pivot {
 
     public function getCostFormatAttribute()
     {
-        return number_format($this->cost, 2, ',', '.');
+        return number_format($this->cost, 4, ',', '.');
     }   
 
 }

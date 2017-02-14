@@ -166,12 +166,12 @@ class BaseRecipe extends Model
         $items = $this->items()->get();
         foreach ($items as $item)
             $total += $item->pivot->cost;
-        return $total;
+        return $total * $this->servings_quantity;
     }
 
     public function getCostMPXRecipeFormatAttribute()
     {
-        return number_format($this->cost_mp_x_recipe, 1, ',', '.');
+        return number_format($this->cost_mp_x_recipe, 2, ',', '.');
     }
 
     public function getCostMPXRationAttribute()
@@ -183,6 +183,6 @@ class BaseRecipe extends Model
 
     public function getCostMPXRationFormatAttribute()
     {
-        return number_format($this->cost_mp_x_ration, 1, ',', '.');
+        return number_format($this->cost_mp_x_ration, 2, ',', '.');
     }     
 }   
