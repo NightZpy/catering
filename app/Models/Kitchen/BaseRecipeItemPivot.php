@@ -18,7 +18,7 @@ class BaseRecipeItemPivot extends Pivot {
 
     public function base()
     {
-        return $this->hasOne(BaseRecipe::class, 'id', 'base_id')->whereId($this->base_id);
+        return $this->hasOne(BaseRecipe::class, 'id', 'base_id');
     }
 
     public function item()
@@ -30,7 +30,7 @@ class BaseRecipeItemPivot extends Pivot {
     {
         $divisor = (1 - ($this->decrease / 100));
         $total = $this->servings_quantity / $divisor;
-        $a = $this->base->servings_quantity;
+        //$a = $this->base->servings_quantity;
         return ($divisor == 0) ? 0 : $total;// * $this->base->servings_quantity;
     }
 
