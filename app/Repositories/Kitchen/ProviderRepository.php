@@ -49,7 +49,8 @@ class ProviderRepository extends MyBaseRepository
 
     public function availableItems($id)
     {
-        $itemsId = $this->findWithoutFail($id)->items->pluck('id');    
-        return Item::whereNotIn('id', $itemsId)->get();
+        //$itemsId = $this->findWithoutFail($id)->items->pluck('id');    
+        //return Item::whereNotIn('id', $itemsId)->get();
+        return $this->findWithoutFail($id)->items;
     }    
 }

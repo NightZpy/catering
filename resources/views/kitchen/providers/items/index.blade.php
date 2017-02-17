@@ -189,6 +189,16 @@
             loadSubFamilies();
         });
 
+        vm.$watch('row.pivot_item.item_id', function (value) {
+
+            if ( value > 0 ) {
+                vm.$validationPivot_item.item_id.invalid = false;                    
+            } else {
+                vm.$validationPivot_item.item_id.invalid = true;
+            }
+            vm.$validationPivot_item.item_id.valid = ! vm.$validationPivot_item.item_id.invalid;        
+        });        
+
 
     </script>       
 @endpush

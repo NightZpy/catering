@@ -165,21 +165,17 @@
         });
 
         vm.$watch('row.min_stock', function (value) {
-            console.log('Min-stock: ' + value)
             if ( value <= vm.row.current_stock )
                 vm.row.to_buy = 0;
             else
                 vm.row.to_buy = value - vm.row.current_stock;
-            console.log('to-buy: ' + vm.row.to_buy)
         });
 
         vm.$watch('row.current_stock', function (value) {
-            console.log('Current-stock: ' + value)
             if ( vm.row.min_stock <= value )
                 vm.row.to_buy = 0;
             else
                 vm.row.to_buy = vm.row.min_stock - value;
-            console.log('to-buy: ' + vm.row.to_buy)
         });
 
         vm.$watch('localModals.providerADD', function (value) {
