@@ -21,7 +21,8 @@ return [
             Prettus\Repository\Providers\RepositoryServiceProvider::class,
             Barryvdh\Debugbar\ServiceProvider::class, 
             DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
-            Laracasts\Generators\GeneratorsServiceProvider::class,            
+            Laracasts\Generators\GeneratorsServiceProvider::class,    
+            'Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider',        
         ],
 
         'aliases' => [

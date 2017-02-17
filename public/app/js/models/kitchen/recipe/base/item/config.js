@@ -57,6 +57,12 @@ var tableColumns = [
 	    visible: true
 	},
 	{
+	    name: 'type',
+	    sortField: 'type',
+	    title: 'Tipo',
+	    visible: true
+	},	
+	{
 	    name: 'unit_name',
 	    sortField: 'unit.name',
 	    title: 'Unidad',

@@ -7,7 +7,7 @@
 			<option v-for="item in foreignData.itemOptions" 
 				v-bind:selected="item.id == row.item.id"
 				v-bind:value="item.id">		
-				@{{ item.name + ' - ' + item.presentation }}
+				@{{ item.name + ' - ' + item.presentation + ' - ' + item.type }}
 			</option>
 		</select>
 	    <div v-if="$validationItem.item_id.invalid" class="alert alert-danger" role="alert">

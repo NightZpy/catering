@@ -120,7 +120,7 @@ class Item extends Model
      */
     public static $rules = [
         //'code'          => 'required|min:1|max:128',
-        'name'            => 'required|min:1|max:128|unique:items',
+        'name'            => 'required|min:1|max:128|unique_with:items,type',
         'auto_provider'   => 'required',
         'perishable'      => 'required',
         'decrease'        => 'required|numeric|digits_between:1,3',
@@ -130,7 +130,7 @@ class Item extends Model
         'currency'        => 'required|min:1|max:128',
         'unit_id'         => 'required|exists:units,id',
         'presentation_id' => 'required|exists:presentations,id',
-        'type'            => 'required|min:1|max:128',
+        'type'            => 'min:1|max:128',
         //'item_type_id'   => 'required|exists:item_types,id',
         'sub_family_id'   => 'required|exists:sub_families,id'
     ];

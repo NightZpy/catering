@@ -300,7 +300,8 @@ class BaseRecipeAPIController extends InfyOmBaseController
             return [
                 'id' => $item['id'], 
                 'name' => $item['name'], 
-                'presentation' => $item['presentation_name']
+                'presentation' => $item['presentation_name'],
+                'type' => $item['type']
                 ];
         }, $items);
 

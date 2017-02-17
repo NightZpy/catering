@@ -108,13 +108,13 @@
 				<!-- Type Id Field -->
 				<div class="form-group col-sm-6">
 				    <label for="type">Tipo:</label>
-				    <input type="text" class="form-control" v-model="row.type" v-validate:type="{ required: true, minlength: 1, maxlength: 128 }" data-type="text" />
+				    <input type="text" class="form-control" v-model="row.type" v-validate:type="{ minlength: 1, maxlength: 128 }" data-type="text" />
 				    <div v-if="$validation.type.invalid" class="alert alert-danger" role="alert">
-							<div v-if="$validation.type.required">
+						{{-- <div v-if="$validation.type.required">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Error:</span>
 							Custom rule(required) Message Here
-						</div>
+						</div> --}}
 						{{-- <div v-if="$validation.type.unique">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Error:</span>
