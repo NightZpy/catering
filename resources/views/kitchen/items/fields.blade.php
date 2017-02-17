@@ -240,7 +240,12 @@
 				<!-- current_stock Field -->
 				<div class="form-group col-sm-6">
 				    <label for="current_stock">Cantidad:</label>
-				    <input type="number" class="form-control" v-model="row.current_stock" v-validate:current_stock="{ required: true, minlength: 1, maxlength: 6 }" data-type="text" />
+				    <input 
+				    	type="number" 
+				    	class="form-control" 
+				    	v-model="row.current_stock" 
+				    	v-validate:current_stock="{ required: true, minlength: 1, maxlength: 6 }" 
+				    	data-type="text" />
 				    <div v-if="$validation.current_stock.invalid" class="alert alert-danger" role="alert">
 							<div v-if="$validation.current_stock.required">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -264,7 +269,8 @@
 				<!-- to_buy Field -->
 				<div class="form-group col-sm-6">
 				    <label for="to_buy">Cantidad a comprar:</label>
-				    <input type="number" 
+				    <input 
+				    	type="number" 
 				    	class="form-control" 
 				    	style="background-color: yellow; font-weight: bold"
 				    	v-model="row.to_buy"

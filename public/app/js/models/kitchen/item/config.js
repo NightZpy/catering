@@ -5,7 +5,7 @@ var objectRow = {
 	auto_provider: "",
 	perishable: "",
 	decrease: "",
-	//to_buy: "",
+	to_buy: "",
 	min_stock: "",
 	current_stock: "",
 	currency: "",
