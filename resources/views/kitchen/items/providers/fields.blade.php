@@ -68,7 +68,7 @@
 	    <div v-if="$validationProvider.provider_id.invalid" class="alert alert-danger" role="alert">
 			<div v-if="$validationProvider.provider_id.required"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
-				La familia es obligatoria
+				El proveedor es obligatorio
 			</div>
 		</div> 
 	</div>			

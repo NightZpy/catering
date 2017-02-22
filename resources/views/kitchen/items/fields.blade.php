@@ -51,7 +51,7 @@
 							</option>
 						</select>
 						<span class="input-group-btn">
-		    					<button class="btn btn-primary" @click="modal('subFamily_ADD_inform')">
+	    					<button class="btn btn-primary" @click="modal('subFamily_ADD_inform')">
 	    						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     						</button>
 	  					</span>
@@ -327,6 +327,13 @@
 						</div>
 					</div>
 				</div>	
+
+				<!-- Assoc Provider Btn -->
+				<div class="form-group col-sm-6">
+				    <button class="btn btn-primary" @click="modal('providerOnClientADD')">
+						Asociar proveedor
+					</button>
+				</div>							
 
 				<!-- Currency Field -->
 				<div class="form-group col-sm-6">

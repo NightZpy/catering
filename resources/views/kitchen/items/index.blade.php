@@ -18,6 +18,7 @@
         <!-- --------- Modals ---------- -->  
         @include('kitchen.items.form')
         @include('kitchen.items.providers.add') 
+        @include('kitchen.items.providers.add-on-client') 
         {{--@include('kitchen.items.providers.add_new')--}}                    
         @include('kitchen.items.units.add')             
         @include('kitchen.items.presentations.add')             
@@ -183,7 +184,8 @@
             {
                 var data = {};
                 vm.available ( vm.url.foreign.provider.available.url, null, data );
-                console.log(data);
+                console.log('-----------///////////Data:')
+                console.log(JSON.stringify(data));
                 if ( !data ) {
                     vm.localModals.providerADD = false;
                     alert('No hay proveedores disponibles!');
