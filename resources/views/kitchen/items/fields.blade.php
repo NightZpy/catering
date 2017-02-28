@@ -333,6 +333,13 @@
 				    <button class="btn btn-primary" @click="modal('providerOnClientADD')">
 						Asociar proveedor
 					</button>
+					<ul>
+						<template v-for="pProvider in row.pivot_provider">
+							<template v-for="provider in row.providers">
+								<li @v-if="provider.id == pProvider.provider_id"><b>@{{ provider.name }}:</b> <i>@{{ pProvider.price }}</i></li>
+							</template>
+						</template>
+					</ul>
 				</div>							
 
 				<!-- Currency Field -->

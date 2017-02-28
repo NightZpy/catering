@@ -181,7 +181,7 @@ window.vm = vm = new Vue({
         }
     },
     methods: {
-        submit: function(model = null, type = null, related = null) {
+        submit: function(model = null, type = null, related = null, selected_array = null) {
             this.row._token = token;
             var data = this.row; 
             if (!model || model.target ) {
@@ -197,27 +197,37 @@ window.vm = vm = new Vue({
                 console.log ('Related: ' + related)
                 console.log ('Model: ' + model)
                 console.log ('Type: ' + type)
-                var url = this.url.foreign[model][type].url;
-                var method = this.url.foreign[model][type].method;
-                var modelId = this.row[model]['id'];
-                console.log ('Id: ' + this.row[model]['id'])                    
-                //var modelKey = 'pivot_' + model;
-                //console.log('Related: ' + modelId);
-                /*if (!modelId) {
-                    modelId = this.row[modelKey][model + '_id'];
-                }*/
-                actionUrl = url + this.row.id + '/' + modelId;
-                this.method = method;  
+                console.log('Selected Array: ' + selected_array);
+
+                if ( type == 'store-on-client' ) {
+                    var model = 'pivot_' + model;
+                    this.row[selected_array].push ( this.row[model] );
+                    var lastOpenModal = this.lastOpenModal.pop();
+                    this.closeModal(lastOpenModal);
+                } else {
+                    var url = this.url.foreign[model][type].url;
+                    var method = this.url.foreign[model][type].method;
+                    var modelId = this.row[model]['id'];
+                    console.log ('Id: ' + this.row[model]['id'])                    
+                    //var modelKey = 'pivot_' + model;
+                    //console.log('Related: ' + modelId);
+                    /*if (!modelId) {
+                        modelId = this.row[modelKey][model + '_id'];
+                    }*/
+                    actionUrl = url + this.row.id + '/' + modelId;
+                    this.method = method; 
+                    this.sendData(actionUrl, this.method, data)
+                        .then(this.success, this.failed); 
+                }
             } else {
                 actionUrl = this.url.foreign[model][type].url;
                 this.method = this.url.foreign[model][type].method;  
                 data = this.row[model];
                 data._token = token;
-            }
-            
-            console.log(JSON.stringify(data));
-            this.sendData(actionUrl, this.method, data)
+                this.sendData(actionUrl, this.method, data)
                 .then(this.success, this.failed);
+            }            
+            console.log(JSON.stringify(data));
         },
         getData: function (url = null) {
             if (!url) {
@@ -245,15 +255,12 @@ window.vm = vm = new Vue({
                     function(response) {}
                 );             
         },
-        available: function(url, map, data) {
+        available: function(url, map = null, data = null {
             this.sendData(url, 'GET')
                 .then(function (response){
-                    data = response.data.success;
-                    //vm.$set(map, data);
-                    return data;
+                    vm.moreParams[map] = response.data.success;
                 }, function (response){
-                    //vm.$set(map, false);
-                    return false;
+                    vm.moreParams[map] = null;
                 });
         },
         getForeignData: function (callUrl = null, mapVar = null, related = null, action = 'index') {

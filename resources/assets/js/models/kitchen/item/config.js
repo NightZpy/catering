@@ -31,6 +31,7 @@ var objectRow = {
 		updated_at: "",
 		deleted_at: ""
 	},
+	selected_providers: [],
 	pivot_provider: {
 		price: "",
 		selected: "",      

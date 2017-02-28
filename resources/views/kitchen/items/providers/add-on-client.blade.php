@@ -5,7 +5,8 @@
             'modalClose'    => 'providerOnClientADD',
             'model'         => 'Provider',
             'related'       => true,
-            'type'			=> 'store',
+            'selectedArray' => 'selected_providers',
+            'type'			=> 'store-on-client',
             'content'       => view('kitchen.items.providers.fields')
 	]);
 ?>

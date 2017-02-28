@@ -17,8 +17,8 @@
         </div>
         <!-- --------- Modals ---------- -->  
         @include('kitchen.items.form')
-        @include('kitchen.items.providers.add') 
         @include('kitchen.items.providers.add-on-client') 
+        @include('kitchen.items.providers.add') 
         {{--@include('kitchen.items.providers.add_new')--}}                    
         @include('kitchen.items.units.add')             
         @include('kitchen.items.presentations.add')             
@@ -182,11 +182,12 @@
         vm.$watch('localModals.providerADD', function (value) {
             if (value) 
             {
-                var data = {};
-                vm.available ( vm.url.foreign.provider.available.url, null, data );
-                console.log('-----------///////////Data:')
+                var data = null ;
+                vm.available ( vm.url.foreign.provider.available.url, 'hasProviders', data );
+                console.log('Watch: localModals.providerADD -----------///////////Data:')
                 console.log(JSON.stringify(data));
-                if ( !data ) {
+                console.log('URL: ' + vm.url.foreign.provider.available.url);
+                if ( data == null ) {
                     vm.localModals.providerADD = false;
                     alert('No hay proveedores disponibles!');
                 } else {
@@ -195,6 +196,25 @@
                 //console.log("Proveedor");
             }
         });  
+
+        vm.$watch('localModals.providerOnClientADD', function (value) {
+            if (value) 
+            {
+                //var data = null;
+                vm.available ( vm.url.foreign.provider.available.url, 'hasProviders' );
+                console.log('Watch: localModals.providerOnClientADD -----------///////////Data:')
+                console.log(JSON.stringify(vm.moreParams.hasProviders));
+                console.log('URL: ' + vm.url.foreign.provider.available.url);
+                if ( vm.moreParams.hasProviders == null ) {
+                    vm.localModals.providerOnClientADD = false;
+                    vm.lastOpenModal.pop();
+                    alert('No hay proveedores disponibles!');
+                } else {
+                    loadAvailableProviders();
+                }
+                //console.log("Proveedor");
+            }
+        });         
 
         /**
          * Load unit list after add new unit from add new item form

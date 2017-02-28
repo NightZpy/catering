@@ -26,11 +26,12 @@
 			@click="closeModal('{{ $modalClose }}')"
 		>{{ trans('modals.buttons.close') }}</button>
 		<button type="button" class="btn btn-success" 
-			v-if="{{  '$validation' . $model }}.valid"
+			v-if="{{  '$validation' . $model }}.valid"			
 			@click="submit(
 				{{ ( isset ($model) 	? "'" 	. lcfirst($model) . "'" : 'null' ) }}, 
 				{{ ( isset ($type) 		? "'" 	. $type 	. "'" : 'null' ) }}, 
-				{{ ( isset ($related) 	? "'" 	. $related 	. "'" : 'null' ) }})"
+				{{ ( isset ($related) 	? "'" 	. $related 	. "'" : 'null' ) }},
+				{{ ( isset ($selectedArray) 	? "'" 	. $selectedArray 	. "'" : 'null' ) }})"
 		>{{ trans('modals.buttons.save') }}</button>
 	</div>	
 </modal>

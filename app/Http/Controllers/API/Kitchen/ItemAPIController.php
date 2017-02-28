@@ -237,17 +237,25 @@ class ItemAPIController extends InfyOmBaseController
 
     public function availableProviders(Request $request, $id = null)
     {
-        $providers = $this->repository->availableProviders($id)->toArray();
+        if ( $id == null )
+          $providers = $this->repository->availableProviders($id)->toArray();
+        else 
+          $providers = $this->repository->all()->toArray();
+
         if (empty($providers))
             return Response::json(ResponseUtil::makeError(trans('store.index.messages.provider')), 400);        
         return $this->sendResponse($providers, trans('store.index.messages.provider-retrieve'));
     }
 
     public function hasAvailableProviders(Request $request, $id = null)
-    {
-        $providers = $this->repository->availableProviders($id)->toArray();
+    {   
+        if ( $id == null )
+          $providers = $this->repository->availableProviders($id)->toArray();
+        else 
+          $providers = $this->repository->all()->toArray(); 
+
         if (empty($providers))
-            return Response::json(ResponseUtil::makeError(trans('store.index.messages.provider')), 400);        
+            return Response::json(ResponseUtil::makeError(trans('store.index.messages.provider')), 400);
         return $this->sendResponse(True, trans('store.index.messages.provider-retrieve'));        
     }
 
