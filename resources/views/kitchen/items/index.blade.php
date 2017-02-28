@@ -205,13 +205,13 @@
                 console.log('Watch: localModals.providerOnClientADD -----------///////////Data:')
                 console.log(JSON.stringify(vm.moreParams.hasProviders));
                 console.log('URL: ' + vm.url.foreign.provider.available.url);
-                if ( vm.moreParams.hasProviders == null ) {
+                /*if ( vm.moreParams.hasProviders == null ) {
                     vm.localModals.providerOnClientADD = false;
                     vm.lastOpenModal.pop();
                     alert('No hay proveedores disponibles!');
-                } else {
+                } else {*/
                     loadAvailableProviders();
-                }
+                //}
                 //console.log("Proveedor");
             }
         });         
