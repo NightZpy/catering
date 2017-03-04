@@ -17118,7 +17118,10 @@ window.vm = vm = new Vue({
                 }
             }, function (response) {});
         },
-        available: function available(url, map, data) {
+        available: function available(url) {
+            var map = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+            var data = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+
             this.sendData(url, 'GET').then(function (response) {
                 vm.moreParams[map] = response.data.success;
             }, function (response) {
@@ -17246,6 +17249,21 @@ window.vm = vm = new Vue({
                 if (this.columns[column].name == field || this.columns[column].name == field + '_format' || this.columns[column].name == field + '_name') return this.columns[column].visible;
             }
             return false;
+        },
+        matchArray: function matchArray(array1, field1, array2, field2) {
+            var match = [];
+            for (var i = 0; i < array1.length; i++) {
+                for (var j = 0; j < array2.length; j++) {
+                    console.log(array1[i][field1] + '==' + array2[j][field2]);
+                    if (array1[i][field1] == array2[j][field2]) {
+                        var object = {};
+                        object.name = array2[j].name;
+                        object.price = array1[i].price;
+                        match.push(object);
+                    }
+                }
+            }
+            return match;
         },
         modal: function modal(type) {
             if (type == 'PATCH' || type == 'POST') {

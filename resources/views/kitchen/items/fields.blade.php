@@ -334,10 +334,17 @@
 						Asociar proveedor
 					</button>
 					<ul>
-						<template v-for="pProvider in row.pivot_provider">
-							<template v-for="provider in row.providers">
-								<li @v-if="provider.id == pProvider.provider_id"><b>@{{ provider.name }}:</b> <i>@{{ pProvider.price }}</i></li>
+						{{-- <template v-for="selectedProvider in row.selected_providers">
+							<template v-for="provider in foreignData.providerOptions">
+								<li @v-if="selectedProvider.provider_id == provider.id">
+									<b>@{{ provider.name }}:</b> <i>@{{ selectedProvider.price }}</i>
+								</li>
 							</template>
+						</template> --}}
+						<template v-for="provider in matchArray(row.selected_providers, 'provider_id', foreignData.providerOptions, 'id')">
+							<li>
+								<b>@{{ provider.name }}:</b> <i>@{{ provider.price }}</i>
+							</li>
 						</template>
 					</ul>
 				</div>							
