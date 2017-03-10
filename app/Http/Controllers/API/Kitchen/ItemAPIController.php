@@ -105,8 +105,13 @@ class ItemAPIController extends InfyOmBaseController
         if (empty($item)) {
             return Response::json(ResponseUtil::makeError(trans('store.index.messages.failed')), 400);
         }
+        $itemArray = $item->toArray();
+        $itemArray['selected_providers'] = [];
+        if ($item->providers()->count())
+          foreach ($itemArray['providers'] as $provider) 
+            $itemArray['selected_providers'][] = $provider['pivot'];
 
-        return $this->sendResponse($item->toArray(), trans('store.index.messages.success'));
+        return $this->sendResponse($itemArray, trans('store.index.messages.success'));
     }
 
     /**

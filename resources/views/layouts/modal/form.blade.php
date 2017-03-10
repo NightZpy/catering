@@ -8,6 +8,10 @@
 		<h4 class="modal-title">
 		  <b>@yield('modal-form-title')</b>
 		</h4>
+		<div slot="modal-footer" class="modal-footer">
+			<button type="button" class="btn btn-default" @click='closeModal("formModal")'>{{ trans('modals.buttons.close') }}</button>
+			<button type="button" class="btn btn-success" @click="submit" v-if="$validation.valid">{{ trans('modals.buttons.save') }}</button>
+		</div>
 	</div>	
 	<div slot="modal-body" class="modal-body">
 		<div class="content">
@@ -20,7 +24,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 	<div slot="modal-footer" class="modal-footer">
 		<button type="button" class="btn btn-default" @click='closeModal("formModal")'>{{ trans('modals.buttons.close') }}</button>
 		<button type="button" class="btn btn-success" @click="submit" v-if="$validation.valid">{{ trans('modals.buttons.save') }}</button>

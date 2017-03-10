@@ -3,6 +3,7 @@
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#product" data-toggle="tab" aria-expanded="true"><b><em>Producto</em></b></a></li>
 			<li class=""><a href="#storage" data-toggle="tab" aria-expanded="false"><b><em>Almacenaje</em></b></a></li>
+			<li class=""><a href="#providers" data-toggle="tab" aria-expanded="false"><b><em>Proveedores</em></b></a></li>
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane active" id="product">
@@ -329,39 +330,22 @@
 				</div>	
 
 				<!-- Assoc Provider Btn -->
-				<div class="form-group col-sm-6">
-				    <button class="btn btn-primary" @click="modal('providerOnClientADD')">
-						Asociar proveedor
-					</button>
+				{{-- <div class="form-group col-sm-6">				    
 					<ul>
-						{{-- <template v-for="selectedProvider in row.selected_providers">
+						<template v-for="selectedProvider in row.selected_providers">
 							<template v-for="provider in foreignData.providerOptions">
 								<li @v-if="selectedProvider.provider_id == provider.id">
 									<b>@{{ provider.name }}:</b> <i>@{{ selectedProvider.price }}</i>
 								</li>
 							</template>
-						</template> --}}
-						{{-- <template v-for="provider in matchArray(row.selected_providers, 'provider_id', foreignData.providerOptions, 'id')">
+						</template>
+						<template v-for="provider in matchArray(row.selected_providers, 'provider_id', foreignData.providerOptions, 'id')">
 							<li>
 								<b>@{{ provider.name }}:</b> <i>@{{ provider.price + ' ' + row.currency}}</i>
 							</li>
-						</template> --}}
+						</template>
 					</ul>
-					<template v-if="count (matchArray(row.selected_providers, 'provider_id', foreignData.providerOptions, 'id')) > 0">
-						<table class="table table-striped table-bordered table-responsive">
-							<thead>
-								<th>Proveedor</th>
-								<th>Precio</th>
-							</thead>
-							<tbody>
-								<tr v-for="provider in matchArray(row.selected_providers, 'provider_id', foreignData.providerOptions, 'id')">
-									<td>@{{ provider.name }}</td>
-									<td>@{{ provider.price + ' ' + row.currency}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</template>
-				</div>							
+				</div> --}}						
 
 				<!-- Currency Field -->
 				<div class="form-group col-sm-6">
@@ -390,6 +374,28 @@
 					</div>
 				</div>							
 			</div>
+			<div class="tab-pane" id="providers">
+				<!-- Providers list -->
+				<div class="form-group col-sm-offset-2 col-sm-10">
+					<button class="btn btn-primary" @click="modal('providerOnClientADD')">
+						Asociar proveedor
+					</button>
+					<template v-if="count (matchArray(row.selected_providers, 'provider_id', foreignData.providerOptions, 'id')) > 0">
+						<table class="table table-striped table-bordered table-responsive">
+							<thead>
+								<th>Proveedor</th>
+								<th>Precio</th>
+							</thead>
+							<tbody>
+								<tr v-for="provider in matchArray(row.selected_providers, 'provider_id', foreignData.providerOptions, 'id')">
+									<td>@{{ provider.name }}</td>
+									<td>@{{ provider.price + ' ' + row.currency}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</template>
+				</div>
+			</div>
 		</div>
-	</div>						
+	</div>
 </validator>	
