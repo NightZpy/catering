@@ -523,6 +523,10 @@ window.vm = vm = new Vue({
                     dropdownClass: 'form-control'
                 });
             }
+        },
+        count: function (array) {
+            console.log('Lenght----------------: ' + array.length);
+            return array.length;
         }                 
     },
     events: {

@@ -17370,6 +17370,10 @@ window.vm = vm = new Vue({
                     dropdownClass: 'form-control'
                 });
             }
+        },
+        count: function count(array) {
+            console.log('Lenght----------------: ' + array.length);
+            return array.length;
         }
     },
     events: {

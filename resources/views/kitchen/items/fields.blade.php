@@ -341,12 +341,26 @@
 								</li>
 							</template>
 						</template> --}}
-						<template v-for="provider in matchArray(row.selected_providers, 'provider_id', foreignData.providerOptions, 'id')">
+						{{-- <template v-for="provider in matchArray(row.selected_providers, 'provider_id', foreignData.providerOptions, 'id')">
 							<li>
 								<b>@{{ provider.name }}:</b> <i>@{{ provider.price + ' ' + row.currency}}</i>
 							</li>
-						</template>
+						</template> --}}
 					</ul>
+					<template v-if="count (matchArray(row.selected_providers, 'provider_id', foreignData.providerOptions, 'id')) > 0">
+						<table class="table table-striped table-bordered table-responsive">
+							<thead>
+								<th>Proveedor</th>
+								<th>Precio</th>
+							</thead>
+							<tbody>
+								<tr v-for="provider in matchArray(row.selected_providers, 'provider_id', foreignData.providerOptions, 'id')">
+									<td>@{{ provider.name }}</td>
+									<td>@{{ provider.price + ' ' + row.currency}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</template>
 				</div>							
 
 				<!-- Currency Field -->

@@ -42,7 +42,12 @@ class ItemRepository extends MyBaseRepository
         if (isset($attributes['selected_providers']) && count($attributes['selected_providers']) > 0) {
             
             foreach ($attributes['selected_providers']  as $provider) {
-                $item->providers()->attach($provider['provider_id'], $provider);            
+                if ($provider['selected']) {
+                    $providers = $item->providers;
+                    foreach ($providers as $storeProvider)
+                        $storeProvider->pivot->selected = 0;
+                }
+                $item->providers()->attach($provider['provider_id'], $provider); 
             }            
         }
 
