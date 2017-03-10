@@ -17062,6 +17062,7 @@ window.vm = vm = new Vue({
                 } else if (this.method == 'DELETE') {
                     actionUrl = this.url.delete + this.row.id;
                 }
+                this.sendData(actionUrl, this.method, data).then(this.success, this.failed);
             } else if (related) {
                 console.log('Related: ' + related);
                 console.log('Model: ' + model);
@@ -17070,35 +17071,37 @@ window.vm = vm = new Vue({
 
                 if (type == 'store-on-client') {
                     var model = 'pivot_' + model;
-                    var modelKeys = Object.keys(this.row[model]);
-
-                    var duplicated = false;
-
-                    for (var i = 0; i < this.row[selected_array].length; i++) {
-                        var object = this.row[selected_array][i];
-                        var arrayKeys = Object.keys(object);
-
-                        var duplicatedCount = 0;
-                        for (var j = 0; j < modelKeys.length; j++) {
-                            var key = modelKeys[j];
-                            if (key in object && this.row[model][key] === object[key]) console.log('-------------Key: ' + key);
-                            if (key === model + '_id') {
-                                this.row[selected_array][i] = this.row[model];
-                                duplicatedCount = modelKeys.length;
-                                break;
-                            } else {
-                                duplicatedCount++;
-                            }
-                        }
-
-                        if (duplicatedCount == modelKeys.length) {
-                            duplicated = true;
-                            break;
-                        }
-                    }
-
-                    if (!duplicated) this.row[selected_array].push(this.row[model]);
-
+                    /*                    var modelKeys = Object.keys(this.row[model]);
+                    
+                                        var duplicated = false;
+                    
+                                        for (var i = 0; i < this.row[selected_array].length; i ++) {
+                                            var object = this.row[selected_array][i];
+                                            var arrayKeys = Object.keys(object);
+                    
+                                            var duplicatedCount = 0;
+                                            for (var j = 0; j < modelKeys.length; j ++) {
+                                                var key = modelKeys[j];
+                                                if ( key in object && this.row[model][key] === object[key])
+                                                    console.log('-------------Key: ' + key);
+                                                    if ( key === model + '_id' ) {
+                                                        this.row[selected_array][i] = this.row[model];
+                                                        duplicatedCount = modelKeys.length;
+                                                        break;
+                                                    } else {
+                                                        duplicatedCount ++;                                    
+                                                    }
+                                            }
+                    
+                                            if ( duplicatedCount == modelKeys.length ) {
+                                                duplicated = true;
+                                                break;
+                                            }
+                                        }
+                    
+                                        if ( !duplicated )
+                                            this.row[selected_array].push ( this.row[model] );*/
+                    this.row[selected_array].push(this.row[model]);
                     var lastOpenModal = this.lastOpenModal.pop();
                     this.closeModal(lastOpenModal);
                     this.row[model] = JSON.parse(JSON.stringify(objectRow[model]));

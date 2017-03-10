@@ -35,7 +35,17 @@ class ItemRepository extends MyBaseRepository
     {
         if (!isset($attributes['code']) || empty($attributes['code']))
             $attributes['code'] = $this->getNewCode();
+
+
         $item = parent::create($attributes);
+
+        if (isset($attributes['selected_providers']) && count($attributes['selected_providers']) > 0) {
+            
+            foreach ($attributes['selected_providers']  as $provider) {
+                $item->providers()->attach($provider['provider_id'], $provider);            
+            }            
+        }
+
         return $item;        
     }    
 

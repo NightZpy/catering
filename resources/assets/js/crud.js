@@ -193,6 +193,8 @@ window.vm = vm = new Vue({
                 } else if (this.method == 'DELETE') {
                     actionUrl = this.url.delete + this.row.id;                
                 }  
+                this.sendData(actionUrl, this.method, data)
+                .then(this.success, this.failed);                
             } else if( related ) { 
                 console.log ('Related: ' + related)
                 console.log ('Model: ' + model)
@@ -201,7 +203,7 @@ window.vm = vm = new Vue({
 
                 if ( type == 'store-on-client' ) {
                     var model = 'pivot_' + model;
-                    var modelKeys = Object.keys(this.row[model]);
+/*                    var modelKeys = Object.keys(this.row[model]);
 
                     var duplicated = false;
 
@@ -230,8 +232,8 @@ window.vm = vm = new Vue({
                     }
 
                     if ( !duplicated )
-                        this.row[selected_array].push ( this.row[model] );
-
+                        this.row[selected_array].push ( this.row[model] );*/
+                    this.row[selected_array].push ( this.row[model] );
                     var lastOpenModal = this.lastOpenModal.pop();
                     this.closeModal(lastOpenModal);
                     this.row[model] = JSON.parse( JSON.stringify( objectRow[model] ) );
