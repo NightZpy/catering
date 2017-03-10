@@ -17021,7 +17021,7 @@ window.vm = vm = new Vue({
         successSubmit: false,
         submitMessage: "",
         url: apiUrl,
-        row: objectRow,
+        row: JSON.parse(JSON.stringify(objectRow)),
         foreignData: new Array(),
         searchFor: '',
         columns: tableColumns,
@@ -17070,9 +17070,38 @@ window.vm = vm = new Vue({
 
                 if (type == 'store-on-client') {
                     var model = 'pivot_' + model;
-                    this.row[selected_array].push(this.row[model]);
+                    var modelKeys = Object.keys(this.row[model]);
+
+                    var duplicated = false;
+
+                    for (var i = 0; i < this.row[selected_array].length; i++) {
+                        var object = this.row[selected_array][i];
+                        var arrayKeys = Object.keys(object);
+
+                        var duplicatedCount = 0;
+                        for (var j = 0; j < modelKeys.length; j++) {
+                            var key = modelKeys[j];
+                            if (key in object && this.row[model][key] === object[key]) console.log('-------------Key: ' + key);
+                            if (key === model + '_id') {
+                                this.row[selected_array][i] = this.row[model];
+                                duplicatedCount = modelKeys.length;
+                                break;
+                            } else {
+                                duplicatedCount++;
+                            }
+                        }
+
+                        if (duplicatedCount == modelKeys.length) {
+                            duplicated = true;
+                            break;
+                        }
+                    }
+
+                    if (!duplicated) this.row[selected_array].push(this.row[model]);
+
                     var lastOpenModal = this.lastOpenModal.pop();
                     this.closeModal(lastOpenModal);
+                    this.row[model] = JSON.parse(JSON.stringify(objectRow[model]));
                 } else {
                     var url = this.url.foreign[model][type].url;
                     var method = this.url.foreign[model][type].method;
@@ -17157,7 +17186,7 @@ window.vm = vm = new Vue({
         },
         cleanData: function cleanData() {
             console.log('Cleaning--------------------');
-            this.row = objectRow;
+            this.row = JSON.parse(JSON.stringify(objectRow));
             console.log('objectRow--------------------');
             console.log(JSON.stringify(objectRow));
             console.log('this.row--------------------');
@@ -17238,7 +17267,7 @@ window.vm = vm = new Vue({
         },
         closeModal: function closeModal(modalName) {
             console.log(modalName + ': close');
-            this.cleanData();
+            //this.cleanData(); 
             if (modalName == this.lastOpenModal[this.lastOpenModal.length - 1]) this.lastOpenModal.pop();
 
             if (this.localModals[modalName] != undefined) this.localModals[modalName] = false;else this.$set(modalName, false);
@@ -17254,7 +17283,7 @@ window.vm = vm = new Vue({
             var match = [];
             for (var i = 0; i < array1.length; i++) {
                 for (var j = 0; j < array2.length; j++) {
-                    console.log(array1[i][field1] + '==' + array2[j][field2]);
+                    // console.log ( array1[i][field1] + '==' + array2[j][field2] )
                     if (array1[i][field1] == array2[j][field2]) {
                         var object = {};
                         object.name = array2[j].name;

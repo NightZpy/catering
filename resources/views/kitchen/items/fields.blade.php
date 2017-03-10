@@ -343,7 +343,7 @@
 						</template> --}}
 						<template v-for="provider in matchArray(row.selected_providers, 'provider_id', foreignData.providerOptions, 'id')">
 							<li>
-								<b>@{{ provider.name }}:</b> <i>@{{ provider.price }}</i>
+								<b>@{{ provider.name }}:</b> <i>@{{ provider.price + ' ' + row.currency}}</i>
 							</li>
 						</template>
 					</ul>
