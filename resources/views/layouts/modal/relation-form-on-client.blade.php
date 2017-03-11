@@ -3,6 +3,8 @@
 	:show.sync="localModals.{{ $modalSync }}" 
 	effect="fade" 
 	width="800"
+	{{-- :callback="closeModal('{{ $modalClose }}')" --}}
+	backdrop="false"
 >
 	<div slot="modal-header" class="modal-header">
 		<h4 class="modal-title">

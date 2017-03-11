@@ -17062,6 +17062,7 @@ window.vm = vm = new Vue({
                 } else if (this.method == 'DELETE') {
                     actionUrl = this.url.delete + this.row.id;
                 }
+                this.cleanData();
                 this.sendData(actionUrl, this.method, data).then(this.success, this.failed);
             } else if (related) {
                 console.log('Related: ' + related);
@@ -17117,6 +17118,7 @@ window.vm = vm = new Vue({
                     }*/
                     actionUrl = url + this.row.id + '/' + modelId;
                     this.method = method;
+                    this.cleanData();
                     this.sendData(actionUrl, this.method, data).then(this.success, this.failed);
                 }
             } else {
@@ -17124,9 +17126,10 @@ window.vm = vm = new Vue({
                 this.method = this.url.foreign[model][type].method;
                 data = this.row[model];
                 data._token = token;
+                this.cleanData();
                 this.sendData(actionUrl, this.method, data).then(this.success, this.failed);
             }
-            console.log(JSON.stringify(data));
+            //console.log(JSON.stringify(data));
         },
         getData: function getData() {
             var url = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
@@ -17188,6 +17191,8 @@ window.vm = vm = new Vue({
             return this.$http({ url: callUrl, method: method, data: data });
         },
         cleanData: function cleanData() {
+            var object = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+
             console.log('Cleaning--------------------');
             this.row = JSON.parse(JSON.stringify(objectRow));
             console.log('objectRow--------------------');
@@ -17269,9 +17274,18 @@ window.vm = vm = new Vue({
             //vm.$setValidationErrors(errorMessages);   
         },
         closeModal: function closeModal(modalName) {
+            var model = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+
             console.log(modalName + ': close');
-            //this.cleanData(); 
+            if (model) {
+                this.row[model] = JSON.parse(JSON.stringify(objectRow[model]));
+            } else {
+                this.cleanData();
+            }
+
             if (modalName == this.lastOpenModal[this.lastOpenModal.length - 1]) this.lastOpenModal.pop();
+
+            if (!this.lastOpenModal.length) this.cleanData();
 
             if (this.localModals[modalName] != undefined) this.localModals[modalName] = false;else this.$set(modalName, false);
             //this.formModal = this.showModal = this.deleteModal = this.infoModal = false;
