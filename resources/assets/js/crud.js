@@ -203,6 +203,7 @@ window.vm = vm = new Vue({
                 console.log('Selected Array: ' + selected_array);
 
                 if ( type == 'store-on-client' ) {
+                    console.log('------- store-on-client -------');
                     var model = 'pivot_' + model;
 /*                    var modelKeys = Object.keys(this.row[model]);
 
@@ -236,9 +237,13 @@ window.vm = vm = new Vue({
                         this.row[selected_array].push ( this.row[model] );*/
                     this.row[selected_array].push ( this.row[model] );
                     var lastOpenModal = this.lastOpenModal.pop();
-                    this.closeModal(lastOpenModal);
+                    console.log('Model: ' + model );
+                    console.log('LastModal: ' + lastOpenModal);
+                    this.closeModal(lastOpenModal, model);
+
                     this.row[model] = JSON.parse( JSON.stringify( objectRow[model] ) );
                 } else {
+                    console.log('------- out of store-on-client -------');
                     var url = this.url.foreign[model][type].url;
                     var method = this.url.foreign[model][type].method;
                     var modelId = this.row[model]['id'];
