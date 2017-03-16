@@ -4,6 +4,7 @@
             'modalSync'     => 'providerOnClientADD',
             'modalClose'    => 'providerOnClientADD',
             'model'         => 'Provider',
+            'cleanModel'    => 'pivot_provider',
             'related'       => true,
             'selectedArray' => 'selected_providers',
             'type'			=> 'store-on-client',

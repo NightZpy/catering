@@ -186,26 +186,25 @@ window.vm = vm = new Vue({
             var data = this.row; 
             if (!model || model.target ) {
                 var actionUrl = this.url.store;
-                if (this.method == 'PATCH' || this.method == 'POST') {
+                if (this.method == 'PATCH' || this.method == 'POST')
                     if (this.method == 'PATCH') {
-                        actionUrl = this.url.update + this.row.id;                    
-                    }  
-                } else if (this.method == 'DELETE') {
+                        actionUrl = this.url.update + this.row.id;                      
+                else if (this.method == 'DELETE') {
                     actionUrl = this.url.delete + this.row.id;                
-                } 
+
                 this.cleanData() ;
                 this.sendData(actionUrl, this.method, data)
                 .then(this.success, this.failed);                
             } else if( related ) { 
-                console.log ('Related: ' + related)
-                console.log ('Model: ' + model)
-                console.log ('Type: ' + type)
-                console.log('Selected Array: ' + selected_array);
+                // console.log ('Related: ' + related)
+                // console.log ('Model: ' + model)
+                // console.log ('Type: ' + type)
+                // console.log('Selected Array: ' + selected_array);
 
                 if ( type == 'store-on-client' ) {
-                    console.log('------- store-on-client -------');
                     var model = 'pivot_' + model;
-/*                    var modelKeys = Object.keys(this.row[model]);
+                    /*                    
+                    var modelKeys = Object.keys(this.row[model]);
 
                     var duplicated = false;
 
@@ -235,19 +234,15 @@ window.vm = vm = new Vue({
 
                     if ( !duplicated )
                         this.row[selected_array].push ( this.row[model] );*/
+                    
                     this.row[selected_array].push ( this.row[model] );
                     var lastOpenModal = this.lastOpenModal.pop();
-                    console.log('Model: ' + model );
-                    console.log('LastModal: ' + lastOpenModal);
                     this.closeModal(lastOpenModal, model);
-
                     this.row[model] = JSON.parse( JSON.stringify( objectRow[model] ) );
                 } else {
-                    console.log('------- out of store-on-client -------');
                     var url = this.url.foreign[model][type].url;
                     var method = this.url.foreign[model][type].method;
                     var modelId = this.row[model]['id'];
-                    console.log ('Id: ' + this.row[model]['id'])                    
                     //var modelKey = 'pivot_' + model;
                     //console.log('Related: ' + modelId);
                     /*if (!modelId) {
@@ -331,12 +326,12 @@ window.vm = vm = new Vue({
             return this.$http({url: callUrl, method: method, data: data});
         },            
         cleanData: function(object = null) {
-            console.log('Cleaning--------------------')
+            //console.log('Cleaning--------------------')
             this.row = JSON.parse(JSON.stringify(objectRow));
-            console.log('objectRow--------------------')
-            console.log(JSON.stringify(objectRow))
-            console.log('this.row--------------------')
-            console.log(JSON.stringify(this.row))
+            //console.log('objectRow--------------------')
+            //console.log(JSON.stringify(objectRow))
+            //console.log('this.row--------------------')
+            //console.log(JSON.stringify(this.row))
             this.flashMessage = '';
             this.flashType = '';
         },            
